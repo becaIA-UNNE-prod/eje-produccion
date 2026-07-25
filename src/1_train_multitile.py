@@ -12,8 +12,16 @@ from utils.model import SimpleUNet
 # CONFIGURACION
 # ============================================================
 BASE_DIR = "/mnt/yacy_1/prod/ferreyra/dataset"
-DIR_TRAIN  = f"{BASE_DIR}/train"
-DIR_EXP    = f"{BASE_DIR}/exp_verano"
+
+# Dataset generado por 03_generar_datasets_npz.py (dataset_T<TILE>.npz, 9 clases sin remapear).
+# Si en algún momento se cuenta con un dataset ya curado a 6 clases (ej. dataset_mnc_T<TILE>.npz,
+# generado por un proceso externo a este repo), cambiar a:
+#   DIR_TRAIN, DIR_EXP, DATASET_PREFIX = f"{BASE_DIR}/train_mnc", f"{BASE_DIR}/exp_mnc", "dataset_mnc_T"
+#   APLICAR_REMAP_6 = False
+DIR_TRAIN       = f"{BASE_DIR}/train"
+DIR_EXP         = f"{BASE_DIR}/exp_verano"
+DATASET_PREFIX  = "dataset_T"
+APLICAR_REMAP_6 = True
 
 TILES_TRAIN = ["20HMJ", "20HMK", "20JML"]
 TILE_VAL    = "20JNL"
@@ -26,12 +34,10 @@ NUM_CLASSES   = 6
 PATIENCE      = 50
 SEED          = 42
 
-# Remapeo a solo cultivos de verano:
-# 0=NoData, 1=Fondo, 2=Maiz, 3=Soja, 4=Mani, 5=Sorgo
-LABEL_REMAP = np.array(
-    [0] + [1]*10 + [1]*4 + [1, 2, 3, 4, 5] + [1]*8,
-    dtype=np.int64
-)
+# Remapeo de 9 clases originales a solo cultivos de verano (6 clases):
+# 0=NoData,1=Natural,2=Urbano,3=Trigo,4=Maiz,5=Soja,6=Mani,7=Sorgo,8=Otros
+# ->        0=NoData,1=Fondo, 1=Fondo,1=Fondo,2=Maiz,3=Soja,4=Mani,5=Sorgo,1=Fondo
+REMAP_6 = np.array([0, 1, 1, 1, 2, 3, 4, 5, 1], dtype=np.int64)
 
 os.makedirs(DIR_EXP, exist_ok=True)
 torch.manual_seed(SEED)
@@ -41,15 +47,12 @@ np.random.seed(SEED)
 # DATASET DESDE .NPZ
 # ============================================================
 class TileDataset(torch.utils.data.Dataset):
-    def __init__(self, ruta_npz, fraccion=1.0, seed=42):
+    def __init__(self, ruta_npz, fraccion=1.0, seed=42, aplicar_remap=False):
         data = np.load(ruta_npz)
         X = data["X"].astype(np.float32)
         Y = data["Y"].astype(np.int64)
-        # Aplicamos remapeo de 9 clases → 6 clases (solo cultivos de verano)
-        # Los .npz tienen: 0=NoData,1=Natural,2=Urbano,3=Trigo,4=Maiz,5=Soja,6=Mani,7=Sorgo,8=Otros
-        # Nuevo:           0=NoData,1=Fondo,  1=Fondo,  1=Fondo, 2=Maiz,3=Soja,4=Mani,5=Sorgo,1=Fondo
-        REMAP_6 = np.array([0, 1, 1, 1, 2, 3, 4, 5, 1], dtype=np.int64)
-        Y = REMAP_6[Y]
+        if aplicar_remap:
+            Y = REMAP_6[Y]
         n = int(len(X) * fraccion)
         rng = np.random.default_rng(seed)
         idx = rng.choice(len(X), size=n, replace=False)
@@ -93,15 +96,15 @@ def entrenar():
 
     print("\nCargando tiles de TRAIN...")
     ds_train = ConcatDataset([
-        TileDataset(f"{DIR_TRAIN}/dataset_T{t}.npz") for t in TILES_TRAIN
+        TileDataset(f"{DIR_TRAIN}/{DATASET_PREFIX}{t}.npz", aplicar_remap=APLICAR_REMAP_6) for t in TILES_TRAIN
     ])
 
-    print("\nCargando tile de VAL (50%)...")
-    ds_val = TileDataset(f"{DIR_TRAIN}/dataset_T{TILE_VAL}.npz", fraccion=1.0)
+    print("\nCargando tile de VAL...")
+    ds_val = TileDataset(f"{DIR_TRAIN}/{DATASET_PREFIX}{TILE_VAL}.npz", fraccion=1.0, aplicar_remap=APLICAR_REMAP_6)
 
     print("\nCargando tiles de TEST...")
     ds_test = ConcatDataset([
-        TileDataset(f"{DIR_TRAIN}/dataset_T{t}.npz") for t in TILES_TEST
+        TileDataset(f"{DIR_TRAIN}/{DATASET_PREFIX}{t}.npz", aplicar_remap=APLICAR_REMAP_6) for t in TILES_TEST
     ])
 
     print(f"\nTrain: {len(ds_train)} parches | Val: {len(ds_val)} | Test: {len(ds_test)}")

@@ -9,14 +9,15 @@ sys.path.append(os.path.abspath("."))
 from utils.model import SimpleUNet
 
 def generar_mapa_clasificacion():
-    # 1. Configuración actualizada para el nuevo tile
+    # Configuración alineada con el pipeline de entrenamiento vigente (1_train_multitile.py)
     TILE = "20JLL"
-    DIR_COMPOSITES = "./dataset/composites"
+    DIR_COMPOSITES = "/mnt/yacy_1/prod/ferreyra/cordoba_dataset_filtrado/composites_filtrado"
     RUTA_MASCARA = f"./mascaras_procesadas/etiqueta_{TILE}_10m_test.tif"
-    RUTA_PESOS = "./pesos/modelo_cordoba_test.pth"
+    RUTA_PESOS = "/mnt/yacy_1/prod/ferreyra/dataset/exp_verano/best_model.pth"
     RUTA_SALIDA = f"./prediccion_{TILE}.tif"
 
-    NUM_CLASSES = 50
+    # 0=NoData, 1=Fondo, 2=Maiz, 3=Soja, 4=Mani, 5=Sorgo (mismo esquema que 1_train_multitile.py)
+    NUM_CLASSES = 6
     SIZE = 512  # Ventana de inferencia
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -43,7 +44,7 @@ def generar_mapa_clasificacion():
     with rasterio.open(RUTA_MASCARA) as src_ref:
         meta = src_ref.meta.copy()
         alto, ancho = src_ref.height, src_ref.width
-        # Forzamos la salida a ser de un solo canal, tipo uint8 (suficiente para 50 clases)
+        # Forzamos la salida a ser de un solo canal, tipo uint8 (suficiente para NUM_CLASSES)
         meta.update(dtype=rasterio.uint8, count=1, nodata=0)
 
     print(f"Dimensiones del mapa a predecir: {ancho} x {alto} píxeles.")
@@ -71,8 +72,7 @@ def generar_mapa_clasificacion():
                     # Apilar y normalizar
                     parche_x = np.concatenate(parche_x_temporal, axis=0).astype(np.float32)
 
-                    # NOTA: Asegúrate de que esta división coincida exactamente con
-                    # cómo normalizas los datos dentro de tu clase CordobaDataset
+                    # Debe coincidir con la normalización usada en TileDataset (1_train_multitile.py)
                     parche_x = parche_x / 10000.0
 
                     # (Batch, Channels, Height, Width)

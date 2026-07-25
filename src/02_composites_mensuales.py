@@ -13,9 +13,9 @@ def procesar_un_mes(args):
     ruta_salida_archivo = os.path.join(dir_salida, f"{tile_id}_{mes}_median.tif")
 
     if os.path.exists(ruta_salida_archivo):
-        return f"[{mes}] Ya existe. Omitiendo."
+        return f"[{tile_id} {mes}] Ya existe. Omitiendo."
 
-    print(f"[{mes}] Iniciando cálculo con {len(fechas_del_mes)} fechas...")
+    print(f"[{tile_id} {mes}] Iniciando cálculo con {len(fechas_del_mes)} fechas...")
 
     # 1. Leer metadatos de la primera imagen disponible
     ruta_plantilla = os.path.join(ruta_tile, fechas_del_mes[0], f"{tile_id}_{fechas_del_mes[0]}_B02.jp2")
@@ -31,17 +31,21 @@ def procesar_un_mes(args):
             for fecha in fechas_del_mes:
                 ruta_banda = os.path.join(ruta_tile, fecha, f"{tile_id}_{fecha}_{banda}.jp2")
                 if os.path.exists(ruta_banda):
-                    with rasterio.open(ruta_banda) as src:
-                        stack_temporal.append(src.read(1))
+                    try:
+                        with rasterio.open(ruta_banda) as src:
+                            stack_temporal.append(src.read(1))
+                    except Exception as e:
+                        print(f"[{tile_id} {mes}] Saltando archivo corrupto: {ruta_banda} ({e})")
+                        continue
 
             if stack_temporal:
                 matriz_stack = np.stack(stack_temporal, axis=0)
                 matriz_mediana = np.median(matriz_stack, axis=0).astype(meta['dtype'])
                 dst.write(matriz_mediana, idx_banda)
             else:
-                print(f"[{mes}] Advertencia: Sin datos para la banda {banda}")
+                print(f"[{tile_id} {mes}] Advertencia: Sin datos para la banda {banda}")
 
-    return f"[{mes}] Completado exitosamente."
+    return f"[{tile_id} {mes}] Completado exitosamente."
 
 def generar_composiciones_mensuales(tile_id, ruta_base_s2, dir_salida, max_workers=None):
     os.makedirs(dir_salida, exist_ok=True)
@@ -74,13 +78,20 @@ def generar_composiciones_mensuales(tile_id, ruta_base_s2, dir_salida, max_worke
             print(resultado)
 
 if __name__ == "__main__":
-    # Actualizado con la nueva nomenclatura de tile
-    TILE_PRUEBA = "20JLL"
+    # ============================================================
+    # CONFIGURACION
+    # ============================================================
+    BASE_S2 = "/mnt/yacy_1/prod/ferreyra/sentinel2_cordoba_2017_2018_filtrado"
+    DIR_COMPOSITES = "/mnt/yacy_1/prod/ferreyra/cordoba_dataset_filtrado/composites_filtrado"
+    MAX_WORKERS = 2
 
-    # Actualizado con la nueva ruta
-    BASE_S2 = "/mnt/yacy_1/prod/ferreyra/sentinel2_cordoba_2017_2018"
+    # TILES = None -> procesa todos los tiles encontrados en BASE_S2
+    # TILES = ["20JLL"] -> procesa solo el/los tile(s) indicado(s)
+    TILES = None
 
-    DIR_COMPOSITES = "./dataset/composites"
+    tiles = TILES or sorted([d for d in os.listdir(BASE_S2) if os.path.isdir(os.path.join(BASE_S2, d))])
+    print(f"Procesando {len(tiles)} tile(s)...")
 
-    # Si quieres limitar el uso de CPU (ej. a 4 núcleos), cambia max_workers=4
-    generar_composiciones_mensuales(TILE_PRUEBA, BASE_S2, DIR_COMPOSITES, max_workers=None)
+    for tile in tiles:
+        print(f"\n=== Tile: {tile} ===")
+        generar_composiciones_mensuales(tile, BASE_S2, DIR_COMPOSITES, max_workers=MAX_WORKERS)
