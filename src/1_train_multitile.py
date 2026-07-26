@@ -27,7 +27,10 @@ TILES_TRAIN = ["20HMJ", "20HMK", "20JML"]
 TILE_VAL    = "20JNL"
 TILES_TEST  = ["20HNK"]
 
-BATCH_SIZE    = 16
+# Modelo chico (UNet de 2 niveles) -> con batch=16 la GPU pasa la mayor parte
+# del tiempo ociosa. Con una RTX 3090 (24GB) 32 deja bastante margen; si el
+# uso de VRAM (nvidia-smi) queda bajo, se puede subir a 48/64.
+BATCH_SIZE    = 32
 EPOCHS        = 100
 LEARNING_RATE = 1e-4
 NUM_CLASSES   = 6
@@ -69,23 +72,34 @@ class TileDataset(torch.utils.data.Dataset):
 # ============================================================
 # METRICAS
 # ============================================================
-def calcular_accuracy(preds, labels, ignore_index=0):
+def calcular_correctos_total(preds, labels, ignore_index=0):
+    # Devuelve tensores en GPU (sin .item()) para no forzar una sincronización
+    # CPU/GPU en cada batch: eso serializa el loop y deja la GPU ociosa esperando.
     pred_clases = torch.argmax(preds, dim=1)
     mascara = labels != ignore_index
-    correctos = (pred_clases[mascara] == labels[mascara]).sum().item()
-    total = mascara.sum().item()
-    return correctos / total if total > 0 else 0.0
+    correctos = (pred_clases[mascara] == labels[mascara]).sum()
+    total = mascara.sum()
+    return correctos, total
 
 def evaluar(modelo, loader, criterion, device):
     modelo.eval()
-    total_loss, total_acc = 0.0, 0.0
+    loss_sum = torch.zeros((), device=device)
+    correctos_sum = torch.zeros((), device=device)
+    total_sum = torch.zeros((), device=device)
+    n_batches = 0
     with torch.no_grad():
         for X, Y in loader:
-            X, Y = X.to(device), Y.to(device)
+            X = X.to(device, non_blocking=True)
+            Y = Y.to(device, non_blocking=True)
             out = modelo(X)
-            total_loss += criterion(out, Y).item()
-            total_acc  += calcular_accuracy(out, Y)
-    return total_loss / len(loader), total_acc / len(loader)
+            loss_sum += criterion(out, Y)
+            correctos, total = calcular_correctos_total(out, Y)
+            correctos_sum += correctos
+            total_sum += total
+            n_batches += 1
+    total_final = total_sum.item()
+    acc = (correctos_sum.item() / total_final) if total_final > 0 else 0.0
+    return (loss_sum / n_batches).item(), acc
 
 # ============================================================
 # ENTRENAMIENTO
@@ -93,6 +107,10 @@ def evaluar(modelo, loader, criterion, device):
 def entrenar():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Dispositivo: {device}")
+    # Todas las imágenes son de 256x256 -> forma fija de entrada, cudnn puede
+    # elegir el algoritmo de convolución más rápido para esa forma sin volver
+    # a probar en cada batch.
+    torch.backends.cudnn.benchmark = True
 
     print("\nCargando tiles de TRAIN...")
     ds_train = ConcatDataset([
@@ -109,9 +127,15 @@ def entrenar():
 
     print(f"\nTrain: {len(ds_train)} parches | Val: {len(ds_val)} | Test: {len(ds_test)}")
 
-    train_loader = DataLoader(ds_train, batch_size=BATCH_SIZE, shuffle=True,  num_workers=2)
-    val_loader   = DataLoader(ds_val,   batch_size=BATCH_SIZE, shuffle=False, num_workers=2)
-    test_loader  = DataLoader(ds_test,  batch_size=BATCH_SIZE, shuffle=False, num_workers=2)
+    # El dataset ya está entero en RAM (TileDataset lo carga en __init__), así que
+    # __getitem__ es solo indexar tensores: num_workers>0 aporta poco y pin_memory
+    # + non_blocking permiten que la copia CPU->GPU se solape con el cómputo.
+    train_loader = DataLoader(ds_train, batch_size=BATCH_SIZE, shuffle=True,  num_workers=2,
+                               pin_memory=True, persistent_workers=True)
+    val_loader   = DataLoader(ds_val,   batch_size=BATCH_SIZE, shuffle=False, num_workers=2,
+                               pin_memory=True, persistent_workers=True)
+    test_loader  = DataLoader(ds_test,  batch_size=BATCH_SIZE, shuffle=False, num_workers=2,
+                               pin_memory=True, persistent_workers=True)
 
     IN_CHANNELS = ds_train[0][0].shape[0]
     print(f"Canales de entrada: {IN_CHANNELS}")
@@ -132,20 +156,33 @@ def entrenar():
     print("\n--- Iniciando entrenamiento ---")
     for epoch in range(EPOCHS):
         model.train()
-        train_loss, train_acc = 0.0, 0.0
+        loss_sum = torch.zeros((), device=device)
+        correctos_sum = torch.zeros((), device=device)
+        total_sum = torch.zeros((), device=device)
+        n_batches = 0
 
         for X, Y in train_loader:
-            X, Y = X.to(device), Y.to(device)
-            optimizer.zero_grad()
+            X = X.to(device, non_blocking=True)
+            Y = Y.to(device, non_blocking=True)
+            optimizer.zero_grad(set_to_none=True)
             out  = model(X)
             loss = criterion(out, Y)
             loss.backward()
             optimizer.step()
-            train_loss += loss.item()
-            train_acc  += calcular_accuracy(out, Y)
 
-        train_loss /= len(train_loader)
-        train_acc  /= len(train_loader)
+            # Acumular en GPU y recién bajar a Python al final de la época:
+            # un .item() por batch fuerza sincronización CPU/GPU en cada paso
+            # y es lo que dejaba la GPU esperando en vez de trabajando.
+            with torch.no_grad():
+                loss_sum += loss.detach()
+                correctos, total = calcular_correctos_total(out, Y)
+                correctos_sum += correctos
+                total_sum += total
+            n_batches += 1
+
+        train_loss = (loss_sum / n_batches).item()
+        total_final = total_sum.item()
+        train_acc = (correctos_sum.item() / total_final) if total_final > 0 else 0.0
         val_loss, val_acc = evaluar(model, val_loader, criterion, device)
 
         historial.append([epoch+1, train_loss, train_acc, val_loss, val_acc])
