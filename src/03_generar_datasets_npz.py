@@ -41,7 +41,7 @@ def _procesar_chunk_ventanas(args):
     print(f"[{tile_id}] chunk terminado: {len(X_local)} parches de {len(coords)} ventanas")
     return X_local, Y_local
 
-def generar_dataset_tile(tile_id, ruta_mascara, dir_composites, dir_salida, size=256, step=256, max_workers=None):
+def generar_dataset_tile(tile_id, ruta_mascara, dir_composites, dir_salida, meses=None, size=256, step=256, max_workers=None):
     dir_salida = Path(dir_salida)
     dir_salida.mkdir(parents=True, exist_ok=True)
     ruta_salida = dir_salida / f"dataset_T{tile_id}.npz"
@@ -56,10 +56,20 @@ def generar_dataset_tile(tile_id, ruta_mascara, dir_composites, dir_salida, size
         except Exception:
             print(f"{tile_id}: existente corrupto, se regenera")
 
-    composites = sorted(Path(dir_composites).glob(f"{tile_id}_*_median.tif"))
-    if not composites:
-        print(f"{tile_id}: sin composites")
-        return
+    if meses:
+        # Filtra a un calendario fijo de meses (p.ej. la intersección común entre
+        # varios tiles) para que todos los tiles del dataset final tengan la misma
+        # cantidad de canales, sin importar cuántos meses de composites tenga cada uno.
+        composites = [Path(dir_composites) / f"{tile_id}_{mes}_median.tif" for mes in meses]
+        faltantes = [c.name for c in composites if not c.exists()]
+        if faltantes:
+            print(f"{tile_id}: faltan composites para {faltantes}")
+            return
+    else:
+        composites = sorted(Path(dir_composites).glob(f"{tile_id}_*_median.tif"))
+        if not composites:
+            print(f"{tile_id}: sin composites")
+            return
 
     print(f"{tile_id}: {len(composites)} meses")
 
@@ -92,15 +102,21 @@ def generar_dataset_tile(tile_id, ruta_mascara, dir_composites, dir_salida, size
     print(f"{tile_id}: guardado {len(X_list)} parches -> {ruta_salida}")
 
 if __name__ == "__main__":
-    tiles = ["20HLJ", "20HLK", "20HMJ", "20HMK", "20JLL", "20JML"]
+    # 7 tiles con máscara ya generada y >= 7 meses de composites en común.
+    # MESES_COMUNES = intersección de meses presentes en TODOS estos tiles
+    # (evita mezclar tiles con distinta cantidad de canales en el mismo dataset).
+    # 19HGB se descartó: sus 1764 ventanas dieron 0 parches válidos (máscara sin
+    # datos de cultivo utilizables en esa zona).
+    tiles = ["20HLJ", "20HLK", "20JLL", "20JML", "20JNL", "20HNK"]
+    MESES_COMUNES = ["201707", "201708", "201709", "201710", "201711", "201712", "201804"]
     DIR_COMPOSITES = "/mnt/yacy_1/prod/ferreyra/cordoba_dataset_filtrado/composites_filtrado"
-    DIR_SALIDA = "/mnt/yacy_1/prod/ferreyra/dataset/train"
+    DIR_SALIDA = "/mnt/yacy_1/prod/ferreyra/dataset/train_multitile7"
 
     for tile in tiles:
         ruta_mascara = f"./mascaras_procesadas/etiqueta_{tile}_10m_test.tif"
         if not os.path.exists(ruta_mascara):
             print(f"{tile}: máscara no encontrada")
             continue
-        generar_dataset_tile(tile, ruta_mascara, DIR_COMPOSITES, DIR_SALIDA)
+        generar_dataset_tile(tile, ruta_mascara, DIR_COMPOSITES, DIR_SALIDA, meses=MESES_COMUNES)
 
     print("\nListo - todos los datasets generados")
