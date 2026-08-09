@@ -97,7 +97,8 @@ def generar_dataset_tile(tile_id, ruta_mascara, dir_composites, dir_salida, mese
     X = np.stack(X_list, axis=0)
     Y = np.stack(Y_list, axis=0)
     ruta_tmp = ruta_salida.with_suffix(".npz.tmp")
-    np.savez_compressed(ruta_tmp, X=X, Y=Y)
+    with open(ruta_tmp, "wb") as f:
+        np.savez_compressed(ruta_tmp, X=X, Y=Y)
     os.replace(ruta_tmp, ruta_salida)
     print(f"{tile_id}: guardado {len(X_list)} parches -> {ruta_salida}")
 

@@ -1,0 +1,128 @@
+nohup: ignoring input
+Procesando 41 tiles filtrados...
+
+=== Tile: 19HGB ===
+Procesando Tile 19HGB | 10 meses a calcular.
+Desplegando 4 workers en la CPU...
+[201710] Iniciando cálculo con 1 fechas...
+[201801] Iniciando cálculo con 4 fechas...
+[201709] Iniciando cálculo con 1 fechas...
+[201712] Iniciando cálculo con 3 fechas...
+[201804] Iniciando cálculo con 3 fechas...
+[201707] Iniciando cálculo con 1 fechas...
+[201711] Iniciando cálculo con 3 fechas...
+[201803] Iniciando cálculo con 5 fechas...
+[201708] Iniciando cálculo con 2 fechas...
+[201802] Iniciando cálculo con 5 fechas...
+[201707] Completado exitosamente.
+[201708] Completado exitosamente.
+[201709] Completado exitosamente.
+[201710] Completado exitosamente.
+[201711] Completado exitosamente.
+[201712] Completado exitosamente.
+[201801] Completado exitosamente.
+[201802] Completado exitosamente.
+[201803] Completado exitosamente.
+[201804] Completado exitosamente.
+
+=== Tile: 19HGC ===
+Procesando Tile 19HGC | 10 meses a calcular.
+Desplegando 4 workers en la CPU...
+[201710] Iniciando cálculo con 2 fechas...
+[201801] Iniciando cálculo con 4 fechas...
+[201709] Iniciando cálculo con 2 fechas...
+[201711] Iniciando cálculo con 1 fechas...
+[201803] Iniciando cálculo con 5 fechas...
+[201707] Iniciando cálculo con 2 fechas...
+[201802] Iniciando cálculo con 4 fechas...
+[201708] Iniciando cálculo con 2 fechas...
+[201712] Iniciando cálculo con 3 fechas...
+[201804] Iniciando cálculo con 2 fechas...
+[201707] Completado exitosamente.
+[201708] Completado exitosamente.
+[201709] Completado exitosamente.
+[201710] Completado exitosamente.
+[201711] Completado exitosamente.
+[201712] Completado exitosamente.
+[201801] Completado exitosamente.
+[201802] Completado exitosamente.
+[201803] Completado exitosamente.
+[201804] Completado exitosamente.
+
+=== Tile: 19HGD ===
+Procesando Tile 19HGD | 10 meses a calcular.
+Desplegando 4 workers en la CPU...
+[201708] Iniciando cálculo con 2 fechas...
+[201712] Iniciando cálculo con 2 fechas...
+[201709] Iniciando cálculo con 2 fechas...
+[201711] Iniciando cálculo con 1 fechas...
+[201804] Iniciando cálculo con 2 fechas...
+[201707] Iniciando cálculo con 1 fechas...
+[201801] Iniciando cálculo con 4 fechas...
+[201803] Iniciando cálculo con 6 fechas...
+[201710] Iniciando cálculo con 2 fechas...
+[201802] Iniciando cálculo con 4 fechas...
+[201707] Completado exitosamente.
+[201708] Completado exitosamente.
+[201709] Completado exitosamente.
+[201710] Completado exitosamente.
+[201711] Completado exitosamente.
+[201712] Completado exitosamente.
+concurrent.futures.process._RemoteTraceback: 
+"""
+rasterio._err.CPLE_AppDefinedError: TIFFFillTile:Read error at row 6144, col 6144, tile 117; got 391722 bytes, expected 861897
+
+The above exception was the direct cause of the following exception:
+
+rasterio._err.CPLE_AppDefinedError: TIFFReadEncodedTile() failed.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "rasterio/_io.pyx", line 969, in rasterio._io.DatasetReaderBase._read
+  File "rasterio/_io.pyx", line 199, in rasterio._io.io_multi_band
+  File "rasterio/_io.pyx", line 205, in rasterio._io.io_multi_band
+  File "rasterio/_err.pyx", line 325, in rasterio._err.StackChecker.exc_wrap_int
+rasterio._err.CPLE_AppDefinedError: 19HGD_20180128_B02.jp2, band 1: IReadBlock failed at X offset 7, Y offset 10: TIFFReadEncodedTile() failed.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/lib64/python3.11/concurrent/futures/process.py", line 261, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.11/concurrent/futures/process.py", line 210, in _process_chunk
+    return [fn(*args) for args in chunk]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.11/concurrent/futures/process.py", line 210, in <listcomp>
+    return [fn(*args) for args in chunk]
+            ^^^^^^^^^
+  File "/home1/ferreyra/cordoba_ia_unne/src/02_composites_filtrado_multitile.py", line 35, in procesar_un_mes
+    stack_temporal.append(src.read(1))
+                          ^^^^^^^^^^^
+  File "rasterio/_io.pyx", line 644, in rasterio._io.DatasetReaderBase.read
+  File "rasterio/_io.pyx", line 972, in rasterio._io.DatasetReaderBase._read
+rasterio.errors.RasterioIOError: Read failed. See previous exception for details.
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home1/ferreyra/cordoba_ia_unne/src/02_composites_filtrado_multitile.py", line 86, in <module>
+    generar_composiciones_mensuales(tile, BASE_S2, DIR_COMPOSITES, max_workers=4)
+  File "/home1/ferreyra/cordoba_ia_unne/src/02_composites_filtrado_multitile.py", line 73, in generar_composiciones_mensuales
+    for resultado in resultados:
+  File "/usr/lib64/python3.11/concurrent/futures/process.py", line 620, in _chain_from_iterable_of_lists
+    for element in iterable:
+  File "/usr/lib64/python3.11/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.11/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.11/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.11/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+rasterio.errors.RasterioIOError: Read failed. See previous exception for details.

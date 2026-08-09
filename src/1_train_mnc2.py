@@ -18,16 +18,12 @@ BASE_DIR = "/mnt/yacy_1/prod/ferreyra/dataset"
 # generado por un proceso externo a este repo), cambiar a:
 #   DIR_TRAIN, DIR_EXP, DATASET_PREFIX = f"{BASE_DIR}/train_mnc", f"{BASE_DIR}/exp_mnc", "dataset_mnc_T"
 #   APLICAR_REMAP_6 = False
-DIR_TRAIN       = f"{BASE_DIR}/train_cordoba_mnc"
-DIR_EXP         = f"{BASE_DIR}/exp_cordoba_mnc"
-DATASET_PREFIX  = "dataset_mnc_"
-APLICAR_REMAP_6 = False
+DIR_TRAIN       = f"{BASE_DIR}/train_mnc"                                                                                                      
+DIR_EXP         = f"{BASE_DIR}/exp_mnc2"                                                                                                       
+DATASET_PREFIX  = "dataset_mnc_T"                                                                                                              
+APLICAR_REMAP_6 = False          
 
-# 6 tiles (frente a los 3+1+1 anteriores) con 7 meses en común (201707-201712,
-# 201804) generados por 03_generar_datasets_npz.py con MESES_COMUNES. Mismo
-# val/test que la config anterior para mantener comparabilidad. (19HGB se
-# descartó: 0 parches válidos, máscara sin datos de cultivo en esa zona.)
-TILES_TRAIN = ["20HMJ", "20HMK", "20JML", "20HPG"]
+TILES_TRAIN = ["20HMJ", "20HMK", "20JML"]
 TILE_VAL    = "20JNL"
 TILES_TEST  = ["20HNK"]
 
@@ -56,22 +52,15 @@ np.random.seed(SEED)
 class TileDataset(torch.utils.data.Dataset):
     def __init__(self, ruta_npz, fraccion=1.0, seed=42, aplicar_remap=False):
         data = np.load(ruta_npz)
-        X = data["X"]
-        Y = data["Y"]
+        X = data["X"].astype(np.float32)
+        Y = data["Y"].astype(np.int64)
         if aplicar_remap:
             Y = REMAP_6[Y]
-        if fraccion < 1.0:
-            # Solo copiamos/barajamos si realmente vamos a submuestrear: con
-            # fraccion=1.0 el fancy-indexing duplicaba el tile entero en RAM
-            # innecesariamente (X[idx] con idx = todos los índices barajados).
-            n = int(len(X) * fraccion)
-            rng = np.random.default_rng(seed)
-            idx = rng.choice(len(X), size=n, replace=False)
-            X, Y = X[idx], Y[idx]
-        else:
-            n = len(X)
-        self.X = torch.from_numpy(X.astype(np.float32, copy=False))
-        self.Y = torch.from_numpy(Y.astype(np.int64, copy=False))
+        n = int(len(X) * fraccion)
+        rng = np.random.default_rng(seed)
+        idx = rng.choice(len(X), size=n, replace=False)
+        self.X = torch.from_numpy(X[idx])
+        self.Y = torch.from_numpy(Y[idx])
         print(f"  {os.path.basename(ruta_npz)}: {n} parches cargados")
 
     def __len__(self):

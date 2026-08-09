@@ -1,0 +1,12 @@
+Dispositivo: cuda
+Autodetectados 40 canales de entrada (Meses x Bandas).
+Splits -> Train: 1234 | Val: 264 | Test: 266
+Epoch [1/5] | Train Loss: 2.7730 Acc: 0.4166 | Val Loss: 1.9409 Acc: 0.5731
+Epoch [2/5] | Train Loss: 2.0226 Acc: 0.5069 | Val Loss: 1.5805 Acc: 0.6011
+Epoch [3/5] | Train Loss: 1.7250 Acc: 0.5295 | Val Loss: 1.3781 Acc: 0.6200
+Epoch [4/5] | Train Loss: 1.5562 Acc: 0.5480 | Val Loss: 1.2695 Acc: 0.6398
+Epoch [5/5] | Train Loss: 1.4603 Acc: 0.5632 | Val Loss: 1.2100 Acc: 0.6258
+
+--- Evaluando en conjunto de TEST ---
+Test Loss: 1.1898 | Test Acc: 0.6272
+Modelo guardado exitosamente.
