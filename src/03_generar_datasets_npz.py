@@ -47,8 +47,14 @@ def generar_dataset_tile(tile_id, ruta_mascara, dir_composites, dir_salida, size
     ruta_salida = dir_salida / f"dataset_T{tile_id}.npz"
 
     if ruta_salida.exists():
-        print(f"{tile_id}: ya existe, omitiendo")
-        return
+        try:
+            with np.load(ruta_salida) as data:
+                data["X"]
+                data["Y"]
+            print(f"{tile_id}: ya existe, omitiendo")
+            return
+        except Exception:
+            print(f"{tile_id}: existente corrupto, se regenera")
 
     composites = sorted(Path(dir_composites).glob(f"{tile_id}_*_median.tif"))
     if not composites:
@@ -80,7 +86,9 @@ def generar_dataset_tile(tile_id, ruta_mascara, dir_composites, dir_salida, size
 
     X = np.stack(X_list, axis=0)
     Y = np.stack(Y_list, axis=0)
-    np.savez_compressed(ruta_salida, X=X, Y=Y)
+    ruta_tmp = ruta_salida.with_suffix(".npz.tmp")
+    np.savez_compressed(ruta_tmp, X=X, Y=Y)
+    os.replace(ruta_tmp, ruta_salida)
     print(f"{tile_id}: guardado {len(X_list)} parches -> {ruta_salida}")
 
 if __name__ == "__main__":
