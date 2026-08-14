@@ -23,18 +23,24 @@ from utils.model import SimpleUNet
 # CONFIGURACION
 # ══════════════════════════════════════════════════════════════════════════════
 BASE_DIR   = "/mnt/yacy_1/prod/ferreyra/dataset"
-DIR_TRAIN  = f"{BASE_DIR}/train_cordoba21"
-DIR_EXP    = f"{BASE_DIR}/exp_cordoba21"
+DIR_TRAIN  = f"{BASE_DIR}/train_cordoba_f16"
+DIR_EXP    = f"{BASE_DIR}/exp_cordoba_f16"
 PREFIJO    = "dataset_"
 
 # Split por franjas de cobertura de cultivo (ver analisis de cobertura MNC)
-TILES_TRAIN = ['20HLH','20HLJ','20HMJ','20HMK','20HNK',    # franja alta
-               '20HLG','20HMG','20HMH','20HNG',            # franja media
-               '19HGC','20HKH']                            # franja baja
-TILE_VAL    = ['20HPH','20HPG','20HKJ']                    # una de cada franja
-TILES_TEST  = ['20JML','20JNL','20HLK']                    # una de cada franja
+# Split espacial por tiles completos, balanceado en tres criterios:
+#   1) gradiente geografico oeste-centro-este (evita mismatch de dominio)
+#   2) presencia de Mani (clase minoritaria) en los tres conjuntos
+#   3) validacion ampliada a 4 tiles para reducir el ruido de la curva Val
+# Split de 11 tiles (limitado por RAM disponible: 124 GB).
+# Mantiene cobertura oeste-centro-este y Mani en los 3 conjuntos.
+TILES_TRAIN = ['19HGC',
+               '20HLG','20HLH','20HMJ',
+               '20HMK','20HNK','20JML']
+TILE_VAL    = ['20HKJ','20HMH']
+TILES_TEST  = ['20HLK','20HLJ']
 
-NUM_CLASSES   = 6
+NUM_CLASSES   = 5
 BATCH_SIZE    = 32
 EPOCHS        = 100
 LEARNING_RATE = 1e-4
@@ -44,9 +50,9 @@ SEED          = 42
 
 # Pesos por clase — recalcular con 0_verificar_pipeline.py --etapa pesos
 # Orden: [NoData, Fondo, Maiz, Soja, Mani, Sorgo]
-PESOS = [0.0, 0.3, 1.0, 0.8, 3.0, 8.0]
+PESOS = [0.0, 0.716, 0.947, 0.728, 4.545]
 
-NOMBRES = {0:"NoData", 1:"Fondo", 2:"Maiz", 3:"Soja", 4:"Mani", 5:"Sorgo"}
+NOMBRES = {0:"NoData", 1:"Fondo", 2:"Maiz", 3:"Soja", 4:"Mani"}
 
 os.makedirs(DIR_EXP, exist_ok=True)
 torch.manual_seed(SEED)
@@ -69,7 +75,9 @@ class TileDataset(torch.utils.data.Dataset):
                 f"{ruta_npz} no tiene el flag remap_aplicado. "
                 "Regenerar el dataset o verificar el esquema de clases.")
 
-        self.X = torch.from_numpy(data["X"].astype(np.float32))
+        # float16 en RAM (mitad de memoria); se convierte a float32 por
+        # parche en __getitem__, que es lo que espera PyTorch en las convs.
+        self.X = torch.from_numpy(data["X"])
         self.Y = torch.from_numpy(data["Y"].astype(np.int64))
 
         clases = torch.unique(self.Y).tolist()
@@ -84,7 +92,7 @@ class TileDataset(torch.utils.data.Dataset):
         return len(self.X)
 
     def __getitem__(self, i):
-        return self.X[i], self.Y[i]
+        return self.X[i].float(), self.Y[i]
 
 
 def cargar_tiles(tiles, etiqueta):
