@@ -7,18 +7,19 @@ import numpy as np
 import sys
 sys.path.append(os.path.abspath("."))
 from utils.model import SimpleUNet
+from utils.tile_dataset import TileDatasetMmap
 
 # ============================================================
 # CONFIGURACION
 # ============================================================
 BASE_DIR = "/mnt/yacy_1/prod/ferreyra/dataset"
 
-# Checkpoint ya entrenado (1_train_multitile.py) que se va a especializar en Manfredi.
-RUTA_CHECKPOINT_BASE = f"{BASE_DIR}/exp_cordoba_mnc/best_model.pth"
+# Checkpoint ya entrenado (1_train_mnc2.py) que se va a especializar en Manfredi.
+RUTA_CHECKPOINT_BASE = f"{BASE_DIR}/exp_mnc2/best_model.pth"
 
 # Deben coincidir con los usados para generar RUTA_CHECKPOINT_BASE (mismos meses/canales).
-DIR_TRAIN      = f"{BASE_DIR}/train_cordoba_mnc"
-DATASET_PREFIX = "dataset_mnc_"
+DIR_TRAIN      = f"{BASE_DIR}/train_mnc"
+DATASET_PREFIX = "dataset_mnc_T"
 
 # Completar con el resultado de src/buscar_tile_por_coordenada.py
 TILE_MANFREDI = "20HMK"
@@ -33,25 +34,15 @@ PATIENCE      = 10
 FRACCION_VAL  = 0.15
 SEED          = 42
 
+# floryacy: 32 nucleos de CPU / RTX 3090. Con TileDatasetMmap cada __getitem__
+# lee del disco bajo demanda (antes el dataset ya estaba entero en RAM), asi
+# que varios workers en paralelo si aportan (se solapan con el computo en GPU).
+NUM_WORKERS = 16
+PREFETCH_FACTOR = 4
+
 os.makedirs(DIR_EXP, exist_ok=True)
 torch.manual_seed(SEED)
 np.random.seed(SEED)
-
-# ============================================================
-# DATASET DESDE .NPZ (un solo tile: Manfredi)
-# ============================================================
-class TileDataset(torch.utils.data.Dataset):
-    def __init__(self, ruta_npz):
-        data = np.load(ruta_npz)
-        self.X = torch.from_numpy(data["X"].astype(np.float32))
-        self.Y = torch.from_numpy(data["Y"].astype(np.int64))
-        print(f"  {os.path.basename(ruta_npz)}: {len(self.X)} parches cargados")
-
-    def __len__(self):
-        return len(self.X)
-
-    def __getitem__(self, i):
-        return self.X[i], self.Y[i]
 
 # ============================================================
 # METRICAS
@@ -69,7 +60,7 @@ def evaluar(modelo, loader, criterion, device):
     correctos_sum = torch.zeros((), device=device)
     total_sum = torch.zeros((), device=device)
     n_batches = 0
-    with torch.no_grad():
+    with torch.no_grad(), torch.autocast(device_type=device.type, enabled=(device.type == "cuda")):
         for X, Y in loader:
             X = X.to(device, non_blocking=True)
             Y = Y.to(device, non_blocking=True)
@@ -94,9 +85,9 @@ def finetune():
     if TILE_MANFREDI == "XXXXX":
         raise ValueError("Completar TILE_MANFREDI con el tile detectado por buscar_tile_por_coordenada.py")
 
-    ruta_npz = f"{DIR_TRAIN}/{DATASET_PREFIX}{TILE_MANFREDI}.npz"
+    ruta_base = f"{DIR_TRAIN}/{DATASET_PREFIX}{TILE_MANFREDI}"
     print(f"\nCargando parches de Manfredi (tile {TILE_MANFREDI})...")
-    dataset = TileDataset(ruta_npz)
+    dataset = TileDatasetMmap(ruta_base)
 
     n = len(dataset)
     rng = np.random.default_rng(SEED)
@@ -108,10 +99,14 @@ def finetune():
     ds_val = Subset(dataset, idx_val)
     print(f"Train: {len(ds_train)} parches | Val: {len(ds_val)} parches")
 
-    train_loader = DataLoader(ds_train, batch_size=BATCH_SIZE, shuffle=True,  num_workers=2,
-                               pin_memory=True, persistent_workers=True)
-    val_loader   = DataLoader(ds_val,   batch_size=BATCH_SIZE, shuffle=False, num_workers=2,
-                               pin_memory=True, persistent_workers=True)
+    # Con TileDatasetMmap cada __getitem__ hace I/O real (lee del disco bajo
+    # demanda), asi que ahora si vale la pena paralelizar con varios workers:
+    # se solapan con el computo en GPU en vez de dejarla esperando.
+    loader_kwargs = dict(batch_size=BATCH_SIZE, num_workers=NUM_WORKERS,
+                          pin_memory=True, persistent_workers=True,
+                          prefetch_factor=PREFETCH_FACTOR)
+    train_loader = DataLoader(ds_train, shuffle=True,  **loader_kwargs)
+    val_loader   = DataLoader(ds_val,   shuffle=False, **loader_kwargs)
 
     IN_CHANNELS = dataset[0][0].shape[0]
     print(f"Canales de entrada: {IN_CHANNELS}")
@@ -122,6 +117,9 @@ def finetune():
     pesos = torch.tensor([0.0, 0.3, 1.0, 0.8, 3.0, 8.0], dtype=torch.float32).to(device)
     criterion = nn.CrossEntropyLoss(weight=pesos, ignore_index=0)
     optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE, weight_decay=1e-4)
+    # Mixed precision: aprovecha los Tensor Cores de la RTX 3090 (el modelo es
+    # chico, con fp32 el cuello de botella es overhead de kernels, no computo).
+    scaler = torch.amp.GradScaler(device.type, enabled=(device.type == "cuda"))
 
     mejor_val_loss = float("inf")
     epocas_sin_mejora = 0
@@ -139,10 +137,12 @@ def finetune():
             X = X.to(device, non_blocking=True)
             Y = Y.to(device, non_blocking=True)
             optimizer.zero_grad(set_to_none=True)
-            out = model(X)
-            loss = criterion(out, Y)
-            loss.backward()
-            optimizer.step()
+            with torch.autocast(device_type=device.type, enabled=(device.type == "cuda")):
+                out = model(X)
+                loss = criterion(out, Y)
+            scaler.scale(loss).backward()
+            scaler.step(optimizer)
+            scaler.update()
 
             with torch.no_grad():
                 loss_sum += loss.detach()

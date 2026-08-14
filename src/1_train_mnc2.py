@@ -7,14 +7,15 @@ import numpy as np
 import sys
 sys.path.append(os.path.abspath("."))
 from utils.model import SimpleUNet
+from utils.tile_dataset import TileDatasetMmap
 
 # ============================================================
 # CONFIGURACION
 # ============================================================
 BASE_DIR = "/mnt/yacy_1/prod/ferreyra/dataset"
 
-# Dataset generado por 03_generar_datasets_npz.py (dataset_T<TILE>.npz, 9 clases sin remapear).
-# Si en algún momento se cuenta con un dataset ya curado a 6 clases (ej. dataset_mnc_T<TILE>.npz,
+# Dataset generado por 03_generar_datasets_npz.py (dataset_T<TILE>_X.npy/_Y.npy, 9 clases sin remapear).
+# Si en algún momento se cuenta con un dataset ya curado a 6 clases (ej. dataset_mnc_T<TILE>_X.npy/_Y.npy,
 # generado por un proceso externo a este repo), cambiar a:
 #   DIR_TRAIN, DIR_EXP, DATASET_PREFIX = f"{BASE_DIR}/train_mnc", f"{BASE_DIR}/exp_mnc", "dataset_mnc_T"
 #   APLICAR_REMAP_6 = False
@@ -37,6 +38,12 @@ NUM_CLASSES   = 6
 PATIENCE      = 50
 SEED          = 42
 
+# floryacy: 32 nucleos de CPU / RTX 3090. Con TileDatasetMmap cada __getitem__
+# lee del disco bajo demanda (antes el dataset ya estaba entero en RAM), asi
+# que varios workers en paralelo si aportan (se solapan con el computo en GPU).
+NUM_WORKERS = 16
+PREFETCH_FACTOR = 4
+
 # Remapeo de 9 clases originales a solo cultivos de verano (6 clases):
 # 0=NoData,1=Natural,2=Urbano,3=Trigo,4=Maiz,5=Soja,6=Mani,7=Sorgo,8=Otros
 # ->        0=NoData,1=Fondo, 1=Fondo,1=Fondo,2=Maiz,3=Soja,4=Mani,5=Sorgo,1=Fondo
@@ -45,29 +52,6 @@ REMAP_6 = np.array([0, 1, 1, 1, 2, 3, 4, 5, 1], dtype=np.int64)
 os.makedirs(DIR_EXP, exist_ok=True)
 torch.manual_seed(SEED)
 np.random.seed(SEED)
-
-# ============================================================
-# DATASET DESDE .NPZ
-# ============================================================
-class TileDataset(torch.utils.data.Dataset):
-    def __init__(self, ruta_npz, fraccion=1.0, seed=42, aplicar_remap=False):
-        data = np.load(ruta_npz)
-        X = data["X"].astype(np.float32)
-        Y = data["Y"].astype(np.int64)
-        if aplicar_remap:
-            Y = REMAP_6[Y]
-        n = int(len(X) * fraccion)
-        rng = np.random.default_rng(seed)
-        idx = rng.choice(len(X), size=n, replace=False)
-        self.X = torch.from_numpy(X[idx])
-        self.Y = torch.from_numpy(Y[idx])
-        print(f"  {os.path.basename(ruta_npz)}: {n} parches cargados")
-
-    def __len__(self):
-        return len(self.X)
-
-    def __getitem__(self, i):
-        return self.X[i], self.Y[i]
 
 # ============================================================
 # METRICAS
@@ -87,7 +71,7 @@ def evaluar(modelo, loader, criterion, device):
     correctos_sum = torch.zeros((), device=device)
     total_sum = torch.zeros((), device=device)
     n_batches = 0
-    with torch.no_grad():
+    with torch.no_grad(), torch.autocast(device_type=device.type, enabled=(device.type == "cuda")):
         for X, Y in loader:
             X = X.to(device, non_blocking=True)
             Y = Y.to(device, non_blocking=True)
@@ -112,30 +96,32 @@ def entrenar():
     # a probar en cada batch.
     torch.backends.cudnn.benchmark = True
 
+    remap = REMAP_6 if APLICAR_REMAP_6 else None
+
     print("\nCargando tiles de TRAIN...")
     ds_train = ConcatDataset([
-        TileDataset(f"{DIR_TRAIN}/{DATASET_PREFIX}{t}.npz", aplicar_remap=APLICAR_REMAP_6) for t in TILES_TRAIN
+        TileDatasetMmap(f"{DIR_TRAIN}/{DATASET_PREFIX}{t}", remap=remap) for t in TILES_TRAIN
     ])
 
     print("\nCargando tile de VAL...")
-    ds_val = TileDataset(f"{DIR_TRAIN}/{DATASET_PREFIX}{TILE_VAL}.npz", fraccion=1.0, aplicar_remap=APLICAR_REMAP_6)
+    ds_val = TileDatasetMmap(f"{DIR_TRAIN}/{DATASET_PREFIX}{TILE_VAL}", remap=remap)
 
     print("\nCargando tiles de TEST...")
     ds_test = ConcatDataset([
-        TileDataset(f"{DIR_TRAIN}/{DATASET_PREFIX}{t}.npz", aplicar_remap=APLICAR_REMAP_6) for t in TILES_TEST
+        TileDatasetMmap(f"{DIR_TRAIN}/{DATASET_PREFIX}{t}", remap=remap) for t in TILES_TEST
     ])
 
     print(f"\nTrain: {len(ds_train)} parches | Val: {len(ds_val)} | Test: {len(ds_test)}")
 
-    # El dataset ya está entero en RAM (TileDataset lo carga en __init__), así que
-    # __getitem__ es solo indexar tensores: num_workers>0 aporta poco y pin_memory
-    # + non_blocking permiten que la copia CPU->GPU se solape con el cómputo.
-    train_loader = DataLoader(ds_train, batch_size=BATCH_SIZE, shuffle=True,  num_workers=2,
-                               pin_memory=True, persistent_workers=True)
-    val_loader   = DataLoader(ds_val,   batch_size=BATCH_SIZE, shuffle=False, num_workers=2,
-                               pin_memory=True, persistent_workers=True)
-    test_loader  = DataLoader(ds_test,  batch_size=BATCH_SIZE, shuffle=False, num_workers=2,
-                               pin_memory=True, persistent_workers=True)
+    # Con TileDatasetMmap cada __getitem__ hace I/O real (lee del disco bajo
+    # demanda), asi que ahora si vale la pena paralelizar con varios workers:
+    # se solapan con el computo en GPU en vez de dejarla esperando.
+    loader_kwargs = dict(batch_size=BATCH_SIZE, num_workers=NUM_WORKERS,
+                          pin_memory=True, persistent_workers=True,
+                          prefetch_factor=PREFETCH_FACTOR)
+    train_loader = DataLoader(ds_train, shuffle=True,  **loader_kwargs)
+    val_loader   = DataLoader(ds_val,   shuffle=False, **loader_kwargs)
+    test_loader  = DataLoader(ds_test,  shuffle=False, **loader_kwargs)
 
     IN_CHANNELS = ds_train[0][0].shape[0]
     print(f"Canales de entrada: {IN_CHANNELS}")
@@ -152,6 +138,9 @@ def entrenar():
     scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
         optimizer, mode='min', patience=10, factor=0.5, verbose=True
     )
+    # Mixed precision: aprovecha los Tensor Cores de la RTX 3090 (el modelo es
+    # chico, con fp32 el cuello de botella es overhead de kernels, no computo).
+    scaler = torch.amp.GradScaler(device.type, enabled=(device.type == "cuda"))
     mejor_val_loss = float("inf")
     epocas_sin_mejora = 0
     historial = []
@@ -168,10 +157,12 @@ def entrenar():
             X = X.to(device, non_blocking=True)
             Y = Y.to(device, non_blocking=True)
             optimizer.zero_grad(set_to_none=True)
-            out  = model(X)
-            loss = criterion(out, Y)
-            loss.backward()
-            optimizer.step()
+            with torch.autocast(device_type=device.type, enabled=(device.type == "cuda")):
+                out  = model(X)
+                loss = criterion(out, Y)
+            scaler.scale(loss).backward()
+            scaler.step(optimizer)
+            scaler.update()
 
             # Acumular en GPU y recién bajar a Python al final de la época:
             # un .item() por batch fuerza sincronización CPU/GPU en cada paso

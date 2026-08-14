@@ -2,10 +2,13 @@
 Entrenamiento de clasificacion de cultivos de verano sobre Cordoba completa.
 Dataset: composites Sentinel-2 2019-2020 + etiquetas MNC INTA verano 2020.
 
-Los .npz ya tienen el remapeo a 6 clases aplicado (flag remap_aplicado=1),
-por eso NO se vuelve a remapear al cargar.
+Los datos ya tienen el remapeo a 6 clases aplicado, por eso NO se vuelve a
+remapear al cargar. Requiere haber convertido los .npz de origen a pares
+<tile>_X.npy/_Y.npy sueltos (ver src/03b_convertir_datasets_a_mmap.py), que
+es donde se valida una sola vez el flag remap_aplicado=1 de los .npz.
 
 Uso:
+    python3 src/03b_convertir_datasets_a_mmap.py /mnt/yacy_1/prod/ferreyra/dataset/train_cordoba_f16
     python3 src/1_train_cordoba.py
 """
 import os
@@ -18,6 +21,7 @@ from torch.utils.data import DataLoader, ConcatDataset
 
 sys.path.append(os.path.abspath("."))
 from utils.model import SimpleUNet
+from utils.tile_dataset import TileDatasetMmap
 
 # ══════════════════════════════════════════════════════════════════════════════
 # CONFIGURACION
@@ -48,6 +52,12 @@ WEIGHT_DECAY  = 1e-3
 PATIENCE      = 30
 SEED          = 42
 
+# floryacy: 32 nucleos de CPU / RTX 3090. Con TileDatasetMmap cada __getitem__
+# lee del disco bajo demanda (antes el dataset ya estaba entero en RAM), asi
+# que varios workers en paralelo si aportan (se solapan con el computo en GPU).
+NUM_WORKERS = 16
+PREFETCH_FACTOR = 4
+
 # Pesos por clase — recalcular con 0_verificar_pipeline.py --etapa pesos
 # Orden: [NoData, Fondo, Maiz, Soja, Mani, Sorgo]
 PESOS = [0.0, 0.716, 0.947, 0.728, 4.545]
@@ -62,49 +72,30 @@ np.random.seed(SEED)
 # ══════════════════════════════════════════════════════════════════════════════
 # DATASET
 # ══════════════════════════════════════════════════════════════════════════════
-class TileDataset(torch.utils.data.Dataset):
-    """Carga un .npz completo en RAM. NO aplica remapeo: los .npz ya vienen
-    con las 6 clases finales (verificado via flag remap_aplicado)."""
-
-    def __init__(self, ruta_npz):
-        data = np.load(ruta_npz)
-
-        # Verificar que el remapeo ya fue aplicado al generar el archivo
-        if "remap_aplicado" not in data:
-            raise ValueError(
-                f"{ruta_npz} no tiene el flag remap_aplicado. "
-                "Regenerar el dataset o verificar el esquema de clases.")
-
-        # float16 en RAM (mitad de memoria); se convierte a float32 por
-        # parche en __getitem__, que es lo que espera PyTorch en las convs.
-        self.X = torch.from_numpy(data["X"])
-        self.Y = torch.from_numpy(data["Y"].astype(np.int64))
-
-        clases = torch.unique(self.Y).tolist()
-        if max(clases) >= NUM_CLASSES:
-            raise ValueError(
-                f"{ruta_npz} tiene clase {max(clases)} pero NUM_CLASSES={NUM_CLASSES}")
-
-        print(f"  {os.path.basename(ruta_npz)}: {len(self.X)} parches, "
-              f"clases {clases}", flush=True)
-
-    def __len__(self):
-        return len(self.X)
-
-    def __getitem__(self, i):
-        return self.X[i].float(), self.Y[i]
-
+# TileDatasetMmap (utils/tile_dataset.py) lee cada parche del disco bajo
+# demanda via mmap en vez de cargar el tile entero en RAM. El flag
+# remap_aplicado que antes se validaba aca al cargar el .npz ahora se valida
+# una sola vez, al convertir con 03b_convertir_datasets_a_mmap.py -- si el
+# .npy existe es porque ya paso esa verificacion.
 
 def cargar_tiles(tiles, etiqueta):
     print(f"\nCargando {etiqueta}...", flush=True)
     datasets = []
     canales = set()
     for t in tiles:
-        ruta = f"{DIR_TRAIN}/{PREFIJO}{t}.npz"
-        if not os.path.exists(ruta):
+        ruta_base = f"{DIR_TRAIN}/{PREFIJO}{t}"
+        if not os.path.exists(f"{ruta_base}_X.npy"):
             print(f"  {t}: NO EXISTE, salteado", flush=True)
             continue
-        ds = TileDataset(ruta)
+        ds = TileDatasetMmap(ruta_base)
+
+        # Lectura unica y transitoria (Y es uint8, liviano) para validar el
+        # rango de clases -- a diferencia de X, no queda residente en RAM
+        # durante todo el entrenamiento, ds sigue mmapeado.
+        clase_max = int(np.asarray(ds.Y).max())
+        if clase_max >= NUM_CLASSES:
+            raise ValueError(f"{ruta_base}: clase {clase_max} pero NUM_CLASSES={NUM_CLASSES}")
+
         canales.add(ds.X.shape[1])
         datasets.append(ds)
 
@@ -131,7 +122,7 @@ def evaluar(modelo, loader, criterion, device):
     ok_sum   = torch.zeros((), device=device)
     tot_sum  = torch.zeros((), device=device)
     n = 0
-    with torch.no_grad():
+    with torch.no_grad(), torch.autocast(device_type=device.type, enabled=(device.type == "cuda")):
         for X, Y in loader:
             X = X.to(device, non_blocking=True)
             Y = Y.to(device, non_blocking=True)
@@ -170,8 +161,12 @@ def entrenar():
 
     print(f"\nTrain: {len(ds_train)} | Val: {len(ds_val)} | Test: {len(ds_test)}", flush=True)
 
-    kw = dict(batch_size=BATCH_SIZE, num_workers=2,
-              pin_memory=True, persistent_workers=True)
+    # Con TileDatasetMmap cada __getitem__ hace I/O real (lee del disco bajo
+    # demanda), asi que ahora si vale la pena paralelizar con varios workers:
+    # se solapan con el computo en GPU en vez de dejarla esperando.
+    kw = dict(batch_size=BATCH_SIZE, num_workers=NUM_WORKERS,
+              pin_memory=True, persistent_workers=True,
+              prefetch_factor=PREFETCH_FACTOR)
     train_loader = DataLoader(ds_train, shuffle=True,  **kw)
     val_loader   = DataLoader(ds_val,   shuffle=False, **kw)
     test_loader  = DataLoader(ds_test,  shuffle=False, **kw)
@@ -186,6 +181,9 @@ def entrenar():
                            weight_decay=WEIGHT_DECAY)
     scheduler = optim.lr_scheduler.ReduceLROnPlateau(
         optimizer, mode='min', patience=10, factor=0.5)
+    # Mixed precision: aprovecha los Tensor Cores de la RTX 3090 (el modelo es
+    # chico, con fp32 el cuello de botella es overhead de kernels, no computo).
+    scaler = torch.amp.GradScaler(device.type, enabled=(device.type == "cuda"))
 
     chequeo_sanidad(model, train_loader, device)
 
@@ -205,10 +203,12 @@ def entrenar():
             X = X.to(device, non_blocking=True)
             Y = Y.to(device, non_blocking=True)
             optimizer.zero_grad(set_to_none=True)
-            out = model(X)
-            loss = criterion(out, Y)
-            loss.backward()
-            optimizer.step()
+            with torch.autocast(device_type=device.type, enabled=(device.type == "cuda")):
+                out = model(X)
+                loss = criterion(out, Y)
+            scaler.scale(loss).backward()
+            scaler.step(optimizer)
+            scaler.update()
             with torch.no_grad():
                 loss_sum += loss.detach()
                 ok, tot = correctos_total(out, Y)

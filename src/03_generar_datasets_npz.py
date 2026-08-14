@@ -44,13 +44,17 @@ def _procesar_chunk_ventanas(args):
 def generar_dataset_tile(tile_id, ruta_mascara, dir_composites, dir_salida, meses=None, size=256, step=256, max_workers=None):
     dir_salida = Path(dir_salida)
     dir_salida.mkdir(parents=True, exist_ok=True)
-    ruta_salida = dir_salida / f"dataset_T{tile_id}.npz"
+    # X/Y se guardan como .npy sueltos sin comprimir (no .npz comprimido) para
+    # poder abrirlos con mmap_mode="r" al entrenar: un array comprimido siempre
+    # se descomprime entero en RAM al leerlo, uno sin comprimir se puede leer
+    # parche a parche bajo demanda (ver utils/tile_dataset.py).
+    ruta_x = dir_salida / f"dataset_T{tile_id}_X.npy"
+    ruta_y = dir_salida / f"dataset_T{tile_id}_Y.npy"
 
-    if ruta_salida.exists():
+    if ruta_x.exists() and ruta_y.exists():
         try:
-            with np.load(ruta_salida) as data:
-                data["X"]
-                data["Y"]
+            np.load(ruta_x, mmap_mode="r").shape
+            np.load(ruta_y, mmap_mode="r").shape
             print(f"{tile_id}: ya existe, omitiendo")
             return
         except Exception:
@@ -94,13 +98,20 @@ def generar_dataset_tile(tile_id, ruta_mascara, dir_composites, dir_salida, mese
             X_list.extend(X_local)
             Y_list.extend(Y_local)
 
-    X = np.stack(X_list, axis=0)
-    Y = np.stack(Y_list, axis=0)
-    ruta_tmp = ruta_salida.with_suffix(".npz.tmp")
-    with open(ruta_tmp, "wb") as f:
-        np.savez_compressed(ruta_tmp, X=X, Y=Y)
-    os.replace(ruta_tmp, ruta_salida)
-    print(f"{tile_id}: guardado {len(X_list)} parches -> {ruta_salida}")
+    # float16/uint8: mismo truco de reduccion de RAM ya validado en el
+    # pipeline Cordoba 2019-2020 (entrenamiento float16), aplicado aca tambien.
+    X = np.stack(X_list, axis=0).astype(np.float16)
+    Y = np.stack(Y_list, axis=0).astype(np.uint8)
+
+    tmp_x = ruta_x.with_suffix(ruta_x.suffix + ".tmp")
+    tmp_y = ruta_y.with_suffix(ruta_y.suffix + ".tmp")
+    with open(tmp_x, "wb") as f:
+        np.save(f, X)
+    with open(tmp_y, "wb") as f:
+        np.save(f, Y)
+    os.replace(tmp_x, ruta_x)
+    os.replace(tmp_y, ruta_y)
+    print(f"{tile_id}: guardado {len(X_list)} parches -> {ruta_x.name} / {ruta_y.name}")
 
 if __name__ == "__main__":
     # 7 tiles con máscara ya generada y >= 7 meses de composites en común.
