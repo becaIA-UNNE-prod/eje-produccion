@@ -28,7 +28,11 @@ args = parser.parse_args()
 
 DIR_EXP = Path(args.exp)
 REMAP_6 = np.array([0, 1, 1, 1, 2, 3, 4, 5, 1], dtype=np.int64)
-NOMBRES = {0:"NoData", 1:"Fondo", 2:"Maiz", 3:"Soja", 4:"Mani", 5:"Sorgo"}
+NOMBRES_6 = {0:"NoData", 1:"Fondo", 2:"Maiz", 3:"Soja", 4:"Mani", 5:"Sorgo"}
+# Esquema original de 9 clases (mismo orden que LABEL_REMAP en 03_generar_datasets_npz.py)
+NOMBRES_9 = {0:"NoData", 1:"Natural", 2:"Urbano", 3:"Trigo", 4:"Maiz",
+             5:"Soja", 6:"Mani", 7:"Sorgo", 8:"Otros"}
+NOMBRES = NOMBRES_6 if args.n_clases == 6 else NOMBRES_9
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = SimpleUNet(28, args.n_clases).to(device)
@@ -37,7 +41,9 @@ model.eval()
 
 data = np.load(f"{args.dir_train}/{args.prefijo}{args.tile}.npz")
 X_all = data["X"]
-Y_all = REMAP_6[data["Y"]] if args.prefijo == "dataset_T" else data["Y"]
+# Remapear a 6 clases solo si el target son 6 clases y el .npz trae las 9 originales
+# sin curar (dataset_T*). Si se pide evaluar con 9 clases (baseline), dejar sin tocar.
+Y_all = REMAP_6[data["Y"]] if (args.prefijo == "dataset_T" and args.n_clases == 6) else data["Y"]
 
 confusion = np.zeros((args.n_clases, args.n_clases), dtype=np.int64)
 for i in range(0, len(X_all), 16):
