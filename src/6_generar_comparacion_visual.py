@@ -58,7 +58,9 @@ Y_usar = Y_all[:n_usar]
 
 preds = []
 for i in range(0, n_usar, 16):
-    X_b = torch.from_numpy(X_usar[i:i+16]).to(device)
+    # .float(): train_cordoba_f16 guarda X en float16 (ahorro de RAM), pero el
+    # modelo esta en float32 -- sin este cast, Conv2d tira dtype mismatch.
+    X_b = torch.from_numpy(X_usar[i:i+16]).float().to(device)
     with torch.no_grad():
         pred = torch.argmax(model(X_b), dim=1).cpu().numpy()
     preds.append(pred)

@@ -49,7 +49,9 @@ Y_all = REMAP_6[data["Y"]] if (args.prefijo == "dataset_T" and args.n_clases == 
 
 confusion = np.zeros((args.n_clases, args.n_clases), dtype=np.int64)
 for i in range(0, len(X_all), 16):
-    X_b = torch.from_numpy(X_all[i:i+16]).to(device)
+    # .float(): train_cordoba_f16 guarda X en float16 (ahorro de RAM), pero el
+    # modelo esta en float32 -- sin este cast, Conv2d tira dtype mismatch.
+    X_b = torch.from_numpy(X_all[i:i+16]).float().to(device)
     Y_b = Y_all[i:i+16]
     with torch.no_grad():
         pred = torch.argmax(model(X_b), dim=1).cpu().numpy()
