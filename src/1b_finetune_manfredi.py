@@ -118,7 +118,7 @@ def finetune():
 
     # Mismos pesos y loss (CE+Dice) que 1_train_cordoba.py, para no cambiar el
     # objetivo de optimizacion entre el entrenamiento base y el fine-tuning.
-    pesos = torch.tensor([0.0, 0.716, 0.947, 0.728, 4.545], dtype=torch.float32).to(device)
+    pesos = torch.tensor([0.0, 0.851, 1.019, 0.79, 4.245], dtype=torch.float32).to(device)
     criterion = CEDiceLoss(weight=pesos, num_classes=NUM_CLASSES, ignore_index=0)
     optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE, weight_decay=1e-4)
     # Mixed precision: aprovecha los Tensor Cores de la RTX 3090. Con la U-Net

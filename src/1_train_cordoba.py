@@ -67,12 +67,10 @@ SEED          = 42
 NUM_WORKERS = 16
 PREFETCH_FACTOR = 4
 
-# Pesos por clase — calculados sobre el split viejo de 7 tiles de TRAIN.
-# TODO: recalcular con 0b_calcular_pesos.py (ya actualizado a los 13 tiles
-# de TRAIN vigentes) antes de la proxima corrida -- la distribucion de clases
-# cambio al sumar los 6 tiles nuevos.
+# Pesos por clase — recalculados con 0b_calcular_pesos.py sobre los 13 tiles
+# de TRAIN vigentes (raiz del inverso de frecuencia).
 # Orden: [NoData, Fondo, Maiz, Soja, Mani]
-PESOS = [0.0, 0.716, 0.947, 0.728, 4.545]
+PESOS = [0.0, 0.851, 1.019, 0.79, 4.245]
 
 NOMBRES = {0:"NoData", 1:"Fondo", 2:"Maiz", 3:"Soja", 4:"Mani"}
 
