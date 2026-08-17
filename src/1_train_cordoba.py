@@ -42,11 +42,14 @@ PREFIJO    = "dataset_"
 #   1) gradiente geografico oeste-centro-este (evita mismatch de dominio)
 #   2) presencia de Mani (clase minoritaria) en los tres conjuntos
 #   3) validacion ampliada a 4 tiles para reducir el ruido de la curva Val
-# Split de 11 tiles (limitado por RAM disponible: 124 GB).
-# Mantiene cobertura oeste-centro-este y Mani en los 3 conjuntos.
+# Split de 17 tiles (11 originales + 6 sumados via
+# 03c_generar_dataset_cordoba_f16.py, verificados con 0_verificar_pipeline.py).
+# Los 6 nuevos se suman todos a TRAIN -- val/test quedan igual que antes para
+# poder comparar resultados contra las corridas previas con el mismo test set.
 TILES_TRAIN = ['19HGC',
                '20HLG','20HLH','20HMJ',
-               '20HMK','20HNK','20JML']
+               '20HMK','20HNK','20JML',
+               '20HKH','20HMG','20HNG','20HPG','20HPH','20JNL']
 TILE_VAL    = ['20HKJ','20HMH']
 TILES_TEST  = ['20HLK','20HLJ']
 
@@ -64,7 +67,10 @@ SEED          = 42
 NUM_WORKERS = 16
 PREFETCH_FACTOR = 4
 
-# Pesos por clase — recalcular con 0b_calcular_pesos.py
+# Pesos por clase — calculados sobre el split viejo de 7 tiles de TRAIN.
+# TODO: recalcular con 0b_calcular_pesos.py (ya actualizado a los 13 tiles
+# de TRAIN vigentes) antes de la proxima corrida -- la distribucion de clases
+# cambio al sumar los 6 tiles nuevos.
 # Orden: [NoData, Fondo, Maiz, Soja, Mani]
 PESOS = [0.0, 0.716, 0.947, 0.728, 4.545]
 

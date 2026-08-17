@@ -127,8 +127,27 @@ Genera **un par `.npy` (`_X`/`_Y`) sin comprimir por tile**, apto para mmap.
 Convierte `.npz` comprimidos (hay que cargarlos enteros en RAM para leer cualquier parche) a pares de
 `.npy` sueltos sin comprimir, que se pueden abrir con `mmap_mode="r"` (`utils/tile_dataset.py`). Valida,
 si el `.npz` trae el flag `remap_aplicado`, que sea `1` antes de convertir (evita entrenar por error con
-un dataset sin remapear). Es el paso previo obligatorio para poder usar `train_cordoba_f16` (y cualquier
-otro dataset en formato `.npz`) con `1_train_cordoba.py`.
+un dataset sin remapear). Es el paso previo obligatorio para poder usar un dataset en formato `.npz` con
+`1_train_cordoba.py`.
+
+### `03c_generar_dataset_cordoba_f16.py` (pipeline vigente)
+El generador original de `train_cordoba_f16` (11 tiles) se corrió como algo suelto en la máquina remota
+y nunca quedó versionado (ver `bash_history`, solo sobrevivió el fragmento `remap_aplicado=np.array([1])`).
+Este script es su reemplazo limpio, mismo formato de salida (`.npy` sin comprimir, `X` float16, `Y`
+uint8, listo para `TileDatasetMmap` sin pasar por `03b`) — pensado para sumar tiles nuevos a
+`train_cordoba_f16` a medida que se van verificando con `0_verificar_pipeline.py`.
+
+- **Tabla de remapeo (5 clases):** Maíz=2, Soja=3, Maní=4, todo el resto de códigos IDVER documentados en
+  la Tabla 2 del informe MNC-INTA (incluido Sorgo, excluido a propósito) colapsa a Fondo=1, y `255` (Sin
+  datos) a NoData=0 — ver `README_MNC.md`. Distinta de la tabla `REMAP_MNC` de `0_verificar_pipeline.py`,
+  que tiene un bug (Maíz/Soja invertidos, Maní mapeado a Fondo) y solo se usa ahí para un chequeo de
+  cobertura, no para generar datos de entrenamiento.
+- **Entrada:** composites `composites_2019_2020/<TILE>_*_median.tif` + máscara `etiqueta_mnc_<TILE>_10m.tif`.
+- **Salida:** `train_cordoba_f16/dataset_<TILE>_X.npy` / `_Y.npy` (si ya existe lo omite).
+- Por default corre sobre los 6 tiles que `0_verificar_pipeline.py` marca como aptos (composites + máscara)
+  pero que todavía no están en el split de `1_train_cordoba.py`: `20HKH, 20HMG, 20HNG, 20HPG, 20HPH, 20JNL`.
+  Imprime la distribución de clases de cada tile generado, para comparar a ojo contra los 11 tiles
+  existentes antes de sumarlos al entrenamiento.
 
 ---
 

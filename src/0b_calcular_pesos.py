@@ -11,7 +11,8 @@ from pathlib import Path
 # Mismo dataset y split de TRAIN que 1_train_cordoba.py (Cordoba completa,
 # 5 clases sin Sorgo).
 DIR = Path("/mnt/yacy_1/prod/ferreyra/dataset/train_cordoba_f16")
-TILES_TRAIN = ['19HGC', '20HLG', '20HLH', '20HMJ', '20HMK', '20HNK', '20JML']
+TILES_TRAIN = ['19HGC', '20HLG', '20HLH', '20HMJ', '20HMK', '20HNK', '20JML',
+               '20HKH', '20HMG', '20HNG', '20HPG', '20HPH', '20JNL']
 NOMBRES = {0:"NoData", 1:"Fondo", 2:"Maiz", 3:"Soja", 4:"Mani"}
 NUM_CLASSES = 5
 
