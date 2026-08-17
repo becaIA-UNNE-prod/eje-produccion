@@ -32,9 +32,9 @@ TILES_TRAIN = ["20HMJ", "20HMK", "20JML", "20HPG"]
 TILE_VAL    = "20JNL"
 TILES_TEST  = ["20HNK"]
 
-# Modelo chico (UNet de 2 niveles) -> con batch=16 la GPU pasa la mayor parte
-# del tiempo ociosa. Con una RTX 3090 (24GB) 32 deja bastante margen; si el
-# uso de VRAM (nvidia-smi) queda bajo, se puede subir a 48/64.
+# La U-Net ahora es de 4 niveles (~31M parametros, ver utils/model.py), ya no
+# sobra VRAM como con la version chica de 2 niveles. Verificar con nvidia-smi
+# al arrancar; si hay OOM con una RTX 3090 (24GB), bajar a 16.
 BATCH_SIZE    = 32
 EPOCHS        = 100
 LEARNING_RATE = 1e-4
@@ -142,8 +142,9 @@ def entrenar():
     scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
         optimizer, mode='min', patience=10, factor=0.5, verbose=True
     )
-    # Mixed precision: aprovecha los Tensor Cores de la RTX 3090 (el modelo es
-    # chico, con fp32 el cuello de botella es overhead de kernels, no computo).
+    # Mixed precision: aprovecha los Tensor Cores de la RTX 3090. Con la U-Net
+    # de 4 niveles (mas pesada que la version chica original) esto reduce
+    # computo real, no solo overhead de lanzar kernels.
     scaler = torch.amp.GradScaler(device.type, enabled=(device.type == "cuda"))
     mejor_val_loss = float("inf")
     epocas_sin_mejora = 0

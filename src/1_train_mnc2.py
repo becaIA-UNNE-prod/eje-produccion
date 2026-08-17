@@ -1,6 +1,5 @@
 import os
 import torch
-import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader, ConcatDataset
 import numpy as np
@@ -8,6 +7,7 @@ import sys
 sys.path.append(os.path.abspath("."))
 from utils.model import SimpleUNet
 from utils.tile_dataset import TileDatasetMmap
+from utils.losses import CEDiceLoss
 
 # ============================================================
 # CONFIGURACION
@@ -28,9 +28,9 @@ TILES_TRAIN = ["20HMJ", "20HMK", "20JML"]
 TILE_VAL    = "20JNL"
 TILES_TEST  = ["20HNK"]
 
-# Modelo chico (UNet de 2 niveles) -> con batch=16 la GPU pasa la mayor parte
-# del tiempo ociosa. Con una RTX 3090 (24GB) 32 deja bastante margen; si el
-# uso de VRAM (nvidia-smi) queda bajo, se puede subir a 48/64.
+# La U-Net ahora es de 4 niveles (~31M parametros, ver utils/model.py), ya no
+# sobra VRAM como con la version chica de 2 niveles. Verificar con nvidia-smi
+# al arrancar; si hay OOM con una RTX 3090 (24GB), bajar a 16.
 BATCH_SIZE    = 32
 EPOCHS        = 100
 LEARNING_RATE = 1e-4
@@ -132,14 +132,18 @@ def entrenar():
     # Pesos para 6 clases: 0=NoData, 1=Fondo, 2=Maiz, 3=Soja, 4=Mani, 5=Sorgo
     pesos = torch.tensor([0.0, 0.3, 1.0, 0.8, 3.0, 8.0],
                           dtype=torch.float32).to(device)
-    criterion = nn.CrossEntropyLoss(weight=pesos, ignore_index=0)
+    # CE (con pesos) + Dice: Dice refuerza la superposicion de mani/sorgo,
+    # que CE subestima aun con pesos altos por ser una fraccion muy chica
+    # de los pixeles utiles.
+    criterion = CEDiceLoss(weight=pesos, num_classes=NUM_CLASSES, ignore_index=0)
     optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE, weight_decay=1e-3)
 
     scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
         optimizer, mode='min', patience=10, factor=0.5, verbose=True
     )
-    # Mixed precision: aprovecha los Tensor Cores de la RTX 3090 (el modelo es
-    # chico, con fp32 el cuello de botella es overhead de kernels, no computo).
+    # Mixed precision: aprovecha los Tensor Cores de la RTX 3090. Con la U-Net
+    # de 4 niveles (mas pesada que la version chica original) esto reduce
+    # computo real, no solo overhead de lanzar kernels.
     scaler = torch.amp.GradScaler(device.type, enabled=(device.type == "cuda"))
     mejor_val_loss = float("inf")
     epocas_sin_mejora = 0

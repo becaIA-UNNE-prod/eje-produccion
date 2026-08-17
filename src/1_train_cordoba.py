@@ -181,8 +181,9 @@ def entrenar():
                            weight_decay=WEIGHT_DECAY)
     scheduler = optim.lr_scheduler.ReduceLROnPlateau(
         optimizer, mode='min', patience=10, factor=0.5)
-    # Mixed precision: aprovecha los Tensor Cores de la RTX 3090 (el modelo es
-    # chico, con fp32 el cuello de botella es overhead de kernels, no computo).
+    # Mixed precision: aprovecha los Tensor Cores de la RTX 3090. Con la U-Net
+    # de 4 niveles (mas pesada que la version chica original) esto reduce
+    # computo real, no solo overhead de lanzar kernels.
     scaler = torch.amp.GradScaler(device.type, enabled=(device.type == "cuda"))
 
     chequeo_sanidad(model, train_loader, device)

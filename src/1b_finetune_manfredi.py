@@ -117,8 +117,9 @@ def finetune():
     pesos = torch.tensor([0.0, 0.3, 1.0, 0.8, 3.0, 8.0], dtype=torch.float32).to(device)
     criterion = nn.CrossEntropyLoss(weight=pesos, ignore_index=0)
     optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE, weight_decay=1e-4)
-    # Mixed precision: aprovecha los Tensor Cores de la RTX 3090 (el modelo es
-    # chico, con fp32 el cuello de botella es overhead de kernels, no computo).
+    # Mixed precision: aprovecha los Tensor Cores de la RTX 3090. Con la U-Net
+    # de 4 niveles (mas pesada que la version chica original) esto reduce
+    # computo real, no solo overhead de lanzar kernels.
     scaler = torch.amp.GradScaler(device.type, enabled=(device.type == "cuda"))
 
     mejor_val_loss = float("inf")

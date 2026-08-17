@@ -98,8 +98,9 @@ Genera **un `.npz` comprimido por tile** con todos sus parches apilados (`X`, `Y
 ## Entrenamiento
 
 ### `1_train_multitile.py`
-Entrena la arquitectura `utils/model.py::SimpleUNet` (U-Net chica de 2 niveles de encoder/decoder con
-skip connections) sobre varios `.npz` (uno por tile), con **splits explícitos por tile** (no aleatorios):
+Entrena la arquitectura `utils/model.py::SimpleUNet` (U-Net de 4 niveles de encoder/decoder, 64→128→256→512
++ cuello de botella 1024, con skip connections) sobre varios `.npz` (uno por tile), con **splits explícitos
+por tile** (no aleatorios):
 `TILES_TRAIN = [20HMJ, 20HMK, 20JML]`, `TILE_VAL = 20JNL`, `TILES_TEST = [20HNK]` — así el modelo se
 valida/testea en tiles geográficamente distintos a los de entrenamiento.
 
@@ -112,12 +113,11 @@ valida/testea en tiles geográficamente distintos a los de entrenamiento.
   - `DIR_TRAIN` / `DIR_EXP` / `DATASET_PREFIX`: por defecto apunta a lo que efectivamente genera
     `03_generar_datasets_npz.py` (`dataset/train/dataset_T<TILE>.npz` → `dataset/exp_verano/`). Es el
     único generador de `.npz` que existe en este repo, y es el método principal del pipeline.
-  - `APLICAR_REMAP_6 = True` por default: esos `.npz` traen 9 clases sin remapear, así que `TileDataset`
-    aplica el remapeo a 6 clases (cultivos de verano) al vuelo, con la tabla `REMAP_6` definida en el
-    propio script.
-  - Si en algún momento existe un dataset ya curado a 6 clases generado por un proceso externo a este
-    repo (ej. `dataset/train_mnc/dataset_mnc_T<TILE>.npz`), se puede apuntar ahí cambiando esas 4
-    variables (`APLICAR_REMAP_6 = False` en ese caso) — ver comentario en el propio archivo.
+  - Por default apunta a un dataset ya curado a 6 clases (`train_cordoba_mnc/dataset_mnc_*`,
+    `APLICAR_REMAP_6 = False`). Si en cambio se usa un `.npz` con las 9 clases sin remapear (el que
+    genera `03_generar_datasets_npz.py`), poner `APLICAR_REMAP_6 = True` para que `TileDataset` aplique
+    el remapeo a 6 clases (cultivos de verano) al vuelo, con la tabla `REMAP_6` definida en el propio
+    script.
 
 ---
 
@@ -138,8 +138,9 @@ para generar un mapa de clasificación en formato GeoTIFF de 1 sola banda (`uint
 
 ## Dependencias externas usadas por `src/` (carpeta `utils/`)
 
-- **`utils/model.py`** → `SimpleUNet`: U-Net pequeña (encoder de 2 niveles: 64→128→256 canales, con
-  skip connections y `ConvTranspose2d` para el upsampling). Usada por `1_train_multitile.py` y `2_inferencia.py`.
+- **`utils/model.py`** → `SimpleUNet`: U-Net de 4 niveles (encoder 64→128→256→512, cuello de botella 1024,
+  con `Dropout2d` en los niveles más profundos), con skip connections y `ConvTranspose2d` para el
+  upsampling. Usada por todos los scripts `1_train_*.py` y `2_inferencia.py`.
 - **`utils/dataset.py`** → `CordobaDataset`: quedó **sin uso** tras eliminar `1_train.py` (era el único
   script que la consumía). Se dejó sin tocar porque no forma parte de `src/`; avisar si también se quiere eliminar.
 
