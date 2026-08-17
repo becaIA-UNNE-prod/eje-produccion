@@ -22,17 +22,19 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--exp', required=True)
 parser.add_argument('--tile', required=True)
 parser.add_argument('--dir_train', required=True)
-parser.add_argument('--n_clases', type=int, default=6)
-parser.add_argument('--prefijo', default='dataset_T')
+parser.add_argument('--n_clases', type=int, default=5)
+parser.add_argument('--prefijo', default='dataset_')
 args = parser.parse_args()
 
 DIR_EXP = Path(args.exp)
 REMAP_6 = np.array([0, 1, 1, 1, 2, 3, 4, 5, 1], dtype=np.int64)
+# Esquema vigente (1_train_cordoba.py, Cordoba completa): 5 clases sin Sorgo
+NOMBRES_5 = {0:"NoData", 1:"Fondo", 2:"Maiz", 3:"Soja", 4:"Mani"}
 NOMBRES_6 = {0:"NoData", 1:"Fondo", 2:"Maiz", 3:"Soja", 4:"Mani", 5:"Sorgo"}
 # Esquema original de 9 clases (mismo orden que LABEL_REMAP en 03_generar_datasets_npz.py)
 NOMBRES_9 = {0:"NoData", 1:"Natural", 2:"Urbano", 3:"Trigo", 4:"Maiz",
              5:"Soja", 6:"Mani", 7:"Sorgo", 8:"Otros"}
-NOMBRES = NOMBRES_6 if args.n_clases == 6 else NOMBRES_9
+NOMBRES = {5: NOMBRES_5, 6: NOMBRES_6}.get(args.n_clases, NOMBRES_9)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = SimpleUNet(28, args.n_clases).to(device)

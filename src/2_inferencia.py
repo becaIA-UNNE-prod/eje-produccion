@@ -9,21 +9,21 @@ sys.path.append(os.path.abspath("."))
 from utils.model import SimpleUNet
 
 def generar_mapa_clasificacion():
-    # Configuración alineada con el pipeline de entrenamiento vigente (1_train_multitile.py)
+    # Configuración alineada con el pipeline de entrenamiento vigente (1_train_cordoba.py)
     TILE = sys.argv[1] if len(sys.argv) > 1 else "20HMK"
     DIR_COMPOSITES = "/mnt/yacy_1/prod/ferreyra/cordoba_dataset_filtrado/composites_2019_2020"
     RUTA_MASCARA = f"./mascaras_procesadas/etiqueta_mnc_{TILE}_10m.tif"
-    RUTA_PESOS = "/mnt/yacy_1/prod/ferreyra/dataset/exp_mnc2/best_model.pth"
+    RUTA_PESOS = "/mnt/yacy_1/prod/ferreyra/dataset/exp_cordoba_f16/best_model.pth"
     RUTA_SALIDA = f"./prediccion_{TILE}.tif"
 
-    # 0=NoData, 1=Fondo, 2=Maiz, 3=Soja, 4=Mani, 5=Sorgo (mismo esquema que 1_train_mnc2.py)
-    NUM_CLASSES = 6
+    # 0=NoData, 1=Fondo, 2=Maiz, 3=Soja, 4=Mani (sin Sorgo, mismo esquema que 1_train_cordoba.py)
+    NUM_CLASSES = 5
     SIZE = 512  # Ventana de inferencia
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Iniciando inferencia en: {device}")
 
-    # 2. Meses usados para entrenar exp_mnc2 (dataset_mnc_T, campaña 2019-2020 MNC INTA):
+    # 2. Meses usados para entrenar exp_cordoba_f16 (dataset_, campaña 2019-2020 MNC INTA):
     # ver bash_history del generador de datasets_mnc.log. No autodetectar: mismo
     # motivo que antes, composites_2019_2020 puede tener más meses que estos.
     MESES_COMUNES = ["201910", "201911", "201912", "202001", "202002", "202003", "202004"]
@@ -76,7 +76,7 @@ def generar_mapa_clasificacion():
                     # Apilar y normalizar
                     parche_x = np.concatenate(parche_x_temporal, axis=0).astype(np.float32)
 
-                    # Debe coincidir con la normalización usada en TileDataset (1_train_multitile.py)
+                    # Debe coincidir con la normalización usada en TileDatasetMmap (1_train_cordoba.py)
                     parche_x = parche_x / 10000.0
 
                     # (Batch, Channels, Height, Width)

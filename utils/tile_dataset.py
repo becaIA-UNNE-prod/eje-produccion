@@ -18,9 +18,13 @@ class TileDatasetMmap(torch.utils.data.Dataset):
     remap: tabla opcional (np.array) para remapear las clases de Y al vuelo.
     fraccion: si < 1.0, fija (una sola vez, por indice) un subconjunto de los
     parches del tile en vez de usarlos todos, sin copiar el resto a RAM.
+    augment: si True, aplica flips y rotaciones aleatorias de 90 grados a cada
+    parche. Transformaciones validas para imagenes satelitales (un lote de
+    soja rotado o espejado sigue siendo soja) -- usar solo en TRAIN, nunca en
+    val/test.
     """
 
-    def __init__(self, ruta_base, remap=None, fraccion=1.0, seed=42):
+    def __init__(self, ruta_base, remap=None, fraccion=1.0, seed=42, augment=False):
         self.X = np.load(f"{ruta_base}_X.npy", mmap_mode="r")
         self.Y = np.load(f"{ruta_base}_Y.npy", mmap_mode="r")
         if len(self.X) != len(self.Y):
@@ -28,6 +32,7 @@ class TileDatasetMmap(torch.utils.data.Dataset):
                 f"{ruta_base}: X e Y con distinta cantidad de parches "
                 f"({len(self.X)} vs {len(self.Y)})")
         self.remap = remap
+        self.augment = augment
 
         if fraccion < 1.0:
             n = max(1, int(len(self.X) * fraccion))
@@ -47,4 +52,20 @@ class TileDatasetMmap(torch.utils.data.Dataset):
         y = np.array(self.Y[j], dtype=np.int64)
         if self.remap is not None:
             y = self.remap[y]
-        return x, torch.from_numpy(y)
+        y = torch.from_numpy(y)
+
+        if self.augment:
+            k = int(torch.randint(0, 4, (1,)))
+            if k:
+                x = torch.rot90(x, k, dims=(1, 2))
+                y = torch.rot90(y, k, dims=(0, 1))
+            if torch.rand(1) < 0.5:
+                x = torch.flip(x, dims=(2,))
+                y = torch.flip(y, dims=(1,))
+            if torch.rand(1) < 0.5:
+                x = torch.flip(x, dims=(1,))
+                y = torch.flip(y, dims=(0,))
+            x = x.contiguous()
+            y = y.contiguous()
+
+        return x, y

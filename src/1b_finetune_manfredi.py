@@ -1,6 +1,5 @@
 import os
 import torch
-import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader, Subset
 import numpy as np
@@ -8,25 +7,28 @@ import sys
 sys.path.append(os.path.abspath("."))
 from utils.model import SimpleUNet
 from utils.tile_dataset import TileDatasetMmap
+from utils.losses import CEDiceLoss
 
 # ============================================================
 # CONFIGURACION
 # ============================================================
 BASE_DIR = "/mnt/yacy_1/prod/ferreyra/dataset"
 
-# Checkpoint ya entrenado (1_train_mnc2.py) que se va a especializar en Manfredi.
-RUTA_CHECKPOINT_BASE = f"{BASE_DIR}/exp_mnc2/best_model.pth"
+# Checkpoint ya entrenado (1_train_cordoba.py, Cordoba completa) que se va a
+# especializar en Manfredi.
+RUTA_CHECKPOINT_BASE = f"{BASE_DIR}/exp_cordoba_f16/best_model.pth"
 
 # Deben coincidir con los usados para generar RUTA_CHECKPOINT_BASE (mismos meses/canales).
-DIR_TRAIN      = f"{BASE_DIR}/train_mnc"
-DATASET_PREFIX = "dataset_mnc_T"
+DIR_TRAIN      = f"{BASE_DIR}/train_cordoba_f16"
+DATASET_PREFIX = "dataset_"
 
 # Completar con el resultado de src/buscar_tile_por_coordenada.py
 TILE_MANFREDI = "20HMK"
 
 DIR_EXP = f"{BASE_DIR}/exp_manfredi_ft"
 
-NUM_CLASSES   = 6
+# 5 clases: 0=NoData, 1=Fondo, 2=Maiz, 3=Soja, 4=Mani (sin Sorgo, ver README_MNC.md)
+NUM_CLASSES   = 5
 BATCH_SIZE    = 16
 EPOCHS        = 30
 LEARNING_RATE = 1e-5  # bajo: fine-tuning sobre un modelo ya entrenado, no entrenamiento desde cero
@@ -114,8 +116,10 @@ def finetune():
     model = SimpleUNet(IN_CHANNELS, NUM_CLASSES).to(device)
     model.load_state_dict(torch.load(RUTA_CHECKPOINT_BASE, map_location=device))
 
-    pesos = torch.tensor([0.0, 0.3, 1.0, 0.8, 3.0, 8.0], dtype=torch.float32).to(device)
-    criterion = nn.CrossEntropyLoss(weight=pesos, ignore_index=0)
+    # Mismos pesos y loss (CE+Dice) que 1_train_cordoba.py, para no cambiar el
+    # objetivo de optimizacion entre el entrenamiento base y el fine-tuning.
+    pesos = torch.tensor([0.0, 0.716, 0.947, 0.728, 4.545], dtype=torch.float32).to(device)
+    criterion = CEDiceLoss(weight=pesos, num_classes=NUM_CLASSES, ignore_index=0)
     optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE, weight_decay=1e-4)
     # Mixed precision: aprovecha los Tensor Cores de la RTX 3090. Con la U-Net
     # de 4 niveles (mas pesada que la version chica original) esto reduce

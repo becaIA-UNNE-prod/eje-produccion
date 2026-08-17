@@ -23,15 +23,17 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--exp', required=True)
 parser.add_argument('--tile', required=True)
 parser.add_argument('--dir_train', required=True)
-parser.add_argument('--n_clases', type=int, default=6)
-parser.add_argument('--prefijo', default='dataset_T')
+parser.add_argument('--n_clases', type=int, default=5)
+parser.add_argument('--prefijo', default='dataset_')
 args = parser.parse_args()
 
 DIR_EXP = Path(args.exp)
 REMAP_6 = np.array([0, 1, 1, 1, 2, 3, 4, 5, 1], dtype=np.int64)
 COLORES = {0:[0,0,0], 1:[70,130,180], 2:[255,165,0],
            3:[0,100,0], 4:[165,42,42], 5:[255,0,0]}
-NOMBRES = {1:"Fondo", 2:"Maiz", 3:"Soja", 4:"Mani", 5:"Sorgo"}
+# Esquema vigente (1_train_cordoba.py, Cordoba completa): 5 clases sin Sorgo
+NOMBRES = {1:"Fondo", 2:"Maiz", 3:"Soja", 4:"Mani"} if args.n_clases == 5 \
+    else {1:"Fondo", 2:"Maiz", 3:"Soja", 4:"Mani", 5:"Sorgo"}
 
 def clase_a_rgb(mapa):
     img = np.zeros((*mapa.shape, 3), dtype=np.uint8)

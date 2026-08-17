@@ -1,11 +1,17 @@
 """
 Entrenamiento de clasificacion de cultivos de verano sobre Cordoba completa.
-Dataset: composites Sentinel-2 2019-2020 + etiquetas MNC INTA verano 2020.
+Dataset: composites Sentinel-2 2019-2020 + etiquetas MNC INTA verano 2020,
+esquema de 5 clases (sin Sorgo -- ver src/README_MNC.md: es una clase de una
+sola zona y el propio informe INTA reporta baja exactitud ahi).
 
-Los datos ya tienen el remapeo a 6 clases aplicado, por eso NO se vuelve a
+Los datos ya tienen el remapeo a 5 clases aplicado, por eso NO se vuelve a
 remapear al cargar. Requiere haber convertido los .npz de origen a pares
 <tile>_X.npy/_Y.npy sueltos (ver src/03b_convertir_datasets_a_mmap.py), que
 es donde se valida una sola vez el flag remap_aplicado=1 de los .npz.
+
+Es el pipeline principal del repo (reemplaza a las variantes chicas
+1_train_mnc2.py / 1_train_multitile.py, y a la version separada con
+augmentacion 1_train_cordoba_aug.py -- ahora todo vive en un unico script).
 
 Uso:
     python3 src/03b_convertir_datasets_a_mmap.py /mnt/yacy_1/prod/ferreyra/dataset/train_cordoba_f16
@@ -15,13 +21,13 @@ import os
 import sys
 import numpy as np
 import torch
-import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader, ConcatDataset
 
 sys.path.append(os.path.abspath("."))
 from utils.model import SimpleUNet
 from utils.tile_dataset import TileDatasetMmap
+from utils.losses import CEDiceLoss
 
 # ══════════════════════════════════════════════════════════════════════════════
 # CONFIGURACION
@@ -58,8 +64,8 @@ SEED          = 42
 NUM_WORKERS = 16
 PREFETCH_FACTOR = 4
 
-# Pesos por clase — recalcular con 0_verificar_pipeline.py --etapa pesos
-# Orden: [NoData, Fondo, Maiz, Soja, Mani, Sorgo]
+# Pesos por clase — recalcular con 0b_calcular_pesos.py
+# Orden: [NoData, Fondo, Maiz, Soja, Mani]
 PESOS = [0.0, 0.716, 0.947, 0.728, 4.545]
 
 NOMBRES = {0:"NoData", 1:"Fondo", 2:"Maiz", 3:"Soja", 4:"Mani"}
@@ -76,9 +82,10 @@ np.random.seed(SEED)
 # demanda via mmap en vez de cargar el tile entero en RAM. El flag
 # remap_aplicado que antes se validaba aca al cargar el .npz ahora se valida
 # una sola vez, al convertir con 03b_convertir_datasets_a_mmap.py -- si el
-# .npy existe es porque ya paso esa verificacion.
+# .npy existe es porque ya paso esa verificacion. Tambien aplica la
+# augmentacion (flips + rotaciones de 90) cuando augment=True, solo para TRAIN.
 
-def cargar_tiles(tiles, etiqueta):
+def cargar_tiles(tiles, etiqueta, augment=False):
     print(f"\nCargando {etiqueta}...", flush=True)
     datasets = []
     canales = set()
@@ -87,7 +94,7 @@ def cargar_tiles(tiles, etiqueta):
         if not os.path.exists(f"{ruta_base}_X.npy"):
             print(f"  {t}: NO EXISTE, salteado", flush=True)
             continue
-        ds = TileDatasetMmap(ruta_base)
+        ds = TileDatasetMmap(ruta_base, augment=augment)
 
         # Lectura unica y transitoria (Y es uint8, liviano) para validar el
         # rango de clases -- a diferencia de X, no queda residente en RAM
@@ -155,7 +162,7 @@ def entrenar():
     torch.backends.cudnn.benchmark = True
     print(f"Dispositivo: {device}", flush=True)
 
-    ds_train = cargar_tiles(TILES_TRAIN, "TRAIN")
+    ds_train = cargar_tiles(TILES_TRAIN, "TRAIN", augment=True)
     ds_val   = cargar_tiles(TILE_VAL,    "VAL")
     ds_test  = cargar_tiles(TILES_TEST,  "TEST")
 
@@ -176,7 +183,10 @@ def entrenar():
 
     model = SimpleUNet(IN_CH, NUM_CLASSES).to(device)
     pesos = torch.tensor(PESOS, dtype=torch.float32).to(device)
-    criterion = nn.CrossEntropyLoss(weight=pesos, ignore_index=0)
+    # CE (con pesos) + Dice: Dice refuerza la superposicion de Mani, que CE
+    # subestima aun con pesos altos por ser una fraccion muy chica de los
+    # pixeles utiles.
+    criterion = CEDiceLoss(weight=pesos, num_classes=NUM_CLASSES, ignore_index=0)
     optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE,
                            weight_decay=WEIGHT_DECAY)
     scheduler = optim.lr_scheduler.ReduceLROnPlateau(
