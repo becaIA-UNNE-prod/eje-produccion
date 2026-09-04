@@ -15,8 +15,13 @@ augmentacion 1_train_cordoba_aug.py -- ahora todo vive en un unico script).
 
 Uso:
     python3 src/03b_convertir_datasets_a_mmap.py /mnt/yacy_1/prod/ferreyra/dataset/train_cordoba_f16
-    python3 src/1_train_cordoba.py
+    python3 src/1_train_cordoba.py [--modelo unet|transunet]
+
+--modelo transunet usa utils/model.py::TransUNet (SimpleUNet + self-attention
+global en el bottleneck, ver docstring de la clase) en vez del baseline, y
+escribe en exp_cordoba_transunet_f16 para no pisar el checkpoint del baseline.
 """
+import argparse
 import os
 import sys
 import numpy as np
@@ -25,16 +30,26 @@ import torch.optim as optim
 from torch.utils.data import DataLoader, ConcatDataset
 
 sys.path.append(os.path.abspath("."))
-from utils.model import SimpleUNet
+from utils.model import SimpleUNet, TransUNet
 from utils.tile_dataset import TileDatasetMmap
 from utils.losses import CEDiceLoss
 
 # ══════════════════════════════════════════════════════════════════════════════
 # CONFIGURACION
 # ══════════════════════════════════════════════════════════════════════════════
+parser = argparse.ArgumentParser()
+parser.add_argument("--modelo", choices=["unet", "transunet"], default="unet",
+                     help="unet=SimpleUNet (baseline), transunet=SimpleUNet "
+                          "con self-attention global en el bottleneck")
+ARGS = parser.parse_args()
+
 BASE_DIR   = "/mnt/yacy_1/prod/ferreyra/dataset"
 DIR_TRAIN  = f"{BASE_DIR}/train_cordoba_f16"
-DIR_EXP    = f"{BASE_DIR}/exp_cordoba_f16"
+# exp_cordoba_f16 se deja intacto (compatibilidad con 2_inferencia.py y demas
+# scripts que ya apuntan ahi) -- transunet escribe en un dir aparte para no
+# pisar el checkpoint del baseline.
+DIR_EXP    = f"{BASE_DIR}/exp_cordoba_f16" if ARGS.modelo == "unet" \
+             else f"{BASE_DIR}/exp_cordoba_transunet_f16"
 PREFIJO    = "dataset_"
 
 # Split por franjas de cobertura de cultivo (ver analisis de cobertura MNC)
@@ -184,8 +199,12 @@ def entrenar():
 
     IN_CH = ds_train[0][0].shape[0]
     print(f"Canales de entrada: {IN_CH}", flush=True)
+    print(f"Modelo: {ARGS.modelo}", flush=True)
 
-    model = SimpleUNet(IN_CH, NUM_CLASSES).to(device)
+    if ARGS.modelo == "unet":
+        model = SimpleUNet(IN_CH, NUM_CLASSES).to(device)
+    else:
+        model = TransUNet(IN_CH, NUM_CLASSES).to(device)
     pesos = torch.tensor(PESOS, dtype=torch.float32).to(device)
     # CE (con pesos) + Dice: Dice refuerza la superposicion de Mani, que CE
     # subestima aun con pesos altos por ser una fraccion muy chica de los
