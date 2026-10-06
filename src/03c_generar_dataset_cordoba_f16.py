@@ -20,15 +20,32 @@ arriesgarse a mal-clasificarlo como Fondo).
 Uso:
     python3 src/03c_generar_dataset_cordoba_f16.py
     python3 src/03c_generar_dataset_cordoba_f16.py --tiles 20HKH 20HMG
+
+Otra ventana de meses / otro dataset (ej. dic-may, ver 02c_composites_cog.py):
+    python3 src/03c_generar_dataset_cordoba_f16.py --tiles <17 tiles> \
+        --meses 201912 202001 202002 202003 202004 202005 \
+        --dir-composites /mnt/yacy_3/prod_bis/ferreyra/composites_dicmay_2019_2020 \
+        --dir-salida /mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_f16
+
+Campana 2017-2018 con la capa Nivel3 (--leyenda nivel3, mascaras de
+01c_mascaras_nivel3_2017_2018.py, ver pipeline_dicmay_1718.sh):
+    python3 src/03c_generar_dataset_cordoba_f16.py --leyenda nivel3 --tiles <13 tiles train> \
+        --meses 201712 201801 201802 201803 201804 201805 \
+        --dir-composites /mnt/yacy_3/prod_bis/ferreyra/composites_dicmay_2017_2018 \
+        --dir-salida /mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_1718_f16
 """
 import argparse
 import concurrent.futures
 import os
+import sys
+import json
 from pathlib import Path
 
 import numpy as np
 import rasterio
 from rasterio.windows import Window
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from utils.leyendas_mnc import REMAP_2021, verificar_codigos
 
 DIR_COMPOSITES = Path("/mnt/yacy_1/prod/ferreyra/cordoba_dataset_filtrado/composites_2019_2020")
 DIR_MASCARAS   = Path("/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas")
@@ -54,16 +71,45 @@ REMAP_5[255] = 0  # Sin datos -> NoData
 # Cualquier otro codigo no documentado en la Tabla 2 queda en 0 (NoData/
 # ignorado via ignore_index=0 en la loss) por el np.zeros inicial.
 
+# Capa Nivel3 2017-2018 (Nivel3_28_dic_2018_30m.qml), 0 = sin dato. A
+# diferencia de 03d (oct-abr), los dobles cultivos van por su cultivo de
+# verano (Trigo-Maiz 2da -> Maiz, Trigo-Soja 2da -> Soja): es lo que ve la
+# ventana dic-may y el mismo criterio que REMAP_MNC_1819 (CI-Soja -> Soja).
+REMAP_NIVEL3 = np.zeros(256, dtype=np.int64)
+REMAP_NIVEL3[1:28] = 1       # natural, urbano, Trigo, Sorgo, pasturas, etc. -> Fondo
+REMAP_NIVEL3[[16, 20]] = 2   # Maiz, Trigo-Maiz de segunda
+REMAP_NIVEL3[[17, 21]] = 3   # Soja, Trigo-Soja de segunda
+REMAP_NIVEL3[18] = 4         # Mani
+
+# MNC 2018/2019 (IDN1, ver informe INTA): 0 Maiz, 1 Soja 1ra, 2 CI-Soja,
+# 3 CI-Maiz, 4 Mani, 16 sin dato -> 0 (ignorado). Igual que 01b y 11.
+REMAP_MNC_1819 = np.zeros(256, dtype=np.int64)
+REMAP_MNC_1819[[0, 3]] = 2
+REMAP_MNC_1819[[1, 2]] = 3
+REMAP_MNC_1819[4] = 4
+REMAP_MNC_1819[[5, 6, 7, 8, 9, 11, 12, 13, 14, 15]] = 1
+
+LEYENDAS = {"1819": (REMAP_MNC_1819, "etiqueta_mnc1819_{}_10m.tif"), "2020":   (REMAP_5,      "etiqueta_mnc_{}_10m.tif"),
+            "nivel3": (REMAP_NIVEL3, "etiqueta_nivel3_1718_{}_10m.tif")}
+LEYENDAS["2021"] = (REMAP_2021, "etiqueta_mnc2021_{}_10m.tif")
+LEYENDA = "2020"
+ESTRICTO = False
+MAX_WORKERS = None
+IGNORAR_CODIGO20 = False
+
 
 def _procesar_chunk_ventanas(args):
-    tile_id, coords, composites, ruta_mascara = args
+    tile_id, coords, composites, ruta_mascara, remap = args
     X_local, Y_local = [], []
     with rasterio.open(ruta_mascara) as src_label:
         composites_abiertos = [rasterio.open(c) for c in composites]
         try:
             for x, y in coords:
                 ventana = Window(x, y, SIZE, SIZE)
-                parche_y = REMAP_5[src_label.read(1, window=ventana)]
+                crudo = src_label.read(1, window=ventana)
+                if LEYENDA == '2021':
+                    verificar_codigos(np.unique(crudo), IGNORAR_CODIGO20)
+                parche_y = remap[crudo]
 
                 if np.all(parche_y == 0):
                     continue
@@ -94,20 +140,33 @@ def generar_dataset_tile(tile_id, max_workers=None):
     faltantes = [c.name for c in composites if not c.exists()]
     if faltantes:
         print(f"{tile_id}: faltan composites {faltantes}, se omite", flush=True)
+        if ESTRICTO:
+            raise FileNotFoundError(f"{tile_id}: {faltantes}")
         return
 
-    ruta_mascara = DIR_MASCARAS / f"etiqueta_mnc_{tile_id}_10m.tif"
+    remap, patron = LEYENDAS[LEYENDA]
+    ruta_mascara = DIR_MASCARAS / patron.format(tile_id)
     if not ruta_mascara.exists():
         print(f"{tile_id}: falta mascara {ruta_mascara.name}, se omite", flush=True)
+        if ESTRICTO:
+            raise FileNotFoundError(ruta_mascara)
         return
 
     with rasterio.open(ruta_mascara) as src_label:
         alto, ancho = src_label.height, src_label.width
+        grilla = (src_label.crs, src_label.transform, src_label.shape)
+    for composite in composites:
+        with rasterio.open(composite) as src:
+            if (src.crs, src.transform, src.shape) != grilla or src.count != 4:
+                raise ValueError(f'{tile_id}: grilla/bandas incompatible en {composite}')
+            if (src.descriptions != (None, None, None, None)
+                    and src.descriptions != ('B02', 'B03', 'B04', 'B08')):
+                raise ValueError(f'{composite}: orden de bandas no acreditado {src.descriptions}')
 
     coords = [(x, y) for y in range(0, alto - SIZE, STEP) for x in range(0, ancho - SIZE, STEP)]
-    max_workers = max_workers or os.cpu_count()
+    max_workers = max_workers or MAX_WORKERS or os.cpu_count()
     chunks = [c for c in np.array_split(coords, max_workers) if len(c) > 0]
-    tareas = [(tile_id, chunk.tolist(), composites, ruta_mascara) for chunk in chunks]
+    tareas = [(tile_id, chunk.tolist(), composites, ruta_mascara, remap) for chunk in chunks]
 
     print(f"{tile_id}: {len(coords)} ventanas repartidas en {len(tareas)} workers", flush=True)
 
@@ -119,6 +178,8 @@ def generar_dataset_tile(tile_id, max_workers=None):
 
     if not X_list:
         print(f"{tile_id}: 0 parches validos, no se genera archivo", flush=True)
+        if ESTRICTO:
+            raise ValueError(f"{tile_id}: sin parches validos")
         return
 
     X = np.stack(X_list, axis=0)
@@ -132,6 +193,18 @@ def generar_dataset_tile(tile_id, max_workers=None):
         np.save(f, Y)
     os.replace(tmp_x, ruta_x)
     os.replace(tmp_y, ruta_y)
+    procedencia = {'tile': tile_id, 'leyenda': LEYENDA, 'meses': MESES_FIJOS,
+                  'composites': [str(c.resolve()) for c in composites],
+                  'composites_mtime_ns': [c.stat().st_mtime_ns for c in composites],
+                  'mascara': str(ruta_mascara.resolve()),
+                  'mascara_mtime_ns': ruta_mascara.stat().st_mtime_ns,
+                  'bandas': ['B02', 'B03', 'B04', 'B08'], 'normalizacion': 10000,
+                  'shape_x': list(X.shape), 'shape_y': list(Y.shape),
+                  'leyenda_version': 1, 'codigos_ignorados': [20] if IGNORAR_CODIGO20 and LEYENDA == '2021' else []}
+    meta = DIR_SALIDA / f'dataset_{tile_id}_procedencia.json'
+    tmp_meta = meta.with_suffix('.json.tmp')
+    tmp_meta.write_text(json.dumps(procedencia, indent=2))
+    tmp_meta.replace(meta)
 
     # Distribucion de clases del tile, para comparar a ojo contra los tiles
     # ya existentes (ej. Mani deberia ser una fraccion chica, ausente en
@@ -145,7 +218,28 @@ def generar_dataset_tile(tile_id, max_workers=None):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--tiles", nargs="*", default=TILES_DEFAULT)
+    parser.add_argument("--meses", nargs="*", default=MESES_FIJOS)
+    parser.add_argument("--dir-composites", type=Path, default=DIR_COMPOSITES)
+    parser.add_argument("--dir-salida", type=Path, default=DIR_SALIDA)
+    parser.add_argument("--dir-mascaras", type=Path, default=DIR_MASCARAS)
+    parser.add_argument("--leyenda", choices=LEYENDAS, default=LEYENDA,
+                        help="2020 = MNC verano 2020 (default), nivel3 = capa Nivel3 2017-2018")
+    parser.add_argument('--workers', type=int, default=None)
+    parser.add_argument('--ignorar-codigo20', action='store_true')
+    parser.add_argument('--estricto', action='store_true', help='abortar ante faltantes')
     args = parser.parse_args()
+    if args.workers is not None and args.workers < 1:
+        parser.error('--workers debe ser positivo')
+    if args.ignorar_codigo20 and args.leyenda != '2021':
+        parser.error('--ignorar-codigo20 solo aplica a --leyenda 2021')
+    IGNORAR_CODIGO20 = args.ignorar_codigo20
+    ESTRICTO = args.estricto
+    MAX_WORKERS = args.workers
+    LEYENDA = args.leyenda
+    MESES_FIJOS = args.meses
+    DIR_COMPOSITES = args.dir_composites
+    DIR_SALIDA = args.dir_salida
+    DIR_MASCARAS = args.dir_mascaras
 
     for tile in args.tiles:
         generar_dataset_tile(tile)

@@ -251,3 +251,54 @@ saben leer, respectivamente, el esquema con Sorgo o el esquema de 9 clases del p
 Rutas del pipeline 2017-2018 legacy (`01_moldear_mascaras.py` → `02_composites_mensuales.py` →
 `03_generar_datasets_npz.py`), sin consumidor de entrenamiento vigente: ver las secciones
 correspondientes más arriba.
+
+---
+
+## Campaña 2018-2019 — ventana dic-may (`pipeline_dicmay.sh`)
+
+La descarga 2018-2019 (`/mnt/yacy_3/prod_bis/ferreyra/sentinel2_cordoba_2018_2019`, COGs de
+earth-search, `<TILE>/<AAAAMMDD>/<BANDA>.tif`) cubre **dic 2018 - may 2019**, y no hay etiquetas
+MNC para esa campaña. Los modelos vigentes usan **oct-abr** (28 canales) y la posición del canal
+es la única señal de mes que tienen, así que no se pueden aplicar directo. Por eso se reentrena con
+la misma ventana dic-may sobre 2019-2020 (dic 2019 - may 2020, con las mismas máscaras MNC verano
+2020) y después se infiere sobre 2018-2019:
+
+```
+nohup bash src/pipeline_dicmay.sh > /mnt/yacy_3/prod_bis/ferreyra/logs_dicmay/pipeline.log 2>&1 &
+```
+
+1. `00_descargar_stac.py`: baja may-2020 (en `sentinel2_cordoba_2019_2020` no hay mayo) a `sentinel2_cordoba_2020_05`.
+2. `02c_composites_cog.py`: arma composites mensuales con el mismo criterio que `02b` (una escena
+   real por mes): la menos nublada, y rellena los huecos de borde de órbita con la siguiente.
+   Genera `composites_2018_2019` y el `202005` de `composites_dicmay_2019_2020`. Los meses dic-abr
+   de esta última son symlinks a `composites_2019_2020`.
+3. `03c_generar_dataset_cordoba_f16.py --meses ... --dir-composites ... --dir-salida ...`:
+   genera `dataset/train_cordoba_dicmay_f16` con los 17 tiles (24 canales).
+4. `1_train_cordoba.py --sin-2017 --dir-train ... --dir-exp ...`: entrena unet y fcrtransunet
+   en `dataset/exp_cordoba_dicmay_<modelo>_f16`, con el mismo split. Sin la campaña 2017, porque sus
+   composites no tienen may-2018.
+5. `2_inferencia.py --dir-composites composites_2018_2019 --meses 201812..201905 --dir-exp ... --dir-salida predicciones_2018_2019`.
+
+Todas las rutas son bajo `/mnt/yacy_3/prod_bis/ferreyra`. Los defaults de los scripts no cambian,
+así que el pipeline oct-abr 2019-2020 sigue funcionando igual.
+
+### Validación 2018-2019 (`evaluar_dicmay.sh`)
+
+Existe el **MNC 2018/2019** de INTA ([Zenodo 8286326](https://zenodo.org/records/8286326), 30 m, en
+`MNC_INTA/2018_2019/`). Su leyenda es distinta a la de 2020 (campaña completa, con dobles cultivos).
+`01b_mascaras_mnc_2018_2019.py` lo reproyecta a 10 m: `mascaras_procesadas/etiqueta_mnc1819_<TILE>_10m.tif`
+(códigos IDN1 crudos). El remapeo a 5 clases es `REMAP_MNC_1819`: Maíz+CI-Maíz→Maíz, Soja 1ra+CI-Soja→Soja,
+Maní→Maní, resto→Fondo. INTA reporta una exactitud de 0.86 en la zona III y 0.75 en la IV, y Maní
+tuvo menos de 20 muestras en Córdoba.
+
+`11_evaluar_contra_mnc.py` evalúa los mapas completos contra un MNC (`--leyenda 2020|1819`):
+OA, kappa y F1 por clase, por tile y agrupado por rol en el split (train/val/test), más las matrices de
+confusión. `evaluar_dicmay.sh` corre las dos comparaciones: la del mismo año (2019-2020 contra MNC 2020,
+tiles de val/test) y la interanual (2018-2019 contra MNC 2018/2019, 17 tiles). Resultados en
+`/mnt/yacy_3/prod_bis/ferreyra/evaluacion_*`.
+
+
+## Preparacion multicampana 2018/2019, 2019/2020 y 2020/2021
+
+Ver [README_MULTICAMPANA.md](README_MULTICAMPANA.md): datos, leyendas, split comun,
+soporte de varias campanas y preparacion con nohup (sin iniciar entrenamiento).
