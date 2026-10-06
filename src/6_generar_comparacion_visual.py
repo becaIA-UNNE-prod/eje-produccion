@@ -16,7 +16,7 @@ from matplotlib.patches import Patch
 import torch
 import sys, os
 sys.path.append(os.path.abspath("."))
-from utils.model import SimpleUNet
+from utils.model import SimpleUNet, TransUNet, UTAE, FCRTransUNet
 from pathlib import Path
 
 parser = argparse.ArgumentParser()
@@ -25,6 +25,9 @@ parser.add_argument('--tile', required=True)
 parser.add_argument('--dir_train', required=True)
 parser.add_argument('--n_clases', type=int, default=5)
 parser.add_argument('--prefijo', default='dataset_')
+parser.add_argument('--modelo', choices=['unet', 'transunet', 'utae', 'fcrtransunet'],
+                     default='unet',
+                     help='debe coincidir con el modelo usado para entrenar --exp')
 args = parser.parse_args()
 
 DIR_EXP = Path(args.exp)
@@ -42,7 +45,14 @@ def clase_a_rgb(mapa):
     return img
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model = SimpleUNet(28, args.n_clases).to(device)
+if args.modelo == 'unet':
+    model = SimpleUNet(28, args.n_clases).to(device)
+elif args.modelo == 'transunet':
+    model = TransUNet(28, args.n_clases).to(device)
+elif args.modelo == 'utae':
+    model = UTAE(28, args.n_clases).to(device)
+else:
+    model = FCRTransUNet(28, args.n_clases).to(device)
 model.load_state_dict(torch.load(DIR_EXP / 'best_model.pth'))
 model.eval()
 
