@@ -15,3 +15,10 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Salidas y backups locales de experimentos
+/baseline_sin_2017/
+/previo_20260918_mesesmal/
+/comparacion_*.png
+/prediccion_*.png
+*.bak
