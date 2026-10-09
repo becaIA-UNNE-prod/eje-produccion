@@ -218,3 +218,155 @@ Se conservan las tres campanas, split espacial fijo, pesos automaticos TRAIN, se
 No se lanzo FCRTransUNet. Wrapper: `src/entrenar_multicampana_unet.sh`; bloqueo de entrenamiento multicampana, PID e inicio/fin/exitcode por experimento.
 Estimacion basada en la corrida anterior U-Net (3h30 para 58 epocas, 21934 parches TRAIN): la nueva tiene 66731 parches. Extrapolacion 11-18h; rango operativo 12-24h y margen hasta 30h por I/O al superar la RAM. No es una garantia.
 El estado actualizado se consulta en el log; la finalizacion se registra en `train.exitcode` y `fin.txt`. Checkpoints y metricas quedan en el mismo experimento.
+
+
+## Lectura por bloques (2026-10-07)
+
+La primera corrida paso 16 h 35 min para completar 10 epocas: TRAIN tiene
+195,5 GiB de X, excede la RAM de 124 GiB y shuffle global provoca lectura
+aleatoria del HDD sdb. Se midieron 46,3 MiB/s con 91,7% de ocupacion y lectores
+bloqueados en filemap_fault/blk_mq_get_tag; GPU esperando datos.
+
+`--lectura-bloques --bloque-parches 512 --bloques-pool 16 --workers 4 --prefetch 2`
+precarga secuencialmente grupos de bloques (aprox. 24 GiB de X mas Y en page
+cache), mezcla sus indices y visita todos los parches una vez por epoca. El
+orden de bloques y de parches cambia con la epoca. La mezcla ya no es una
+permutacion global uniforme: las muestras se mezclan dentro de cada pool;
+se conservan etiquetas, augmentacion y split. No necesita duplicar datasets.
+VAL/TEST usan hasta dos workers sin persistencia. El log informa precarga por
+pool y tiempos de TRAIN/espera/epoca; espera_loader_s mide espera del consumidor,
+no tiempo CUDA sincronizado. Medir una epoca completa antes de extrapolar.
+
+`--init-pesos RUTA/best_model.pth` inicia desde pesos previos con optimizador,
+scheduler y contador de epocas nuevos. La corrida original solo guardaba el
+mejor modelo (epoca 4), no un checkpoint de la epoca 10. Se conserva intacta.
+Ahora `ultimo_checkpoint.pth` se actualiza atomicamente cada epoca con modelo,
+optimizador, scheduler, scaler, historial y RNG del proceso principal; tambien
+se escribe historial.npy cada epoca. `--reanudar RUTA/ultimo_checkpoint.pth`
+recupera ese estado en el mismo directorio de experimento. El RNG de los
+workers de augmentacion no se conserva; no promete equivalencia bit a bit.
+El lanzador acepta argumentos adicionales despues del directorio de salida.
+
+Relanzamiento optimizado: `/mnt/yacy_3/prod_bis/ferreyra/dataset/exp_multicampana_1819_1920_2021_unet_bloques_20261007T094404`.
+Supervisor PID 31879. Log estable: `/mnt/yacy_3/prod_bis/ferreyra/logs_multicampana/ultimo_entrenamiento_unet.log`.
+
+
+## Precarga anticipada y caches en tres discos (2026-10-07, tarde)
+
+Las epocas 9-11 tardaron 47,5-51,4 minutos. Epoca 11: TRAIN 2686 s,
+espera del loader 1879 s, total 3031 s. Cada pool se precargaba de forma
+sincrona, dejando la GPU esperando 2-3 minutos entre pools. Ademas, a las
+18:48 otro usuario (urturi, PID 9563) ocupaba 13,5 GiB de GPU y compartia
+el computo; nvidia-smi pmon mostraba reparto entre ambos procesos.
+
+Correccion de procedencia: el primer relanzamiento registraba --init-pesos
+pero no ejecutaba load_state_dict para esa opcion. Esa corrida empezo desde
+cero. Se corrigio la carga y se agrego una prueba que verifica los pesos
+cargados desde el archivo. El siguiente relanzamiento conserva el estado de
+la corrida vigente usando --reanudar, incluida su epoca y optimizador.
+
+`--anticipar-pool` precarga el siguiente pool durante el computo actual.
+Mantiene como maximo dos pools en page cache (~48 GiB de X mas Y); un lector
+por dispositivo realiza lecturas consecutivas y hasta tres dispositivos
+trabajan en paralelo. No cambia la permutacion respecto del sampler anterior.
+
+El coordinador `optimizar_lectura_multicampana.sh EXP PID_TRAIN`, lanzado
+con nohup y &, prepara solo copias TRAIN:
+- 2018_2019: /var/tmp/ferreyra_cordoba_ia_unne/train_cache (NVMe).
+- 2019_2020: /mnt/yacy_1/prod/ferreyra/cache_multicampana_train (HDD sda).
+- 2020_2021: originales en yacy_3 (HDD sdb).
+Las copias conservan los bytes y se verifican con SHA-256. Hay reserva minima
+de 40 GiB en NVMe y 100 GiB en yacy_1. VAL/TEST siguen en sus originales.
+El manifiesto cache_lectura.json registra firmas de originales/destinos y
+se rechaza si cambian; tambien la validacion completa de TRAIN usa las copias.
+La copia tiene prioridad de I/O baja y puede reducir temporalmente el ritmo
+de entrenamiento. Los originales se conservan. /var/tmp debe conservarse
+mientras se use el manifiesto; si se elimina una cache, hay que reconstruirla.
+
+Una vez listas, se espera un nuevo checkpoint completo (max. 3 h), se
+interrumpe la corrida y se relanza en el mismo EXP con --reanudar. Se conserva
+checkpoint_antes_precarga_paralela.pth y train_antes_paralelo_epochN.log;
+train.log se mantiene y se agrega el nuevo proceso al final. Si ya termino
+por early stopping o maximo de epocas, no se reinicia automaticamente.
+Estado en optimizacion_lectura.json, logs en optimizacion_lectura.log y codigo
+final del coordinador en optimizacion_lectura.exitcode.
+
+No se promete 100% continuo: persisten la primera precarga y VAL, y la GPU
+esta compartida. Medir tiempos por epoca y pmon por PID luego del cambio.
+
+A pedido del usuario (19:06), la corrida lenta se detuvo durante epoca 12.
+Se recuperara el ultimo checkpoint completo (epoca 11), sin esperar otra
+epoca. El coordinador usa --sin-esperar-epoca y --usar-copia-pid para
+conservar la copia que ya estaba en marcha; solo se lanzara la corrida nueva.
+
+
+## Inferencia y comparaciones (2026-10-09)
+
+Entrenamiento terminado 2026-10-09 03:46:19 ART, exitcode 0. Early stopping
+en epoca 90; mejor checkpoint epoca 60 (VAL loss 0.3744356).
+TEST de parches: accuracy 0.8829207, F1 macro 0.8070624, mIoU 0.6922312.
+
+`bash src/inferencia_multicampana.sh EXP SALIDA` se lanza con nohup y &.
+Usa best_model.pth y crea 51 mapas U-Net multicampana (17 tiles x 3 campanas),
+mas 12 mapas TEST de U-Net y FCRTransUNet previos entrenados en 2019/2020
+dic-may. Los 18 mapas TEST se hacen primero; TRAIN/VAL se completan despues.
+Se verifica que los tres checkpoints carguen con 24 canales y 5 clases,
+y que los 306 composites y las 51 mascaras coincidan en grilla/bandas.
+
+Inferencia: TIFF abiertos una vez por tile, bloques 512 y batch 4, AMP en
+GPU, normalizacion /10000 redondeada a float16 como los datasets, padding
+edge de bordes y NoData para pixeles sin imagen en todos los meses. Los TIFF
+se escriben temporales y se publican atomicamente al completar el tile.
+Tienen tags de checkpoint SHA-256 y firma de insumos; no se mezclan modelos.
+
+Se generan curvas, matrices de confusion por campana/rol, PNG RGB-MNC-mapas
+de modelos-errores (vista reducida a 1024 px), barras de accuracy/F1 y F1 por
+clase, CSV y JSON a resolucion completa. MNC>0 define la mascara comun y
+pred=0 cuenta como error. MNC2021 codigo 20 sigue ignorado como NoData.
+
+La comparacion justa usa TEST 20HLK/20HLJ con mismos composites, ventana,
+leyenda y pixeles de evaluacion. Multicampana vio TRAIN de todos los anios;
+no es evaluacion de anio no visto. TRAIN solo es descriptivo. VAL de tres
+anios y VAL historica 2019/2020 son conjuntos distintos, y sus pesos por
+clase pueden diferir: curvas se muestran con contexto, no como ranking.
+No se comparan directamente metricas de parches 256 con mapas completos 512.
+Se omite la variante con 2017/2018 para evitar otra leyenda y posible
+solapamiento espacial historico con los tiles TEST actuales.
+
+Estado por tarea en progreso.json, log inferencia.log, PID inferencia.pid y
+resultado final inferencia.exitcode. Figuras en figuras/; mapas en
+predicciones/MODELO/CAMPANA/. Las cuatro pruebas verifican bordes/georreferencia,
+normalizacion, rechazo de grillas incompatibles, NoData y excepcion codigo 20.
+
+Salida de esta corrida: `/mnt/yacy_3/prod_bis/ferreyra/dataset/exp_multicampana_1819_1920_2021_unet_bloques_20261007T094404/inferencia_20261009T093206`.
+
+
+## Evaluacion temporal en anio nunca visto: 2021/2022
+
+El usuario eligio los cuatro tiles espaciales VAL/TEST (20HKJ,20HMH,20HLK,20HLJ).
+Se congela best_model.pth de epoca 60 con SHA-256 en protocolo.json; 2021/2022
+no aparece en config_multicampana.json. No se reentrena, calibra ni selecciona
+un checkpoint usando etiquetas nuevas. Ventana diciembre 2021 - mayo 2022,
+bandas B02/B03/B04/B08 y mismo procesamiento SCL (incluye correccion BOA).
+
+Fuente: https://zenodo.org/records/8284081, MNC_verano2022.tif,
+MD5 f88ffac06865b36038916ec22c1ffe28. Informe MD5
+9111c2166f1c074430e435aa90cb6c59. Tabla 2, pagina impresa 6 (PDF 7),
+verificada visualmente: 10 Maiz,11 Soja,16 Mani; resto de codigos documentados
+12,13,14,15,17,18,19,21,22,26,28 a Fondo. 255 es NoData. Codigos desconocidos
+aborton; la excepcion de codigo 20 en 2021 no se extiende a 2022.
+
+El pipeline descarga STAC/SCL, selecciona escenas, descarga bandas, compone
+y verifica integridad de TIFF, proyecta mascaras con nearest y verifica los
+codigos dentro de los cuatro tiles antes de inferir. Espera las fuentes
+oficiales verificadas (transferidas desde la maquina local por fallo TLS de
+Zenodo en floryacy); no se desactiva la verificacion TLS.
+
+La inferencia espera el lock compartido de la corrida anterior y compara
+U-Net multicampana con U-Net/FCRTransUNet 2019/2020 sobre los mismos pixeles.
+Resultados de TEST espacial y VAL espacial se separan dentro del anio nuevo.
+MNC>0 define la mascara, pred=0 cuenta como error; es concordancia con mapa
+INTA, no exactitud contra muestras de campo independientes. Se generan mapas,
+comparaciones visuales, matrices y evaluacion_temporal.json.
+
+Salida: `/mnt/yacy_3/prod_bis/ferreyra/evaluacion_ano_no_visto_2021_2022_20261009T101637`.

@@ -53,6 +53,7 @@ dic-may con la campana 2017-2018 (Nivel3) sumada, ver pipeline_dicmay_1718.sh:
         --dir-exp /mnt/yacy_3/prod_bis/ferreyra/dataset/exp_cordoba_dicmay_1718_unet_f16
 """
 import argparse
+import time
 import json
 from pathlib import Path
 import os
@@ -64,6 +65,8 @@ from torch.utils.data import DataLoader, ConcatDataset
 
 sys.path.append(os.path.abspath("."))
 from utils.model import SimpleUNet, TransUNet, UTAE, FCRTransUNet
+from utils.lectura_bloques import MezclaBloques
+from utils.cache_lectura import cargar_cache
 from utils.tile_dataset import TileDatasetMmap
 from utils.losses import CEDiceLoss
 from utils.multicampana import (SPLIT, normalizar_campanas, validar_campanas,
@@ -94,7 +97,24 @@ parser.add_argument("--campana", nargs=2, action="append", metavar=("AAAA_AAAA",
                     help="repetible: incorpora TRAIN/VAL/TEST de cada campana")
 parser.add_argument("--verificar-datos", action="store_true",
                     help="valida multicampana y pesos, sin crear salidas ni entrenar")
+parser.add_argument('--lectura-bloques', action='store_true', help='precarga secuencial y mezcla en pools de page cache')
+parser.add_argument('--bloque-parches', type=int, default=512)
+parser.add_argument('--bloques-pool', type=int, default=16)
+parser.add_argument('--workers', type=int, default=16)
+parser.add_argument('--prefetch', type=int, default=4)
+parser.add_argument('--init-pesos', type=Path, help='warm start: solo pesos, sin recuperar optimizador/epoca')
+parser.add_argument('--reanudar', type=Path, help='checkpoint completo generado por esta version')
+parser.add_argument('--anticipar-pool', action='store_true', help='precargar siguiente pool durante computo; dos pools en RAM')
+parser.add_argument('--cache-lectura', type=Path, help='manifest de caches de TRAIN verificadas')
 ARGS = parser.parse_args()
+if (ARGS.anticipar_pool or ARGS.cache_lectura) and not ARGS.lectura_bloques:
+    parser.error('--anticipar-pool/--cache-lectura requieren --lectura-bloques')
+if ARGS.cache_lectura and not ARGS.campana:
+    parser.error('--cache-lectura requiere --campana')
+if ARGS.reanudar and ARGS.init_pesos:
+    parser.error('--reanudar no se combina con --init-pesos')
+if min(ARGS.bloque_parches, ARGS.bloques_pool, ARGS.prefetch) <= 0 or ARGS.workers < 0:
+    parser.error('bloques/prefetch deben ser positivos y workers >= 0')
 if ARGS.campana:
     if ARGS.dir_train or ARGS.dir_train_extra or ARGS.sin_2017:
         parser.error("--campana no se combina con --dir-train/--dir-train-extra/--sin-2017")
@@ -290,13 +310,14 @@ def entrenar():
     por_campana = None
     informe = None
     if ARGS.campana:
-        campanas, informe, conteos = validar_campanas(ARGS.campana)
+        cache_lectura = cargar_cache(ARGS.cache_lectura)
+        campanas, informe, conteos = validar_campanas(ARGS.campana, cache=cache_lectura)
         PESOS = ARGS.pesos if ARGS.pesos is not None else pesos_desde_conteos(conteos)
         print(f"Conteos TRAIN: {conteos.tolist()} | Pesos: {PESOS}", flush=True)
         if ARGS.verificar_datos:
             print("VERIFICACION OK; no se entreno ni se crearon salidas", flush=True)
             return
-        conjuntos, por_campana = cargar_campanas(campanas)
+        conjuntos, por_campana = cargar_campanas(campanas, cache=cache_lectura)
         ds_train, ds_val, ds_test = (conjuntos[r] for r in ('train', 'val', 'test'))
     else:
         ds_train = cargar_tiles(TILES_TRAIN, "TRAIN", augment=True)
@@ -320,20 +341,25 @@ def entrenar():
             'canales': 24, 'seed': SEED,
             'batch_size': BATCH_SIZE, 'epochs': EPOCHS, 'patience': PATIENCE,
             'learning_rate': LEARNING_RATE, 'weight_decay': WEIGHT_DECAY,
+            'anticipar_pool': ARGS.anticipar_pool, 'cache_lectura': str(ARGS.cache_lectura) if ARGS.cache_lectura else None,
+            'lectura_bloques': ARGS.lectura_bloques, 'bloque_parches': ARGS.bloque_parches,
+            'bloques_pool': ARGS.bloques_pool, 'workers': ARGS.workers, 'prefetch': ARGS.prefetch,
+            'init_pesos': str(ARGS.init_pesos) if ARGS.init_pesos else None,
+            'reanudar': str(ARGS.reanudar) if ARGS.reanudar else None,
         })
 
     print(f"Pesos por clase: {PESOS}", flush=True)
     print(f"\nTrain: {len(ds_train)} | Val: {len(ds_val)} | Test: {len(ds_test)}", flush=True)
 
-    # Con TileDatasetMmap cada __getitem__ hace I/O real (lee del disco bajo
-    # demanda), asi que ahora si vale la pena paralelizar con varios workers:
-    # se solapan con el computo en GPU en vez de dejarla esperando.
-    kw = dict(batch_size=BATCH_SIZE, num_workers=NUM_WORKERS,
-              pin_memory=True, persistent_workers=True,
-              prefetch_factor=PREFETCH_FACTOR)
-    train_loader = DataLoader(ds_train, shuffle=True,  **kw)
-    val_loader   = DataLoader(ds_val,   shuffle=False, **kw)
-    test_loader  = DataLoader(ds_test,  shuffle=False, **kw)
+    kw = dict(batch_size=BATCH_SIZE, num_workers=ARGS.workers, pin_memory=True)
+    if ARGS.workers:
+        kw.update(persistent_workers=True, prefetch_factor=ARGS.prefetch)
+    sampler = MezclaBloques(ds_train, ARGS.bloque_parches, ARGS.bloques_pool, SEED, anticipar=ARGS.anticipar_pool) if ARGS.lectura_bloques else None
+    train_loader = DataLoader(ds_train, shuffle=(sampler is None), sampler=sampler, **kw)
+    # VAL/TEST son secuenciales: dos lectores bastan y no quedan persistentes.
+    eval_kw = dict(batch_size=BATCH_SIZE, num_workers=min(2, ARGS.workers), pin_memory=True)
+    val_loader = DataLoader(ds_val, shuffle=False, **eval_kw)
+    test_loader = DataLoader(ds_test, shuffle=False, **eval_kw)
 
     IN_CH = ds_train[0][0].shape[0]
     print(f"Canales de entrada: {IN_CH}", flush=True)
@@ -347,6 +373,9 @@ def entrenar():
         model = UTAE(IN_CH, NUM_CLASSES, T=IN_CH // 4).to(device)
     else:
         model = FCRTransUNet(IN_CH, NUM_CLASSES).to(device)
+    if ARGS.init_pesos:
+        model.load_state_dict(torch.load(ARGS.init_pesos, map_location=device))
+        print(f'Warm start desde {ARGS.init_pesos}; optimizador y epocas nuevos', flush=True)
     pesos = torch.tensor(PESOS, dtype=torch.float32).to(device)
     # CE (con pesos) + Dice: Dice refuerza la superposicion de Mani, que CE
     # subestima aun con pesos altos por ser una fraccion muy chica de los
@@ -361,21 +390,47 @@ def entrenar():
     # computo real, no solo overhead de lanzar kernels.
     scaler = torch.amp.GradScaler(device.type, enabled=(device.type == "cuda"))
 
-    chequeo_sanidad(model, train_loader, device)
+    # No consumir/precargar un pool entero para el chequeo de cuatro batches.
+    sanity_loader = DataLoader(ds_train, batch_size=BATCH_SIZE, num_workers=0)
+    chequeo_sanidad(model, sanity_loader, device)
 
     mejor = float("inf")
     sin_mejora = 0
     historial = []
 
+    inicio_epoch = 0
+    if ARGS.reanudar:
+        checkpoint = torch.load(ARGS.reanudar, map_location='cpu')
+        if checkpoint['args']['modelo'] != ARGS.modelo or checkpoint['args']['campana'] != ARGS.campana:
+            raise ValueError('Checkpoint de otro modelo o conjunto de campanas')
+        model.load_state_dict(checkpoint['model'])
+        optimizer.load_state_dict(checkpoint['optimizer'])
+        scheduler.load_state_dict(checkpoint['scheduler'])
+        scaler.load_state_dict(checkpoint['scaler'])
+        inicio_epoch = checkpoint['epoch']
+        historial, mejor, sin_mejora = checkpoint['historial'], checkpoint['mejor'], checkpoint['sin_mejora']
+        torch.set_rng_state(checkpoint['torch_rng'])
+        np.random.set_state(checkpoint['numpy_rng'])
+        if device.type == 'cuda' and checkpoint['cuda_rng'] is not None:
+            torch.cuda.set_rng_state_all(checkpoint['cuda_rng'])
+        if not (Path(DIR_EXP) / 'best_model.pth').exists():
+            raise ValueError('Reanudar en el mismo experimento: falta best_model.pth')
+        print(f'Reanudando despues de epoca {inicio_epoch}', flush=True)
     print("\n--- Iniciando entrenamiento ---", flush=True)
-    for epoch in range(EPOCHS):
+    for epoch in range(inicio_epoch, EPOCHS):
+        epoch_start = time.monotonic()
+        wait_data = 0.0
+        if sampler is not None:
+            sampler.set_epoch(epoch)
         model.train()
         loss_sum = torch.zeros((), device=device)
         ok_sum   = torch.zeros((), device=device)
         tot_sum  = torch.zeros((), device=device)
         n = 0
 
+        batch_end = time.monotonic()
         for X, Y in train_loader:
+            wait_data += time.monotonic() - batch_end
             X = X.to(device, non_blocking=True)
             Y = Y.to(device, non_blocking=True)
             optimizer.zero_grad(set_to_none=True)
@@ -390,10 +445,12 @@ def entrenar():
                 ok, tot = correctos_total(out, Y)
                 ok_sum += ok; tot_sum += tot
             n += 1
+            batch_end = time.monotonic()
 
         tr_loss = (loss_sum / n).item()
         total = tot_sum.item()
         tr_acc = ok_sum.item() / total if total else 0.0
+        train_seconds = time.monotonic() - epoch_start
         va_loss, va_acc = evaluar(model, val_loader, criterion, device)
         scheduler.step(va_loss)
 
@@ -402,6 +459,9 @@ def entrenar():
         print(f"Epoch [{epoch+1:3d}/{EPOCHS}] "
               f"Train Loss:{tr_loss:.4f} Acc:{tr_acc:.4f} | "
               f"Val Loss:{va_loss:.4f} Acc:{va_acc:.4f} | lr={lr:.1e}", flush=True)
+
+        print(f'Tiempos: train_s={train_seconds:.1f} espera_loader_s={wait_data:.1f} '
+              f'epoca_s={time.monotonic()-epoch_start:.1f}', flush=True)
 
         # Alarma temprana
         if epoch == 0 and tr_acc > 0.95:
@@ -415,7 +475,20 @@ def entrenar():
             sin_mejora += 1
             if sin_mejora >= PATIENCE:
                 print(f"Early stopping en epoca {epoch+1}", flush=True)
-                break
+
+        # Guardado atomico: conservar estado completo y progreso cada epoca.
+        temp_checkpoint = Path(DIR_EXP) / 'ultimo_checkpoint.tmp'
+        torch.save({'epoch': epoch + 1, 'model': model.state_dict(),
+                    'optimizer': optimizer.state_dict(), 'scheduler': scheduler.state_dict(),
+                    'scaler': scaler.state_dict(), 'historial': historial,
+                    'mejor': mejor, 'sin_mejora': sin_mejora,
+                    'torch_rng': torch.get_rng_state(), 'numpy_rng': np.random.get_state(),
+                    'cuda_rng': torch.cuda.get_rng_state_all() if device.type == 'cuda' else None,
+                    'args': vars(ARGS)}, temp_checkpoint)
+        temp_checkpoint.replace(Path(DIR_EXP) / 'ultimo_checkpoint.pth')
+        np.save(f"{DIR_EXP}/historial.npy", np.array(historial))
+        if sin_mejora >= PATIENCE:
+            break
 
     np.save(f"{DIR_EXP}/historial.npy", np.array(historial))
     torch.save(model.state_dict(), f"{DIR_EXP}/modelo_final.pth")

@@ -50,15 +50,17 @@ def pesos_desde_conteos(conteos):
                     for n in conteos[1:]]
 
 
-def validar_dataset(directorio, split=None, canales=24, tamano=256):
+def validar_dataset(directorio, split=None, canales=24, tamano=256, cache=None):
     split = split or SPLIT
+    cache = cache or {}
     registros, conteos_train = {}, np.zeros(5, dtype=np.int64)
     for rol, tiles in split.items():
         registros[rol] = []
         for tile in tiles:
             base = Path(directorio) / f'dataset_{tile}'
-            x = np.load(str(base) + '_X.npy', mmap_mode='r', allow_pickle=False)
-            y = np.load(str(base) + '_Y.npy', mmap_mode='r', allow_pickle=False)
+            lectura = cache.get(str(base), str(base))
+            x = np.load(lectura + '_X.npy', mmap_mode='r', allow_pickle=False)
+            y = np.load(lectura + '_Y.npy', mmap_mode='r', allow_pickle=False)
             if (x.ndim != 4 or y.ndim != 3 or len(x) != len(y) or len(x) == 0
                     or x.shape[1:] != (canales, tamano, tamano)
                     or y.shape[1:] != (tamano, tamano)):
@@ -79,26 +81,28 @@ def validar_dataset(directorio, split=None, canales=24, tamano=256):
     return registros, conteos_train
 
 
-def validar_campanas(entradas, split=None, canales=24, tamano=256):
+def validar_campanas(entradas, split=None, canales=24, tamano=256, cache=None):
     campanas = normalizar_campanas(entradas)
     informe, total = {}, np.zeros(5, dtype=np.int64)
     for nombre, directorio in campanas:
         print(f'Validando {nombre}: {directorio}', flush=True)
-        registros, conteos = validar_dataset(directorio, split, canales, tamano)
+        registros, conteos = validar_dataset(directorio, split, canales, tamano, cache=cache)
         informe[nombre] = {'directorio': directorio, 'split': registros}
         total += conteos
     return campanas, informe, total
 
 
-def cargar_campanas(campanas, split=None):
+def cargar_campanas(campanas, split=None, cache=None):
     from torch.utils.data import ConcatDataset
     from utils.tile_dataset import TileDatasetMmap
     split = split or SPLIT
+    cache = cache or {}
     por_campana, conjuntos = {}, {rol: [] for rol in split}
     for nombre, directorio in campanas:
         por_campana[nombre] = {}
         for rol, tiles in split.items():
-            partes = [TileDatasetMmap(str(Path(directorio) / f'dataset_{t}'),
+            partes = [TileDatasetMmap(cache.get(str(Path(directorio) / f'dataset_{t}'),
+                                                str(Path(directorio) / f'dataset_{t}')),
                                       augment=(rol == 'train')) for t in tiles]
             ds = ConcatDataset(partes)
             por_campana[nombre][rol] = ds
