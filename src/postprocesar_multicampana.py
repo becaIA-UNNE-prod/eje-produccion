@@ -24,6 +24,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from model import SimpleUNet, FCRTransUNet
 from utils.multicampana import SPLIT
+from src.soporte.archivos import guardar, sha256
+from utils.rutas import MULTICAMPANA_ROOT
 from src.inferencia.raster import normalizar, inferir_tile
 from src.evaluacion.metricas import metricas_confusion, confusion_mnc as evaluar
 from src.datos.leyendas import REMAP_1819, REMAP_2020, REMAP_2021, LEGENDS
@@ -31,21 +33,6 @@ from src.figuras.comunes import NAMES, COLORS, matriz_fig, curvas
 from src.figuras.historico import figura_tile as _figura_tile
 
 YEARS = ['2018_2019','2019_2020','2020_2021']
-
-
-def guardar(path, value):
-    path.parent.mkdir(parents=True,exist_ok=True)
-    temp = path.with_suffix(path.suffix+'.tmp')
-    temp.write_text(json.dumps(value,indent=2,allow_nan=False)+'\n')
-    temp.replace(path)
-
-
-def sha256(path):
-    digest = hashlib.sha256()
-    with path.open('rb') as file:
-        for data in iter(lambda:file.read(8*1024**2),b''):
-            digest.update(data)
-    return digest.hexdigest()
 
 
 def figura_tile(year,tile,campaign,models,out):
@@ -99,7 +86,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--exp',type=Path,required=True)
     parser.add_argument('--salida',type=Path,required=True)
-    parser.add_argument('--base',type=Path,default=Path('/mnt/yacy_3/prod_bis/ferreyra'))
+    parser.add_argument('--base',type=Path,default=MULTICAMPANA_ROOT)
     parser.add_argument('--verificar',action='store_true')
     args=parser.parse_args()
     exp=args.exp.resolve(); out=args.salida.resolve(); base=args.base

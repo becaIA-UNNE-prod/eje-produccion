@@ -7,3 +7,14 @@ en 2018/2019 y NoData en 2019/2020; la excepción 20 es exclusiva de 2020/2021.
 utils.leyendas_mnc conserva los imports anteriores.
 Los demás generadores históricos mantienen sus remapeos específicos hasta
 una migración propia; no se reinterpretan como equivalentes automáticamente.
+
+## Campañas y rutas
+
+campanas.py consume config/campanas.json y las rutas operativas registradas
+en config/almacenamiento.json mediante utils.rutas. Proporciona meses,
+composites, fuentes MNC y las tuplas de preparación ya usadas.
+Las ubicaciones existentes y el alias de máscaras se conservan.
+El catálogo no define TRAIN/VAL/TEST: el split vigente sigue en
+config/split_extension_este.json; preparación histórica mantiene 17 tiles.
+Los wrappers shell y otros generadores aún tienen configuración propia
+y se migrarán por separado.

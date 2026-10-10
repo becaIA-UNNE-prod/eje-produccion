@@ -1,0 +1,81 @@
+{
+  "ventana": "diciembre-mayo",
+  "bandas": [
+    "B02",
+    "B03",
+    "B04",
+    "B08"
+  ],
+  "normalizacion": 10000,
+  "preparacion_train_val": [
+    "2018_2019",
+    "2019_2020",
+    "2020_2021"
+  ],
+  "campanas": {
+    "2018_2019": {
+      "meses": [
+        "201812",
+        "201901",
+        "201902",
+        "201903",
+        "201904",
+        "201905"
+      ],
+      "composites_multicampana": "composites_2018_2019_scl",
+      "composites_extension": "composites_2018_2019_scl",
+      "dataset": "train_cordoba_dicmay_1819_scl_f16",
+      "leyenda": "1819",
+      "patron_mascara": "etiqueta_mnc1819_{}_10m.tif",
+      "fuente_mnc": "2018_2019/mnc_2018-2019_V1R1.tif"
+    },
+    "2019_2020": {
+      "meses": [
+        "201912",
+        "202001",
+        "202002",
+        "202003",
+        "202004",
+        "202005"
+      ],
+      "composites_multicampana": "composites_dicmay_2019_2020",
+      "composites_extension": "composites_2019_2020_scl",
+      "dataset": "train_cordoba_dicmay_f16",
+      "leyenda": "2020",
+      "patron_mascara": "etiqueta_mnc_{}_10m.tif",
+      "fuente_mnc": "mnc-verano-2020.tif"
+    },
+    "2020_2021": {
+      "meses": [
+        "202012",
+        "202101",
+        "202102",
+        "202103",
+        "202104",
+        "202105"
+      ],
+      "composites_multicampana": "composites_2020_2021_scl",
+      "composites_extension": "composites_2020_2021_scl",
+      "dataset": "train_cordoba_dicmay_2021_f16",
+      "leyenda": "2021",
+      "patron_mascara": "etiqueta_mnc2021_{}_10m.tif",
+      "fuente_mnc": "2020_2021/verano-2021.tif"
+    },
+    "2021_2022": {
+      "meses": [
+        "202112",
+        "202201",
+        "202202",
+        "202203",
+        "202204",
+        "202205"
+      ],
+      "composites_multicampana": "composites_2021_2022_scl",
+      "composites_extension": "composites_2021_2022_scl",
+      "dataset": null,
+      "leyenda": "2022",
+      "patron_mascara": "etiqueta_mnc2022_{}_10m.tif",
+      "fuente_mnc": "2021_2022/MNC_verano2022.tif"
+    }
+  }
+}

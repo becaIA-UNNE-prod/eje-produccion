@@ -121,15 +121,12 @@ inferencia_multicampana.sh
        ├─ por defecto → evaluar_test_actual.main
        └─ --historico → su propio main histórico
 
-evaluar_test_actual.py
-  ├─ importa preparar_evaluar_extension.py
-  │    └─ importa postprocesar_multicampana.py
-  └─ importa postprocesar_multicampana.py
-
-regenerar_figuras_test_actual.py
-  └─ importa preparar_evaluar_extension.py
+evaluar_test_actual.py y regenerar_figuras_test_actual.py
+  └─ módulos de datos, figuras, inferencia, evaluación y soporte
+     (ya no importan preparar_evaluar_extension ni postprocesar_multicampana)
 
 preparar_multicampana.py
+  ├─ src.datos.campanas (catálogo de configuración)
   ├─ carga por ruta 01d_mascaras_mnc_2020_2021.py
   └─ ejecuta generadores mediante subprocess
 

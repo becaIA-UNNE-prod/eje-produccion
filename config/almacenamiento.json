@@ -8,5 +8,10 @@
     "artifacts/archive": "figuras, predicciones, logs y backups históricos",
     "backups": "respaldos de código, Git y migraciones"
   },
-  "existing_operational_paths": "Las rutas ya usadas en /mnt/yacy_1 y /mnt/yacy_3, incluyendo preparacion_base del TEST, conservan su ubicación."
+  "existing_operational_paths": "Las rutas ya usadas en /mnt/yacy_1 y /mnt/yacy_3, incluyendo preparacion_base del TEST, conservan su ubicación.",
+  "rutas_operativas": {
+    "multicampana": "/mnt/yacy_3/prod_bis/ferreyra",
+    "extension_este": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana",
+    "mnc": "/mnt/yacy_1/prod/ferreyra/MNC_INTA"
+  }
 }

@@ -24,3 +24,11 @@ if RUN_DIR.resolve() == ROOT or ROOT in RUN_DIR.resolve().parents:
     raise ValueError('CORDOBA_RUN_DIR debe estar fuera del repositorio; usar un disco /mnt/yacy_*')
 LEGACY_PREDICTIONS = RUN_DIR / 'predicciones'
 LEGACY_FIGURES = RUN_DIR / 'figuras'
+
+# Ubicaciones existentes acreditadas: conservarlas fuera del namespace nuevo.
+OPERATIVAS = CONFIG_STORAGE['rutas_operativas']
+MULTICAMPANA_ROOT = Path(OPERATIVAS['multicampana'])
+EXTENSION_ROOT = Path(OPERATIVAS['extension_este'])
+MNC_ROOT = Path(OPERATIVAS['mnc'])
+if not all(p.is_absolute() for p in (MULTICAMPANA_ROOT, EXTENSION_ROOT, MNC_ROOT)):
+    raise ValueError('Las rutas operativas requieren ubicaciones absolutas')

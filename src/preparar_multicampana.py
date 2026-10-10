@@ -17,22 +17,10 @@ from utils.multicampana import SPLIT, validar_campanas, pesos_desde_conteos
 from utils.leyendas_mnc import verificar_codigos
 from utils.integridad_raster import auditar_rasters
 
-Y3 = Path('/mnt/yacy_3/prod_bis/ferreyra')
+from utils.rutas import MULTICAMPANA_ROOT as Y3
+from src.datos.campanas import BANDAS, MASCARAS, LOGS, campanas_preparacion
 TILES = sum(SPLIT.values(), [])
-BANDAS = ('B02', 'B03', 'B04', 'B08')
-MASCARAS = ROOT/'mascaras_procesadas'
-CAMPANAS = [
-    ('2018_2019', Y3/'composites_2018_2019_scl',
-     ['201812','201901','201902','201903','201904','201905'],
-     '1819', 'etiqueta_mnc1819_{}_10m.tif', Y3/'dataset/train_cordoba_dicmay_1819_scl_f16'),
-    ('2019_2020', Y3/'composites_dicmay_2019_2020',
-     ['201912','202001','202002','202003','202004','202005'],
-     '2020', 'etiqueta_mnc_{}_10m.tif', Y3/'dataset/train_cordoba_dicmay_f16'),
-    ('2020_2021', Y3/'composites_2020_2021_scl',
-     ['202012','202101','202102','202103','202104','202105'],
-     '2021', 'etiqueta_mnc2021_{}_10m.tif', Y3/'dataset/train_cordoba_dicmay_2021_f16'),
-]
-LOGS = Y3/'logs_multicampana'
+CAMPANAS = campanas_preparacion()
 
 
 def cargar_script(nombre):
