@@ -46,5 +46,6 @@ Por eso el esquema de entrenamiento usa **5 clases**:
 ## Exactitud reportada por el INTA
 
 Mapas de verano 2020: exactitud general 0,88 e indice Kappa 0,82.
-Esto acota el techo alcanzable por cualquier modelo entrenado contra
-estas etiquetas.
+Estas cifras describen la calidad de la referencia; no constituyen un techo
+matemático de acuerdo de un modelo con ese mismo mapa. La tabla corresponde
+a 2019/2020: no reutilizar sus códigos para otras campañas sin verificar su leyenda.

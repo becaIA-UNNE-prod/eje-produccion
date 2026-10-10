@@ -1,0 +1,15 @@
+{
+  "fecha_utc": "2026-10-10T14:10:20.540594+00:00",
+  "solicitud": "Eliminar dataset histórico 20JLL y artefactos exclusivos",
+  "archivos": 3541,
+  "bytes_logicos": 27883136739,
+  "procesos_no_inspeccionables": [
+    "1304",
+    "3779",
+    "3780",
+    "27751"
+  ],
+  "conservado": "Máscaras compartidas, datasets operativos, TEST vigente y manifiestos de migración",
+  "manifiesto_detallado": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/backups/eliminacion_dataset_20JLL_20261010.json",
+  "verificacion": "Dataset, enlace y tres artefactos ausentes"
+}

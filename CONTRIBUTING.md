@@ -11,8 +11,8 @@ Conservar aportes locales y sincronizar el mirror después de modificar floryacy
 Leer, en este orden:
 
 1. Este archivo y `git status --short` del lugar donde se va a trabajar.
-2. `config/split_extension_este.json` y [TEST vigente](docs/README_TEST_ACTUAL.md).
-3. [Multicampaña](docs/README_MULTICAMPANA.md) y la documentación de la etapa afectada.
+2. `config/split_extension_este.json` y [TEST vigente](docs/guias/test_actual.md).
+3. [Multicampaña](docs/guias/multicampana.md) y la documentación de la etapa afectada.
 
 La configuración y el código actual prevalecen sobre notas de corridas antiguas.
 Los archivos de `docs/` que registran una ejecución conservan sus fechas y rutas
@@ -44,10 +44,8 @@ Para un nuevo artefacto, determinar su rol y usar la ruta correspondiente:
 | Rol | Ruta física |
 |---|---|
 | Datos, referencias, máscaras y pesos compartidos | `/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/` |
-| Dataset histórico del repo | `.../data/datasets/legacy_repo/` |
 | Archivo de corridas históricas | `/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/artifacts/archive/` |
 | Respaldos y manifiestos de traslado | `/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/backups/` |
-| Entorno `.venv` histórico | `/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/envs/repo_uv/` |
 | Nuevas corridas | `/mnt/yacy_3/prod_bis/ferreyra/cordoba_ia_unne/artifacts/runs/<nombre_FECHA_ID>/` |
 
 `yacy_1` aloja entradas compartidas y archivo histórico; `yacy_3` aloja nuevas
@@ -69,10 +67,8 @@ vigente. No copiar esos volúmenes al nuevo namespace para imponer uniformidad.
 │   ├── runs -> /mnt/yacy_3/.../artifacts/runs
 │   └── reports/test_actual -> reporte vigente en /mnt
 ├── data/referencias -> /mnt/yacy_1/.../data/referencias
-├── dataset -> /mnt/yacy_1/.../data/datasets/legacy_repo
 ├── mascaras_procesadas -> /mnt/yacy_1/.../data/mascaras
-├── pesos -> /mnt/yacy_1/.../data/pesos
-└── .venv -> /mnt/yacy_1/.../envs/repo_uv
+└── pesos -> /mnt/yacy_1/.../data/pesos
 ```
 
 Los enlaces de directorio anteriores conservan los consumidores históricos,
@@ -94,7 +90,8 @@ pruebas ligeras pueden usar un directorio temporal explícito fuera del repo.
 ## Cómo ejecutar sin ensuciar la raíz
 
 Trabajar desde la raíz del repositorio. El entorno operativo en floryacy es
-**`~/s4a-venv/bin/python`**. `.venv` y `pyproject.toml` no describen ese entorno
+**`~/s4a-venv/bin/python`**. El `.venv` histórico fue eliminado el 10/10/2026
+por solicitud del usuario. `pyproject.toml` no describe ese entorno
 de entrenamiento; no instalar ni cambiar dependencias como efecto lateral de
 una reorganización de archivos.
 
@@ -182,3 +179,17 @@ No lanzar entrenamientos o inferencias completas para validar un simple cambio
 de ubicación si las verificaciones de rutas y los tests cubren ese cambio.
 La entrega debe indicar ubicaciones finales, respaldo/manifiesto, validación,
 estado de Git y cualquier trabajo que falte.
+
+El dataset histórico de 20JLL (`legacy_repo`, 40 canales, julio 2017–abril 2018)
+fue eliminado el 10/10/2026 por solicitud del usuario, junto con el alias
+`dataset` y sus dos predicciones/figura exclusivas archivadas. No recrearlo como
+fallback. Las máscaras compartidas y los demás datasets que contienen ese tile
+se conservan; consultar el manifiesto de eliminación en `docs/historico/migraciones/`.
+
+## Documentación
+
+Usar `docs/README.md` como índice. Mantener procedimientos actuales en `guias/`,
+definiciones en `referencias/` y relatos fechados/manifiestos en `historico/`.
+No incorporar PID, estados transitorios o autorizaciones de una corrida a una
+guía vigente. Actualizar la página existente y contrastarla con código/config
+antes de crear otra. Las rutas y splits históricos no son instrucciones actuales.

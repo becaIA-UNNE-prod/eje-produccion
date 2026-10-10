@@ -1,3 +1,9 @@
+> Registro histórico consolidado el 10/10/2026. Los estados, PID, comandos y splits describen su fecha original; no son instrucciones vigentes. Leer las guías en `../guias/`.
+
+# Registro de experimentos, 6–10/10/2026
+
+## Multicampaña, 6–9 de octubre
+
 > TEST vigente desde 10/10/2026: 20HNJ y 20HNH. El entrenador y la inferencia cargan config/split_extension_este.json; la evaluacion principal excluye TRAIN/VAL. Las referencias anteriores a 20HLK/20HLJ corresponden al split historico. Ver README_TEST_ACTUAL.md.
 
 # Entrenamiento multicampana: Cordoba
@@ -372,3 +378,215 @@ INTA, no exactitud contra muestras de campo independientes. Se generan mapas,
 comparaciones visuales, matrices y evaluacion_temporal.json.
 
 Salida: `/mnt/yacy_3/prod_bis/ferreyra/evaluacion_ano_no_visto_2021_2022_20261009T101637`.
+
+
+---
+
+## Descarga de la extensión este, 9 de octubre
+
+# Descarga de la extensión este
+
+Iniciada el 9 de octubre de 2026, a las 15:26 (Argentina), en floryacy.
+
+Se incorporan los tiles **20HNJ y 20HNH**, entre 20HNK y 20HNG, para cubrir la franja faltante del este de Córdoba y sur de Santa Fe. Su existencia y ubicación se comprobaron en el catálogo Sentinel-2 Earth Search.
+
+Campañas: **2018/2019, 2019/2020, 2020/2021 y 2021/2022**, todas de diciembre a mayo. Son 48 combinaciones tile-mes.
+
+Los tiles antiguos encontrados anteriormente se descartan como candidatos a este cambio. No se borraron archivos históricos. El split actual y los modelos existentes no se modificaron: primero se descargan los datos nuevos.
+
+## Ubicación y ejecución
+
+- Datos: `/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/sentinel2_AAAA_AAAA`.
+- Logs: `/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/logs_20261009T152638`.
+- Metadatos: `/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/ultima_descarga.json`.
+- Supervisor inicial: PID **17785**.
+- Script remoto: `~/cordoba_ia_unne/src/descargar_extension_este.sh`, preparado con `git add`; sin commit.
+
+Se inició mediante nohup, entrada `/dev/null`, salida a archivo y sesión separada. Continúa aunque se cierre la terminal o SSH. El comando equivalente desde el proyecto es:
+
+```bash
+nohup env OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 bash src/descargar_extension_este.sh /mnt/yacy_1/prod/ferreyra/extension_este_multicampana/logs_20261009T152638 > /mnt/yacy_1/prod/ferreyra/extension_este_multicampana/logs_20261009T152638/descarga.log 2>&1 < /dev/null &
+```
+
+No volver a ejecutar ese comando mientras siga activa la descarga. El script tiene un lock que evita duplicarla.
+
+## Flujo
+
+Para cada campaña, secuencialmente:
+
+1. Buscar escenas Sentinel-2 L2A de ambos tiles en diciembre–mayo.
+2. Descargar SCL de las escenas candidatas y verificar apertura y una ventana de lectura.
+3. Seleccionar escenas por cobertura despejada, con el criterio SCL ya usado en el proyecto.
+4. Comprobar que estén presentes los 12 tile-mes de esa campaña.
+5. Descargar B02, B03, B04 y B08 de las escenas seleccionadas, con seis descargas simultáneas y reintentos por archivo.
+6. Verificar apertura y ventana 64×64 de cada archivo seleccionado; guardar `descarga_verificada.json`.
+
+Esta verificación no es una auditoría exhaustiva de cada bloque TIFF. Se deja una reserva mínima de 100 GiB al iniciar cada campaña. Se utiliza yacy_1, con aproximadamente 1,2 TB libres al iniciar, para evitar agotar yacy_3.
+
+Si una campaña falla, queda registrado y se intentan las restantes. El supervisor termina con código distinto de cero si alguna falló. Una nueva ejecución reutiliza archivos descargados y las selecciones guardadas.
+
+No se generan aún máscaras, datasets ni inferencias; tampoco se cambia TEST. Eso corresponde al siguiente paso, después de verificar la descarga.
+
+## Cómo seguir el avance
+
+Desde esta computadora:
+
+```bash
+ssh floryacy 'tail -f /mnt/yacy_1/prod/ferreyra/extension_este_multicampana/logs_20261009T152638/2018_2019.log'
+```
+
+Los otros logs son `2019_2020.log`, `2020_2021.log` y `2021_2022.log`. `descarga.log` contiene el resumen de campañas. Cada campaña tiene un `.exitcode`; el cierre global queda en `descarga.exitcode` y `fin.txt`. Código 0 significa éxito.
+
+## Cierre verificado
+
+La descarga terminó correctamente el **09/10/2026 a las 17:44:23** (Argentina), con código global 0 y código 0 en las cuatro campañas. No quedaron procesos activos de descarga en la revisión posterior.
+
+| Campaña | Escenas seleccionadas | Espacio incluyendo SCL candidatas |
+|---|---:|---:|
+| 2018/2019 | 43 | 28.2 GiB |
+| 2019/2020 | 27 | 17.0 GiB |
+| 2020/2021 | 29 | 18.4 GiB |
+| 2021/2022 | 31 | 19.2 GiB |
+
+Están las 48 combinaciones tile-mes; no hay archivos seleccionados faltantes ni descargas `.part` pendientes. La verificación realizada es apertura y ventana 64×64, no lectura exhaustiva de todos los bloques.
+
+Pendientes para usar estos tiles como TEST: componer las 48 imágenes mensuales, auditar íntegramente los compuestos, generar/verificar las máscaras INTA de cada campaña y preparar la evaluación espacial con un split documentado. Los tiles 20HNJ y 20HNH todavía no están asignados a TRAIN, VAL ni TEST. No se inició preparación adicional ni se cambió el split durante esta revisión.
+
+
+---
+
+## Preparación y recuperación de la extensión este
+
+# Nuevo TEST: extensión este
+
+Preparación y evaluación iniciadas con `nohup ... &` el 09/10/2026 a las 19:22 (Argentina), en floryacy. Supervisor inicial PID 19987; continúa al cerrar terminal o SSH.
+
+## Alcance
+
+- Tiles nuevos: **20HNJ y 20HNH**.
+- Cuatro campañas: **2018/2019, 2019/2020, 2020/2021 y 2021/2022**.
+- Ventana fija: diciembre a mayo, cuatro bandas B02/B03/B04/B08, 24 canales, 10 m.
+- U-Net multicampaña congelada, mejor checkpoint de VAL (época 60). Se copia el checkpoint al directorio del experimento y se verifica su SHA256 antes de inferir.
+- Se guarda una configuración separada `config/split_extension_este.json`: TRAIN y VAL originales; TEST nuevo con ambos tiles; TEST anterior fuera de ese split. No se modifica la configuración de la corrida anterior ni sus métricas.
+
+## Etapas en ejecución
+
+1. Leer **todos los bloques y bandas** de los TIFF seleccionados descargados. Si hay corrupción, detener y reportar el archivo.
+2. Generar **48 compuestos mensuales SCL**, dos workers. Directorios `composites_AAAA_AAAA_scl` dentro de la extensión este.
+3. Auditar íntegramente esos compuestos y comprobar que cada grupo mensual comparte grilla.
+4. Reproyectar por vecino más cercano el mapa INTA de cada campaña y verificar estrictamente los códigos. Código 20 se ignora exclusivamente para 2020/2021, según la excepción autorizada previamente. No se aplica esa excepción a 2021/2022.
+5. Guardar **16 máscaras de clases** (dos criterios × dos tiles × cuatro campañas) y leer todos sus bloques.
+6. Esperar el lock de inferencia GPU; ejecutar **ocho mapas** con la U-Net congelada, sin reentrenar ni ajustar con este TEST.
+7. Guardar figuras de comparación, errores y exclusión, matrices de confusión, métricas por tile y agregadas por campaña, y resumen CSV.
+
+No se generan arrays X/Y de parches: para la evaluación de mapas completos no hacen falta y ocuparían espacio adicional.
+
+## Tratamiento del solapamiento espacial
+
+Se publican dos resultados sobre las mismas predicciones:
+
+- **Completa:** todos los píxeles con referencia INTA remapeada >0 del tile.
+- **Independiente:** excluye píxeles que intersectan las grillas completas de cualquier tile TRAIN o VAL de las tres campañas originales. La rasterización usa `all_touched=True` para excluir también los píxeles tocados por el borde.
+
+La exclusión es conservadora: puede excluir píxeles de grillas TRAIN/VAL que no llegaron a aportar un parche. Evita puntuar áreas ya incluidas geográficamente en los conjuntos anteriores. NoData se ignora como referencia; predecir 0 en una referencia válida cuenta como error. El contexto de una inferencia convolucional puede cruzar el borde de la máscara; no se afirma aislamiento de todo el contexto visual.
+
+2021/2022 constituye una prueba temporal y espacial; las otras tres campañas son zonas nuevas en años ya usados para entrenar. La referencia es un mapa clasificado de INTA, no observaciones independientes de campo. Los nuevos compuestos 2019/2020 usan SCL, a diferencia del preprocesamiento original de esa campaña: comparar con las métricas antiguas mezcla diferencias de territorio y preparación.
+
+## Rutas y logs
+
+Base remota:
+`/mnt/yacy_1/prod/ferreyra/extension_este_multicampana`
+
+Resultados de esta ejecución:
+`/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/evaluacion_20261009T192204`
+
+Desde esta computadora:
+
+```bash
+ssh floryacy 'tail -f /mnt/yacy_1/prod/ferreyra/extension_este_multicampana/ultima_preparacion.log'
+```
+
+Metadatos del supervisor: `ultima_preparacion.json`. El resultado final se registra en `preparacion.exitcode` (0 = éxito) y `fin.txt`. Durante inferencia, `progreso.json` indica campaña, tile y tarea. Antes de inferencia, el avance se sigue en el log.
+
+## Verificación del código
+
+Pasaron tres pruebas nuevas: excepción del código 20 exclusiva de 2021, NoData y predicción 0 como error, y exclusión parcial por solapamiento. También pasaron las cuatro pruebas existentes del postprocesado. Se verificaron sintaxis de Python y Bash, compatibilidad real del checkpoint con `SimpleUNet(24,5)`, y coincidencia del split original guardado con el usado para excluir áreas.
+
+Scripts remotos: `src/preparar_extension_este.sh`, `src/preparar_evaluar_extension.py`, `test/test_extension_este.py`. Cambios preparados con git add, sin commit.
+
+## Recuperación tras error de etiquetas
+
+La primera ejecución se detuvo después de auditar correctamente los 650 TIFF seleccionados y los 48 compuestos, al detectar el código 0 en MNC verano 2020. Se comprobó que proviene del raster oficial original: MD5 `e5a7b99560a9a9aa37712c69250a3541`, coincidente con Zenodo (registro 8286310). Afecta 183 píxeles del tile 20HNJ y 1.691 del 20HNH tras reproyección. El remapeo del dataset original ya excluía el código 0 como NoData; se corrige el validador de este nuevo flujo para conservar ese criterio exclusivamente en 2019/2020. En 2018/2019 el código 0 sigue siendo Maíz. En 2020/2021 y 2021/2022 no se admite silenciosamente código 0. Nueva prueba de regresión pasada.
+
+También se detectaron advertencias de calidad: 20HNJ marzo de 2019 tenía 93,7 % despejado (resto relleno de menor azul), y 20HNH marzo de 2021 tenía 98,6 % con datos. No son errores de integridad. La recuperación amplía las escenas de esos dos meses con todas las candidatas ya catalogadas y SCL disponibles, descarga las bandas faltantes, audita completamente y recompone. Solo promueve el compuesto nuevo si no disminuye cobertura ni porcentaje despejado; preserva el anterior como respaldo.
+
+La recuperación corre nuevamente con nohup y &. Reutiliza los compuestos y las auditorías vigentes, y conserva los archivos de salida del fallo con sufijo `.fallo_labels_FECHA`. Los mensajes antiguos del error permanecen en el log como evidencia; la nueva sección comienza con `RECUPERACION`.
+
+## Cierre confirmado el 10/10/2026
+
+La recuperación y evaluación finalizaron el **09/10/2026 a las 20:34:27** (Argentina), código de salida 0. Se completaron ocho inferencias, 48 compuestos auditados y 16 máscaras auditadas. Los resultados se copiaron a `resultados_nuevo_test_extension_este/`, con 17 figuras PNG, JSON de métricas y CSV. No quedaron procesos de esta preparación activos.
+
+Las mejoras logradas fueron: 20HNH marzo de 2021 pasó de 98,56 % a 100 % de cobertura con datos; 20HNJ marzo de 2019 pasó de 93,71 % a 93,88 % despejado y mantuvo 100 % con datos. Este último aún contiene aproximadamente 6,12 % rellenado por el criterio de menor azul y se conserva como limitación de calidad; no es corrupción del TIFF.
+
+La configuración del nuevo TEST permanece separada del entrenador original. No se inició un nuevo entrenamiento.
+
+La ruta de copia anterior es histórica. Para localizar la preparación remota actual,
+consultar `preparacion_base` en [la configuración vigente](../../config/split_extension_este.json).
+
+
+---
+
+## Integración y comparación del TEST, 10 de octubre
+
+# TEST vigente integrado
+
+Desde el 10/10/2026, los flujos relevantes de diciembre–mayo usan **20HNJ y 20HNH** como TEST, con criterio principal **fuera de las grillas completas de TRAIN y VAL**. Se conservan también las métricas de los tiles completos.
+
+## Configuración y entrenamiento
+
+La fuente de configuración es `config/split_extension_este.json` en floryacy. TRAIN y VAL conservan los tiles del experimento original. 20HLK y 20HLJ dejan de participar en el TEST vigente; sus resultados previos quedan como históricos.
+
+`src/1_train_cordoba.py` carga esta configuración por defecto en modo multicampaña y en las corridas de diciembre–mayo con `--sin-2017`. Solo carga arrays de TRAIN y VAL; el TEST se evalúa como mapas completos al finalizar, con el mejor checkpoint de VAL. Antes de entrenar comprueba que la preparación del TEST corresponda a TRAIN y VAL actuales. Si cambian esas particiones, exige regenerar las exclusiones.
+
+Las métricas de VAL por parches permanecen en `metricas_multicampana.json`. Las métricas e imágenes de TEST vigente quedan en `evaluacion_test_actual/`, más `test_actual.json` en el directorio del experimento. No se mezclan métricas de parches de 256 con métricas de mapas inferidos en bloques de 512.
+
+`--split-config` permite elegir la configuración; `--test-historico` reproduce el TEST antiguo de parches. Las ventanas distintas de diciembre–mayo mantienen el flujo histórico, y el TEST nuevo requiere 24 canales.
+
+## Inferencia y comparación de modelos existentes
+
+`src/postprocesar_multicampana.py` y el wrapper `src/inferencia_multicampana.sh` ahora usan el evaluador de TEST vigente por defecto. Para reproducir la inferencia antigua debe usarse `--historico` en el script Python.
+
+Se lanzó con nohup y & la comparación de:
+
+- U-Net multicampaña, entrenada con 2018/2019, 2019/2020 y 2020/2021.
+- U-Net 2019/2020.
+- FCRTransUNet 2019/2020.
+
+Son **24 mapas** (tres modelos × dos tiles × cuatro campañas). Se reutilizan las predicciones multicampaña existentes únicamente si coinciden SHA256 de pesos y firmas de las seis entradas. Las demás se generan con checkpoints congelados nuevos dentro del reporte. No se reentrena ni se seleccionan pesos usando TEST.
+
+Cada modelo recibe los mismos compuestos mensuales y se evalúa con exactamente las mismas máscaras. Se crean imágenes individuales, comparaciones por tile, matrices de confusión, curvas históricas (con advertencia de distintos VAL), métricas JSON y resumen CSV. Al finalizar cada experimento recibe un `test_actual.json` que referencia esta comparación y sus métricas.
+
+La comparación mezcla arquitecturas y años de entrenamiento; no aísla solamente el efecto arquitectónico. 2021/2022 es un año nuevo para los tres modelos; en los otros años la exposición temporal depende del modelo. La referencia es INTA, no verdad de campo independiente. Permanece la advertencia de marzo de 2019 con ~6,12 % de relleno de menor azul.
+
+## Ejecución y resultados
+
+Inicio: 10/10/2026 09:24 (Argentina). Supervisor inicial PID 29188.
+
+Resultados remotos:
+`/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436`
+
+Log desde esta computadora:
+
+```bash
+ssh floryacy 'tail -f /mnt/yacy_1/prod/ferreyra/extension_este_multicampana/ultima_comparacion_test_actual.log'
+```
+
+Copia local automática de figuras y métricas: [reporte del TEST vigente](../../artifacts/reports/test_actual/). Los TIFF y pesos quedan en floryacy por tamaño.
+
+El cierre se registra en `inferencia.exitcode`; la actualización final de títulos y leyendas se registra en `figuras.exitcode`. Ambos deben valer 0 antes de la copia local. `progreso.json` muestra el mapa que se está procesando.
+
+## Validación y Git
+
+Pasaron tres pruebas nuevas de configuración, disjunción de particiones, rechazo de exclusiones obsoletas y ejecución real de `--verificar-datos` sin arrays de TEST; cuatro pruebas de etiquetas/exclusión, cuatro de inferencia y tres de cachés/checkpoints. Se acreditó la compatibilidad real de los tres checkpoints y se inspeccionó una figura generada.
+
+Cambios preparados con git add, sin commit. Los resultados históricos y los pesos originales se conservan.

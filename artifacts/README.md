@@ -29,9 +29,11 @@ imagen o una métrica antigua en un resultado del TEST vigente: consultar protoc
 campañas, split y criterio de evaluación antes de comparar.
 
 La reorganización y sus SHA256 se registran en
-[el manifiesto](../docs/migrations/reorganizacion_20261010.json).
-Para revertir movimientos, usar los pares origen/destino del manifiesto y el
-respaldo indicado allí; preservar cualquier cambio posterior a la migración.
+[el manifiesto](../docs/historico/migraciones/reorganizacion_20261010.json).
+Para revisar movimientos, interpretar el manifiesto junto al registro de
+[mantenimiento](../docs/historico/mantenimiento_20261010.md): algunos destinos
+fueron eliminados después por solicitud del usuario. No intentar revertirlos
+sin comprobar el estado actual y el alcance de los respaldos.
 
 ## Almacenamiento físico
 
@@ -40,5 +42,5 @@ respaldo indicado allí; preservar cualquier cambio posterior a la migración.
 - Datos compartidos: `/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/`.
 - Respaldos: `/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/backups/`.
 
-Ver [traslado a discos](../docs/migrations/almacenamiento_discos_20261010.json)
+Ver [traslado a discos](../docs/historico/migraciones/almacenamiento_discos_20261010.json)
 y [CONTRIBUTING](../CONTRIBUTING.md).

@@ -1,7 +1,7 @@
 """
 Entrenamiento de clasificacion de cultivos de verano sobre Cordoba completa.
 Dataset: composites Sentinel-2 2019-2020 + etiquetas MNC INTA verano 2020,
-esquema de 5 clases (sin Sorgo -- ver docs/README_MNC.md: es una clase de una
+esquema de 5 clases (sin Sorgo -- ver docs/referencias/leyenda_mnc.md: es una clase de una
 sola zona y el propio informe INTA reporta baja exactitud ahi).
 
 Los datos ya tienen el remapeo a 5 clases aplicado, por eso NO se vuelve a
