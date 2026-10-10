@@ -10,7 +10,7 @@ import rasterio
 from rasterio.transform import from_origin
 import torch
 
-ROOT=Path(__file__).resolve().parents[1]
+ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT))
 spec=importlib.util.spec_from_file_location('post',ROOT/'src/postprocesar_multicampana.py')
 post=importlib.util.module_from_spec(spec); spec.loader.exec_module(post)

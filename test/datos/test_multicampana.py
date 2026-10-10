@@ -11,7 +11,7 @@ import torch
 import rasterio
 from rasterio.transform import from_origin
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 from utils.multicampana import (SPLIT, normalizar_campanas, validar_campanas,
                                 cargar_campanas, pesos_desde_conteos, metricas_confusion)

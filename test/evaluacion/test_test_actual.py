@@ -1,7 +1,7 @@
 import unittest,json,tempfile,sys,subprocess
 from pathlib import Path
 import numpy as np
-ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
+ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT))
 from utils.test_actual import cargar_config,preflight,CONFIG
 class TestActualTests(unittest.TestCase):
  def test_split_activo_y_no_mezcla_particiones(self):

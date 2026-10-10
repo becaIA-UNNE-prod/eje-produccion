@@ -7,7 +7,7 @@ from pathlib import Path
 from unittest.mock import patch
 import numpy as np
 from torch.utils.data import ConcatDataset, DataLoader
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from utils.tile_dataset import TileDatasetMmap
 from utils.lectura_bloques import MezclaBloques, precargar
 

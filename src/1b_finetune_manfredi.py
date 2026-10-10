@@ -22,7 +22,7 @@ RUTA_CHECKPOINT_BASE = f"{BASE_DIR}/exp_cordoba_f16/best_model.pth"
 DIR_TRAIN      = f"{BASE_DIR}/train_cordoba_f16"
 DATASET_PREFIX = "dataset_"
 
-# Completar con el resultado de src/buscar_tile_por_coordenada.py
+# Completar con el resultado de scripts/diagnostico/buscar_tile_por_coordenada.py
 TILE_MANFREDI = "20HMK"
 
 DIR_EXP = f"{BASE_DIR}/exp_manfredi_ft"

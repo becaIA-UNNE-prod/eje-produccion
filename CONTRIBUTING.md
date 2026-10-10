@@ -193,3 +193,11 @@ definiciones en `referencias/` y relatos fechados/manifiestos en `historico/`.
 No incorporar PID, estados transitorios o autorizaciones de una corrida a una
 guía vigente. Actualizar la página existente y contrastarla con código/config
 antes de crear otra. Las rutas y splits históricos no son instrucciones actuales.
+
+## Pruebas y diagnóstico
+
+`test/` contiene pruebas agrupadas en datos, entrenamiento, evaluación e
+infraestructura; consultar `test/README.md`. Los comandos de descubrimiento
+por nombre siguen funcionando recursivamente. Las utilidades manuales están
+en `scripts/diagnostico/`, con rutas/coordenadas explícitas. No incorporar
+lecturas de datos reales como efecto lateral de importar una prueba.

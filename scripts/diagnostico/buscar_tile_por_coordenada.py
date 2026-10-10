@@ -1,13 +1,9 @@
-import os
+"""Busca tiles cuya huella contiene un punto; no comprueba cobertura válida."""
+import argparse
 import rasterio
 from rasterio.warp import transform as warp_transform
 from pathlib import Path
 
-# Coordenadas de Manfredi (EEA INTA): 31°49'S 63°36'O
-LAT = -(31 + 49 / 60)
-LON = -(63 + 36 / 60)
-
-DIR_COMPOSITES = "/mnt/yacy_1/prod/ferreyra/cordoba_dataset_filtrado/composites_filtrado"
 
 
 def punto_en_raster(ruta_tif, lon, lat):
@@ -55,11 +51,21 @@ def buscar_tile(lat, lon, dir_composites):
     return encontrados
 
 
-if __name__ == "__main__":
-    encontrados = buscar_tile(LAT, LON, DIR_COMPOSITES)
-    print()
-    if encontrados:
-        print(f"El punto está dentro de: {', '.join(encontrados)}")
-    else:
-        print("El punto no está dentro de ningún tile revisado.")
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--lat', type=float, required=True)
+    parser.add_argument('--lon', type=float, required=True)
+    parser.add_argument('--dir-composites', type=Path, required=True)
+    args = parser.parse_args()
+    if not -90 <= args.lat <= 90 or not -180 <= args.lon <= 180:
+        parser.error('Coordenadas fuera de rango')
+    try:
+        encontrados = buscar_tile(args.lat, args.lon, args.dir_composites)
+    except FileNotFoundError as exc:
+        parser.error(str(exc))
+    print("El punto está dentro de: " + ', '.join(encontrados) if encontrados
+          else "El punto no está dentro de ningún tile revisado.")
 
+
+if __name__ == '__main__':
+    main()

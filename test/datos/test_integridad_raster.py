@@ -6,7 +6,7 @@ import unittest
 import numpy as np
 import rasterio
 from rasterio.transform import from_origin
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 from utils.integridad_raster import verificar_raster, auditar_rasters
 

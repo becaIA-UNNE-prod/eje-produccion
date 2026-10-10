@@ -4,7 +4,7 @@ import numpy as np
 import rasterio
 from rasterio.transform import from_origin
 from rasterio.features import rasterize
-sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'src'))
+sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'src'))
 from preparar_evaluar_extension import legend,check_codes,confusion
 class ExtensionTests(unittest.TestCase):
  def test_codigo20_exclusivo_2021(self):

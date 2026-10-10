@@ -10,7 +10,7 @@ import unittest
 from pathlib import Path
 import numpy as np
 import torch
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 from utils.cache_lectura import firma, cargar_cache
 from utils.multicampana import validar_dataset, cargar_campanas
