@@ -5,7 +5,7 @@ Mantener separados codigos crudos MNC y clases ya remapeadas del TEST.
 """
 import numpy as np
 import rasterio
-from utils.leyendas_mnc import verificar_codigos
+from src.datos.leyendas import verificar_codigos
 
 
 def metricas_confusion(cm):

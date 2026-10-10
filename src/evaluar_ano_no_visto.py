@@ -13,6 +13,7 @@ ROOT=Path(__file__).resolve().parents[1]; sys.path.insert(0,str(ROOT))
 sys.path.insert(0,str(ROOT/'src'))
 import postprocesar_multicampana as post
 from src.inferencia.raster import inferir_tile
+from src.figuras.comunes import matriz_fig
 from src.evaluacion.metricas import metricas_confusion, confusion_mnc
 from utils.integridad_raster import auditar_rasters
 
@@ -81,7 +82,7 @@ def main():
             selected=[r for r in records if r['modelo']==name and (role=='todos' or r['rol_espacial']==role)]
             cm=sum((np.array(r['confusion'],dtype=np.int64) for r in selected),np.zeros((5,5),dtype=np.int64))
             groups.append({'modelo':name,'grupo_espacial':role,**metricas_confusion(cm)})
-            post.matriz_fig(cm,f'Anio nunca visto: 2021/2022 | {models[name]["nombre"]} | {role}',out/'figuras'/f'confusion_{name}_{role}.png')
+            matriz_fig(cm,f'Anio nunca visto: 2021/2022 | {models[name]["nombre"]} | {role}',out/'figuras'/f'confusion_{name}_{role}.png')
     post.guardar(out/'evaluacion_temporal.json',{'campana':'2021_2022','modelo_congelado':True,'sin_ajustes':True,'grupos':groups,'tiles':records})
     fig,axes=plt.subplots(1,2,figsize=(12,5)); labels=[m['nombre'] for m in models.values()]
     for ax,metric in zip(axes,['accuracy','f1_macro']):

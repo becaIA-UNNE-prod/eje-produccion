@@ -13,6 +13,8 @@ ROOT=Path(__file__).resolve().parents[1];sys.path[:0]=[str(ROOT),str(ROOT/'src')
 import preparar_evaluar_extension as ext
 import postprocesar_multicampana as post
 from src.inferencia.raster import inferir_tile
+from src.figuras.comunes import matriz_fig, curvas
+from src.figuras.test_actual import figura_extension, comparar_modelos
 from src.evaluacion.metricas import metricas_confusion, confusion_remapeada
 from utils.test_actual import CONFIG,cargar_config,preflight
 from utils.integridad_raster import auditar_rasters,firma
@@ -21,20 +23,9 @@ from model import TransUNet,UTAE
 def constructor(name):
  return {'unet':post.SimpleUNet,'fcrtransunet':post.FCRTransUNet,'transunet':TransUNet,'utae':lambda c,n:UTAE(c,n,T=c//4)}[name]
 
+
 def comparison(out,year,tile,models,maskbase):
- size=(1024,1024)
- with rasterio.open(ext.files(year,tile)[2]) as src:rgb=src.read([3,2,1],out_shape=(3,*size)).astype(np.float32).transpose(1,2,0)
- for c in range(3):
-  valid=rgb[:,:,c][rgb[:,:,c]>0];lo,hi=np.percentile(valid,[2,98]) if valid.size else (0,1);rgb[:,:,c]=np.clip((rgb[:,:,c]-lo)/max(hi-lo,1),0,1)
- with rasterio.open(maskbase/'mascaras'/f'{year}_{tile}_independiente.tif') as src:target=src.read(1,out_shape=size,resampling=Resampling.nearest)
- panels=[('RGB febrero',rgb),('INTA fuera de TRAIN/VAL',post.COLORS[target])]
- for name,record in models.items():
-  with rasterio.open(out/'modelos'/name/'predicciones'/year/f'prediccion_{tile}.tif') as src:p=src.read(1,out_shape=size,resampling=Resampling.nearest)
-  panels.append((record['nombre'],post.COLORS[p]))
- fig,axes=plt.subplots(2,3,figsize=(17,11))
- for ax,(title,array) in zip(axes.ravel(),panels):ax.imshow(array);ax.set_title(title);ax.axis('off')
- for ax in axes.ravel()[len(panels):]:ax.axis('off')
- fig.suptitle(f'TEST actual · {tile} · {year.replace("_","/")}');fig.tight_layout();fig.savefig(out/'figuras'/f'comparacion_modelos_{year}_{tile}.png',dpi=140);plt.close(fig)
+ return comparar_modelos(out,year,tile,models,maskbase,ext.files(year,tile)[2])
 
 def main():
  p=argparse.ArgumentParser(description=__doc__);p.add_argument('--exp',type=Path,required=True);p.add_argument('--salida',type=Path,required=True);p.add_argument('--split-config',type=Path,default=CONFIG);p.add_argument('--modelo',choices=['unet','fcrtransunet','transunet','utae'],default=None);p.add_argument('--sin-comparar',action='store_true');p.add_argument('--verificar',action='store_true');p.add_argument('--lock-adquirido',action='store_true');a=p.parse_args()
@@ -59,7 +50,7 @@ def main():
  print(f'PREFLIGHT TEST ACTUAL OK: {tiles}, {len(years)} campanas, {len(models)} modelos',flush=True)
  if a.verificar:return
  out.mkdir(parents=True,exist_ok=True);(out/'figuras').mkdir(exist_ok=True)
- if all((r['exp']/'historial.npy').exists() for r in models.values()):post.curvas(models,out/'figuras/curvas_comparadas.png')
+ if all((r['exp']/'historial.npy').exists() for r in models.values()):curvas(models,out/'figuras/curvas_comparadas.png')
  lock=None
  if not a.lock_adquirido:
   lock=open(ext.Y3/'logs_multicampana/inferencia.lock','w');fcntl.flock(lock,fcntl.LOCK_EX)
@@ -92,13 +83,13 @@ def main():
      inferir_tile(model,ext.files(year,tile),dest,device,tags=tags)
     for scope in ['completa','independiente']:
      metric=metricas_confusion(confusion_remapeada(dest,maskbase/'mascaras'/f'{year}_{tile}_{scope}.tif'));records.append({'modelo':name,'campana':year,'tile':tile,'criterio':scope,**metric})
-    post.guardar(out/'metricas_tiles.json',records);ext.figure(modelout,year,tile,dest,maskbase=maskbase,title=record['nombre'])
+    post.guardar(out/'metricas_tiles.json',records);figura_extension(modelout,year,tile,dest,ext.files(year,tile)[2],maskbase=maskbase,title=record['nombre'])
   del model;torch.cuda.empty_cache()
  groups=[]
  for name,record in models.items():
   for year in years:
    for scope in ['completa','independiente']:
-    cm=sum((np.array(r['confusion'],dtype=np.int64) for r in records if r['modelo']==name and r['campana']==year and r['criterio']==scope),np.zeros((5,5),dtype=np.int64));groups.append({'modelo':name,'campana':year,'criterio':scope,**metricas_confusion(cm)});post.matriz_fig(cm,f'{record["nombre"]} · {year} · {scope}',out/'figuras'/f'confusion_{name}_{year}_{scope}.png')
+    cm=sum((np.array(r['confusion'],dtype=np.int64) for r in records if r['modelo']==name and r['campana']==year and r['criterio']==scope),np.zeros((5,5),dtype=np.int64));groups.append({'modelo':name,'campana':year,'criterio':scope,**metricas_confusion(cm)});matriz_fig(cm,f'{record["nombre"]} · {year} · {scope}',out/'figuras'/f'confusion_{name}_{year}_{scope}.png')
  for year in years:
   for tile in tiles:comparison(out,year,tile,models,maskbase)
  result={'tiles':records,'grupos':groups,'split':cfg,'criterio_principal':'independiente','protocolo':protocol};post.guardar(out/'evaluacion_test_actual.json',result)

@@ -14,6 +14,9 @@ ROOT=Path(__file__).resolve().parents[1];sys.path[:0]=[str(ROOT),str(ROOT/'src')
 import postprocesar_multicampana as post
 from utils.integridad_raster import auditar_rasters,firma
 from utils.multicampana import SPLIT
+from src.datos.leyendas import legend, check_codes
+from src.figuras.comunes import matriz_fig
+from src.figuras.test_actual import figura_extension
 from src.inferencia.raster import inferir_tile
 from src.evaluacion.metricas import metricas_confusion, confusion_remapeada as confusion
 BASE=Path('/mnt/yacy_1/prod/ferreyra/extension_este_multicampana');Y3=Path('/mnt/yacy_3/prod_bis/ferreyra');MNC=Path('/mnt/yacy_1/prod/ferreyra/MNC_INTA')
@@ -22,17 +25,7 @@ SOURCES=dict(zip(YEARS,[MNC/'2018_2019/mnc_2018-2019_V1R1.tif',MNC/'mnc-verano-2
 def files(year,tile):
  months=[year[:4]+'12']+[year[5:]+f'{m:02}' for m in range(1,6)]
  return [BASE/f'composites_{year}_scl'/f'{tile}_{m}_median.tif' for m in months]
-def legend(year):
- if year=='2021_2022':
-  cfg=json.loads((ROOT/'config/leyenda_mnc_2021_2022.json').read_text());return np.array(cfg['remap'],dtype=np.uint8),set(cfg['codigos_documentados'])|{255},255
- lut=post.LEGENDS[year][0].astype(np.uint8)
- if year=='2018_2019':return lut,{0,1,2,3,4,5,6,7,8,9,11,12,13,14,15,16},16
- if year=='2019_2020':return lut,{0}|set(range(10,20))|{21,22,255},255
- return lut,set(range(10,20))|{20,21,22,26,28,255},255
 
-def check_codes(codes,allowed):
- unknown=set(map(int,codes))-allowed
- if unknown:raise ValueError(f'Codigos sin leyenda: {sorted(unknown)}')
 def shapes(crs):
  result=[]
  for directory,month in [('composites_2018_2019_scl','201812'),('composites_dicmay_2019_2020','201912'),('composites_2020_2021_scl','202012')]:
@@ -77,23 +70,7 @@ def prepare(out):
 
 
 def figure(out,year,tile,pred,maskbase=None,title="U-Net multicampana"):
- maskbase=maskbase or out
- size=(1024,1024)
- with rasterio.open(files(year,tile)[2]) as src:rgb=src.read([3,2,1],out_shape=(3,*size)).astype(np.float32).transpose(1,2,0)
- for c in range(3):
-  vals=rgb[:,:,c][rgb[:,:,c]>0];lo,hi=np.percentile(vals,[2,98]) if vals.size else (0,1);rgb[:,:,c]=np.clip((rgb[:,:,c]-lo)/max(hi-lo,1),0,1)
- targets=[]
- for scope in ['completa','independiente']:
-  with rasterio.open(maskbase/'mascaras'/f'{year}_{tile}_{scope}.tif') as src:targets.append(src.read(1,out_shape=size,resampling=Resampling.nearest))
- with rasterio.open(pred) as src:p=src.read(1,out_shape=size,resampling=Resampling.nearest)
- err=np.full((*size,3),55,dtype=np.uint8);err[(targets[1]>0)&(p==targets[1])]=[0,180,0];err[(targets[1]>0)&(p!=targets[1])]=[220,0,0]
- panels=[('RGB febrero',rgb),('INTA completa',post.COLORS[targets[0]]),('INTA fuera de TRAIN/VAL',post.COLORS[targets[1]]),(title,post.COLORS[p]),('Error area independiente',err),('Solapamiento excluido (blanco)',((targets[0]>0)&(targets[1]==0)).astype(np.uint8)*255)]
- fig,axes=plt.subplots(2,3,figsize=(17,11))
- for ax,(panel_title,array) in zip(axes.ravel(),panels):ax.imshow(array,cmap='gray',vmin=0,vmax=255);ax.set_title(panel_title);ax.axis('off')
- fig.suptitle(f'{year.replace("_","/")} · {tile} · TEST vigente · {title}');
- from matplotlib.patches import Patch
- fig.legend(handles=[Patch(color=post.COLORS[i]/255,label=post.NAMES[i]) for i in range(5)],loc='lower center',ncol=5)
- fig.tight_layout(rect=(0,.04,1,.96));fig.savefig(out/'figuras'/f'comparacion_{year}_{tile}.png',dpi=140);plt.close(fig)
+ return figura_extension(out,year,tile,pred,files(year,tile)[2],maskbase,title)
 
 def evaluate(out):
  protocol=json.loads((out/'protocolo.json').read_text());weights=out/'modelo_congelado.pth'
@@ -115,7 +92,7 @@ def evaluate(out):
  groups=[]
  for year in YEARS:
   for scope in ['completa','independiente']:
-   cm=sum((np.array(r['confusion'],dtype=np.int64) for r in records if r['campana']==year and r['criterio']==scope),np.zeros((5,5),dtype=np.int64));groups.append({'campana':year,'criterio':scope,**metricas_confusion(cm)});post.matriz_fig(cm,f'Nuevo TEST {year} · {scope}',out/'figuras'/f'confusion_{year}_{scope}.png')
+   cm=sum((np.array(r['confusion'],dtype=np.int64) for r in records if r['campana']==year and r['criterio']==scope),np.zeros((5,5),dtype=np.int64));groups.append({'campana':year,'criterio':scope,**metricas_confusion(cm)});matriz_fig(cm,f'Nuevo TEST {year} · {scope}',out/'figuras'/f'confusion_{year}_{scope}.png')
  post.guardar(out/'evaluacion_nuevo_test.json',{'checkpoint_sha256':protocol['checkpoint_sha256'],'tiles':records,'grupos':groups,'nota':'2021/2022 es prueba temporal y espacial; otros anos entrenados en otras zonas. Independiente excluye TRAIN y VAL. Referencia INTA, no campo independiente.'})
  with (out/'metricas_resumen.csv').open('w',newline='') as f:
   fields=['campana','criterio','accuracy','f1_macro','miou','pixeles'];w=csv.DictWriter(f,fieldnames=fields);w.writeheader();w.writerows({k:r[k] for k in fields} for r in groups)

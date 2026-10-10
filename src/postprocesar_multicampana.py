@@ -26,20 +26,11 @@ from model import SimpleUNet, FCRTransUNet
 from utils.multicampana import SPLIT
 from src.inferencia.raster import normalizar, inferir_tile
 from src.evaluacion.metricas import metricas_confusion, confusion_mnc as evaluar
-from utils.leyendas_mnc import REMAP_2021
+from src.datos.leyendas import REMAP_1819, REMAP_2020, REMAP_2021, LEGENDS
+from src.figuras.comunes import NAMES, COLORS, matriz_fig, curvas
+from src.figuras.historico import figura_tile as _figura_tile
 
-NAMES = ['NoData','Fondo','Maiz','Soja','Mani']
-COLORS = np.array([[0,0,0],[70,130,180],[255,165,0],[0,100,0],[165,42,42]],dtype=np.uint8)
 YEARS = ['2018_2019','2019_2020','2020_2021']
-REMAP_1819 = np.zeros(256,dtype=np.uint8)
-REMAP_1819[[0,3]], REMAP_1819[[1,2]], REMAP_1819[4] = 2,3,4
-REMAP_1819[[5,6,7,8,9,11,12,13,14,15]] = 1
-REMAP_2020 = np.zeros(256,dtype=np.uint8)
-REMAP_2020[[10,11,16]] = [2,3,4]
-REMAP_2020[[12,13,14,15,17,18,19,21,22]] = 1
-LEGENDS = {'2018_2019':(REMAP_1819,'etiqueta_mnc1819_{}_10m.tif'),
-           '2019_2020':(REMAP_2020,'etiqueta_mnc_{}_10m.tif'),
-           '2020_2021':(REMAP_2021,'etiqueta_mnc2021_{}_10m.tif')}
 
 
 def guardar(path, value):
@@ -57,67 +48,8 @@ def sha256(path):
     return digest.hexdigest()
 
 
-def matriz_fig(cm,title,path):
-    norm = cm[1:,:]/np.maximum(cm[1:,:].sum(1,keepdims=True),1)
-    fig,ax = plt.subplots(figsize=(7,5))
-    im = ax.imshow(norm,vmin=0,vmax=1,cmap='Blues')
-    for i in range(4):
-        for j in range(5): ax.text(j,i,f'{norm[i,j]:.2f}',ha='center',va='center',color='white' if norm[i,j]>.5 else 'black')
-    ax.set_xticks(range(5),NAMES); ax.set_yticks(range(4),NAMES[1:])
-    ax.set_xlabel('Prediccion'); ax.set_ylabel('MNC'); ax.set_title(title,fontsize=10)
-    fig.colorbar(im,ax=ax); fig.tight_layout(); fig.savefig(path,dpi=160); plt.close(fig)
-
-
-def curvas(models,path):
-    fig,axes = plt.subplots(2,2,figsize=(14,10))
-    for name,record in models.items():
-        h = np.load(record['exp']/'historial.npy',allow_pickle=False)
-        for ax,col,title in zip(axes.ravel(),[1,3,2,4],['Train loss','Val loss','Train accuracy','Val accuracy']):
-            ax.plot(h[:,0],h[:,col],label=record['nombre']); ax.set_title(title)
-            ax.set_xlabel('Epoca'); ax.grid(alpha=.25); ax.legend(fontsize=8)
-    fig.suptitle('Curvas de entrenamientos: VAL multicampana y VAL 2019/2020 son conjuntos distintos',fontsize=11)
-    fig.tight_layout(); fig.savefig(path,dpi=160); plt.close(fig)
-
-
 def figura_tile(year,tile,campaign,models,out):
-    shape = (1024,1024)
-    remap,pattern = LEGENDS[year]
-    mask = ROOT/'mascaras_procesadas'/pattern.format(tile)
-    with rasterio.open(mask) as src:
-        scale = min(1,1024/max(src.shape))
-        shape = (max(1,round(src.height*scale)),max(1,round(src.width*scale)))
-        target = remap[src.read(1,out_shape=shape,resampling=Resampling.nearest)]
-    with rasterio.open(campaign['archivos'][tile][2]) as src:
-        rgb = src.read([3,2,1],out_shape=(3,*shape)).astype(np.float32).transpose(1,2,0)
-        for c in range(3):
-            values = rgb[:,:,c][rgb[:,:,c]>0]
-            lo,hi = np.percentile(values,[2,98]) if len(values) else (0,1)
-            rgb[:,:,c] = np.clip((rgb[:,:,c]-lo)/max(hi-lo,1),0,1)
-    panels = [('RGB febrero (contraste 2-98%)',rgb),('Referencia MNC',COLORS[target])]
-    multi = None
-    for name,record in models.items():
-        path = out/'predicciones'/name/year/f'prediccion_{tile}.tif'
-        if not path.exists(): continue
-        with rasterio.open(path) as src:
-            pred = src.read(1,out_shape=shape,resampling=Resampling.nearest)
-        panels.append((record['nombre'],COLORS[pred]))
-        if name=='multicampana': multi=pred
-    error = np.full((*shape,3),55,dtype=np.uint8)
-    error[(target>0)&(multi==target)]=[0,180,0]
-    error[(target>0)&(multi!=target)]=[220,0,0]
-    panels.append(('Error multicampana: verde acierto, rojo error',error))
-    cols=3; rows=(len(panels)+cols-1)//cols
-    fig,axes = plt.subplots(rows,cols,figsize=(17,5.5*rows))
-    for ax,(name,array) in zip(axes.ravel(),panels):
-        ax.imshow(array); ax.set_title(name,fontsize=10); ax.axis('off')
-    for ax in axes.ravel()[len(panels):]: ax.axis('off')
-    legend = [Patch(color=COLORS[i]/255,label=NAMES[i]) for i in range(5)]
-    fig.legend(handles=legend,loc='lower center',ncol=5)
-    fig.suptitle(f'{year.replace("_","/")} | {tile} | '+('TEST' if tile in SPLIT['test'] else 'VAL' if tile in SPLIT['val'] else 'TRAIN (descriptivo)'),fontsize=13)
-    fig.tight_layout(rect=(0,.04,1,.96))
-    destination = out/'figuras'/year/f'comparacion_{tile}.png'
-    destination.parent.mkdir(parents=True,exist_ok=True)
-    fig.savefig(destination,dpi=140); plt.close(fig)
+    return _figura_tile(year,tile,campaign,models,out,ROOT/'mascaras_procesadas',SPLIT)
 
 
 def resumen(records,models,out):

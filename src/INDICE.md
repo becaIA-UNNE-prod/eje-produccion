@@ -102,8 +102,9 @@ descartable. Algunos componentes siguen sirviendo para reproducir o preparar dat
 - [Métricas](evaluacion/README.md): matrices para etiquetas crudas o remapeadas y métricas comunes.
 
 Los evaluadores y el entrenador importan estos módulos directamente. Las rutas
-anteriores reexportan funciones para conservar compatibilidad. Las leyendas,
-figuras y coordinación de protocolos todavía permanecen en los scripts.
+anteriores reexportan funciones para conservar compatibilidad. Las [leyendas](datos/README.md) y las [figuras compartidas](figuras/README.md)
+también tienen módulos independientes. La coordinación y algunas gráficas
+de resumen específicas del protocolo todavía permanecen en los scripts.
 
 ## Dependencias que condicionan la reorganización
 
