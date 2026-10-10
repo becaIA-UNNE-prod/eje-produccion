@@ -1,3 +1,5 @@
+> TEST vigente desde 10/10/2026: 20HNJ y 20HNH. El entrenador y la inferencia cargan config/split_extension_este.json; la evaluacion principal excluye TRAIN/VAL. Las referencias anteriores a 20HLK/20HLJ corresponden al split historico. Ver README_TEST_ACTUAL.md.
+
 # Entrenamiento multicampana: Cordoba
 
 Proyecto: `floryacy:~/cordoba_ia_unne`. Datos: `/mnt/yacy_3/prod_bis/ferreyra`.

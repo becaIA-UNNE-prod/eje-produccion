@@ -54,3 +54,19 @@ Metadatos del supervisor: `ultima_preparacion.json`. El resultado final se regis
 Pasaron tres pruebas nuevas: excepción del código 20 exclusiva de 2021, NoData y predicción 0 como error, y exclusión parcial por solapamiento. También pasaron las cuatro pruebas existentes del postprocesado. Se verificaron sintaxis de Python y Bash, compatibilidad real del checkpoint con `SimpleUNet(24,5)`, y coincidencia del split original guardado con el usado para excluir áreas.
 
 Scripts remotos: `src/preparar_extension_este.sh`, `src/preparar_evaluar_extension.py`, `test/test_extension_este.py`. Cambios preparados con git add, sin commit.
+
+## Recuperación tras error de etiquetas
+
+La primera ejecución se detuvo después de auditar correctamente los 650 TIFF seleccionados y los 48 compuestos, al detectar el código 0 en MNC verano 2020. Se comprobó que proviene del raster oficial original: MD5 `e5a7b99560a9a9aa37712c69250a3541`, coincidente con Zenodo (registro 8286310). Afecta 183 píxeles del tile 20HNJ y 1.691 del 20HNH tras reproyección. El remapeo del dataset original ya excluía el código 0 como NoData; se corrige el validador de este nuevo flujo para conservar ese criterio exclusivamente en 2019/2020. En 2018/2019 el código 0 sigue siendo Maíz. En 2020/2021 y 2021/2022 no se admite silenciosamente código 0. Nueva prueba de regresión pasada.
+
+También se detectaron advertencias de calidad: 20HNJ marzo de 2019 tenía 93,7 % despejado (resto relleno de menor azul), y 20HNH marzo de 2021 tenía 98,6 % con datos. No son errores de integridad. La recuperación amplía las escenas de esos dos meses con todas las candidatas ya catalogadas y SCL disponibles, descarga las bandas faltantes, audita completamente y recompone. Solo promueve el compuesto nuevo si no disminuye cobertura ni porcentaje despejado; preserva el anterior como respaldo.
+
+La recuperación corre nuevamente con nohup y &. Reutiliza los compuestos y las auditorías vigentes, y conserva los archivos de salida del fallo con sufijo `.fallo_labels_FECHA`. Los mensajes antiguos del error permanecen en el log como evidencia; la nueva sección comienza con `RECUPERACION`.
+
+## Cierre confirmado el 10/10/2026
+
+La recuperación y evaluación finalizaron el **09/10/2026 a las 20:34:27** (Argentina), código de salida 0. Se completaron ocho inferencias, 48 compuestos auditados y 16 máscaras auditadas. Los resultados se copiaron a [resultados_nuevo_test_extension_este](resultados_nuevo_test_extension_este/), con 17 figuras PNG, JSON de métricas y CSV. No quedaron procesos de esta preparación activos.
+
+Las mejoras logradas fueron: 20HNH marzo de 2021 pasó de 98,56 % a 100 % de cobertura con datos; 20HNJ marzo de 2019 pasó de 93,71 % a 93,88 % despejado y mantuvo 100 % con datos. Este último aún contiene aproximadamente 6,12 % rellenado por el criterio de menor azul y se conserva como limitación de calidad; no es corrupción del TIFF.
+
+La configuración del nuevo TEST permanece separada del entrenador original. No se inició un nuevo entrenamiento.

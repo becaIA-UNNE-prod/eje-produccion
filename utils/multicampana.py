@@ -3,6 +3,8 @@ from pathlib import Path
 import re
 import numpy as np
 
+# SPLIT historico para preparar/reproducir datos antiguos.
+# El entrenador y evaluador vigentes cargan config/split_extension_este.json.
 SPLIT = {
     'train': ['19HGC', '20HLG', '20HLH', '20HMJ', '20HMK', '20HNK', '20JML',
               '20HKH', '20HMG', '20HNG', '20HPG', '20HPH', '20JNL'],

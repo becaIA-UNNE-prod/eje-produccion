@@ -333,4 +333,11 @@ def main():
     print('INFERENCIA Y FIGURAS FINALIZADAS',flush=True)
 
 
-if __name__=='__main__': main()
+if __name__=='__main__':
+    if '--historico' in sys.argv:
+        sys.argv.remove('--historico')
+        if '--lock-adquirido' in sys.argv: sys.argv.remove('--lock-adquirido')
+        main()
+    else:
+        from evaluar_test_actual import main as test_actual_main
+        test_actual_main()

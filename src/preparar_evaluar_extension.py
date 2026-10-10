@@ -25,7 +25,7 @@ def legend(year):
   cfg=json.loads((ROOT/'config/leyenda_mnc_2021_2022.json').read_text());return np.array(cfg['remap'],dtype=np.uint8),set(cfg['codigos_documentados'])|{255},255
  lut=post.LEGENDS[year][0].astype(np.uint8)
  if year=='2018_2019':return lut,{0,1,2,3,4,5,6,7,8,9,11,12,13,14,15,16},16
- if year=='2019_2020':return lut,set(range(10,20))|{21,22,255},255
+ if year=='2019_2020':return lut,{0}|set(range(10,20))|{21,22,255},255
  return lut,set(range(10,20))|{20,21,22,26,28,255},255
 
 def check_codes(codes,allowed):
@@ -67,7 +67,7 @@ def prepare(out):
     tags={'campana':year,'tile':tile,'fuente':str(SOURCES[year]),'fuente_firma':json.dumps(firma(SOURCES[year]))}
     write(out/'mascaras'/f'{year}_{tile}_completa.tif',target,ref,tags);target[excluded>0]=0
     write(out/'mascaras'/f'{year}_{tile}_independiente.tif',target,ref,{**tags,'exclusion':'grillas completas TRAIN y VAL; all_touched=True'})
-    records.append({'campana':year,'tile':tile,'codigos':{str(int(c)):int(n) for c,n in zip(codes,counts)},'pixeles_completos':full,'pixeles_independientes':strict,'excluidos':full-strict,'fuente_firma':firma(SOURCES[year])})
+    records.append({'campana':year,'tile':tile,'codigos':{str(int(c)):int(n) for c,n in zip(codes,counts)},'pixeles_completos':full,'pixeles_independientes':strict,'excluidos':full-strict,'codigos_ignorados_excepcionales':([0] if year=='2019_2020' else [20] if year=='2020_2021' else []),'fuente_firma':firma(SOURCES[year])})
     post.guardar(out/'labels_verificados.json',records);print(f'MASCARA {year} {tile}: {full} validos; {strict} independientes',flush=True)
  failures=auditar_rasters(list((out/'mascaras').glob('*.tif')),out/'integridad_mascaras.json',workers=2)
  if failures:raise ValueError(f'Mascaras corruptas: {failures}')
@@ -83,20 +83,24 @@ def confusion(pred,mask):
    valid=b>0;cm+=np.bincount(b[valid].astype(np.int64)*5+a[valid],minlength=25).reshape(5,5)
  return cm
 
-def figure(out,year,tile,pred):
+def figure(out,year,tile,pred,maskbase=None,title="U-Net multicampana"):
+ maskbase=maskbase or out
  size=(1024,1024)
  with rasterio.open(files(year,tile)[2]) as src:rgb=src.read([3,2,1],out_shape=(3,*size)).astype(np.float32).transpose(1,2,0)
  for c in range(3):
   vals=rgb[:,:,c][rgb[:,:,c]>0];lo,hi=np.percentile(vals,[2,98]) if vals.size else (0,1);rgb[:,:,c]=np.clip((rgb[:,:,c]-lo)/max(hi-lo,1),0,1)
  targets=[]
  for scope in ['completa','independiente']:
-  with rasterio.open(out/'mascaras'/f'{year}_{tile}_{scope}.tif') as src:targets.append(src.read(1,out_shape=size,resampling=Resampling.nearest))
+  with rasterio.open(maskbase/'mascaras'/f'{year}_{tile}_{scope}.tif') as src:targets.append(src.read(1,out_shape=size,resampling=Resampling.nearest))
  with rasterio.open(pred) as src:p=src.read(1,out_shape=size,resampling=Resampling.nearest)
  err=np.full((*size,3),55,dtype=np.uint8);err[(targets[1]>0)&(p==targets[1])]=[0,180,0];err[(targets[1]>0)&(p!=targets[1])]=[220,0,0]
- panels=[('RGB febrero',rgb),('INTA completa',post.COLORS[targets[0]]),('INTA fuera de TRAIN/VAL',post.COLORS[targets[1]]),('U-Net multicampana',post.COLORS[p]),('Error area independiente',err),('Solapamiento excluido (blanco)',((targets[0]>0)&(targets[1]==0)).astype(np.uint8)*255)]
+ panels=[('RGB febrero',rgb),('INTA completa',post.COLORS[targets[0]]),('INTA fuera de TRAIN/VAL',post.COLORS[targets[1]]),(title,post.COLORS[p]),('Error area independiente',err),('Solapamiento excluido (blanco)',((targets[0]>0)&(targets[1]==0)).astype(np.uint8)*255)]
  fig,axes=plt.subplots(2,3,figsize=(17,11))
- for ax,(title,array) in zip(axes.ravel(),panels):ax.imshow(array,cmap='gray',vmin=0,vmax=255);ax.set_title(title);ax.axis('off')
- fig.suptitle(f'{year.replace("_","/")} · {tile} · nuevo TEST · U-Net congelada');fig.tight_layout();fig.savefig(out/'figuras'/f'comparacion_{year}_{tile}.png',dpi=140);plt.close(fig)
+ for ax,(panel_title,array) in zip(axes.ravel(),panels):ax.imshow(array,cmap='gray',vmin=0,vmax=255);ax.set_title(panel_title);ax.axis('off')
+ fig.suptitle(f'{year.replace("_","/")} · {tile} · TEST vigente · {title}');
+ from matplotlib.patches import Patch
+ fig.legend(handles=[Patch(color=post.COLORS[i]/255,label=post.NAMES[i]) for i in range(5)],loc='lower center',ncol=5)
+ fig.tight_layout(rect=(0,.04,1,.96));fig.savefig(out/'figuras'/f'comparacion_{year}_{tile}.png',dpi=140);plt.close(fig)
 
 def evaluate(out):
  protocol=json.loads((out/'protocolo.json').read_text());weights=out/'modelo_congelado.pth'

@@ -55,6 +55,7 @@ dic-may con la campana 2017-2018 (Nivel3) sumada, ver pipeline_dicmay_1718.sh:
 import argparse
 import time
 import json
+import subprocess
 from pathlib import Path
 import os
 import sys
@@ -64,6 +65,7 @@ import torch.optim as optim
 from torch.utils.data import DataLoader, ConcatDataset
 
 sys.path.append(os.path.abspath("."))
+from utils.test_actual import CONFIG as CONFIG_TEST, cargar_config as cargar_config_test, preflight as preflight_test
 from utils.model import SimpleUNet, TransUNet, UTAE, FCRTransUNet
 from utils.lectura_bloques import MezclaBloques
 from utils.cache_lectura import cargar_cache
@@ -106,6 +108,8 @@ parser.add_argument('--init-pesos', type=Path, help='warm start: solo pesos, sin
 parser.add_argument('--reanudar', type=Path, help='checkpoint completo generado por esta version')
 parser.add_argument('--anticipar-pool', action='store_true', help='precargar siguiente pool durante computo; dos pools en RAM')
 parser.add_argument('--cache-lectura', type=Path, help='manifest de caches de TRAIN verificadas')
+parser.add_argument('--split-config', type=Path, default=CONFIG_TEST, help='Configuracion de TEST vigente (20HNJ/20HNH por defecto)')
+parser.add_argument('--test-historico', action='store_true', help='Reproducir evaluacion historica 20HLK/20HLJ de parches')
 ARGS = parser.parse_args()
 if (ARGS.anticipar_pool or ARGS.cache_lectura) and not ARGS.lectura_bloques:
     parser.error('--anticipar-pool/--cache-lectura requieren --lectura-bloques')
@@ -307,18 +311,26 @@ def entrenar():
     print(f"Dispositivo: {device}", flush=True)
 
     global PESOS
+    test_actual = not ARGS.test_historico and (bool(ARGS.campana) or (ARGS.dir_train is not None and 'dicmay' in ARGS.dir_train and ARGS.sin_2017))
+    config_test = cargar_config_test(ARGS.split_config) if test_actual else None
+    split_activo = {r: config_test[r] for r in ('train', 'val', 'test')} if test_actual else SPLIT
+    if test_actual:
+        preflight_test(config_test)
+        print(f'TEST vigente: {split_activo["test"]}; mapas completos fuera de TRAIN/VAL', flush=True)
+    split_datos = {r: split_activo[r] for r in ('train', 'val')} if test_actual else split_activo
     por_campana = None
     informe = None
     if ARGS.campana:
         cache_lectura = cargar_cache(ARGS.cache_lectura)
-        campanas, informe, conteos = validar_campanas(ARGS.campana, cache=cache_lectura)
+        campanas, informe, conteos = validar_campanas(ARGS.campana, split=split_datos, cache=cache_lectura)
         PESOS = ARGS.pesos if ARGS.pesos is not None else pesos_desde_conteos(conteos)
         print(f"Conteos TRAIN: {conteos.tolist()} | Pesos: {PESOS}", flush=True)
         if ARGS.verificar_datos:
             print("VERIFICACION OK; no se entreno ni se crearon salidas", flush=True)
             return
-        conjuntos, por_campana = cargar_campanas(campanas, cache=cache_lectura)
-        ds_train, ds_val, ds_test = (conjuntos[r] for r in ('train', 'val', 'test'))
+        conjuntos, por_campana = cargar_campanas(campanas, split=split_datos, cache=cache_lectura)
+        ds_train, ds_val = conjuntos['train'], conjuntos['val']
+        ds_test = conjuntos.get('test')
     else:
         ds_train = cargar_tiles(TILES_TRAIN, "TRAIN", augment=True)
         if ARGS.dir_train_extra:
@@ -330,12 +342,14 @@ def entrenar():
             if ds_train[0][0].shape != ds_extra[0][0].shape:
                 raise RuntimeError("Canales distintos entre --dir-train y --dir-train-extra")
         ds_val   = cargar_tiles(TILE_VAL,    "VAL")
-        ds_test  = cargar_tiles(TILES_TEST,  "TEST")
+        ds_test  = None if test_actual else cargar_tiles(TILES_TEST,  "TEST")
 
     os.makedirs(DIR_EXP, exist_ok=True)
     if informe is not None:
         guardar_json(Path(DIR_EXP) / 'config_multicampana.json', {
-            'campanas': informe, 'split': SPLIT, 'pesos': PESOS,
+            'campanas': informe, 'split': split_activo, 'pesos': PESOS,
+            'test_config': str(ARGS.split_config) if test_actual else None,
+            'test_criterio': 'mapas_independientes' if test_actual else 'parches_historicos',
             'conteos_train': conteos.tolist(), 'modelo': ARGS.modelo,
             'ventana': 'diciembre-mayo', 'bandas': ['B02', 'B03', 'B04', 'B08'],
             'canales': 24, 'seed': SEED,
@@ -359,10 +373,12 @@ def entrenar():
     # VAL/TEST son secuenciales: dos lectores bastan y no quedan persistentes.
     eval_kw = dict(batch_size=BATCH_SIZE, num_workers=min(2, ARGS.workers), pin_memory=True)
     val_loader = DataLoader(ds_val, shuffle=False, **eval_kw)
-    test_loader = DataLoader(ds_test, shuffle=False, **eval_kw)
+    test_loader = DataLoader(ds_test, shuffle=False, **eval_kw) if ds_test is not None else None
 
     IN_CH = ds_train[0][0].shape[0]
-    print(f"Canales de entrada: {IN_CH}", flush=True)
+    if test_actual and IN_CH != 24:
+        raise ValueError('TEST dic-may requiere 24 canales; seleccionar --test-historico para otra ventana')
+    print(f'Canales de entrada: {IN_CH}', flush=True)
     print(f"Modelo: {ARGS.modelo}", flush=True)
 
     if ARGS.modelo == "unet":
@@ -495,12 +511,13 @@ def entrenar():
 
     print("\n--- Evaluando en TEST con el mejor modelo ---", flush=True)
     model.load_state_dict(torch.load(f"{DIR_EXP}/best_model.pth"))
-    te_loss, te_acc = evaluar(model, test_loader, criterion, device)
-    print(f"Test Loss: {te_loss:.4f} | Test Acc: {te_acc:.4f}", flush=True)
+    if test_loader is not None:
+        te_loss, te_acc = evaluar(model, test_loader, criterion, device)
+        print(f'Test Loss: {te_loss:.4f} | Test Acc: {te_acc:.4f}', flush=True)
     if por_campana is not None:
         resultados = {}
         # Sin workers persistentes: cada loader temporal se libera tras su evaluacion.
-        for rol in ('val', 'test'):
+        for rol in (('val',) if test_actual else ('val', 'test')):
             suma = np.zeros((5, 5), dtype=np.int64)
             resultados[rol] = {}
             for nombre, conjuntos_anio in por_campana.items():
@@ -512,7 +529,14 @@ def entrenar():
                 print(f"{rol.upper()} {nombre}: {resultados[rol][nombre]}", flush=True)
             resultados[rol]['global'] = metricas_confusion(suma)
         guardar_json(Path(DIR_EXP) / 'metricas_multicampana.json', resultados)
-    print(f"\nResultados en: {DIR_EXP}", flush=True)
+    if test_actual:
+        if IN_CH != 24:
+            raise ValueError('TEST dic-may requiere 24 canales; no evaluar otra ventana con estas imagenes')
+        model.to('cpu'); optimizer.state.clear(); torch.cuda.empty_cache()
+        subprocess.run([sys.executable, 'src/evaluar_test_actual.py', '--exp', str(DIR_EXP),
+                        '--salida', str(Path(DIR_EXP)/'evaluacion_test_actual'), '--modelo', ARGS.modelo,
+                        '--sin-comparar', '--split-config', str(ARGS.split_config)], check=True)
+    print(f'\nResultados en: {DIR_EXP}', flush=True)
 
 
 if __name__ == "__main__":

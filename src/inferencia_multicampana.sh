@@ -9,4 +9,4 @@ flock -n 9 || { echo 'Ya existe una inferencia multicampana activa'; exit 1; }
 printf '%s\n' "$$" > "$OUT/inferencia.pid"
 trap 'rc=$?; printf "%s\n" "$rc" > "$OUT/inferencia.exitcode"; date -Is > "$OUT/fin.txt"' EXIT
 date -Is > "$OUT/inicio.txt"
-"$PY" -u src/postprocesar_multicampana.py --exp "$EXP" --salida "$OUT"
+"$PY" -u src/postprocesar_multicampana.py --exp "$EXP" --salida "$OUT" --lock-adquirido

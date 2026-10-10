@@ -34,5 +34,7 @@
     "2021_2022"
   ],
   "criterio": "Evaluar checkpoint congelado; excluir geometrias completas TRAIN y VAL de las metricas espaciales estrictas",
-  "entrenador_actual_modificado": false
+  "entrenador_actual_modificado": true,
+  "preparacion_base": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/evaluacion_20261009T192204",
+  "criterio_principal": "independiente"
 }

@@ -11,6 +11,11 @@ class ExtensionTests(unittest.TestCase):
   lut,allowed,_=legend('2020_2021');check_codes([20],allowed);self.assertEqual(int(lut[20]),0)
   for year in ['2018_2019','2019_2020','2021_2022']:
    with self.assertRaises(ValueError):check_codes([20],legend(year)[1])
+ def test_cero_exclusivo_2020_nodata_2019_maiz(self):
+  lut,allowed,_=legend('2019_2020');check_codes([0],allowed);self.assertEqual(int(lut[0]),0)
+  self.assertEqual(int(legend('2018_2019')[0][0]),2)
+  for year in ['2020_2021','2021_2022']:
+   with self.assertRaises(ValueError):check_codes([0],legend(year)[1])
  def test_pred0_es_error_y_gt0_se_ignora(self):
   with tempfile.TemporaryDirectory() as tmp:
    profile=dict(driver='GTiff',width=2,height=2,count=1,dtype='uint8',crs='EPSG:32720',transform=from_origin(500000,6200000,10,10),nodata=0)
