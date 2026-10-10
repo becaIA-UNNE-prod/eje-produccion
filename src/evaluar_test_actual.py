@@ -12,6 +12,8 @@ import matplotlib.pyplot as plt
 ROOT=Path(__file__).resolve().parents[1];sys.path[:0]=[str(ROOT),str(ROOT/'src')]
 import preparar_evaluar_extension as ext
 import postprocesar_multicampana as post
+from src.inferencia.raster import inferir_tile
+from src.evaluacion.metricas import metricas_confusion, confusion_remapeada
 from utils.test_actual import CONFIG,cargar_config,preflight
 from utils.integridad_raster import auditar_rasters,firma
 from model import TransUNet,UTAE
@@ -87,16 +89,16 @@ def main():
     print(f'[{task}/{total}] {name} {year} {tile} reutilizar={reuse}',flush=True)
     if not reuse:
      if model is None:model=constructor(record['arquitectura'])(24,5).to(device);model.load_state_dict(torch.load(weights,map_location=device));model.eval()
-     post.inferir_tile(model,ext.files(year,tile),dest,device,tags=tags)
+     inferir_tile(model,ext.files(year,tile),dest,device,tags=tags)
     for scope in ['completa','independiente']:
-     metric=post.metricas_confusion(ext.confusion(dest,maskbase/'mascaras'/f'{year}_{tile}_{scope}.tif'));records.append({'modelo':name,'campana':year,'tile':tile,'criterio':scope,**metric})
+     metric=metricas_confusion(confusion_remapeada(dest,maskbase/'mascaras'/f'{year}_{tile}_{scope}.tif'));records.append({'modelo':name,'campana':year,'tile':tile,'criterio':scope,**metric})
     post.guardar(out/'metricas_tiles.json',records);ext.figure(modelout,year,tile,dest,maskbase=maskbase,title=record['nombre'])
   del model;torch.cuda.empty_cache()
  groups=[]
  for name,record in models.items():
   for year in years:
    for scope in ['completa','independiente']:
-    cm=sum((np.array(r['confusion'],dtype=np.int64) for r in records if r['modelo']==name and r['campana']==year and r['criterio']==scope),np.zeros((5,5),dtype=np.int64));groups.append({'modelo':name,'campana':year,'criterio':scope,**post.metricas_confusion(cm)});post.matriz_fig(cm,f'{record["nombre"]} · {year} · {scope}',out/'figuras'/f'confusion_{name}_{year}_{scope}.png')
+    cm=sum((np.array(r['confusion'],dtype=np.int64) for r in records if r['modelo']==name and r['campana']==year and r['criterio']==scope),np.zeros((5,5),dtype=np.int64));groups.append({'modelo':name,'campana':year,'criterio':scope,**metricas_confusion(cm)});post.matriz_fig(cm,f'{record["nombre"]} · {year} · {scope}',out/'figuras'/f'confusion_{name}_{year}_{scope}.png')
  for year in years:
   for tile in tiles:comparison(out,year,tile,models,maskbase)
  result={'tiles':records,'grupos':groups,'split':cfg,'criterio_principal':'independiente','protocolo':protocol};post.guardar(out/'evaluacion_test_actual.json',result)

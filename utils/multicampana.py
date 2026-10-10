@@ -2,6 +2,7 @@
 from pathlib import Path
 import re
 import numpy as np
+from src.evaluacion.metricas import metricas_confusion  # compatibilidad
 
 # SPLIT historico para preparar/reproducir datos antiguos.
 # El entrenador y evaluador vigentes cargan config/split_extension_este.json.
@@ -110,24 +111,3 @@ def cargar_campanas(campanas, split=None, cache=None):
             por_campana[nombre][rol] = ds
             conjuntos[rol].append(ds)
     return {rol: ConcatDataset(partes) for rol, partes in conjuntos.items()}, por_campana
-
-
-def metricas_confusion(cm):
-    cm = np.asarray(cm, dtype=np.int64)
-    total = int(cm[1:, :].sum())
-    resultado = {'pixeles': total, 'accuracy': float(np.trace(cm[1:, 1:]) / total) if total else 0.0,
-                 'confusion': cm.tolist(), 'clases': {}}
-    f1s, ious = [], []
-    for c, nombre in enumerate(['Fondo', 'Maiz', 'Soja', 'Mani'], 1):
-        tp = int(cm[c, c]); reales = int(cm[c, :].sum()); predichos = int(cm[1:, c].sum())
-        precision = tp / predichos if predichos else 0.0
-        recall = tp / reales if reales else 0.0
-        f1 = 2 * tp / (reales + predichos) if reales + predichos else 0.0
-        iou = tp / (reales + predichos - tp) if reales + predichos - tp else 0.0
-        resultado['clases'][nombre] = {'precision': precision, 'recall': recall, 'f1': f1, 'iou': iou,
-                                      'pixeles': reales}
-        if reales:
-            f1s.append(f1); ious.append(iou)
-    resultado['f1_macro'] = float(np.mean(f1s)) if f1s else 0.0
-    resultado['miou'] = float(np.mean(ious)) if ious else 0.0
-    return resultado

@@ -72,7 +72,7 @@ relanzarlos sin revisar salidas y metadatos acreditados.
 | `4_generar_metricas.py`, `5_generar_matriz_confusion.py`, `6_generar_comparacion_visual.py`, `7_visualizar_inferencia.py` | Métricas y visualizaciones de los flujos originales. |
 | `8_comparar_modelos.py`, `9_comparar_inferencia_etiqueta.py`, `10_metricas_test.py` | Comparación y métricas históricas. No adaptar cambiando solo nombres de tiles para evaluar TEST vigente. |
 | `11_evaluar_contra_mnc.py`, `12_comparar_con_1718.py` | Evaluación contra MNC y comparación con experimentos 2017/2018. |
-| `postprocesar_multicampana.py` | Biblioteca de hecho para inferencia, métricas y figuras; conserva un flujo histórico en `main()`. Como comando deriva al TEST vigente por defecto; `--historico` selecciona el anterior. |
+| `postprocesar_multicampana.py` | Compatibilidad para inferencia y métricas; implementación de figuras; conserva un flujo histórico en `main()`. Como comando deriva al TEST vigente por defecto; `--historico` selecciona el anterior. |
 | `evaluar_test_actual.py`, `inferencia_multicampana.sh` | Evaluación canónica y wrapper operativo del TEST vigente. |
 | `regenerar_figuras_test_actual.py` | Figuras desde predicciones acreditadas existentes. |
 
@@ -96,10 +96,20 @@ descartable. Algunos componentes siguen sirviendo para reproducir o preparar dat
 | `mejorar_calidad_extension.py`, `recuperar_extension_este.sh` | Reparación específica de dos composites de la extensión; el wrapper continúa con preparación y evaluación. |
 | `optimizar_lectura_multicampana.py`, `optimizar_lectura_multicampana.sh` | Preparación de caches y gestión de un entrenamiento existente. Puede detener/reanudar procesos; no es un verificador de solo lectura. |
 
+## Componentes compartidos extraídos
+
+- [Inferencia raster](inferencia/README.md): normalización e inferencia por bloques.
+- [Métricas](evaluacion/README.md): matrices para etiquetas crudas o remapeadas y métricas comunes.
+
+Los evaluadores y el entrenador importan estos módulos directamente. Las rutas
+anteriores reexportan funciones para conservar compatibilidad. Las leyendas,
+figuras y coordinación de protocolos todavía permanecen en los scripts.
+
 ## Dependencias que condicionan la reorganización
 
-Las siguientes relaciones se verificaron leyendo código, sin importar los scripts
-ni ejecutar datos reales:
+El siguiente mapa conserva las relaciones entre comandos y las dependencias de
+figuras/configuración que todavía quedan. Inferencia y métricas ya se importan
+desde los módulos compartidos indicados arriba:
 
 ```text
 1_train_cordoba.py
@@ -134,8 +144,8 @@ rutas. Las pruebas cargan algunos scripts con `importlib` o agregando `src` a
 Las arquitecturas están en [model/](../model/README.md), con un archivo por
 modelo y bloques compartidos. utils/model.py conserva imports anteriores.
 
-`utils/` contiene parte del código compartido, pero no todo: inferencia, leyendas
-y figuras también residen en scripts de `src/`. Varios comandos procesan
+`utils/` contiene parte del código compartido, pero no todo: las leyendas
+y figuras todavía residen en scripts de `src/`. Varios comandos procesan
 argumentos al importar; el entrenador además fija semillas en el nivel superior.
 Por eso no se deben importar indiscriminadamente para hacer un inventario.
 

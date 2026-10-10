@@ -72,7 +72,8 @@ from utils.cache_lectura import cargar_cache
 from utils.tile_dataset import TileDatasetMmap
 from utils.losses import CEDiceLoss
 from utils.multicampana import (SPLIT, normalizar_campanas, validar_campanas,
-                                cargar_campanas, pesos_desde_conteos, metricas_confusion)
+                                cargar_campanas, pesos_desde_conteos)
+from src.evaluacion.metricas import metricas_confusion
 
 # ══════════════════════════════════════════════════════════════════════════════
 # CONFIGURACION

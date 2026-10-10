@@ -14,6 +14,8 @@ ROOT=Path(__file__).resolve().parents[1];sys.path[:0]=[str(ROOT),str(ROOT/'src')
 import postprocesar_multicampana as post
 from utils.integridad_raster import auditar_rasters,firma
 from utils.multicampana import SPLIT
+from src.inferencia.raster import inferir_tile
+from src.evaluacion.metricas import metricas_confusion, confusion_remapeada as confusion
 BASE=Path('/mnt/yacy_1/prod/ferreyra/extension_este_multicampana');Y3=Path('/mnt/yacy_3/prod_bis/ferreyra');MNC=Path('/mnt/yacy_1/prod/ferreyra/MNC_INTA')
 YEARS=['2018_2019','2019_2020','2020_2021','2021_2022'];TILES=['20HNJ','20HNH']
 SOURCES=dict(zip(YEARS,[MNC/'2018_2019/mnc_2018-2019_V1R1.tif',MNC/'mnc-verano-2020.tif',MNC/'2020_2021/verano-2021.tif',MNC/'2021_2022/MNC_verano2022.tif']))
@@ -73,15 +75,6 @@ def prepare(out):
  if failures:raise ValueError(f'Mascaras corruptas: {failures}')
  post.guardar(out/'preparacion_verificada.json',{'campanas':YEARS,'tiles':TILES,'composites':48,'mascaras':16,'codigo20_2021':'NoData; excepcion autorizada, exclusiva de 2021'})
 
-def confusion(pred,mask):
- cm=np.zeros((5,5),dtype=np.int64)
- with rasterio.open(pred) as p,rasterio.open(mask) as m:
-  if (p.crs,p.transform,p.shape)!=(m.crs,m.transform,m.shape):raise ValueError('Grillas diferentes')
-  for _,win in p.block_windows(1):
-   a=p.read(1,window=win);b=m.read(1,window=win)
-   if a.max()>4 or b.max()>4:raise ValueError('Clases fuera de 0..4')
-   valid=b>0;cm+=np.bincount(b[valid].astype(np.int64)*5+a[valid],minlength=25).reshape(5,5)
- return cm
 
 def figure(out,year,tile,pred,maskbase=None,title="U-Net multicampana"):
  maskbase=maskbase or out
@@ -115,14 +108,14 @@ def evaluate(out):
    dest=out/'predicciones/multicampana'/year/f'prediccion_{tile}.tif';tags={'checkpoint_sha256':protocol['checkpoint_sha256'],'entradas':json.dumps([firma(p) for p in files(year,tile)])};reuse=False
    if dest.exists():
     with rasterio.open(dest) as src:reuse=all(src.tags().get(k)==v for k,v in tags.items())
-   if not reuse:post.inferir_tile(model,files(year,tile),dest,device,tags=tags)
+   if not reuse:inferir_tile(model,files(year,tile),dest,device,tags=tags)
    for scope in ['completa','independiente']:
-    metric=post.metricas_confusion(confusion(dest,out/'mascaras'/f'{year}_{tile}_{scope}.tif'));records.append({'campana':year,'tile':tile,'criterio':scope,**metric});print(f'{year} {tile} {scope}: accuracy={metric["accuracy"]:.4f} F1={metric["f1_macro"]:.4f}',flush=True)
+    metric=metricas_confusion(confusion(dest,out/'mascaras'/f'{year}_{tile}_{scope}.tif'));records.append({'campana':year,'tile':tile,'criterio':scope,**metric});print(f'{year} {tile} {scope}: accuracy={metric["accuracy"]:.4f} F1={metric["f1_macro"]:.4f}',flush=True)
    post.guardar(out/'metricas_tiles.json',records);figure(out,year,tile,dest)
  groups=[]
  for year in YEARS:
   for scope in ['completa','independiente']:
-   cm=sum((np.array(r['confusion'],dtype=np.int64) for r in records if r['campana']==year and r['criterio']==scope),np.zeros((5,5),dtype=np.int64));groups.append({'campana':year,'criterio':scope,**post.metricas_confusion(cm)});post.matriz_fig(cm,f'Nuevo TEST {year} · {scope}',out/'figuras'/f'confusion_{year}_{scope}.png')
+   cm=sum((np.array(r['confusion'],dtype=np.int64) for r in records if r['campana']==year and r['criterio']==scope),np.zeros((5,5),dtype=np.int64));groups.append({'campana':year,'criterio':scope,**metricas_confusion(cm)});post.matriz_fig(cm,f'Nuevo TEST {year} · {scope}',out/'figuras'/f'confusion_{year}_{scope}.png')
  post.guardar(out/'evaluacion_nuevo_test.json',{'checkpoint_sha256':protocol['checkpoint_sha256'],'tiles':records,'grupos':groups,'nota':'2021/2022 es prueba temporal y espacial; otros anos entrenados en otras zonas. Independiente excluye TRAIN y VAL. Referencia INTA, no campo independiente.'})
  with (out/'metricas_resumen.csv').open('w',newline='') as f:
   fields=['campana','criterio','accuracy','f1_macro','miou','pixeles'];w=csv.DictWriter(f,fieldnames=fields);w.writeheader();w.writerows({k:r[k] for k in fields} for r in groups)

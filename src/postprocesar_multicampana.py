@@ -14,7 +14,6 @@ import time
 import numpy as np
 import rasterio
 from rasterio.enums import Resampling
-from rasterio.windows import Window
 import torch
 import matplotlib
 matplotlib.use('Agg')
@@ -24,8 +23,10 @@ from matplotlib.patches import Patch
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from model import SimpleUNet, FCRTransUNet
-from utils.multicampana import SPLIT, metricas_confusion
-from utils.leyendas_mnc import REMAP_2021, verificar_codigos
+from utils.multicampana import SPLIT
+from src.inferencia.raster import normalizar, inferir_tile
+from src.evaluacion.metricas import metricas_confusion, confusion_mnc as evaluar
+from utils.leyendas_mnc import REMAP_2021
 
 NAMES = ['NoData','Fondo','Maiz','Soja','Mani']
 COLORS = np.array([[0,0,0],[70,130,180],[255,165,0],[0,100,0],[165,42,42]],dtype=np.uint8)
@@ -54,77 +55,6 @@ def sha256(path):
         for data in iter(lambda:file.read(8*1024**2),b''):
             digest.update(data)
     return digest.hexdigest()
-
-
-def normalizar(array):
-    # Igual al dataset: dividir /10000, almacenar f16 y convertir a f32.
-    x = (array.astype(np.float32)/10000).astype(np.float16).astype(np.float32)
-    if not np.isfinite(x).all():
-        raise ValueError('Composite con NaN/Inf o valores fuera de float16')
-    return x
-
-
-def inferir_tile(model, archivos, destino, device, batch=4, size=512, tags=None):
-    destino.parent.mkdir(parents=True,exist_ok=True)
-    partial = destino.with_suffix('.partial.tif')
-    tags = tags or {}
-    started = time.monotonic()
-    try:
-        with ExitStack() as stack:
-            sources = [stack.enter_context(rasterio.open(path)) for path in archivos]
-            ref = sources[0]
-            grid = (ref.shape,ref.transform,ref.crs)
-            if any((src.shape,src.transform,src.crs)!=grid or src.count!=4 for src in sources):
-                raise ValueError('Composites incompatibles en grilla/bandas')
-            profile = ref.profile.copy()
-            profile.update(count=1,dtype='uint8',nodata=0,compress='deflate',predictor=1,
-                           tiled=True,blockxsize=256,blockysize=256)
-            windows = [Window(x,y,min(size,ref.width-x),min(size,ref.height-y))
-                       for y in range(0,ref.height,size) for x in range(0,ref.width,size)]
-            with rasterio.open(partial,'w',**profile) as dst, torch.inference_mode():
-                dst.update_tags(**tags)
-                for offset in range(0,len(windows),batch):
-                    selected = windows[offset:offset+batch]
-                    inputs, missing = [],[]
-                    for window in selected:
-                        x = normalizar(np.concatenate([src.read(window=window) for src in sources],axis=0))
-                        missing.append((x==0).all(axis=0))
-                        h,w = x.shape[-2:]
-                        inputs.append(np.pad(x,((0,0),(0,size-h),(0,size-w)),mode='edge'))
-                    tensor = torch.from_numpy(np.stack(inputs)).to(device)
-                    with torch.autocast(device_type=device.type,enabled=(device.type=='cuda')):
-                        logits = model(tensor)
-                    if not torch.isfinite(logits).all():
-                        raise ValueError('El modelo produjo NaN/Inf')
-                    pred = logits.argmax(1).cpu().numpy().astype(np.uint8)
-                    for i,window in enumerate(selected):
-                        result = pred[i,:int(window.height),:int(window.width)].copy()
-                        result[missing[i]]=0
-                        dst.write(result,1,window=window)
-                    if offset==0 or (offset//batch)%20==0 or offset+batch>=len(windows):
-                        print(f'  {destino.name}: {min(offset+batch,len(windows))}/{len(windows)} bloques, '
-                              f'{time.monotonic()-started:.0f}s',flush=True)
-        partial.replace(destino)
-    except BaseException:
-        if partial.exists(): partial.unlink()
-        raise
-    return time.monotonic()-started
-
-
-def evaluar(pred_path,mask_path,remap,year):
-    cm = np.zeros((5,5),dtype=np.int64)
-    with rasterio.open(pred_path) as pred, rasterio.open(mask_path) as mask:
-        if (pred.shape,pred.transform,pred.crs)!=(mask.shape,mask.transform,mask.crs):
-            raise ValueError('Grilla distinta: '+str(pred_path))
-        for _,window in pred.block_windows(1):
-            raw = mask.read(1,window=window)
-            if year=='2020_2021': verificar_codigos(np.unique(raw),ignorar_codigo20=True)
-            y = remap[raw]
-            p = pred.read(1,window=window)
-            if p.max()>4: raise ValueError('Prediccion fuera de clases 0..4')
-            valid = y>0  # misma mascara MNC para todos; pred=0 cuenta como error
-            cm += np.bincount(y[valid].astype(np.int64)*5+p[valid],minlength=25).reshape(5,5)
-    return cm
 
 
 def matriz_fig(cm,title,path):
