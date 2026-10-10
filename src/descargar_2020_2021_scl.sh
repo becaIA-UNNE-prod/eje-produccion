@@ -20,30 +20,30 @@ paso "busqueda STAC dic-2020 a may-2021"
 if [ -f $S2/productos.json ]; then
     echo "productos.json ya existe, no se busca de nuevo"
 else
-    $PY src/00_descargar_stac.py buscar --out $S2 --inicio 2020-12-01 --fin 2021-05-31 \
+    $PY -m src.datos.descargar_stac buscar --out $S2 --inicio 2020-12-01 --fin 2021-05-31 \
         --tiles-file $Y3/tiles.txt --max-nodata 100 > $LOGS/busqueda.log 2>&1
     tail -3 $LOGS/busqueda.log
 fi
 
 paso "SCL de todos los candidatos 2020-2021"
-$PY src/00_descargar_stac.py descargar --out $S2 --bandas SCL > $LOGS/descarga_scl.log 2>&1 \
-    || $PY src/00_descargar_stac.py descargar --out $S2 --bandas SCL >> $LOGS/descarga_scl.log 2>&1
+$PY -m src.datos.descargar_stac descargar --out $S2 --bandas SCL > $LOGS/descarga_scl.log 2>&1 \
+    || $PY -m src.datos.descargar_stac descargar --out $S2 --bandas SCL >> $LOGS/descarga_scl.log 2>&1
 tail -1 $LOGS/descarga_scl.log
 
 paso "seleccion de escenas por SCL"
-$PY src/02d_composites_scl.py seleccionar --base $S2 --tiles $TILES --meses $MESES \
+$PY -m src.datos.composites_scl seleccionar --base $S2 --tiles $TILES --meses $MESES \
     > $LOGS/seleccion.log 2>&1
 tail -2 $LOGS/seleccion.log
 
 paso "bandas de las escenas elegidas"
-$PY src/00_descargar_stac.py descargar --out $S2 --seleccion $S2/seleccion_scl.json \
+$PY -m src.datos.descargar_stac descargar --out $S2 --seleccion $S2/seleccion_scl.json \
     > $LOGS/descarga_bandas.log 2>&1 \
-    || $PY src/00_descargar_stac.py descargar --out $S2 --seleccion $S2/seleccion_scl.json \
+    || $PY -m src.datos.descargar_stac descargar --out $S2 --seleccion $S2/seleccion_scl.json \
     >> $LOGS/descarga_bandas.log 2>&1
-$PY src/00_descargar_stac.py verificar --out $S2 --seleccion $S2/seleccion_scl.json | head -3
+$PY -m src.datos.descargar_stac verificar --out $S2 --seleccion $S2/seleccion_scl.json | head -3
 
 paso "composites 2020-2021 con SCL"
-$PY src/02d_composites_scl.py componer --base $S2 --out $COMP --tiles $TILES \
+$PY -m src.datos.composites_scl componer --base $S2 --out $COMP --tiles $TILES \
     > $LOGS/composites.log 2>&1
 tail -1 $LOGS/composites.log
 grep "ATENCION" $LOGS/composites.log || echo "todos los composites >= 95% despejado"

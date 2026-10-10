@@ -57,11 +57,11 @@ def mejorar_compuesto(base, salida, campana, clave, raiz_repo=ROOT):
         f'-> {len(fechas)} escenas', flush=True,
     )
     ejecutar_comando(
-        raiz_repo, 'src/00_descargar_stac.py', 'descargar',
+        raiz_repo, '-m', 'src.datos.descargar_stac', 'descargar',
         '--out', fuentes, '--seleccion', seleccion,
     )
     ejecutar_comando(
-        raiz_repo, 'src/00_descargar_stac.py', 'verificar',
+        raiz_repo, '-m', 'src.datos.descargar_stac', 'verificar',
         '--out', fuentes, '--seleccion', seleccion,
     )
     rasters = [
@@ -75,7 +75,7 @@ def mejorar_compuesto(base, salida, campana, clave, raiz_repo=ROOT):
         raise ValueError(str(fallos))
     temporales = salida / ('compuestos_mejorados_' + campana)
     ejecutar_comando(
-        raiz_repo, 'src/02d_composites_scl.py', 'componer',
+        raiz_repo, '-m', 'src.datos.composites_scl', 'componer',
         '--base', fuentes, '--out', temporales, '--seleccion', seleccion,
         '--tiles', tile, '--workers', '1',
     )

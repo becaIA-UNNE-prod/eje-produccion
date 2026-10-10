@@ -23,11 +23,11 @@ free=shutil.disk_usage(sys.argv[1]).free
 if free<100*1024**3:raise SystemExit('Espacio insuficiente: se conserva reserva de 100 GiB')
 PY
  if [ ! -f "$source/productos.json" ]; then
-  "$PY" -u src/00_descargar_stac.py buscar --out "$source" --inicio "$inicio" --fin "$fin" --tiles-file "$BASE/tiles.txt" --max-nodata 100
+  "$PY" -u -m src.datos.descargar_stac buscar --out "$source" --inicio "$inicio" --fin "$fin" --tiles-file "$BASE/tiles.txt" --max-nodata 100
  fi
- "$PY" -u src/00_descargar_stac.py descargar --out "$source" --bandas SCL
- "$PY" -u src/00_descargar_stac.py verificar --out "$source" --bandas SCL
- "$PY" -u src/02d_composites_scl.py seleccionar --base "$source" --tiles 20HNJ 20HNH --meses "${anio}12" "${siguiente}01" "${siguiente}02" "${siguiente}03" "${siguiente}04" "${siguiente}05" --workers 4
+ "$PY" -u -m src.datos.descargar_stac descargar --out "$source" --bandas SCL
+ "$PY" -u -m src.datos.descargar_stac verificar --out "$source" --bandas SCL
+ "$PY" -u -m src.datos.composites_scl seleccionar --base "$source" --tiles 20HNJ 20HNH --meses "${anio}12" "${siguiente}01" "${siguiente}02" "${siguiente}03" "${siguiente}04" "${siguiente}05" --workers 4
  "$PY" -u - "$source" "$anio" "$siguiente" <<'PY'
 import json,sys
 from pathlib import Path
@@ -36,8 +36,8 @@ expected={f'{t}_{m}' for t in ['20HNJ','20HNH'] for m in [a+'12']+[b+f'{i:02}' f
 if set(sel)!=expected or any(not v['fechas'] for v in sel.values()):raise SystemExit('Seleccion mensual incompleta')
 print('SELECCION VERIFICADA: 12 tile-mes')
 PY
- "$PY" -u src/00_descargar_stac.py descargar --out "$source" --seleccion "$source/seleccion_scl.json"
- "$PY" -u src/00_descargar_stac.py verificar --out "$source" --seleccion "$source/seleccion_scl.json"
+ "$PY" -u -m src.datos.descargar_stac descargar --out "$source" --seleccion "$source/seleccion_scl.json"
+ "$PY" -u -m src.datos.descargar_stac verificar --out "$source" --seleccion "$source/seleccion_scl.json"
  "$PY" -u - "$source" <<'PY'
 import json,sys,datetime
 from pathlib import Path

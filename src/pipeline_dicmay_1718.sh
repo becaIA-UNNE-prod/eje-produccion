@@ -53,34 +53,34 @@ paso() { echo; echo "===== $(date '+%F %T') $* ====="; }
 # 1) Descarga + composites 2017-2018 con SCL
 # Si queda corriendo una descarga anterior sobre el mismo directorio, esperar
 # (bajarian los mismos archivos a la vez).
-while pgrep -f "00_descargar_stac.py descargar --out $S2_1718" > /dev/null; do sleep 60; done
+while pgrep -f "(00_descargar_stac[.]py|src[.]datos[.]descargar_stac) descargar --out $S2_1718" > /dev/null; do sleep 60; done
 paso "busqueda dic 2017 - may 2018 sin limite de % sin dato"
 echo "$TILES_1718" | tr ' ' '\n' > $LOGS/tiles_1718.txt
 if [ ! -f $S2_1718/productos_v2_maxnodata100.json ]; then
-    $PY src/00_descargar_stac.py buscar --inicio 2017-12-01 --fin 2018-05-31 \
+    $PY -m src.datos.descargar_stac buscar --inicio 2017-12-01 --fin 2018-05-31 \
         --out $S2_1718 --tiles-file $LOGS/tiles_1718.txt --max-nodata 100 | tail -14
     cp $S2_1718/productos.json $S2_1718/productos_v2_maxnodata100.json
 fi
 
 paso "SCL de todos los candidatos 2017-2018"
-$PY src/00_descargar_stac.py descargar --out $S2_1718 --bandas SCL > $LOGS/descarga_scl_2017_2018.log 2>&1 \
-    || $PY src/00_descargar_stac.py descargar --out $S2_1718 --bandas SCL >> $LOGS/descarga_scl_2017_2018.log 2>&1
+$PY -m src.datos.descargar_stac descargar --out $S2_1718 --bandas SCL > $LOGS/descarga_scl_2017_2018.log 2>&1 \
+    || $PY -m src.datos.descargar_stac descargar --out $S2_1718 --bandas SCL >> $LOGS/descarga_scl_2017_2018.log 2>&1
 tail -1 $LOGS/descarga_scl_2017_2018.log
 
 paso "seleccion de escenas por SCL"
-$PY src/02d_composites_scl.py seleccionar --base $S2_1718 --tiles $TILES_1718 --meses $MESES_1718 \
+$PY -m src.datos.composites_scl seleccionar --base $S2_1718 --tiles $TILES_1718 --meses $MESES_1718 \
     > $LOGS/seleccion_2017_2018.log 2>&1
 tail -2 $LOGS/seleccion_2017_2018.log
 
 paso "bandas de las escenas elegidas (log: $LOGS/descarga_2017_2018.log)"
-$PY src/00_descargar_stac.py descargar --out $S2_1718 --seleccion $S2_1718/seleccion_scl.json \
+$PY -m src.datos.descargar_stac descargar --out $S2_1718 --seleccion $S2_1718/seleccion_scl.json \
     > $LOGS/descarga_2017_2018.log 2>&1 \
-    || $PY src/00_descargar_stac.py descargar --out $S2_1718 --seleccion $S2_1718/seleccion_scl.json \
+    || $PY -m src.datos.descargar_stac descargar --out $S2_1718 --seleccion $S2_1718/seleccion_scl.json \
     >> $LOGS/descarga_2017_2018.log 2>&1
-$PY src/00_descargar_stac.py verificar --out $S2_1718 --seleccion $S2_1718/seleccion_scl.json | head -3
+$PY -m src.datos.descargar_stac verificar --out $S2_1718 --seleccion $S2_1718/seleccion_scl.json | head -3
 
 paso "composites 2017-2018 con SCL (log: $LOGS/composites_2017_2018.log)"
-$PY src/02d_composites_scl.py componer --base $S2_1718 --out $COMP_1718 --tiles $TILES_1718 \
+$PY -m src.datos.composites_scl componer --base $S2_1718 --out $COMP_1718 --tiles $TILES_1718 \
     > $LOGS/composites_2017_2018.log 2>&1
 tail -1 $LOGS/composites_2017_2018.log
 grep "ATENCION" $LOGS/composites_2017_2018.log || echo "todos los composites >= 95% despejado"
@@ -90,7 +90,7 @@ paso "mascaras Nivel3 2017-2018"
 $PY -m src.datos.mascaras_nivel3_2017_2018 --ref $S2_1718 --tiles $TILES_1718 | tee $LOGS/mascaras_nivel3.log
 
 paso "dataset dic-may 2017-2018"
-$PY src/03c_generar_dataset_cordoba_f16.py --leyenda nivel3 --tiles $TILES_TRAIN --meses $MESES_1718 \
+$PY -m src.datos.generar_dataset_cordoba_f16 --leyenda nivel3 --tiles $TILES_TRAIN --meses $MESES_1718 \
     --dir-composites $COMP_1718 --dir-salida $DIR_TRAIN_1718 | grep -v "chunk terminado"
 
 # 3) Pesos + entrenamiento

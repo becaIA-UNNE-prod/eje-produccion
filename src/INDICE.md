@@ -38,12 +38,12 @@ este índice. Los grupos describen su función actual; no implican moverlos toda
 | `00_descargar_stac.py` | Búsqueda, descarga y verificación Sentinel por STAC. |
 | `01_moldear_mascaras.py` | Reproyección de máscaras del flujo original. |
 | `01b_mascaras_mnc_2018_2019.py` | Máscaras MNC 2018/2019 y su remapeo. |
-| `01c_mascaras_nivel3_2017_2018.py` | Máscaras Nivel3 2017/2018; carga REMAP_NIVEL3 del generador `03c`. |
+| `01c_mascaras_nivel3_2017_2018.py` | Máscaras Nivel3 2017/2018; importa REMAP_NIVEL3 de `datos/generar_dataset_cordoba_f16.py`. |
 | `01d_mascaras_mnc_2020_2021.py` | Máscaras MNC 2020/2021 y verificación de códigos. Usado por preparación multicampaña. |
 | `02_composites_mensuales.py`, `02b_composites_2019_2020.py` | Composites del procesamiento original y de 2019/2020. No equivalen automáticamente al método SCL. |
 | `02c_composites_cog.py` | Composites desde entradas COG. |
 | `02d_composites_scl.py` | Selección de escenas y composición SCL; también usado por recuperación. |
-| `03_generar_datasets_npz.py`, `03b_convertir_datasets_a_mmap.py` | Generación NPZ y conversión histórica a arrays mmap. |
+| `03_generar_datasets_npz.py`, `03b_convertir_datasets_a_mmap.py` | Generación original de pares NPY (nombre antiguo NPZ) y conversión de NPZ existentes a mmap. |
 | `03c_generar_dataset_cordoba_f16.py` | Generador parametrizable float16; sigue siendo usado por preparación multicampaña. Sus defaults son del flujo original. |
 | `03d_generar_dataset_cordoba_2017_f16.py` | Generación de arrays 2017/2018 de la ventana histórica. |
 | `0_verificar_pipeline.py` | Verificación del pipeline original; no sustituye el preflight vigente. |
@@ -132,7 +132,7 @@ preparar_multicampana.py
 
 recuperar_multicampana.py
   ├─ carga por ruta preparar_multicampana.py
-  └─ carga por ruta 02d_composites_scl.py
+  └─ importa src.datos.composites_scl al ejecutar
 ```
 
 También hay consumidores en shell, documentación y `test/` que fijan nombres o
@@ -224,7 +224,7 @@ son relativos a `src/`. Son destinos previstos, no archivos creados todavía.
 | `02b_composites_2019_2020.py` | `datos/composites_2019_2020.py` |
 | `02c_composites_cog.py` | `datos/composites_cog.py` |
 | `02d_composites_scl.py` | `datos/composites_scl.py` |
-| `03_generar_datasets_npz.py` | `datos/generar_datasets_npz.py` |
+| `03_generar_datasets_npz.py` | `datos/generar_arrays_originales.py` |
 | `03b_convertir_datasets_a_mmap.py` | `datos/convertir_datasets_a_mmap.py` |
 | `03c_generar_dataset_cordoba_f16.py` | `datos/generar_dataset_cordoba_f16.py` |
 | `03d_generar_dataset_cordoba_2017_f16.py` | `datos/generar_dataset_cordoba_2017_f16.py` |
@@ -403,3 +403,22 @@ Implementaciones en datos/: moldear_mascaras.py, mascaras_mnc_2018_2019.py,
 mascaras_nivel3_2017_2018.py y mascaras_mnc_2020_2021.py. Entradas anteriores
 compatibles; preparación multicampaña y pipeline 1718 usan los módulos nuevos.
 La dependencia real de Nivel3 es el remapeo de 03c, no 01b; se conserva.
+
+### Fuentes STAC y composites trasladados
+
+Implementaciones: datos/descargar_stac.py, datos/composites_mensuales.py,
+datos/composites_2019_2020.py, datos/composites_cog.py y datos/composites_scl.py.
+Entradas numeradas compatibles; shells y mantenimiento usan los módulos nuevos.
+Recuperación carga composites_scl solo al ejecutar. La espera de descargas del
+pipeline 1718 reconoce rutas antiguas y nuevas. Shells conservan su ubicación.
+No se unifican los cuatro métodos ni sus ventanas o formatos.
+
+### Generadores de arrays trasladados
+
+Implementaciones: datos/generar_arrays_originales.py,
+datos/generar_dataset_cordoba_f16.py y datos/generar_dataset_cordoba_2017_f16.py.
+Las entradas 03/03c/03d reexportan/delegan. Preparación y pipelines usan -m;
+Nivel3 importa directamente el remapeo compartido del generador parametrizable.
+Se preservan calendarios, ventanas, remapeos, normalización, tipos, nombres,
+procedencia y comportamiento ante faltantes o salidas existentes.
+Coordinación de preparación y sus shells quedan para el paso siguiente.

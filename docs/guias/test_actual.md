@@ -22,6 +22,10 @@ contexto visual convolucional. Si cambian TRAIN/VAL, regenerar exclusiones:
 el preflight rechaza una preparación con particiones obsoletas.
 No se necesitan arrays X/Y del TEST para esta evaluación de mapas.
 
+El orden general y la secuencia SCL se describen en
+[Multicampaña](multicampana.md); para TEST usar siempre los tiles y la preparación
+acreditada de esta guía.
+
 Scripts: `descargar_extension_este.sh`, `preparar_extension_este.sh` y
 `preparar_evaluar_extension.py`, bajo `src/`. Antes de relanzarlos revisar
 configuración, salidas, locks y metadatos de la preparación existente. Auditar

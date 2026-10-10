@@ -20,7 +20,7 @@ LOGS = MULTICAMPANA_ROOT / 'logs_multicampana'
 def cargar_dependencias():
     """Cargar comandos existentes solo al ejecutar, hasta su propia migración."""
     preparacion = importlib.import_module('src.preparar_multicampana')
-    compositor = importlib.import_module('src.02d_composites_scl')
+    compositor = importlib.import_module('src.datos.composites_scl')
     return preparacion, compositor
 
 

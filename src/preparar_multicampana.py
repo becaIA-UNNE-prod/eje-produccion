@@ -98,7 +98,7 @@ def preparar(workers, ignorar_codigo20=False):
     for campana in (CAMPANAS[2], CAMPANAS[0]):
         nombre, comp, meses, leyenda, patron, directorio = campana
         comprobar_procedencia(campana, ignorar_codigo20)
-        comando = [sys.executable, '-u', str(ROOT/'src/03c_generar_dataset_cordoba_f16.py'),
+        comando = [sys.executable, '-u', '-m', 'src.datos.generar_dataset_cordoba_f16',
                    '--tiles', *TILES, '--meses', *meses, '--leyenda', leyenda,
                    '--dir-composites', str(comp), '--dir-salida', str(directorio),
                    '--workers', str(workers), '--estricto']

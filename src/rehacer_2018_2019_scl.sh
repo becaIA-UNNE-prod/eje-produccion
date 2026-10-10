@@ -26,24 +26,24 @@ mkdir -p $LOGS
 paso() { echo; echo "===== $(date '+%F %T') $* ====="; }
 
 paso "SCL de todos los candidatos 2018-2019"
-$PY src/00_descargar_stac.py descargar --out $S2_1819 --bandas SCL > $LOGS/descarga_scl_2018_2019.log 2>&1 \
-    || $PY src/00_descargar_stac.py descargar --out $S2_1819 --bandas SCL >> $LOGS/descarga_scl_2018_2019.log 2>&1
+$PY -m src.datos.descargar_stac descargar --out $S2_1819 --bandas SCL > $LOGS/descarga_scl_2018_2019.log 2>&1 \
+    || $PY -m src.datos.descargar_stac descargar --out $S2_1819 --bandas SCL >> $LOGS/descarga_scl_2018_2019.log 2>&1
 tail -1 $LOGS/descarga_scl_2018_2019.log
 
 paso "seleccion de escenas por SCL"
-$PY src/02d_composites_scl.py seleccionar --base $S2_1819 --tiles $TILES --meses $MESES_1819 \
+$PY -m src.datos.composites_scl seleccionar --base $S2_1819 --tiles $TILES --meses $MESES_1819 \
     > $LOGS/seleccion_2018_2019.log 2>&1
 tail -2 $LOGS/seleccion_2018_2019.log
 
 paso "bandas de las escenas elegidas (log: $LOGS/descarga_bandas_2018_2019.log)"
-$PY src/00_descargar_stac.py descargar --out $S2_1819 --seleccion $S2_1819/seleccion_scl.json \
+$PY -m src.datos.descargar_stac descargar --out $S2_1819 --seleccion $S2_1819/seleccion_scl.json \
     > $LOGS/descarga_bandas_2018_2019.log 2>&1 \
-    || $PY src/00_descargar_stac.py descargar --out $S2_1819 --seleccion $S2_1819/seleccion_scl.json \
+    || $PY -m src.datos.descargar_stac descargar --out $S2_1819 --seleccion $S2_1819/seleccion_scl.json \
     >> $LOGS/descarga_bandas_2018_2019.log 2>&1
-$PY src/00_descargar_stac.py verificar --out $S2_1819 --seleccion $S2_1819/seleccion_scl.json | head -3
+$PY -m src.datos.descargar_stac verificar --out $S2_1819 --seleccion $S2_1819/seleccion_scl.json | head -3
 
 paso "composites 2018-2019 con SCL (log: $LOGS/composites_2018_2019.log)"
-$PY src/02d_composites_scl.py componer --base $S2_1819 --out $COMP --tiles $TILES \
+$PY -m src.datos.composites_scl componer --base $S2_1819 --out $COMP --tiles $TILES \
     > $LOGS/composites_2018_2019.log 2>&1
 tail -1 $LOGS/composites_2018_2019.log
 grep "ATENCION" $LOGS/composites_2018_2019.log || echo "todos los composites >= 95% despejado"

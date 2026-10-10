@@ -35,18 +35,18 @@ paso() { echo; echo "===== $(date '+%F %T') $* ====="; }
 
 # 1) Composites 2018-2019 (CPU/disco) en paralelo con la descarga de may-2020 (red)
 paso "composites 2018-2019 (log: $LOGS/composites_2018_2019.log)"
-$PY src/02c_composites_cog.py --base $S2_1819 --out $COMP_1819 --meses $MESES_1819 \
+$PY -m src.datos.composites_cog --base $S2_1819 --out $COMP_1819 --meses $MESES_1819 \
     > $LOGS/composites_2018_2019.log 2>&1 &
 PID_COMP=$!
 
 paso "descarga may-2020"
 if [ ! -f $S2_MAY20/productos.json ]; then
-    $PY src/00_descargar_stac.py buscar --inicio 2020-05-01 --fin 2020-05-31 \
+    $PY -m src.datos.descargar_stac buscar --inicio 2020-05-01 --fin 2020-05-31 \
         --out $S2_MAY20 --tiles-file $Y3/tiles.txt
 fi
-$PY src/00_descargar_stac.py descargar --out $S2_MAY20 > $LOGS/descarga_2020_05.log 2>&1 \
-    || $PY src/00_descargar_stac.py descargar --out $S2_MAY20 >> $LOGS/descarga_2020_05.log 2>&1
-$PY src/00_descargar_stac.py verificar --out $S2_MAY20
+$PY -m src.datos.descargar_stac descargar --out $S2_MAY20 > $LOGS/descarga_2020_05.log 2>&1 \
+    || $PY -m src.datos.descargar_stac descargar --out $S2_MAY20 >> $LOGS/descarga_2020_05.log 2>&1
+$PY -m src.datos.descargar_stac verificar --out $S2_MAY20
 
 paso "composites may-2020 + links dic-abr 2019-2020"
 mkdir -p $COMP_DICMAY
@@ -55,14 +55,14 @@ for t in $TILES; do
         ln -sfn $COMP_1920/${t}_${m}_median.tif $COMP_DICMAY/${t}_${m}_median.tif
     done
 done
-$PY src/02c_composites_cog.py --base $S2_MAY20 --out $COMP_DICMAY --meses 202005
+$PY -m src.datos.composites_cog --base $S2_MAY20 --out $COMP_DICMAY --meses 202005
 
 wait $PID_COMP
 tail -3 $LOGS/composites_2018_2019.log
 
 # 2) Dataset de entrenamiento dic-may (mismos 17 tiles / mascaras MNC que train_cordoba_f16)
 paso "dataset dic-may"
-$PY src/03c_generar_dataset_cordoba_f16.py --tiles $TILES --meses $MESES_1920 \
+$PY -m src.datos.generar_dataset_cordoba_f16 --tiles $TILES --meses $MESES_1920 \
     --dir-composites $COMP_DICMAY --dir-salida $DIR_TRAIN
 
 # 3) Entrenamiento + 4) inferencia, por modelo

@@ -31,7 +31,7 @@ PY
 for anio in 2018 2019 2020 2021; do
  siguiente=$((anio+1));year="${anio}_${siguiente}"
  echo "$(date -Is) COMPUESTOS $year"
- "$PY" -u src/02d_composites_scl.py componer --base "$BASE/sentinel2_$year" --out "$BASE/composites_${year}_scl" --tiles 20HNJ 20HNH --workers 2
+ "$PY" -u -m src.datos.composites_scl componer --base "$BASE/sentinel2_$year" --out "$BASE/composites_${year}_scl" --tiles 20HNJ 20HNH --workers 2
 done
 echo "$(date -Is) AUDITORIA COMPUESTOS Y PREPARACION MASCARAS"
 "$PY" -u src/preparar_evaluar_extension.py --modo preparar --salida "$OUT"

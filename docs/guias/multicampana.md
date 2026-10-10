@@ -13,9 +13,11 @@ Almacenamiento y lanzamientos: [CONTRIBUTING](../../CONTRIBUTING.md).
    No descargar ni reconstruir datos ya acreditados por el solo hecho de correr
    el proyecto. Si faltan entradas, revisar los comandos de preparación de la
    campaña correspondiente y sus salidas antes de ejecutarlos.
-3. Ejecutar las verificaciones de preparación y arrays de la sección
+3. Si las entradas y arrays existen, ejecutar las verificaciones de la sección
    «Verificar antes de preparar o entrenar». Revisar también los JSON de
-   procedencia; estas verificaciones no sustituyen su comparación.
+   procedencia; estas verificaciones no sustituyen su comparación. Si faltan
+   entradas, completar la preparación del paso 4 y volver a verificar antes de
+   entrenar.
 4. Si hay que preparar TRAIN/VAL, revisar `src/preparar_multicampana.sh` y
    ejecutar esa preparación con log externo según CONTRIBUTING. El proceso
    audita composites, prepara máscaras MNC2021 y genera arrays; requiere
@@ -32,6 +34,63 @@ Almacenamiento y lanzamientos: [CONTRIBUTING](../../CONTRIBUTING.md).
    Registrar decisiones duraderas en documentación y conservar los artefactos
    en los discos operativos.
 
+### Orden de etapas y alternativas
+
+El orden responde a dependencias de datos, no a la numeración de scripts:
+
+| Etapa | Entrada necesaria | Resultado o siguiente paso |
+|---|---|---|
+| Fuentes | Tiles, campaña, fechas, bandas y destino externo | Escenas y productos.json |
+| Composites | Escenas compatibles y método de la campaña | Seis mosaicos de cuatro bandas por tile para dic–may |
+| Máscaras | Referencia de la campaña y grilla Sentinel/composite | Etiquetas crudas alineadas |
+| Arrays TRAIN/VAL | Composites, máscaras, leyenda y meses | X/Y y procedencia; verificar antes de entrenar |
+| Entrenamiento | Arrays verificados y split vigente | Checkpoint seleccionado con VAL |
+| Evaluación | Checkpoint congelado y preparación TEST acreditada | Mapas y métricas completa/independiente |
+| Figuras | Predicciones y protocolo de evaluación | Reporte de resultados |
+
+Si ya hay composites, máscaras o arrays acreditados, retomar en la etapa que
+falta tras verificar compatibilidad. Evaluar un checkpoint existente no requiere
+volver a preparar arrays ni entrenar. TEST de mapas requiere su preparación
+específica; no se genera a partir de los arrays TRAIN/VAL.
+
+### Secuencia de fuentes y composites SCL
+
+Para una campaña que realmente necesite preparación, elegir antes tiles, fechas,
+meses diciembre–mayo, fuentes y salidas absolutas en /mnt según configuración.
+Desde la raíz, usar `~/s4a-venv/bin/python -m` con el módulo de cada fila:
+
+| Paso | Módulo y modo | Parámetros principales / evidencia |
+|---|---|---|
+| 1. Buscar candidatos | src.datos.descargar_stac buscar | --inicio, --fin, --out, --tiles-file; productos.json |
+| 2. Descargar SCL | src.datos.descargar_stac descargar | --out, --bandas SCL |
+| 3. Verificar SCL | src.datos.descargar_stac verificar | --out, --bandas SCL; lectura de ventana |
+| 4. Seleccionar escenas | src.datos.composites_scl seleccionar | --base, --tiles, --meses; seleccion_scl.json |
+| 5. Descargar bandas elegidas | src.datos.descargar_stac descargar | --out, --seleccion |
+| 6. Verificar bandas | src.datos.descargar_stac verificar | --out, --seleccion; lectura de ventana |
+| 7. Auditar bloques | utils.integridad_raster, invocado por coordinación | Lectura completa; revisar inventario y fallos |
+| 8. Componer | src.datos.composites_scl componer | --base, --out, --seleccion, --tiles; TIFF y fechas_usadas.json |
+| 9. Auditar composites/grillas | Preparación multicampaña o extensión | Integridad, bandas, meses y alineación de máscaras |
+
+Consultar --help antes de construir el comando concreto. La política
+--max-nodata 100 de los shells SCL permite escenas parciales y se conserva;
+el default general de STAC sigue siendo 50. No cambiar umbrales por el traslado.
+Los wrappers src/rehacer_2018_2019_scl.sh y src/descargar_2020_2021_scl.sh
+coordinan sus campañas específicas. Revisar sus rutas, locks, logs y qué etapas
+incluyen antes de ejecutarlos; conservar procedencia y no relanzar por refactor.
+La extensión sigue su [guía específica](test_actual.md): su shell de preparación
+incluye evaluación. La auditoría exhaustiva no está incluida en el modo
+«verificar» de descarga, que solo lee ventanas de 64×64.
+
+### Otros métodos de composites
+
+Son alternativas de preparación, no etapas posteriores al método SCL:
+composites_mensuales calcula la mediana JP2 original; composites_2019_2020
+elige la primera fecha JP2 válida y conserva siete meses oct–abr y float32;
+composites_cog rellena píxeles sin dato en orden de nubosidad, sin máscara SCL.
+Conservar especialmente el procesamiento acreditado 2019/2020: diciembre–abril
+proviene del método original y mayo del mosaico COG. Estos módulos no deben
+sustituirse por SCL para uniformar el flujo. Sus rutas numeradas siguen compatibles.
+
 ### Entradas específicas de máscaras
 
 Para revisar argumentos, usar `~/s4a-venv/bin/python -m` seguido de:
@@ -43,6 +102,38 @@ Nivel3 requiere `--ref` con su grilla COG. MNC2021 admite
 Las rutas numeradas anteriores siguen funcionando.
 `src.datos.moldear_mascaras` conserva la prueba original fija sobre JP2;
 no es el preparador multicampaña y no debe ejecutarse como paso del flujo vigente.
+
+### Generar arrays después de composites y máscaras
+
+El generador de las campañas TRAIN/VAL es
+`src.datos.generar_dataset_cordoba_f16`. La coordinación
+`src/preparar_multicampana.py` lo llama con meses, leyenda, rutas y modo estricto;
+preferir el wrapper de preparación para conservar auditorías y procedencia.
+Para revisar la entrada específica: `~/s4a-venv/bin/python -m
+src.datos.generar_dataset_cordoba_f16 --help` (escribir el comando en una línea).
+
+La forma de un comando explícito, sustituyendo rutas/tiles/meses por los de la
+campaña acreditada, es:
+
+```bash
+~/s4a-venv/bin/python -m src.datos.generar_dataset_cordoba_f16 \
+  --tiles TILE_TRAIN_VAL --meses MES1 MES2 MES3 MES4 MES5 MES6 \
+  --leyenda LEYENDA_CAMPANA --dir-composites /mnt/RUTA_COMPOSITES \
+  --dir-mascaras /mnt/RUTA_MASCARAS --dir-salida /mnt/RUTA_ARRAYS \
+  --workers 4 --estricto
+```
+
+Son marcadores, no un comando listo para lanzar. Leyendas: 1819, 2020, 2021
+o nivel3; meses en AAAAMM. --ignorar-codigo20 solo aplica a 2021. El default
+sin argumentos conserva siete meses oct–abr y no representa el flujo dic–may.
+No usarlo por accidente para preparar las campañas de la tabla siguiente.
+Las verificaciones posteriores acreditan meses, canales y grillas; comparar
+además los JSON de procedencia antes de reutilizar pares existentes.
+
+`src.datos.generar_arrays_originales` conserva el flujo original 0–8 y su
+calendario, y `src.datos.generar_dataset_cordoba_2017_f16` conserva oct–abr,
+sufijo _2017 y su remapeo. Son alternativas para reproducir esos contratos;
+no pasos adicionales necesarios para el TRAIN/VAL dic–may ni el TEST de mapas.
 
 ## Entradas
 

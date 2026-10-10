@@ -7,7 +7,7 @@ tiles de Cordoba (01_moldear_mascaras.py solo genero las etiqueta_<TILE>_10m_tes
 de unos pocos tiles, sobre la grilla de los .jp2 legacy).
 
 Se guardan los codigos crudos Nivel3 (0 = sin dato); el remapeo a 5 clases es
-REMAP_NIVEL3 de 03c_generar_dataset_cordoba_f16.py (--leyenda nivel3):
+REMAP_NIVEL3 de src.datos.generar_dataset_cordoba_f16 (--leyenda nivel3):
   16 Maiz, 20 Trigo-Maiz de segunda -> Maiz
   17 Soja, 21 Trigo-Soja de segunda -> Soja
   18 Mani -> Mani, resto -> Fondo
@@ -17,7 +17,6 @@ Uso:
     python3 -m src.datos.mascaras_nivel3_2017_2018 --ref <DIR> --tiles 20HLJ 20HLK
 """
 import argparse
-import importlib.util
 from pathlib import Path
 
 import numpy as np
@@ -30,11 +29,7 @@ DIR_SALIDA = Path("/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas")
 NODATA = 0
 
 # Mismo remapeo que el que usa 03c para entrenar (no duplicar la tabla).
-_spec = importlib.util.spec_from_file_location(
-    "dataset03c", RAIZ / "src" / "03c_generar_dataset_cordoba_f16.py")
-_mod = importlib.util.module_from_spec(_spec)
-_spec.loader.exec_module(_mod)
-REMAP_NIVEL3 = _mod.REMAP_NIVEL3
+from src.datos.generar_dataset_cordoba_f16 import REMAP_NIVEL3
 
 
 def generar_mascara(tile, dir_ref):

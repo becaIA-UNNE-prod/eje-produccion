@@ -138,7 +138,7 @@ class MulticampanaTest(unittest.TestCase):
         meta.update(count=1,dtype='uint8',nodata=255)
         with rasterio.open(masks/'etiqueta_mnc2021_A_10m.tif','w',**meta) as dst:
             dst.write(np.resize(np.array([10,11,16,20,26,28,255],dtype=np.uint8),(512,512)),1)
-        cmd = [sys.executable, str(ROOT/'src/03c_generar_dataset_cordoba_f16.py'),
+        cmd = [sys.executable, '-m', 'src.datos.generar_dataset_cordoba_f16',
                '--tiles','A','--meses',*meses,'--leyenda','2021','--dir-composites',str(comp),
                '--dir-mascaras',str(masks),'--dir-salida',str(salida),'--workers','1','--estricto']
         r = subprocess.run(cmd,cwd=ROOT,capture_output=True,text=True)

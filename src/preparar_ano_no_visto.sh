@@ -17,17 +17,17 @@ mkdir -p "$S2" "$COMP"
 paso() { echo "$(date -Is) $*"; }
 paso 'Busqueda STAC diciembre 2021 - mayo 2022'
 if [ ! -f "$S2/productos.json" ]; then
-  "$PY" -u src/00_descargar_stac.py buscar --out "$S2" --inicio 2021-12-01 --fin 2022-05-31 --tiles-file "$OUT/tiles.txt" --max-nodata 100
+  "$PY" -u -m src.datos.descargar_stac buscar --out "$S2" --inicio 2021-12-01 --fin 2022-05-31 --tiles-file "$OUT/tiles.txt" --max-nodata 100
 fi
 paso 'Descarga SCL'
-"$PY" -u src/00_descargar_stac.py descargar --out "$S2" --bandas SCL
+"$PY" -u -m src.datos.descargar_stac descargar --out "$S2" --bandas SCL
 paso 'Seleccion de escenas despejadas'
-"$PY" -u src/02d_composites_scl.py seleccionar --base "$S2" --tiles $TILES --meses $MESES --workers 4
+"$PY" -u -m src.datos.composites_scl seleccionar --base "$S2" --tiles $TILES --meses $MESES --workers 4
 paso 'Descarga bandas seleccionadas'
-"$PY" -u src/00_descargar_stac.py descargar --out "$S2" --seleccion "$S2/seleccion_scl.json"
-"$PY" -u src/00_descargar_stac.py verificar --out "$S2" --seleccion "$S2/seleccion_scl.json"
+"$PY" -u -m src.datos.descargar_stac descargar --out "$S2" --seleccion "$S2/seleccion_scl.json"
+"$PY" -u -m src.datos.descargar_stac verificar --out "$S2" --seleccion "$S2/seleccion_scl.json"
 paso 'Composites mensuales SCL'
-"$PY" -u src/02d_composites_scl.py componer --base "$S2" --out "$COMP" --tiles $TILES --workers 2
+"$PY" -u -m src.datos.composites_scl componer --base "$S2" --out "$COMP" --tiles $TILES --workers 2
 paso 'Esperando fuentes MNC verificadas y leyenda oficial'
 for i in $(seq 1 240); do
   if [ -f /mnt/yacy_1/prod/ferreyra/MNC_INTA/2021_2022/MNC_verano2022.tif ] && [ -f config/leyenda_mnc_2021_2022.json ]; then break; fi
