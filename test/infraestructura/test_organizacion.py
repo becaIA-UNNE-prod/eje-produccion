@@ -64,6 +64,14 @@ class OrganizacionTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertTrue((run / 'figuras/mapa.png').is_file())
             self.assertFalse(source.with_suffix('.png').exists())
+            anterior = (run / 'figuras/mapa.png').read_bytes()
+            result = subprocess.run([
+                sys.executable, '-m', 'src.figuras.visualizar_inferencia', str(source),
+            ], cwd=ROOT, env=dict(os.environ, CORDOBA_RUN_DIR=str(run)),
+                capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual((run / 'figuras/mapa.png').read_bytes(), anterior)
+
 
 
 if __name__ == '__main__':

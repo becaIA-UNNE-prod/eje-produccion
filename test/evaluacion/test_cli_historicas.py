@@ -1,4 +1,4 @@
-"""Contratos de importación de los comandos históricos de figuras."""
+"""Contratos de figuras generales y comandos de protocolos anteriores."""
 import importlib
 import subprocess
 import sys
@@ -8,10 +8,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 MODULOS = (
-    "src.4_generar_metricas",
+    "src.figuras.curvas_entrenamiento",
     "src.5_generar_matriz_confusion",
     "src.6_generar_comparacion_visual",
-    "src.7_visualizar_inferencia",
+    "src.figuras.visualizar_inferencia",
     "src.9_comparar_inferencia_etiqueta",
     "src.10_metricas_test",
 )
@@ -32,8 +32,9 @@ with (
     patch('torch.cuda.is_available', side_effect=AssertionError('consulta GPU')),
     patch('matplotlib.pyplot.subplots', side_effect=AssertionError('figura')),
 ):
-    for nombre in ('src.4_generar_metricas', 'src.5_generar_matriz_confusion',
-                   'src.6_generar_comparacion_visual', 'src.7_visualizar_inferencia',
+    for nombre in ('src.4_generar_metricas', 'src.7_visualizar_inferencia',
+                   'src.figuras.curvas_entrenamiento', 'src.5_generar_matriz_confusion',
+                   'src.6_generar_comparacion_visual', 'src.figuras.visualizar_inferencia',
                    'src.9_comparar_inferencia_etiqueta', 'src.10_metricas_test'):
         importlib.import_module(nombre)
 """

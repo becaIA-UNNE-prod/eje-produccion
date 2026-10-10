@@ -126,7 +126,7 @@ def main():
     if args.verificar: return
     out.mkdir(parents=True,exist_ok=True); (out/'figuras').mkdir(exist_ok=True)
     curvas(models,out/'figuras/curvas_comparadas.png')
-    subprocess.run([sys.executable,'src/4_generar_metricas.py','--exp',str(exp)],cwd=ROOT,check=True)
+    subprocess.run([sys.executable,'-m','src.figuras.curvas_entrenamiento','--exp',str(exp)],cwd=ROOT,check=True)
     metrics_train=json.loads((exp/'metricas_multicampana.json').read_text())
     for role in ['val','test']:
         for year,record in metrics_train[role].items():

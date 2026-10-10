@@ -239,10 +239,10 @@ son relativos a `src/`. Son destinos previstos, no archivos creados todavía.
 | `optimizar_lectura_multicampana.py` | `mantenimiento/optimizar_lectura_multicampana.py` |
 | `0_verificar_pipeline.py` | `historico/verificar_pipeline.py` |
 | `1b_finetune_manfredi.py` | `historico/finetune_manfredi.py` |
-| `4_generar_metricas.py` | `historico/generar_metricas.py` |
-| `5_generar_matriz_confusion.py` | `historico/generar_matriz_confusion.py` |
-| `6_generar_comparacion_visual.py` | `historico/generar_comparacion_visual.py` |
-| `7_visualizar_inferencia.py` | `historico/visualizar_inferencia.py` |
+| `4_generar_metricas.py` | `figuras/curvas_entrenamiento.py` |
+| `5_generar_matriz_confusion.py` | `evaluacion/matriz_confusion_parches.py` |
+| `6_generar_comparacion_visual.py` | `figuras/comparacion_parches.py` |
+| `7_visualizar_inferencia.py` | `figuras/visualizar_inferencia.py` |
 | `8_comparar_modelos.py` | `historico/comparar_modelos.py` |
 | `9_comparar_inferencia_etiqueta.py` | `historico/comparar_inferencia_etiqueta.py` |
 | `10_metricas_test.py` | `historico/metricas_test.py` |
@@ -261,11 +261,14 @@ Dos comandos mezclan responsabilidades y necesitan separación propia:
   `historico/postprocesar_multicampana.py`. Revisar figuras aún embebidas y
   exports consumidos por `evaluar_ano_no_visto.py` antes de separarlo.
 
-Los comandos de figuras 4–10 se ubican inicialmente en `historico/` por sus
-defaults y consumidores. Un helper reutilizable pertenece a `figuras/`,
-`evaluacion/` o `inferencia/`; no se convierte todo el comando en vigente por
-compartir un cálculo. Las variantes de preparación permanecen en `datos/` con
-sus campañas explícitas, sin consolidar meses, leyendas o métodos diferentes.
+Curvas y visualización general pertenecen a `figuras/`. Los comandos 5 y 6
+se ubicarán por responsabilidad en evaluación/figuras, describiendo su contrato
+actual de NPZ, parches y 28 canales; no se consideran evaluadores del TEST
+vigente de 24 canales. Los protocolos concretos anteriores permanecen en
+`historico/`. Clasificar por responsabilidad y contrato, no por numeración.
+Las variantes de preparación permanecen en `datos/` con campañas explícitas,
+sin consolidar meses, leyendas o métodos diferentes.
+
 
 ### Destinos de shell
 
@@ -356,3 +359,12 @@ para no depender de la profundidad del archivo trasladado. El shell conserva
 lock, PID, exitcode y argumentos. No ejecutar como diagnóstico: puede detener
 un entrenamiento y relanzarlo desde un checkpoint. Los destinos físicos de
 cachés existentes, reservas de espacio y parámetros de reanudación se conservan.
+
+### Figuras generales trasladadas
+
+`figuras/curvas_entrenamiento.py` lee historial.npy y grafica Train/Val.
+`figuras/visualizar_inferencia.py` representa un GeoTIFF de clases 0–4.
+No fijan campañas, modelos o split; mantienen sus formatos y salidas anteriores.
+Las entradas 4 y 7 reexportan y delegan. El postprocesador usa la entrada por -m.
+Esta reorganización facilita reutilización; parametrizar regiones, bandas,
+leyendas y protocolos es trabajo adicional y no consecuencia de mover archivos.
