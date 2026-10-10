@@ -147,9 +147,11 @@ módulos propios; algunas variantes históricas siguen dentro de sus scripts.
 El entrenador y la regeneración de figuras separan parser y ejecución en
 main(); importarlos no procesa argumentos, fija semillas ni escribe salidas.
 Los comandos históricos de curvas, matriz de confusión y comparación visual
-(4, 5 y 6) también exponen crear_parser() y main(argv=None), sin leer datos ni
+(4, 5, 6, 7, 9 y 10) también exponen crear_parser() y main(argv=None), sin leer datos ni
 cargar modelos al importar. Conservan sus canales, remapeos y cálculos originales.
-Otros comandos históricos todavía procesan argumentos al importar.
+Quedan dos comandos con procesamiento de argumentos y acceso a datos al importar:
+0b_calcular_pesos.py y 03b_convertir_datasets_a_mmap.py. Otros ya protegen su
+ejecución con __main__, aunque no todos exponen una función main().
 Por eso no se deben importar indiscriminadamente para hacer un inventario.
 
 ## Secuencia de reorganización propuesta

@@ -25,34 +25,42 @@ from matplotlib.patches import Patch
 COLORES = {0: [0, 0, 0], 1: [70, 130, 180], 2: [255, 165, 0], 3: [0, 100, 0], 4: [165, 42, 42]}
 NOMBRES = {1: "Fondo", 2: "Maiz", 3: "Soja", 4: "Mani"}
 
-parser = argparse.ArgumentParser()
-parser.add_argument("tif", help="Ruta al GeoTIFF de clasificacion (1 banda, 0-4)")
-parser.add_argument("--max_lado", type=int, default=2048,
-                     help="Lado maximo (px) de la imagen de salida (downsampling)")
-parser.add_argument("--salida", default=None, help="Ruta de salida (default: figuras/ de CORDOBA_RUN_DIR)")
-args = parser.parse_args()
+def crear_parser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("tif", help="Ruta al GeoTIFF de clasificacion (1 banda, 0-4)")
+    parser.add_argument("--max_lado", type=int, default=2048,
+                         help="Lado maximo (px) de la imagen de salida (downsampling)")
+    parser.add_argument("--salida", default=None, help="Ruta de salida (default: figuras/ de CORDOBA_RUN_DIR)")
+    return parser
 
-ruta_tif = Path(args.tif)
-with rasterio.open(ruta_tif) as src:
-    alto, ancho = src.height, src.width
-    escala = min(1.0, args.max_lado / max(alto, ancho))
-    out_h, out_w = max(1, int(alto * escala)), max(1, int(ancho * escala))
-    mapa = src.read(1, out_shape=(out_h, out_w), resampling=rasterio.enums.Resampling.nearest)
 
-img = np.zeros((*mapa.shape, 3), dtype=np.uint8)
-for clase, color in COLORES.items():
-    img[mapa == clase] = color
+def main(argv=None):
+    args = crear_parser().parse_args(argv)
+    ruta_tif = Path(args.tif)
+    with rasterio.open(ruta_tif) as src:
+        alto, ancho = src.height, src.width
+        escala = min(1.0, args.max_lado / max(alto, ancho))
+        out_h, out_w = max(1, int(alto * escala)), max(1, int(ancho * escala))
+        mapa = src.read(1, out_shape=(out_h, out_w), resampling=rasterio.enums.Resampling.nearest)
 
-ruta_salida = Path(args.salida) if args.salida else LEGACY_FIGURES / ruta_tif.with_suffix(".png").name
-ruta_salida.parent.mkdir(parents=True, exist_ok=True)
+    img = np.zeros((*mapa.shape, 3), dtype=np.uint8)
+    for clase, color in COLORES.items():
+        img[mapa == clase] = color
 
-fig, ax = plt.subplots(figsize=(10, 10))
-ax.imshow(img)
-ax.set_title(f"Clasificacion — {ruta_tif.stem}\n({ancho}x{alto} px, mostrado a {out_w}x{out_h})")
-ax.axis('off')
-leyenda = [Patch(color=[c / 255 for c in COLORES[k]], label=v) for k, v in NOMBRES.items()]
-fig.legend(handles=leyenda, loc='lower center', ncol=4, fontsize=10, bbox_to_anchor=(0.5, -0.02))
-plt.tight_layout()
-plt.savefig(ruta_salida, dpi=150, bbox_inches='tight')
-plt.close()
-print(f"Guardado: {ruta_salida}")
+    ruta_salida = Path(args.salida) if args.salida else LEGACY_FIGURES / ruta_tif.with_suffix(".png").name
+    ruta_salida.parent.mkdir(parents=True, exist_ok=True)
+
+    fig, ax = plt.subplots(figsize=(10, 10))
+    ax.imshow(img)
+    ax.set_title(f"Clasificacion — {ruta_tif.stem}\n({ancho}x{alto} px, mostrado a {out_w}x{out_h})")
+    ax.axis('off')
+    leyenda = [Patch(color=[c / 255 for c in COLORES[k]], label=v) for k, v in NOMBRES.items()]
+    fig.legend(handles=leyenda, loc='lower center', ncol=4, fontsize=10, bbox_to_anchor=(0.5, -0.02))
+    plt.tight_layout()
+    plt.savefig(ruta_salida, dpi=150, bbox_inches='tight')
+    plt.close()
+    print(f"Guardado: {ruta_salida}")
+
+
+if __name__ == "__main__":
+    main()

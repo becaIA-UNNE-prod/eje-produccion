@@ -50,52 +50,60 @@ def leer_downsampled(ruta, out_shape):
         return src.read(1, out_shape=out_shape, resampling=Resampling.nearest)
 
 
-parser = argparse.ArgumentParser()
-parser.add_argument("--tile", default="20JML")
-parser.add_argument("--modelo", default="fcrtransunet",
-                     choices=["unet", "transunet", "utae", "fcrtransunet"])
-parser.add_argument("--dir_mascaras", default="./mascaras_procesadas")
-parser.add_argument("--max_lado", type=int, default=2048)
-parser.add_argument("--dir-pred", type=Path, default=LEGACY_PREDICTIONS)
-parser.add_argument("--dir-salida", type=Path, default=LEGACY_FIGURES)
-args = parser.parse_args()
+def crear_parser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--tile", default="20JML")
+    parser.add_argument("--modelo", default="fcrtransunet",
+                         choices=["unet", "transunet", "utae", "fcrtransunet"])
+    parser.add_argument("--dir_mascaras", default="./mascaras_procesadas")
+    parser.add_argument("--max_lado", type=int, default=2048)
+    parser.add_argument("--dir-pred", type=Path, default=LEGACY_PREDICTIONS)
+    parser.add_argument("--dir-salida", type=Path, default=LEGACY_FIGURES)
+    return parser
 
-sufijo = "" if args.modelo == "unet" else f"_{args.modelo}"
-ruta_pred = args.dir_pred / f"prediccion_{args.tile}{sufijo}.tif"
-ruta_etiqueta = Path(args.dir_mascaras) / f"etiqueta_mnc_{args.tile}_10m.tif"
 
-with rasterio.open(ruta_pred) as src:
-    alto, ancho = src.height, src.width
-escala = min(1.0, args.max_lado / max(alto, ancho))
-out_shape = (max(1, int(alto * escala)), max(1, int(ancho * escala)))
+def main(argv=None):
+    args = crear_parser().parse_args(argv)
+    sufijo = "" if args.modelo == "unet" else f"_{args.modelo}"
+    ruta_pred = args.dir_pred / f"prediccion_{args.tile}{sufijo}.tif"
+    ruta_etiqueta = Path(args.dir_mascaras) / f"etiqueta_mnc_{args.tile}_10m.tif"
 
-pred = leer_downsampled(ruta_pred, out_shape)
-target = REMAP_5[leer_downsampled(ruta_etiqueta, out_shape)]
+    with rasterio.open(ruta_pred) as src:
+        alto, ancho = src.height, src.width
+    escala = min(1.0, args.max_lado / max(alto, ancho))
+    out_shape = (max(1, int(alto * escala)), max(1, int(ancho * escala)))
 
-# Igual que 6_generar_comparacion_visual.py: el mapa de errores solo evalua
-# sobre clases de cultivo (Maiz/Soja/Mani) -- Fondo y NoData quedan grises,
-# porque el interes real es donde se equivoca el modelo entre cultivos.
-mapa_error = np.zeros((*target.shape, 3), dtype=np.uint8)
-mascara = target > 1
-mapa_error[mascara & (target == pred)] = [0, 200, 0]
-mapa_error[mascara & (target != pred)] = [200, 0, 0]
-mapa_error[~mascara] = [50, 50, 50]
+    pred = leer_downsampled(ruta_pred, out_shape)
+    target = REMAP_5[leer_downsampled(ruta_etiqueta, out_shape)]
 
-acc = (pred[mascara] == target[mascara]).mean() * 100 if mascara.sum() > 0 else float("nan")
+    # Igual que 6_generar_comparacion_visual.py: el mapa de errores solo evalua
+    # sobre clases de cultivo (Maiz/Soja/Mani) -- Fondo y NoData quedan grises,
+    # porque el interes real es donde se equivoca el modelo entre cultivos.
+    mapa_error = np.zeros((*target.shape, 3), dtype=np.uint8)
+    mascara = target > 1
+    mapa_error[mascara & (target == pred)] = [0, 200, 0]
+    mapa_error[mascara & (target != pred)] = [200, 0, 0]
+    mapa_error[~mascara] = [50, 50, 50]
 
-fig, axes = plt.subplots(1, 3, figsize=(18, 7))
-fig.suptitle(f"Inferencia vs. etiqueta — Tile {args.tile} ({args.modelo})\n"
-             f"Accuracy en clases de cultivo: {acc:.1f}%", fontsize=13)
-axes[0].imshow(clase_a_rgb(target)); axes[0].set_title("Etiqueta (real)"); axes[0].axis('off')
-axes[1].imshow(clase_a_rgb(pred));   axes[1].set_title("Inferencia (prediccion)"); axes[1].axis('off')
-axes[2].imshow(mapa_error);          axes[2].set_title("Mapa de errores\n(Verde=Acierto, Rojo=Error, Gris=Fondo)"); axes[2].axis('off')
+    acc = (pred[mascara] == target[mascara]).mean() * 100 if mascara.sum() > 0 else float("nan")
 
-leyenda = [Patch(color=[c/255 for c in COLORES[k]], label=v) for k, v in NOMBRES.items()]
-fig.legend(handles=leyenda, loc='lower center', ncol=4, fontsize=10, bbox_to_anchor=(0.5, -0.02))
+    fig, axes = plt.subplots(1, 3, figsize=(18, 7))
+    fig.suptitle(f"Inferencia vs. etiqueta — Tile {args.tile} ({args.modelo})\n"
+                 f"Accuracy en clases de cultivo: {acc:.1f}%", fontsize=13)
+    axes[0].imshow(clase_a_rgb(target)); axes[0].set_title("Etiqueta (real)"); axes[0].axis('off')
+    axes[1].imshow(clase_a_rgb(pred));   axes[1].set_title("Inferencia (prediccion)"); axes[1].axis('off')
+    axes[2].imshow(mapa_error);          axes[2].set_title("Mapa de errores\n(Verde=Acierto, Rojo=Error, Gris=Fondo)"); axes[2].axis('off')
 
-plt.tight_layout()
-args.dir_salida.mkdir(parents=True, exist_ok=True)
-ruta_salida = args.dir_salida / f"comparacion_inferencia_{args.tile}_{args.modelo}.png"
-plt.savefig(ruta_salida, dpi=140, bbox_inches='tight')
-plt.close()
-print(f"Guardado: {ruta_salida}")
+    leyenda = [Patch(color=[c/255 for c in COLORES[k]], label=v) for k, v in NOMBRES.items()]
+    fig.legend(handles=leyenda, loc='lower center', ncol=4, fontsize=10, bbox_to_anchor=(0.5, -0.02))
+
+    plt.tight_layout()
+    args.dir_salida.mkdir(parents=True, exist_ok=True)
+    ruta_salida = args.dir_salida / f"comparacion_inferencia_{args.tile}_{args.modelo}.png"
+    plt.savefig(ruta_salida, dpi=140, bbox_inches='tight')
+    plt.close()
+    print(f"Guardado: {ruta_salida}")
+
+
+if __name__ == "__main__":
+    main()
