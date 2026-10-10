@@ -1,5 +1,6 @@
 """
-Tabla de metricas por clase sobre los tiles de TEST, calculada contra la
+Herramienta histórica oct-abr (20HLJ/20HLK); para TEST vigente usar
+evaluar_test_actual.py. Tabla de metricas por clase calculada contra la
 inferencia completa en disco (el GeoTIFF que escribe 2_inferencia.py), no
 sobre el mosaico de parches de 6_generar_comparacion_visual.py.
 
@@ -13,6 +14,9 @@ Uso:
 """
 import argparse
 from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from utils.rutas import LEGACY_PREDICTIONS
 
 import numpy as np
 import rasterio
@@ -34,6 +38,7 @@ parser.add_argument("--modelo", default="fcrtransunet",
                      choices=["unet", "transunet", "utae", "fcrtransunet"])
 parser.add_argument("--tiles", nargs="+", default=["20HLJ", "20HLK"])
 parser.add_argument("--dir_mascaras", default="./mascaras_procesadas")
+parser.add_argument("--dir-pred", type=Path, default=LEGACY_PREDICTIONS)
 args = parser.parse_args()
 
 sufijo = "" if args.modelo == "unet" else f"_{args.modelo}"
@@ -45,7 +50,7 @@ def confusion_tile(tile):
     """Acumula la confusion leyendo por bloques: el tile entero (10980^2) en
     int64 no entra comodo en memoria junto con la etiqueta."""
     conf = np.zeros((n, n), dtype=np.int64)
-    ruta_pred = Path(f"./prediccion_{tile}{sufijo}.tif")
+    ruta_pred = args.dir_pred / f"prediccion_{tile}{sufijo}.tif"
     ruta_lab = Path(args.dir_mascaras) / f"etiqueta_mnc_{tile}_10m.tif"
     with rasterio.open(ruta_pred) as sp, rasterio.open(ruta_lab) as sl:
         alto, ancho = sp.height, sp.width

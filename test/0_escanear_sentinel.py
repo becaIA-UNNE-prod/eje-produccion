@@ -1,6 +1,9 @@
 import os
 import json
 from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from utils.rutas import RUN_DIR
 
 def mapear_estructura_sentinel(base_path):
     print(f"Escaneando directorio: {base_path}...\n")
@@ -52,7 +55,9 @@ if __name__ == "__main__":
         print(f"Total de archivos de bandas (.jp2) indexados: {total}\n")
         
         # Exportar a JSON para tener un registro estructurado
-        output_file = "estructura_sentinel2.json"
+        from pathlib import Path
+        output_file = RUN_DIR / 'inventarios/estructura_sentinel2.json'
+        output_file.parent.mkdir(parents=True, exist_ok=True)
         with open(output_file, 'w') as f:
             json.dump(datos, f, indent=4)
         

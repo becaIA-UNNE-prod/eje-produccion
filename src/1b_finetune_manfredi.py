@@ -27,7 +27,7 @@ TILE_MANFREDI = "20HMK"
 
 DIR_EXP = f"{BASE_DIR}/exp_manfredi_ft"
 
-# 5 clases: 0=NoData, 1=Fondo, 2=Maiz, 3=Soja, 4=Mani (sin Sorgo, ver README_MNC.md)
+# 5 clases: 0=NoData, 1=Fondo, 2=Maiz, 3=Soja, 4=Mani (sin Sorgo, ver docs/README_MNC.md)
 NUM_CLASSES   = 5
 BATCH_SIZE    = 16
 EPOCHS        = 30

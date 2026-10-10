@@ -1,11 +1,26 @@
-# misc
-dataset/
-mascaras_procesadas/
-pesos/
-nohup.out
-prediccion_*.tif
+# Datos y entorno operativo existentes
+/dataset
+/mascaras_procesadas
+/pesos
+/.venv
 
-# Python-generated files
+# Salidas por corrida: solo versionar el índice
+/artifacts/*
+!/artifacts/README.md
+
+# Evitar que vuelvan a versionarse salidas sueltas en la raíz
+/*.png
+/*.tif
+/*.log
+/*.out
+/logs.txt
+/estructura_sentinel2.json
+/baseline_sin_2017/
+/previo_20260918_mesesmal/
+/resultados_test_actual_comparacion_*/
+*.bak
+
+# Python
 __pycache__/
 *.py[oc]
 build/
@@ -13,12 +28,5 @@ dist/
 wheels/
 *.egg-info
 
-# Virtual environments
-.venv
-
-# Salidas y backups locales de experimentos
-/baseline_sin_2017/
-/previo_20260918_mesesmal/
-/comparacion_*.png
-/prediccion_*.png
-*.bak
+# Entradas físicas en /mnt; aliases locales y TIFF fuera de Git
+/data/

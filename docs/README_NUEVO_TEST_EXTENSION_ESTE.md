@@ -65,8 +65,11 @@ La recuperación corre nuevamente con nohup y &. Reutiliza los compuestos y las 
 
 ## Cierre confirmado el 10/10/2026
 
-La recuperación y evaluación finalizaron el **09/10/2026 a las 20:34:27** (Argentina), código de salida 0. Se completaron ocho inferencias, 48 compuestos auditados y 16 máscaras auditadas. Los resultados se copiaron a [resultados_nuevo_test_extension_este](resultados_nuevo_test_extension_este/), con 17 figuras PNG, JSON de métricas y CSV. No quedaron procesos de esta preparación activos.
+La recuperación y evaluación finalizaron el **09/10/2026 a las 20:34:27** (Argentina), código de salida 0. Se completaron ocho inferencias, 48 compuestos auditados y 16 máscaras auditadas. Los resultados se copiaron a `resultados_nuevo_test_extension_este/`, con 17 figuras PNG, JSON de métricas y CSV. No quedaron procesos de esta preparación activos.
 
 Las mejoras logradas fueron: 20HNH marzo de 2021 pasó de 98,56 % a 100 % de cobertura con datos; 20HNJ marzo de 2019 pasó de 93,71 % a 93,88 % despejado y mantuvo 100 % con datos. Este último aún contiene aproximadamente 6,12 % rellenado por el criterio de menor azul y se conserva como limitación de calidad; no es corrupción del TIFF.
 
 La configuración del nuevo TEST permanece separada del entrenador original. No se inició un nuevo entrenamiento.
+
+La ruta de copia anterior es histórica. Para localizar la preparación remota actual,
+consultar `preparacion_base` en [la configuración vigente](../config/split_extension_este.json).

@@ -22,6 +22,7 @@ import sys
 
 sys.path.append(os.path.abspath("."))
 from utils.model import SimpleUNet, TransUNet, UTAE, FCRTransUNet
+from utils.rutas import LEGACY_PREDICTIONS
 
 def generar_mapa_clasificacion():
     # Configuración alineada con el pipeline de entrenamiento vigente (1_train_cordoba.py)
@@ -39,7 +40,7 @@ def generar_mapa_clasificacion():
                          help="meses AAAAMM en el orden de entrenamiento (default: 201910..202004)")
     parser.add_argument("--dir-exp", default=None,
                          help="dir con best_model.pth (default: exp_cordoba_[<modelo>_]f16)")
-    parser.add_argument("--dir-salida", default=".",
+    parser.add_argument("--dir-salida", default=str(LEGACY_PREDICTIONS),
                          help="dir donde escribir prediccion_<TILE>[_<modelo>].tif")
     args = parser.parse_args()
 

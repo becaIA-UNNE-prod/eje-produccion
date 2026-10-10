@@ -4,7 +4,7 @@ unico lugar:
   - Curva de error: Val Loss / Val Accuracy por epoca, superpuestas (un color
     por modelo), leidas del historial.npy que ya guarda cada entrenamiento.
   - Mapa de comparacion: Target + prediccion de cada modelo, lado a lado,
-    sobre un tile (por default uno de TEST, para que sea evaluacion real).
+    sobre un tile del TEST histórico oct-abr; no evalúa el TEST vigente.
 
 Uso:
     python3 src/8_comparar_modelos.py --tile 20HLJ
@@ -21,6 +21,7 @@ from matplotlib.patches import Patch
 import sys, os
 sys.path.append(os.path.abspath("."))
 from utils.model import SimpleUNet, TransUNet, UTAE, FCRTransUNet
+from utils.rutas import LEGACY_FIGURES
 
 BASE_DIR = "/mnt/yacy_1/prod/ferreyra/dataset"
 # Mismo orden en el que se fueron probando en la sesion (ver docstrings de
@@ -138,9 +139,10 @@ if __name__ == "__main__":
     parser.add_argument("--dir_train", default="/mnt/yacy_1/prod/ferreyra/dataset/train_cordoba_f16")
     parser.add_argument("--prefijo", default="dataset_")
     parser.add_argument("--n_clases", type=int, default=5)
-    parser.add_argument("--salida_dir", default=".")
+    parser.add_argument("--salida_dir", default=str(LEGACY_FIGURES))
     args = parser.parse_args()
 
+    Path(args.salida_dir).mkdir(parents=True, exist_ok=True)
     graficar_curvas(f"{args.salida_dir}/comparacion_curvas.png")
     graficar_mapa(args.tile, args.dir_train, args.prefijo, args.n_clases,
                   f"{args.salida_dir}/comparacion_mapa_{args.tile}.png")

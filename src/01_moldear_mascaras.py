@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 import rasterio
 from rasterio.warp import reproject, Resampling
 
@@ -35,7 +36,7 @@ def generar_mascara_10m(ruta_etiqueta_30m, ruta_referencia_s2, ruta_salida):
 
 if __name__ == "__main__":
     # Mantengo el TIF_ORIGINAL asumiendo que sigues usando la misma etiqueta base de 30m
-    TIF_ORIGINAL = "./Nivel3_28_dic_2018_30m_completo.tif"
+    TIF_ORIGINAL = Path(__file__).resolve().parents[1] / "data/referencias/Nivel3_28_dic_2018_30m_completo.tif"
     DIR_SALIDA = "./mascaras_procesadas"
     os.makedirs(DIR_SALIDA, exist_ok=True)
 

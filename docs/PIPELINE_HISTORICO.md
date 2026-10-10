@@ -1,3 +1,5 @@
+> Referencia histórica de etapas y corridas. Para el flujo vigente, leer [TEST actual](README_TEST_ACTUAL.md), [multicampaña](README_MULTICAMPANA.md) y [CONTRIBUTING](../CONTRIBUTING.md). Las menciones a TEST 20HLK/20HLJ describen el flujo histórico.
+
 # Carpeta `src/` — Pipeline de clasificación de cultivos (Córdoba, Sentinel-2)
 
 Este proyecto arma un pipeline de **clasificación de cultivos** (maíz, soja, maní, etc.) a partir de
@@ -206,7 +208,7 @@ para generar un mapa de clasificación en formato GeoTIFF de 1 sola banda (`uint
 - Autodetecta la cantidad de canales de entrada contando los composites mensuales disponibles (`meses * 4 bandas`).
 - Recorre la imagen en ventanas de 512x512, arma el mismo tipo de tensor de entrada que en entrenamiento
   (concatenación de bandas por mes, normalizado `/10000.0`), corre el modelo y escribe el `argmax` de la
-  predicción directamente en el TIF de salida (`./prediccion_<TILE>.tif`).
+  predicción directamente en el TIF de salida (`artifacts/runs/legacy_octabr/predicciones/prediccion_<TILE>.tif`).
 
 ---
 

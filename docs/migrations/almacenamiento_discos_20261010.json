@@ -1,0 +1,295 @@
+{
+  "fecha_utc": "20261010T134110Z",
+  "head": "0bbc25a1e8b935890216a344695d4813960a601e",
+  "backup": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/backups/traslado_20261010T134110Z",
+  "archivos_verificados": 7665,
+  "bytes_trasladados": 33512676945,
+  "movimientos": [
+    {
+      "origen": "/home1/ferreyra/cordoba_ia_unne/artifacts/archive",
+      "destino": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/artifacts/archive",
+      "archivos": 55,
+      "bytes": 1738596986
+    },
+    {
+      "origen": "/home1/ferreyra/cordoba_ia_unne/data/referencias",
+      "destino": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/referencias",
+      "archivos": 2,
+      "bytes": 21350745
+    },
+    {
+      "origen": "/home1/ferreyra/cordoba_ia_unne/pesos",
+      "destino": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/pesos",
+      "archivos": 1,
+      "bytes": 7595890
+    },
+    {
+      "origen": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas",
+      "destino": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras",
+      "archivos": 79,
+      "bytes": 3726784096
+    },
+    {
+      "origen": "/home1/ferreyra/cordoba_ia_unne/dataset",
+      "destino": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/datasets/legacy_repo",
+      "archivos": 3538,
+      "bytes": 27640997350
+    },
+    {
+      "origen": "/home1/ferreyra/cordoba_ia_unne/.venv",
+      "destino": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/envs/repo_uv",
+      "archivos": 3984,
+      "bytes": 321411425
+    },
+    {
+      "origen": "/home1/ferreyra/cordoba_ia_unne_backup_reorganizacion_20261010T132522Z",
+      "destino": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/backups/cordoba_ia_unne_backup_reorganizacion_20261010T132522Z",
+      "archivos": 6,
+      "bytes": 55940453
+    }
+  ],
+  "manifiesto_detallado": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/backups/traslado_20261010T134110Z/archivos.json",
+  "manifiesto_sha256": "0ac946cb78765a4b51dd5e2cf816479caf64749868e14e312db522bd3d5983bc",
+  "procedencia_actualizada": [
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_2021_f16/dataset_20HLG_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc2021_20HLG_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc2021_20HLG_10m.tif",
+      "original_sha256": "6c6b38f55fd50b433f645683149b186976e8545f381d5874f11eca8ea0fe7aa0",
+      "actual_sha256": "98704957cdb51f8fb3feae5c04e062714c607c3e72d28f55f62f92961590eb1e"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_2021_f16/dataset_20HMH_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc2021_20HMH_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc2021_20HMH_10m.tif",
+      "original_sha256": "e4ce85ceafff729cf30691672db80ae92052b64397761c4efa2b156357f7734c",
+      "actual_sha256": "6732a9c1c3f5bddad590e3d424cea0f9b1ca74f93902b031f74456371e86fe81"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_2021_f16/dataset_20HKJ_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc2021_20HKJ_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc2021_20HKJ_10m.tif",
+      "original_sha256": "aca95719f40942d6385c9db946b93a07f86f425a42b0654a040452b9173e824e",
+      "actual_sha256": "7788e10d3b7f04661cfb20219fea6beb23f99a3899d75dcb1efe6528851aa871"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_2021_f16/dataset_20HMJ_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc2021_20HMJ_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc2021_20HMJ_10m.tif",
+      "original_sha256": "450a7e8e0f9d1604e64501679f6279f22f3e9c4c2f8ccae6ad5ab521efdc25ca",
+      "actual_sha256": "1d883a03e5e68b886629fb8de864b4c56a066299e8c01dde29aef320674f2877"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_2021_f16/dataset_20HLK_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc2021_20HLK_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc2021_20HLK_10m.tif",
+      "original_sha256": "b7096f6f953062e32c0c5821fb8c6de67ca3b8bd7a8f1a8be8d99bf71fbd34ba",
+      "actual_sha256": "b869ea9477e1df540cec0032cab8ff9ab7be44af9703dad7a946f850a6aa6324"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_2021_f16/dataset_20JML_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc2021_20JML_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc2021_20JML_10m.tif",
+      "original_sha256": "9d742a1f43731fa52560a559ff2d66246fcab1212e870997332825cb8e95502b",
+      "actual_sha256": "9b1ec7c890b29e0788dcddac508c83dc083f1104f1c3e3448951e6ab8ec27807"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_2021_f16/dataset_20HNG_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc2021_20HNG_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc2021_20HNG_10m.tif",
+      "original_sha256": "841021f30b4bcb788c307bd4611552140f31e3b53d983b03c968b62691450d17",
+      "actual_sha256": "4dd3be867a7ef61c190cfac772a50f0e68c455f60f68a09c9ba71f09eff849f6"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_2021_f16/dataset_20HLJ_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc2021_20HLJ_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc2021_20HLJ_10m.tif",
+      "original_sha256": "740b315ddaf5b652e328a7d64363799a67cedb0d1a69fd096af912aa1c7bffce",
+      "actual_sha256": "dca3edfca429e97514cc3ed61ceb7edd32f2b1886cd983e12778c5c9796a5e5d"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_2021_f16/dataset_20HPG_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc2021_20HPG_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc2021_20HPG_10m.tif",
+      "original_sha256": "010d1cc9211634ce680cdf5b637e25f33548583717b89259a7098a2bd6730e68",
+      "actual_sha256": "7c2611e02f2945578c8f9112db0e5f31d6098cebf7b5e69abd1a564e25a17eed"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_2021_f16/dataset_20HPH_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc2021_20HPH_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc2021_20HPH_10m.tif",
+      "original_sha256": "d39da2e313ced335f4e40d21ba2c59b9805fac2698745658e9ec6b76bc2589cd",
+      "actual_sha256": "588bf90d543f6554585287a6df49b3d8ffd85adcab1590098960bf7f37ef4aba"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_2021_f16/dataset_20HLH_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc2021_20HLH_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc2021_20HLH_10m.tif",
+      "original_sha256": "22fe4145ff73c0fd2f4f5cdb4b614e9d51bd68002779fc20a66637c03de0ed00",
+      "actual_sha256": "842f6e0256cc627083eeb5a1645d50137aecf4a1ce61c0558135dabf36aa68e1"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_2021_f16/dataset_20HMK_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc2021_20HMK_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc2021_20HMK_10m.tif",
+      "original_sha256": "3aed25acf8587d13f4f24304ca3721882f1ecc742abe05cfe57dc68de1eb08db",
+      "actual_sha256": "72b7f5c09ed4fa720d35f440d276e2b94e56178d31bb3f478f5e52b299ad8c9b"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_2021_f16/dataset_20HKH_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc2021_20HKH_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc2021_20HKH_10m.tif",
+      "original_sha256": "1cd348c29557f132ae8fc6f37a30d3503b32cd6ffe4b7fdca3a603590cf17a7a",
+      "actual_sha256": "1a08aaa45b0c8324705c821217526aba1fae88e533ba69b77492966c1b943cb2"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_2021_f16/dataset_19HGC_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc2021_19HGC_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc2021_19HGC_10m.tif",
+      "original_sha256": "d1bc260af3ac400a9546feb2b3a9de65a80cb49a5e436c80a4493e9c8d30a222",
+      "actual_sha256": "d9dc361b9cbc9b59052a8154e1dbdd677039f883e178860ee71ede16a333eafe"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_2021_f16/dataset_20JNL_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc2021_20JNL_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc2021_20JNL_10m.tif",
+      "original_sha256": "271fef799204b2e4b184cba79fd88fed950c0909e5254bef52de45cfd6e04cc6",
+      "actual_sha256": "3002f90b983af331bdf8fb468b6a371432b0ca4bb861e2f320ad3c34150bd27e"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_2021_f16/dataset_20HMG_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc2021_20HMG_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc2021_20HMG_10m.tif",
+      "original_sha256": "d7363d9db6152fc88739788979cfe923f500e9365c36c0309a673fdc507fa716",
+      "actual_sha256": "854589fbb0973c579126147869497931ac87005841e5bb442ba972ab45f846c0"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_2021_f16/dataset_20HNK_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc2021_20HNK_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc2021_20HNK_10m.tif",
+      "original_sha256": "1a0bb03cbe0539b6141599f78428f0ed6c0e7c45c6e3bd476d1f44540e21dd6d",
+      "actual_sha256": "fe5092b9eaa5350066a62905b1f4a3ae9b8a6ea00514dbfb7344d4f8d9f6bdc2"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_1819_scl_f16/dataset_20HLG_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc1819_20HLG_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc1819_20HLG_10m.tif",
+      "original_sha256": "4adef015232ed7fd7b3426a7640d79e3b439d3e54d67aba4ca03050513939905",
+      "actual_sha256": "00b3ec458b3ec3b7855e0deb4b0a83cc711232e2dd5eb59b20d9b2a8eb1d4802"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_1819_scl_f16/dataset_20HMH_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc1819_20HMH_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc1819_20HMH_10m.tif",
+      "original_sha256": "2b2c081d899be295706e3a46da422b6caa08c0521d4b247b6dafcb2492e8cb45",
+      "actual_sha256": "68ea281fbf097107ac1aac16458b8e3cbc5cb6b4ced09423315600a67f5a465b"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_1819_scl_f16/dataset_20HKJ_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc1819_20HKJ_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc1819_20HKJ_10m.tif",
+      "original_sha256": "3b3cc6919b9ef785f13b664363b59f6073ccdd7b4db1ddb501bf0f7a02addb9a",
+      "actual_sha256": "0a596de05e7c1d9d22bed04b8cd1342534e3687c73688092c813eaf5cd6596ca"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_1819_scl_f16/dataset_20HMJ_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc1819_20HMJ_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc1819_20HMJ_10m.tif",
+      "original_sha256": "e06f28be9afde35ae248722cb0a710d89ef06b943e154b5a203874e210868836",
+      "actual_sha256": "2405a9da56b8500cce4c4af63c32b1bf074bb54fda5430326a8103ea9ff8accb"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_1819_scl_f16/dataset_20HLK_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc1819_20HLK_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc1819_20HLK_10m.tif",
+      "original_sha256": "55ddffb5165de3c253556d1a8fe063ce41bc265f772bba2b0e553a0d3181d4cb",
+      "actual_sha256": "d5e88b8b3ecd0037bf5b3ed4d89a894d56b6a4f0ce40388495faf5194df0b57d"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_1819_scl_f16/dataset_20JML_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc1819_20JML_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc1819_20JML_10m.tif",
+      "original_sha256": "7928f64e995bf3bfb41524fbfaa0c3172797572dcbe767b1828fb3f825adf2f3",
+      "actual_sha256": "7cf08c0dfced1f0f3888092d3eb3a22b5f1e138043dfc944084909c35cd5a8a3"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_1819_scl_f16/dataset_20HNG_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc1819_20HNG_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc1819_20HNG_10m.tif",
+      "original_sha256": "3b0f1092e91c04e4baf97c6406f9554b4e38f7183d7ea791c25c2e34d0f7fc92",
+      "actual_sha256": "7357286726c2e25ad72f413585893d7cda7cabbfd04eb2b268a2568ea6092473"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_1819_scl_f16/dataset_20HLJ_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc1819_20HLJ_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc1819_20HLJ_10m.tif",
+      "original_sha256": "7c4395d7cc92a75c6d6548fd9c6fd68c2f63f5f0282935c430565b1079966dd6",
+      "actual_sha256": "4fcc56be1b2dad3f62d8a7572ca71d326a44eac6b99a722da5e2a1ab2af69a0f"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_1819_scl_f16/dataset_20HPG_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc1819_20HPG_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc1819_20HPG_10m.tif",
+      "original_sha256": "efc69dd0127d1df966789fa2c7bfb5e455dedc3c18de3775b177b4ea1dd6e55a",
+      "actual_sha256": "91f809512c330d8aeb25c0b418e9d0f4f8bf22c1750a576b57b1fd4b496a221c"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_1819_scl_f16/dataset_20HPH_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc1819_20HPH_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc1819_20HPH_10m.tif",
+      "original_sha256": "cc76a2c560ae399d4d1d24b5cd6ba292711fe897410500a6b18d2340637973fb",
+      "actual_sha256": "169fa4f3fe40e1422e13eb57f9ccda0534c1d282afc4aeb824388de0fb850858"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_1819_scl_f16/dataset_20HLH_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc1819_20HLH_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc1819_20HLH_10m.tif",
+      "original_sha256": "a7e5cbef1d53df5f87290af717aee135fa9657e2b6a381ceba519255e158bd96",
+      "actual_sha256": "46da0498446b36b51065f3c6ad90a4e488c0c356e20989349b9b30db3e1ed51c"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_1819_scl_f16/dataset_20HMK_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc1819_20HMK_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc1819_20HMK_10m.tif",
+      "original_sha256": "bcaecf30da7cdb5d26f590dddf39befd7179f5c224c131f8e2c09d81ea2fe450",
+      "actual_sha256": "9e11f5dbaee135fa2299c8e4d90677e684144ecfa071ab5c71dbafab444ee40e"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_1819_scl_f16/dataset_20HKH_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc1819_20HKH_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc1819_20HKH_10m.tif",
+      "original_sha256": "fb2dd19aa244002c40acbfc1a73dd1370915f855183f740f2445569784f5a1cd",
+      "actual_sha256": "a8e22709a3fcda56501488b29b5282547319b54b141b1ee3c365c51ee3762fbd"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_1819_scl_f16/dataset_19HGC_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc1819_19HGC_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc1819_19HGC_10m.tif",
+      "original_sha256": "1d82ad4abd2939e1aa24de370cb482f81514b05023a5d78331c086baa837f185",
+      "actual_sha256": "b0b37645ad41b9eabd9a943fdbb8e71c5187836965b87c1baa8ba03cf2f57fe7"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_1819_scl_f16/dataset_20JNL_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc1819_20JNL_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc1819_20JNL_10m.tif",
+      "original_sha256": "afdafdefc22ce5ea33e1378900ef2a4a84c7c14259e8a84dbcd0267912984b6d",
+      "actual_sha256": "15763e9b21e4dde581caf0d8c6937bbc069189f77a1ae738439df25995279a95"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_1819_scl_f16/dataset_20HMG_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc1819_20HMG_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc1819_20HMG_10m.tif",
+      "original_sha256": "d806f3b28fe6960e39e26e3d614338b7330b4d73b0800b62752260b10e2bab03",
+      "actual_sha256": "0d45a09b9b07b1ca515fb8b0b0f81bd16fdb218344622bdf5d0bea68bea381ff"
+    },
+    {
+      "archivo": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_1819_scl_f16/dataset_20HNK_procedencia.json",
+      "mascara_anterior": "/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas/etiqueta_mnc1819_20HNK_10m.tif",
+      "mascara_actual": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/mascaras/etiqueta_mnc1819_20HNK_10m.tif",
+      "original_sha256": "6c9068809acb6dff3f9d6d286bde7d504fe03d7647519f3c372b92f1e95e728a",
+      "actual_sha256": "8db5336a1ae466b57ea6e821240ca3249090cd63eab9f6ba0673b4107750442c"
+    }
+  ],
+  "runs_root": "/mnt/yacy_3/prod_bis/ferreyra/cordoba_ia_unne/artifacts/runs",
+  "nota": "Originales retirados solo después de verificar SHA256 y mtime. Aliases conservan consumidores históricos; el TEST vigente conserva configuración y rutas originales."
+}

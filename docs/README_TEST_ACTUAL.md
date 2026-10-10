@@ -41,7 +41,7 @@ Log desde esta computadora:
 ssh floryacy 'tail -f /mnt/yacy_1/prod/ferreyra/extension_este_multicampana/ultima_comparacion_test_actual.log'
 ```
 
-Copia local automática de figuras y métricas: [resultados_test_actual_comparacion_20261010](resultados_test_actual_comparacion_20261010/). Los TIFF y pesos quedan en floryacy por tamaño.
+Copia local automática de figuras y métricas: [reporte del TEST vigente](../artifacts/reports/test_actual/). Los TIFF y pesos quedan en floryacy por tamaño.
 
 El cierre se registra en `inferencia.exitcode`; la actualización final de títulos y leyendas se registra en `figuras.exitcode`. Ambos deben valer 0 antes de la copia local. `progreso.json` muestra el mapa que se está procesando.
 

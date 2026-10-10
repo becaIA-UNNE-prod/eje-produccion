@@ -10,7 +10,7 @@ maquina remota y no quedo versionado (ver bash_history: aparecia
 reemplazo limpio, mismo formato de salida (.npy sin comprimir, X float16,
 Y uint8, listo para TileDatasetMmap sin pasar por 03b_convertir_datasets_a_mmap.py).
 
-Tabla de remapeo (5 clases, ver README_MNC.md, Tabla 2 del informe MNC-INTA
+Tabla de remapeo (5 clases, ver docs/README_MNC.md, Tabla 2 del informe MNC-INTA
 verano 2020): Maiz=2, Soja=3, Mani=4, todo el resto de codigos IDVER
 documentados (incluido Sorgo, que se excluye a proposito como clase propia)
 colapsa a Fondo=1, y 255 (Sin datos) a NoData=0. Cualquier codigo IDVER no
@@ -60,7 +60,7 @@ STEP = 256
 # forman parte de TILES_TRAIN/TILE_VAL/TILES_TEST en 1_train_cordoba.py).
 TILES_DEFAULT = ["20HKH", "20HMG", "20HNG", "20HPG", "20HPH", "20JNL"]
 
-# Leyenda oficial MNC-INTA verano 2020 (Tabla 2, ver README_MNC.md).
+# Leyenda oficial MNC-INTA verano 2020 (Tabla 2, ver docs/README_MNC.md).
 REMAP_5 = np.zeros(256, dtype=np.int64)
 REMAP_5[10] = 2   # Maiz
 REMAP_5[11] = 3   # Soja

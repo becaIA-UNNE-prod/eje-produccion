@@ -10,6 +10,9 @@ Uso:
 """
 import argparse
 from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from utils.rutas import LEGACY_PREDICTIONS, LEGACY_FIGURES
 
 import numpy as np
 import rasterio
@@ -53,10 +56,12 @@ parser.add_argument("--modelo", default="fcrtransunet",
                      choices=["unet", "transunet", "utae", "fcrtransunet"])
 parser.add_argument("--dir_mascaras", default="./mascaras_procesadas")
 parser.add_argument("--max_lado", type=int, default=2048)
+parser.add_argument("--dir-pred", type=Path, default=LEGACY_PREDICTIONS)
+parser.add_argument("--dir-salida", type=Path, default=LEGACY_FIGURES)
 args = parser.parse_args()
 
 sufijo = "" if args.modelo == "unet" else f"_{args.modelo}"
-ruta_pred = Path(f"./prediccion_{args.tile}{sufijo}.tif")
+ruta_pred = args.dir_pred / f"prediccion_{args.tile}{sufijo}.tif"
 ruta_etiqueta = Path(args.dir_mascaras) / f"etiqueta_mnc_{args.tile}_10m.tif"
 
 with rasterio.open(ruta_pred) as src:
@@ -89,7 +94,8 @@ leyenda = [Patch(color=[c/255 for c in COLORES[k]], label=v) for k, v in NOMBRES
 fig.legend(handles=leyenda, loc='lower center', ncol=4, fontsize=10, bbox_to_anchor=(0.5, -0.02))
 
 plt.tight_layout()
-ruta_salida = f"./comparacion_inferencia_{args.tile}_{args.modelo}.png"
+args.dir_salida.mkdir(parents=True, exist_ok=True)
+ruta_salida = args.dir_salida / f"comparacion_inferencia_{args.tile}_{args.modelo}.png"
 plt.savefig(ruta_salida, dpi=140, bbox_inches='tight')
 plt.close()
 print(f"Guardado: {ruta_salida}")

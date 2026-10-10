@@ -25,7 +25,7 @@ import rasterio
 from rasterio.warp import reproject, Resampling
 
 RAIZ = Path(__file__).resolve().parent.parent
-RUTA_NIVEL3 = RAIZ / "Nivel3_28_dic_2018_30m_completo.tif"
+RUTA_NIVEL3 = RAIZ / "data/referencias/Nivel3_28_dic_2018_30m_completo.tif"
 DIR_SALIDA = Path("/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas")
 NODATA = 0
 

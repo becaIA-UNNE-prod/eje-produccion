@@ -10,6 +10,9 @@ Uso:
 """
 import argparse
 from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from utils.rutas import LEGACY_FIGURES
 
 import numpy as np
 import rasterio
@@ -26,7 +29,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("tif", help="Ruta al GeoTIFF de clasificacion (1 banda, 0-4)")
 parser.add_argument("--max_lado", type=int, default=2048,
                      help="Lado maximo (px) de la imagen de salida (downsampling)")
-parser.add_argument("--salida", default=None, help="Ruta de salida (default: mismo nombre, .png)")
+parser.add_argument("--salida", default=None, help="Ruta de salida (default: figuras/ de CORDOBA_RUN_DIR)")
 args = parser.parse_args()
 
 ruta_tif = Path(args.tif)
@@ -40,7 +43,8 @@ img = np.zeros((*mapa.shape, 3), dtype=np.uint8)
 for clase, color in COLORES.items():
     img[mapa == clase] = color
 
-ruta_salida = Path(args.salida) if args.salida else ruta_tif.with_suffix(".png")
+ruta_salida = Path(args.salida) if args.salida else LEGACY_FIGURES / ruta_tif.with_suffix(".png").name
+ruta_salida.parent.mkdir(parents=True, exist_ok=True)
 
 fig, ax = plt.subplots(figsize=(10, 10))
 ax.imshow(img)
