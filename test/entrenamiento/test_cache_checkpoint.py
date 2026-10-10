@@ -1,6 +1,5 @@
 import ast
 import contextlib
-import importlib.util
 import io
 import json
 import sys
@@ -14,9 +13,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 from utils.cache_lectura import firma, cargar_cache
 from utils.multicampana import validar_dataset, cargar_campanas
-spec = importlib.util.spec_from_file_location('optimizar', ROOT/'src/optimizar_lectura_multicampana.py')
-optimizar = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(optimizar)
+from src.mantenimiento import optimizar_lectura_multicampana as optimizar
 
 
 class CacheYCheckpointTest(unittest.TestCase):

@@ -18,3 +18,10 @@ El catálogo no define TRAIN/VAL/TEST: el split vigente sigue en
 config/split_extension_este.json; preparación histórica mantiene 17 tiles.
 Los wrappers shell y otros generadores aún tienen configuración propia
 y se migrarán por separado.
+
+## Conversión mmap
+
+`convertir_datasets_a_mmap.py` convierte NPZ a pares X/Y con verificación
+y temporales. Entrada: `python -m src.datos.convertir_datasets_a_mmap DIR`.
+El script numerado anterior conserva compatibilidad; --borrar-original sigue
+siendo explícito y se aplica tras verificar. Los pares existentes se omiten.

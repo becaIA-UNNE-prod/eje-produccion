@@ -12,7 +12,7 @@ class TileDatasetMmap(torch.utils.data.Dataset):
     el parche que pide ese batch puntual (el resto del archivo lo administra
     el page cache del sistema operativo, no el heap de Python). Los .npy deben
     generarse sin comprimir (ver 03_generar_datasets_npz.py /
-    03b_convertir_datasets_a_mmap.py) -- un .npz comprimido no se puede
+    src/datos/convertir_datasets_a_mmap.py) -- un .npz comprimido no se puede
     memory-mapear, numpy siempre descomprime el array entero al leerlo.
 
     remap: tabla opcional (np.array) para remapear las clases de Y al vuelo.

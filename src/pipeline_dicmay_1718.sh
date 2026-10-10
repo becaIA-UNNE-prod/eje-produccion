@@ -97,7 +97,7 @@ $PY src/03c_generar_dataset_cordoba_f16.py --leyenda nivel3 --tiles $TILES_TRAIN
 # Mismos pesos por clase que los modelos base (--sin-2017), para que la unica
 # diferencia sea la campana sumada. Los recalculados quedan solo de referencia.
 paso "pesos por clase (2019-2020 + 2017-2018, solo referencia)"
-$PY src/0b_calcular_pesos.py --dirs $DIR_TRAIN $DIR_TRAIN_1718 | tee $LOGS/pesos.log
+$PY -m src.entrenamiento.calcular_pesos --dirs $DIR_TRAIN $DIR_TRAIN_1718 | tee $LOGS/pesos.log
 
 for M in $MODELOS; do
     EXP=$Y3/dataset/exp_cordoba_dicmay_con1718_${M}_f16

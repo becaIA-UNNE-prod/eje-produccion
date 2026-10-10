@@ -152,8 +152,11 @@ cargar modelos al importar. Conservan sus canales, remapeos y cálculos original
 Los comandos de pesos y conversión mmap también separan crear_parser() y
 main(argv=None): importarlos no cuenta etiquetas ni convierte o borra archivos.
 Conservan el modo histórico de pesos, TRAIN con --dirs y las verificaciones de
-conversión. Queda confirmado mejorar_calidad_extension.py, que accede a sys.argv
-y ejecuta mantenimiento al importar. Otros ya protegen su ejecución con
+conversión. mejorar_calidad_extension.py también separa parser, main y mantenimiento
+por compuesto con rutas explícitas; importarlo no descarga ni reemplaza archivos.
+Sus respaldos y el rechazo de cobertura empeorada se verifican con fixtures y mocks.
+Los tres efectos operativos confirmados al importar quedaron resueltos; esto no
+constituye una auditoría completa de todos los imports. Otros ya protegen su ejecución con
 __main__, aunque no todos exponen una función main().
 Por eso no se deben importar indiscriminadamente para hacer un inventario.
 
@@ -172,3 +175,184 @@ Por eso no se deben importar indiscriminadamente para hacer un inventario.
 Cada paso requiere un diff acotado y las pruebas pertinentes. Un movimiento de
 archivos no justifica relanzar entrenamiento o inferencia completos ni cambiar
 dependencias del entorno operativo.
+
+## Estructura objetivo y plan de traslado
+
+Este es el diseño propuesto para los próximos pasos; las rutas de las tablas
+anteriores siguen siendo las actuales hasta migrar cada grupo. Cada traslado
+se entrega por separado, conservando contratos y consumidores. Los nombres de
+módulos nuevos describen su responsabilidad y no llevan numeración de pipeline.
+
+```text
+model/                        arquitecturas y bloques (ya organizado)
+src/
+├── datos/                    fuentes, máscaras, composites, arrays y preparación
+├── entrenamiento/            entrenador y cálculo de pesos TRAIN
+├── inferencia/               inferencia raster y comando de tile
+├── evaluacion/               métricas y protocolo TEST vigente
+├── figuras/                  figuras compartidas y regeneración vigente
+├── mantenimiento/            recuperación, calidad y optimización operativa
+├── historico/                comandos de protocolos anteriores o específicos
+└── soporte/                  operaciones comunes sin protocolo científico
+scripts/
+├── preparacion/              wrappers de preparación por campaña/extensión
+├── entrenamiento/            wrapper multicampaña
+├── evaluacion/               wrapper de inferencia/evaluación vigente
+├── mantenimiento/            wrappers de recuperación y optimización
+└── historico/                pipelines y evaluación de protocolos anteriores
+```
+
+Cada dominio contiene implementación importable y, cuando haga falta, un módulo
+de entrada con `crear_parser()` y `main(argv=None)`. No crear un segundo árbol
+de implementaciones en `cli/`. Mantener los módulos compartidos existentes.
+`utils/` conserva compatibilidad; su reorganización completa queda fuera de este
+paso. Las arquitecturas permanecen en `model/`.
+
+### Destinos de Python
+
+Los orígenes siguientes son relativos a la raíz actual de `src/`; los destinos
+son relativos a `src/`. Son destinos previstos, no archivos creados todavía.
+
+| Origen | Destino previsto |
+|---|---|
+| `00_descargar_stac.py` | `datos/descargar_stac.py` |
+| `01_moldear_mascaras.py` | `datos/moldear_mascaras.py` |
+| `01b_mascaras_mnc_2018_2019.py` | `datos/mascaras_mnc_2018_2019.py` |
+| `01c_mascaras_nivel3_2017_2018.py` | `datos/mascaras_nivel3_2017_2018.py` |
+| `01d_mascaras_mnc_2020_2021.py` | `datos/mascaras_mnc_2020_2021.py` |
+| `02_composites_mensuales.py` | `datos/composites_mensuales.py` |
+| `02b_composites_2019_2020.py` | `datos/composites_2019_2020.py` |
+| `02c_composites_cog.py` | `datos/composites_cog.py` |
+| `02d_composites_scl.py` | `datos/composites_scl.py` |
+| `03_generar_datasets_npz.py` | `datos/generar_datasets_npz.py` |
+| `03b_convertir_datasets_a_mmap.py` | `datos/convertir_datasets_a_mmap.py` |
+| `03c_generar_dataset_cordoba_f16.py` | `datos/generar_dataset_cordoba_f16.py` |
+| `03d_generar_dataset_cordoba_2017_f16.py` | `datos/generar_dataset_cordoba_2017_f16.py` |
+| `preparar_multicampana.py` | `datos/preparar_multicampana.py` |
+| `0b_calcular_pesos.py` | `entrenamiento/calcular_pesos.py` |
+| `1_train_cordoba.py` | `entrenamiento/entrenar_cordoba.py` |
+| `2_inferencia.py` | `inferencia/inferir_tile.py` |
+| `evaluar_test_actual.py` | `evaluacion/test_actual.py` |
+| `regenerar_figuras_test_actual.py` | `figuras/regenerar_test_actual.py` |
+| `mejorar_calidad_extension.py` | `mantenimiento/mejorar_calidad_extension.py` |
+| `recuperar_multicampana.py` | `mantenimiento/recuperar_multicampana.py` |
+| `optimizar_lectura_multicampana.py` | `mantenimiento/optimizar_lectura_multicampana.py` |
+| `0_verificar_pipeline.py` | `historico/verificar_pipeline.py` |
+| `1b_finetune_manfredi.py` | `historico/finetune_manfredi.py` |
+| `4_generar_metricas.py` | `historico/generar_metricas.py` |
+| `5_generar_matriz_confusion.py` | `historico/generar_matriz_confusion.py` |
+| `6_generar_comparacion_visual.py` | `historico/generar_comparacion_visual.py` |
+| `7_visualizar_inferencia.py` | `historico/visualizar_inferencia.py` |
+| `8_comparar_modelos.py` | `historico/comparar_modelos.py` |
+| `9_comparar_inferencia_etiqueta.py` | `historico/comparar_inferencia_etiqueta.py` |
+| `10_metricas_test.py` | `historico/metricas_test.py` |
+| `11_evaluar_contra_mnc.py` | `historico/evaluar_contra_mnc.py` |
+| `12_comparar_con_1718.py` | `historico/comparar_con_1718.py` |
+| `evaluar_ano_no_visto.py` | `historico/evaluar_ano_no_visto.py` |
+
+Dos comandos mezclan responsabilidades y necesitan separación propia:
+
+- `preparar_evaluar_extension.py`: preparación en `datos/preparar_extension.py`
+  y evaluación específica en `evaluacion/evaluar_extension.py`. Conservar su
+  orquestación CLI mediante compatibilidad; no equiparar este protocolo al
+  evaluador canónico ni duplicar helpers ya extraídos.
+- `postprocesar_multicampana.py`: conservar el despacho vigente hacia
+  `evaluacion/test_actual.py`; ubicar el protocolo anterior en
+  `historico/postprocesar_multicampana.py`. Revisar figuras aún embebidas y
+  exports consumidos por `evaluar_ano_no_visto.py` antes de separarlo.
+
+Los comandos de figuras 4–10 se ubican inicialmente en `historico/` por sus
+defaults y consumidores. Un helper reutilizable pertenece a `figuras/`,
+`evaluacion/` o `inferencia/`; no se convierte todo el comando en vigente por
+compartir un cálculo. Las variantes de preparación permanecen en `datos/` con
+sus campañas explícitas, sin consolidar meses, leyendas o métodos diferentes.
+
+### Destinos de shell
+
+Conservar los nombres de archivo al migrar cada wrapper:
+
+| Directorio objetivo | Archivos actuales en `src/` |
+|---|---|
+| `scripts/preparacion/` | `preparar_multicampana.sh`, `descargar_extension_este.sh`, `preparar_extension_este.sh`, `descargar_2020_2021_scl.sh`, `rehacer_2018_2019_scl.sh` |
+| `scripts/entrenamiento/` | `entrenar_multicampana_unet.sh` |
+| `scripts/evaluacion/` | `inferencia_multicampana.sh` |
+| `scripts/mantenimiento/` | `recuperar_extension_este.sh`, `optimizar_lectura_multicampana.sh` |
+| `scripts/historico/` | `pipeline_dicmay.sh`, `pipeline_dicmay_1718.sh`, `evaluar_dicmay.sh`, `preparar_ano_no_visto.sh` |
+
+`preparar_extension_este.sh` debe seguir documentado como preparación **más
+evaluación**; la carpeta no modifica su comportamiento. El wrapper de
+recuperación también continúa hacia preparación/evaluación.
+
+### Compatibilidad y orden de implementación
+
+1. Migrar pesos TRAIN y conversión mmap: módulos pequeños ya separables y con
+   pruebas sintéticas. Es el primer grupo recomendado.
+2. Migrar mantenimiento de calidad y su wrapper; luego recuperación y
+   optimización tras revisar sus cargas por ruta y gestión de procesos.
+3. Migrar preparación por grupos: máscaras compartidas, STAC/composites,
+   generadores y coordinación. Resolver cargas `01c -> 01b`, preparación
+   `-> 01d` y recuperación `-> preparación/02d` con imports de módulos.
+4. Migrar evaluador vigente/regenerador y entrenador con sus consumidores;
+   conservar cierre TEST, lock, estado y comportamiento de wrappers.
+5. Separar comandos mixtos y migrar históricos; actualizar el índice para
+   mostrar ubicaciones reales y retirar este plan cuando esté implementado.
+
+Al mover una entrada con consumidores, dejar en la ruta anterior un wrapper
+delgado que delegue a la implementación única. Preservar los exports importados
+por pruebas o comandos, no solamente `main`. Los consumidores del repositorio
+se actualizan a las rutas nuevas en el mismo paso; no mantener dos versiones.
+El objetivo de la raíz de `src/` es índice, inicialización y esos wrappers de
+compatibilidad documentados, sin lógica de negocio duplicada.
+
+Para módulos nuevos, preferir `python -m src.<dominio>.<modulo>` desde la raíz.
+Los wrappers anteriores mantienen ejecución directa y resuelven la raíz por
+`__file__`, sin depender del directorio actual. Recalcular también la raíz de
+shell al cambiar su profundidad. No insertar `src/` globalmente en `sys.path`:
+puede colisionar con paquetes de `test/`. Revisar antes de mover scripts que
+se relanzan a sí mismos, como optimización de lectura.
+
+En cada grupo, buscar consumidores en código, pruebas, shell, configuración y
+documentación; verificar imports, ayuda, salidas sintéticas y rutas. Mantener
+relatos históricos con sus rutas fechadas, añadiendo aclaraciones cuando sean
+necesarias. No lanzar operaciones ML o mantenimiento para validar un traslado.
+
+## Traslados implementados
+
+| Implementación actual | Entrada anterior compatible |
+|---|---|
+| `entrenamiento/calcular_pesos.py` | `0b_calcular_pesos.py` |
+| `datos/convertir_datasets_a_mmap.py` | `03b_convertir_datasets_a_mmap.py` |
+
+Ejecutar desde la raíz con `python -m src.entrenamiento.calcular_pesos` o
+`python -m src.datos.convertir_datasets_a_mmap`. Los archivos anteriores solo
+reexportan funciones y delegan su CLI. Sus imports no leen ni escriben datasets.
+El pipeline 1718 y las pruebas de cálculo usan las implementaciones nuevas.
+Las referencias de los relatos históricos se conservan como rutas de su época.
+El resto de la tabla objetivo sigue pendiente.
+
+### Recomposición de imágenes mensuales trasladada
+
+Implementación: `mantenimiento/mejorar_calidad_extension.py` (20HNJ marzo 2019,
+20HNH marzo 2021). Shell: `scripts/mantenimiento/recuperar_extension_este.sh`.
+Las rutas anteriores de src delegan. El shell conserva lock, PID, exitcode y
+continuación hacia preparación/evaluación; invoca el módulo nuevo desde la raíz.
+
+### Reconstrucción de imágenes corruptas trasladada
+
+`mantenimiento/recuperar_multicampana.py` contiene la implementación;
+`recuperar_multicampana.py` delega y conserva la entrada anterior.
+Ejecutar desde raíz con `python -m src.mantenimiento.recuperar_multicampana`.
+Preparación y compositor SCL se cargan por nombre de módulo al ejecutar,
+no por ruta al importar; sus propios traslados siguen pendientes.
+Los bloqueos, respaldos, invalidación de arrays y reanudación sin entrenamiento
+se conservan. main y reparar aceptan dependencias explícitas para pruebas.
+
+### Preparación de cachés y reanudación trasladadas
+
+Python: `mantenimiento/optimizar_lectura_multicampana.py`.
+Shell: `scripts/mantenimiento/optimizar_lectura_multicampana.sh`.
+Las rutas anteriores delegan; el subproceso --solo-copiar usa -m desde la raíz,
+para no depender de la profundidad del archivo trasladado. El shell conserva
+lock, PID, exitcode y argumentos. No ejecutar como diagnóstico: puede detener
+un entrenamiento y relanzarlo desde un checkpoint. Los destinos físicos de
+cachés existentes, reservas de espacio y parámetros de reanudación se conservan.

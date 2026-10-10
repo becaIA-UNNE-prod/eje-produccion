@@ -8,7 +8,7 @@ El generador original de train_cordoba_f16 se corrio como algo suelto en la
 maquina remota y no quedo versionado (ver bash_history: aparecia
 "remap_aplicado=np.array([1])" pero no un script completo) -- este es un
 reemplazo limpio, mismo formato de salida (.npy sin comprimir, X float16,
-Y uint8, listo para TileDatasetMmap sin pasar por 03b_convertir_datasets_a_mmap.py).
+Y uint8, listo para TileDatasetMmap sin pasar por src/datos/convertir_datasets_a_mmap.py).
 
 Tabla de remapeo (5 clases, ver docs/referencias/leyenda_mnc.md, Tabla 2 del informe MNC-INTA
 verano 2020): Maiz=2, Soja=3, Mani=4, todo el resto de codigos IDVER

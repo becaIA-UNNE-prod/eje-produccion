@@ -6,7 +6,7 @@ sola zona y el propio informe INTA reporta baja exactitud ahi).
 
 Los datos ya tienen el remapeo a 5 clases aplicado, por eso NO se vuelve a
 remapear al cargar. Requiere haber convertido los .npz de origen a pares
-<tile>_X.npy/_Y.npy sueltos (ver src/03b_convertir_datasets_a_mmap.py), que
+<tile>_X.npy/_Y.npy sueltos (ver src/datos/convertir_datasets_a_mmap.py), que
 es donde se valida una sola vez el flag remap_aplicado=1 de los .npz.
 
 Es el pipeline principal del repo (reemplaza a las variantes chicas
@@ -14,7 +14,7 @@ Es el pipeline principal del repo (reemplaza a las variantes chicas
 augmentacion 1_train_cordoba_aug.py -- ahora todo vive en un unico script).
 
 Uso:
-    python3 src/03b_convertir_datasets_a_mmap.py /mnt/yacy_1/prod/ferreyra/dataset/train_cordoba_f16
+    python3 -m src.datos.convertir_datasets_a_mmap /mnt/yacy_1/prod/ferreyra/dataset/train_cordoba_f16
     python3 src/1_train_cordoba.py [--modelo unet|transunet]
 
 --modelo transunet usa model/transunet.py::TransUNet (SimpleUNet + self-attention
@@ -44,7 +44,7 @@ tocar los defaults. Ventana dic-may, para inferir sobre la campana 2018-2019
 
 --dir-train-extra suma a TRAIN los mismos tiles de TRAIN de otro dataset (otra
 campana, misma ventana y canales); val/test no cambian. --pesos reemplaza los
-pesos por clase (calcularlos con 0b_calcular_pesos.py --dirs ...). Ventana
+pesos por clase (calcularlos con src/entrenamiento/calcular_pesos.py --dirs ...). Ventana
 dic-may con la campana 2017-2018 (Nivel3) sumada, ver pipeline_dicmay_1718.sh:
     python3 src/1_train_cordoba.py --modelo unet --sin-2017 \
         --dir-train       /mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_f16 \
@@ -201,7 +201,7 @@ def configurar(ARGS):
     # lee del disco bajo demanda (antes el dataset ya estaba entero en RAM), asi
     # que varios workers en paralelo si aportan (se solapan con el computo en GPU).
 
-    # Pesos por clase — recalculados con 0b_calcular_pesos.py sobre los tiles de
+    # Pesos por clase — recalculados con src/entrenamiento/calcular_pesos.py sobre los tiles de
     # TRAIN vigentes, incluida la campana 2017-2018 (raiz del inverso de frecuencia).
     # Orden: [NoData, Fondo, Maiz, Soja, Mani]
     PESOS = [0.0, 0.742, 1.119, 0.868, 4.105]
@@ -222,7 +222,7 @@ def configurar(ARGS):
 # TileDatasetMmap (utils/tile_dataset.py) lee cada parche del disco bajo
 # demanda via mmap en vez de cargar el tile entero en RAM. El flag
 # remap_aplicado que antes se validaba aca al cargar el .npz ahora se valida
-# una sola vez, al convertir con 03b_convertir_datasets_a_mmap.py -- si el
+# una sola vez, al convertir con src/datos/convertir_datasets_a_mmap.py -- si el
 # .npy existe es porque ya paso esa verificacion. Tambien aplica la
 # augmentacion (flips + rotaciones de 90) cuando augment=True, solo para TRAIN.
 

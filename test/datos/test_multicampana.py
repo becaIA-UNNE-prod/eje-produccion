@@ -116,7 +116,7 @@ class MulticampanaTest(unittest.TestCase):
         self.assertFalse(salida.exists())
         resultado = subprocess.run(comando + ['--dir-train', '/tmp/legacy'], cwd=ROOT, capture_output=True, text=True)
         self.assertEqual(resultado.returncode, 2)
-        pesos = subprocess.run([sys.executable, str(ROOT/'src/0b_calcular_pesos.py'), '--dirs',
+        pesos = subprocess.run([sys.executable, '-m', 'src.entrenamiento.calcular_pesos', '--dirs',
                                  *[d for _,d in self.entradas]], cwd=ROOT, capture_output=True, text=True)
         self.assertEqual(pesos.returncode, 0, pesos.stderr)
         self.assertIn('PESOS_ARGS 0.0 1.0 1.0 1.0 1.0', pesos.stdout)

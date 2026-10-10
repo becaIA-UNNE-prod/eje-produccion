@@ -22,6 +22,8 @@ sys.path.insert(0, sys.argv[1])
 import numpy
 sys.argv = ['comando', '--inexistente']
 with patch('numpy.load', side_effect=AssertionError('lectura')), patch('numpy.save', side_effect=AssertionError('escritura')), patch('pathlib.Path.glob', side_effect=AssertionError('inventario')), patch('pathlib.Path.unlink', side_effect=AssertionError('borrado')):
+    importlib.import_module('src.entrenamiento.calcular_pesos')
+    importlib.import_module('src.datos.convertir_datasets_a_mmap')
     importlib.import_module('src.0b_calcular_pesos')
     importlib.import_module('src.03b_convertir_datasets_a_mmap')
 """
@@ -32,7 +34,7 @@ with patch('numpy.load', side_effect=AssertionError('lectura')), patch('numpy.sa
             self.assertEqual(list(Path(d).iterdir()), [])
 
     def test_pesos_repetidos_train_y_faltantes(self):
-        mod = importlib.import_module('src.0b_calcular_pesos')
+        mod = importlib.import_module('src.entrenamiento.calcular_pesos')
         with tempfile.TemporaryDirectory() as d:
             base = Path(d)
             for tile in mod.SPLIT['train']:
@@ -57,7 +59,7 @@ with patch('numpy.load', side_effect=AssertionError('lectura')), patch('numpy.sa
             self.assertIn('no existe, salteado', out.getvalue())
 
     def test_conversion_y_omision_no_borran_original_existente(self):
-        mod = importlib.import_module('src.03b_convertir_datasets_a_mmap')
+        mod = importlib.import_module('src.datos.convertir_datasets_a_mmap')
         with tempfile.TemporaryDirectory() as d, contextlib.redirect_stdout(io.StringIO()):
             base = Path(d); p = base / 'datos.npz'
             x = np.arange(24, dtype=np.float16).reshape(2, 3, 4)
@@ -76,7 +78,7 @@ with patch('numpy.load', side_effect=AssertionError('lectura')), patch('numpy.sa
             self.assertFalse(list(base.glob('*.tmp')))
 
     def test_conversion_rechaza_incompatibles_y_remap(self):
-        mod = importlib.import_module('src.03b_convertir_datasets_a_mmap')
+        mod = importlib.import_module('src.datos.convertir_datasets_a_mmap')
         with tempfile.TemporaryDirectory() as d, contextlib.redirect_stdout(io.StringIO()):
             base = Path(d)
             np.savez(base / 'longitudes.npz', X=np.zeros((2, 1)), Y=np.zeros((1, 1)))
@@ -85,7 +87,7 @@ with patch('numpy.load', side_effect=AssertionError('lectura')), patch('numpy.sa
             self.assertEqual({p.name for p in base.iterdir()}, {'longitudes.npz', 'sin_remap.npz'})
 
     def test_verificacion_fallida_preserva_origen_y_limpia_temporales(self):
-        mod = importlib.import_module('src.03b_convertir_datasets_a_mmap')
+        mod = importlib.import_module('src.datos.convertir_datasets_a_mmap')
         with tempfile.TemporaryDirectory() as d, contextlib.redirect_stdout(io.StringIO()):
             p = Path(d) / 'datos.npz'
             np.savez(p, X=np.zeros((1, 1)), Y=np.zeros((1, 1)))
@@ -94,7 +96,42 @@ with patch('numpy.load', side_effect=AssertionError('lectura')), patch('numpy.sa
             self.assertEqual(list(Path(d).iterdir()), [p])
 
     def test_sin_npz_falla(self):
-        mod = importlib.import_module('src.03b_convertir_datasets_a_mmap')
+        mod = importlib.import_module('src.datos.convertir_datasets_a_mmap')
         with tempfile.TemporaryDirectory() as d:
             with self.assertRaisesRegex(SystemExit, 'No hay .npz'):
                 mod.main([d])
+
+    def test_wrappers_delegan_y_cli_desde_otro_directorio(self):
+        pesos = importlib.import_module('src.entrenamiento.calcular_pesos')
+        conversion = importlib.import_module('src.datos.convertir_datasets_a_mmap')
+        for anterior, nuevo, nombres in (
+            ('src.0b_calcular_pesos', pesos, ('main', 'crear_parser', 'contar_rutas', 'seleccionar_rutas', 'imprimir_pesos')),
+            ('src.03b_convertir_datasets_a_mmap', conversion, ('main', 'crear_parser', 'convertir_npz')),
+        ):
+            wrapper = importlib.import_module(anterior)
+            for nombre in nombres:
+                self.assertIs(getattr(wrapper, nombre), getattr(nuevo, nombre))
+        with tempfile.TemporaryDirectory() as d:
+            base = Path(d)
+            for tile in pesos.SPLIT['train']:
+                np.save(base / f'dataset_{tile}_Y.npy', [0, 1, 2, 2, 3, 4])
+            comandos = [
+                ([str(ROOT / 'src/0b_calcular_pesos.py')], base),
+                (['-m', 'src.entrenamiento.calcular_pesos'], ROOT),
+            ]
+            resultados = [subprocess.run([sys.executable, '-B', *cmd, '--dirs', d], cwd=cwd, capture_output=True, text=True) for cmd, cwd in comandos]
+            self.assertEqual(resultados[0].returncode, 0, resultados[0].stderr)
+            self.assertEqual([(r.returncode, r.stdout, r.stderr) for r in resultados], [(0, resultados[0].stdout, '')] * 2)
+            archivos = []
+            salidas = []
+            for cmd, cwd in (([str(ROOT / 'src/03b_convertir_datasets_a_mmap.py')], base), (['-m', 'src.datos.convertir_datasets_a_mmap'], ROOT)):
+                for p in base.glob('datos*'):
+                    p.unlink()
+                np.savez_compressed(base / 'datos.npz', X=np.arange(8).reshape(2, 4), Y=np.arange(4).reshape(2, 2), remap_aplicado=True)
+                r = subprocess.run([sys.executable, '-B', *cmd, d, '--borrar-original'], cwd=cwd, capture_output=True, text=True)
+                self.assertEqual(r.returncode, 0, r.stderr)
+                salidas.append((r.stdout, r.stderr))
+                archivos.append({p.name: p.read_bytes() for p in base.glob('datos*')})
+            self.assertEqual(*salidas)
+            self.assertEqual(*archivos)
+            self.assertEqual(set(archivos[0]), {'datos_X.npy', 'datos_Y.npy'})
