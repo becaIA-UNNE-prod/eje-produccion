@@ -2,13 +2,11 @@
   "storage_root": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne",
   "runs_root": "/mnt/yacy_3/prod_bis/ferreyra/cordoba_ia_unne/artifacts/runs",
   "roles": {
-    "data/datasets/legacy_repo": "dataset histórico antes alojado en el repositorio",
     "data/mascaras": "máscaras procesadas compartidas",
     "data/referencias": "raster Nivel3 y su leyenda QML",
     "data/pesos": "pesos históricos antes alojados en el repositorio",
     "artifacts/archive": "figuras, predicciones, logs y backups históricos",
-    "backups": "respaldos de código, Git y migraciones",
-    "envs/repo_uv": "entorno .venv histórico; entorno operativo de ML: ~/s4a-venv"
+    "backups": "respaldos de código, Git y migraciones"
   },
   "existing_operational_paths": "Las rutas ya usadas en /mnt/yacy_1 y /mnt/yacy_3, incluyendo preparacion_base del TEST, conservan su ubicación."
 }
