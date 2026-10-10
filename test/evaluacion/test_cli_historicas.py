@@ -9,8 +9,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 MODULOS = (
     "src.figuras.curvas_entrenamiento",
-    "src.5_generar_matriz_confusion",
-    "src.6_generar_comparacion_visual",
+    "src.evaluacion.matriz_confusion_parches",
+    "src.figuras.comparacion_parches",
     "src.figuras.visualizar_inferencia",
     "src.9_comparar_inferencia_etiqueta",
     "src.10_metricas_test",
@@ -33,8 +33,9 @@ with (
     patch('matplotlib.pyplot.subplots', side_effect=AssertionError('figura')),
 ):
     for nombre in ('src.4_generar_metricas', 'src.7_visualizar_inferencia',
-                   'src.figuras.curvas_entrenamiento', 'src.5_generar_matriz_confusion',
-                   'src.6_generar_comparacion_visual', 'src.figuras.visualizar_inferencia',
+                   'src.5_generar_matriz_confusion', 'src.6_generar_comparacion_visual',
+                   'src.figuras.curvas_entrenamiento', 'src.evaluacion.matriz_confusion_parches',
+                   'src.figuras.comparacion_parches', 'src.figuras.visualizar_inferencia',
                    'src.9_comparar_inferencia_etiqueta', 'src.10_metricas_test'):
         importlib.import_module(nombre)
 """

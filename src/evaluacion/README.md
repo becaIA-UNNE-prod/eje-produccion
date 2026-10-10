@@ -16,3 +16,12 @@ No convertir una máscara ya remapeada como si fueran códigos crudos MNC.
 
 Se conservan imports anteriores desde utils.multicampana y los scripts.
 Los protocolos y las figuras siguen en sus comandos hasta el siguiente paso.
+
+## Matriz de confusión de parches NPZ
+
+`python -m src.evaluacion.matriz_confusion_parches --exp EXP --tile TILE --dir_train DIR`
+conserva la entrada anterior 5. Usa best_model.pth y modelos de 28 canales,
+procesa parches en lotes de 16 y permite los esquemas anteriores de clases.
+Referencia 0 se ignora; predicción 0 cuenta como error aunque no aparezca como
+columna de la figura. dataset_T se remapea únicamente al pedir seis clases.
+Salida: matriz_confusion_TILE.png dentro de EXP. No evalúa mapas TEST vigentes.

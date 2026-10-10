@@ -368,3 +368,14 @@ No fijan campañas, modelos o split; mantienen sus formatos y salidas anteriores
 Las entradas 4 y 7 reexportan y delegan. El postprocesador usa la entrada por -m.
 Esta reorganización facilita reutilización; parametrizar regiones, bandas,
 leyendas y protocolos es trabajo adicional y no consecuencia de mover archivos.
+
+### Evaluación y comparación de parches trasladadas
+
+`evaluacion/matriz_confusion_parches.py` y `figuras/comparacion_parches.py`
+implementan las entradas 5 y 6, conservadas como wrappers. Ejecutar por -m
+con los argumentos anteriores. Estos comandos usan NPZ, best_model.pth y
+modelos de 28 canales; no son el evaluador TEST vigente de mapas/24 canales.
+Matriz: ignora referencia 0 y cuenta predicción 0 como error; la figura muestra
+solo clases no cero con referencia presente. Comparación: mosaico de los primeros
+floor(sqrt(N))² parches de 256, y mapa de errores solo sobre etiquetas >1.
+Mantener diferencias de remapeo dataset_T entre ambos hasta una revisión propia.
