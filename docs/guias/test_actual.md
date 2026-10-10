@@ -34,7 +34,7 @@ el código 0 de 2018/2019 frente a 2019/2020 y la excepción 20 de 2020/2021.
 Desde la raíz del repo, con el entorno `~/s4a-venv/bin/python`:
 
 ```bash
-~/s4a-venv/bin/python src/evaluar_test_actual.py \
+~/s4a-venv/bin/python -m src.evaluacion.test_actual \
   --exp /mnt/yacy_3/prod_bis/ferreyra/dataset/EXPERIMENTO \
   --salida /mnt/yacy_3/prod_bis/ferreyra/cordoba_ia_unne/artifacts/runs/NUEVA_CORRIDA \
   --verificar
@@ -67,3 +67,11 @@ El [índice de artefactos](../../artifacts/README.md) localiza el reporte existe
 Su cierre se verificó el 10/10/2026: `inferencia.exitcode` y `figuras.exitcode`
 valían 0. Eso acredita aquella ejecución, no un proceso activo permanente.
 Los detalles y recuperación están en el [historial](../historico/experimentos_20261006_10.md).
+
+## Ubicación de las entradas
+
+El evaluador está en `src/evaluacion/test_actual.py` y el regenerador en
+`src/figuras/regenerar_test_actual.py`. Desde la raíz, ejecutar por -m; las
+rutas anteriores de src conservan compatibilidad. Para figuras existentes:
+`python -m src.figuras.regenerar_test_actual --salida CORRIDA [--esperar]`.
+Conservar la preparación acreditada y revisar protocolo/estado antes de ejecutar.

@@ -11,8 +11,8 @@ from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-trainer = importlib.import_module('src.1_train_cordoba')
-figures = importlib.import_module('src.regenerar_figuras_test_actual')
+trainer = importlib.import_module('src.entrenamiento.entrenar_cordoba')
+figures = importlib.import_module('src.figuras.regenerar_test_actual')
 
 
 class CliImportsTest(unittest.TestCase):
@@ -23,7 +23,9 @@ class CliImportsTest(unittest.TestCase):
             "sys.argv = ['prueba', '--argumento-invalido']; "
             "torch_state = torch.get_rng_state().clone(); np_state = np.random.get_state(); "
             "benchmark = torch.backends.cudnn.benchmark; "
+            "importlib.import_module('src.entrenamiento.entrenar_cordoba'); "
             "importlib.import_module('src.1_train_cordoba'); "
+            "importlib.import_module('src.figuras.regenerar_test_actual'); "
             "importlib.import_module('src.regenerar_figuras_test_actual'); "
             "assert torch.equal(torch_state, torch.get_rng_state()); "
             "actual = np.random.get_state(); "

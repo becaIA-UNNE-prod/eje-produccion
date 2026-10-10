@@ -25,3 +25,12 @@ procesa parches en lotes de 16 y permite los esquemas anteriores de clases.
 Referencia 0 se ignora; predicción 0 cuenta como error aunque no aparezca como
 columna de la figura. dataset_T se remapea únicamente al pedir seis clases.
 Salida: matriz_confusion_TILE.png dentro de EXP. No evalúa mapas TEST vigentes.
+
+## TEST vigente de mapas
+
+`python -m src.evaluacion.test_actual --exp EXP --salida CORRIDA [--verificar]`
+es la entrada canónica de mapas para 20HNJ/20HNH, 24 canales y cinco clases.
+Mantiene selección previa de checkpoint con VAL, preflight, firmas y métricas
+completas/independientes. Consultar docs/guias/test_actual.md para precondiciones.
+La ruta src/evaluar_test_actual.py conserva compatibilidad. --verificar exige
+checkpoints y preparación compatibles; omitirlo ejecuta inferencia y escribe reportes.

@@ -30,3 +30,10 @@ ignorando el resto. Con dataset_T conserva el remapeo anterior, independiente
 del argumento de clases. El mapa de errores compara solo etiquetas >1.
 Salida: comparacion_TILE.png en EXP. Representa parches, no la grilla completa;
 no equivale a las figuras del protocolo TEST de mapas y 24 canales.
+
+## Regeneración de figuras TEST vigente
+
+`python -m src.figuras.regenerar_test_actual --salida CORRIDA [--esperar]` usa
+protocolo.json y predicciones existentes. Conserva espera de inferencia.exitcode,
+rechazo de inferencia fallida y figuras.exitcode. No ejecuta inferencia nueva.
+La ruta src/regenerar_figuras_test_actual.py conserva compatibilidad.

@@ -102,7 +102,7 @@ class MulticampanaTest(unittest.TestCase):
 
     def test_cli_y_verificacion_sin_salidas(self):
         salida = self.base/'experimento'
-        comando = [sys.executable, str(ROOT/'src/1_train_cordoba.py'), '--verificar-datos', '--dir-exp', str(salida)]
+        comando = [sys.executable, '-m', 'src.entrenamiento.entrenar_cordoba', '--verificar-datos', '--dir-exp', str(salida)]
         # Fixture completo de 51 pares con forma productiva, sin modelos/GPU.
         for nombre, d in self.entradas:
             for tile in sum(SPLIT.values(), []):
@@ -120,7 +120,7 @@ class MulticampanaTest(unittest.TestCase):
                                  *[d for _,d in self.entradas]], cwd=ROOT, capture_output=True, text=True)
         self.assertEqual(pesos.returncode, 0, pesos.stderr)
         self.assertIn('PESOS_ARGS 0.0 1.0 1.0 1.0 1.0', pesos.stdout)
-        ayuda = subprocess.run([sys.executable, str(ROOT/'src/1_train_cordoba.py'), '--help'], cwd=ROOT, capture_output=True, text=True)
+        ayuda = subprocess.run([sys.executable, '-m', 'src.entrenamiento.entrenar_cordoba', '--help'], cwd=ROOT, capture_output=True, text=True)
         self.assertEqual(ayuda.returncode, 0)
         self.assertIn('--dir-train-extra', ayuda.stdout)
 
@@ -159,7 +159,7 @@ class MulticampanaTest(unittest.TestCase):
         self.assertNotEqual(r.returncode,0)
 
     def test_mascara_nearest_grilla_y_codigos(self):
-        mod = modulo('mascaras', '01d_mascaras_mnc_2020_2021.py')
+        from src.datos import mascaras_mnc_2020_2021 as mod
         comp = self.base/'composites'; comp.mkdir()
         origen = self.base/'mnc.tif'
         meta = {'driver': 'GTiff', 'height': 2, 'width': 2, 'count': 1, 'dtype': 'uint8',

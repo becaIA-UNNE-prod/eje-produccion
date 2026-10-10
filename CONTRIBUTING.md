@@ -25,7 +25,8 @@ históricas; no interpretarlos como una orden de volver a lanzarla.
 - Evaluación principal: mapas con exclusión de las grillas completas de TRAIN/VAL.
   Conservar también las métricas de mapas completos y distinguir ambos criterios.
 - Seleccionar el checkpoint con VAL; no entrenar ni elegir pesos usando TEST.
-- Usar `src/evaluar_test_actual.py` y `utils/test_actual.py`; no inventar otro split.
+- Usar `src/evaluacion/test_actual.py` (por `-m src.evaluacion.test_actual`)
+  y `utils/test_actual.py`; no inventar otro split.
 - `20HLK/20HLJ`, los scripts `8`, `9`, `10` y las corridas oct–abr son históricos.
   No basta con cambiar los nombres de tiles en esos scripts para evaluar TEST vigente.
 - Conservar ventanas, leyendas, normalización, procedencia y compatibilidad de canales.

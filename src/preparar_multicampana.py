@@ -1,6 +1,5 @@
 """Preparacion/auditoria de datos multicampana. Nunca ejecuta entrenamiento."""
 import argparse
-import importlib.util
 import json
 import os
 from pathlib import Path
@@ -21,12 +20,6 @@ from utils.rutas import MULTICAMPANA_ROOT as Y3
 from src.datos.campanas import BANDAS, MASCARAS, LOGS, campanas_preparacion
 TILES = sum(SPLIT.values(), [])
 CAMPANAS = campanas_preparacion()
-
-
-def cargar_script(nombre):
-    spec = importlib.util.spec_from_file_location('mascaras2021', ROOT/'src'/nombre)
-    mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
-    return mod
 
 
 def comprobar_grillas(campanas, exigir_2021=False):
@@ -84,7 +77,7 @@ def comprobar_procedencia(campana, ignorar_codigo20=False):
 
 
 def preparar(workers, ignorar_codigo20=False):
-    mod = cargar_script('01d_mascaras_mnc_2020_2021.py')
+    from src.datos import mascaras_mnc_2020_2021 as mod
     codes = mod.verificar_fuente(mod.MNC, ignorar_codigo20)
     comprobar_grillas(CAMPANAS)
     # Dos datasets nuevos de ~90 GiB, mas margen para temporales.
@@ -131,7 +124,7 @@ if __name__ == '__main__':
     if a.workers < 1:
         ap.error('--workers debe ser positivo')
     if a.solo_verificar:
-        mod = cargar_script('01d_mascaras_mnc_2020_2021.py')
+        from src.datos import mascaras_mnc_2020_2021 as mod
         mod.verificar_fuente(mod.MNC, a.ignorar_codigo20)
         comprobar_grillas(CAMPANAS)
         print('PRECHECK OK; sin cambios', flush=True)

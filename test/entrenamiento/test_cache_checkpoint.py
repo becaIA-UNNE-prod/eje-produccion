@@ -42,7 +42,7 @@ class CacheYCheckpointTest(unittest.TestCase):
             with self.assertRaises(ValueError): cargar_cache(manifest)
 
     def _bloque_entrenador(self, attr):
-        tree = ast.parse((ROOT/'src/1_train_cordoba.py').read_text())
+        tree = ast.parse((ROOT/'src/entrenamiento/entrenar_cordoba.py').read_text())
         function = next(node for node in tree.body if isinstance(node,ast.FunctionDef) and node.name=='entrenar')
         block = next(node for node in function.body if isinstance(node,ast.If)
                      and isinstance(node.test,ast.Attribute) and node.test.attr==attr)

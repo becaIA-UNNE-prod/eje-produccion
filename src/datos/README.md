@@ -25,3 +25,15 @@ y se migrarán por separado.
 y temporales. Entrada: `python -m src.datos.convertir_datasets_a_mmap DIR`.
 El script numerado anterior conserva compatibilidad; --borrar-original sigue
 siendo explícito y se aplica tras verificar. Los pares existentes se omiten.
+
+## Preparación de máscaras
+
+Las implementaciones están en moldear_mascaras.py, mascaras_mnc_2018_2019.py,
+mascaras_nivel3_2017_2018.py y mascaras_mnc_2020_2021.py. Las entradas numeradas
+anteriores conservan compatibilidad. Las variantes por campaña se ejecutan con
+`python -m src.datos.<modulo> --help`; importar no ejecuta la preparación.
+Moldear conserva su ejecución fija original sobre JP2 y no tiene parser CLI.
+Se mantienen nearest, grillas, códigos crudos, NoData y salidas por campaña.
+Nivel3 sigue leyendo REMAP_NIVEL3 del generador 03c; su traslado queda pendiente.
+No unificar estos contratos por parecido de implementación.
+El procedimiento operativo está en [Multicampaña](../../docs/guias/multicampana.md).

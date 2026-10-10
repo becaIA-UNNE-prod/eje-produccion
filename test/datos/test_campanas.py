@@ -44,7 +44,7 @@ class CampanasTest(unittest.TestCase):
     def test_evaluador_no_importa_otros_comandos(self):
         code = (
             "import sys; sys.argv = ['prueba', '--argumento-invalido']; "
-            "import src.evaluar_test_actual; "
+            "import src.evaluacion.test_actual; import src.evaluar_test_actual; "
             "assert 'postprocesar_multicampana' not in sys.modules; "
             "assert 'preparar_evaluar_extension' not in sys.modules"
         )

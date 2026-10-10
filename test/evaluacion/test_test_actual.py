@@ -18,6 +18,6 @@ class TestActualTests(unittest.TestCase):
    directory=Path(tmp);x=np.ones((1,24,256,256),dtype=np.float16);y=np.ones((1,256,256),dtype=np.uint8)
    for tile in cfg['train']+cfg['val']:
     np.save(directory/f'dataset_{tile}_X.npy',x);np.save(directory/f'dataset_{tile}_Y.npy',y)
-   p=subprocess.run([sys.executable,'src/1_train_cordoba.py','--modelo','unet','--campana','2018_2019',tmp,'--verificar-datos','--split-config',str(CONFIG)],cwd=ROOT,capture_output=True,text=True,timeout=60)
+   p=subprocess.run([sys.executable,'-m','src.entrenamiento.entrenar_cordoba','--modelo','unet','--campana','2018_2019',tmp,'--verificar-datos','--split-config',str(CONFIG)],cwd=ROOT,capture_output=True,text=True,timeout=60)
    self.assertEqual(p.returncode,0,p.stdout+p.stderr);self.assertIn("TEST vigente: ['20HNJ', '20HNH']",p.stdout);self.assertIn('VERIFICACION OK',p.stdout)
 if __name__=='__main__':unittest.main()

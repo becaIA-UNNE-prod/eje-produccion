@@ -87,7 +87,7 @@ grep "ATENCION" $LOGS/composites_2017_2018.log || echo "todos los composites >= 
 
 # 2) Mascaras Nivel3 + dataset 2017-2018 (solo tiles de TRAIN)
 paso "mascaras Nivel3 2017-2018"
-$PY src/01c_mascaras_nivel3_2017_2018.py --ref $S2_1718 --tiles $TILES_1718 | tee $LOGS/mascaras_nivel3.log
+$PY -m src.datos.mascaras_nivel3_2017_2018 --ref $S2_1718 --tiles $TILES_1718 | tee $LOGS/mascaras_nivel3.log
 
 paso "dataset dic-may 2017-2018"
 $PY src/03c_generar_dataset_cordoba_f16.py --leyenda nivel3 --tiles $TILES_TRAIN --meses $MESES_1718 \
@@ -104,7 +104,7 @@ for M in $MODELOS; do
     if [ ! -f $EXP/modelo_final.pth ]; then
         paso "entrenamiento $M (log: $EXP/train.log)"
         mkdir -p $EXP
-        $PY src/1_train_cordoba.py --modelo $M --sin-2017 \
+        $PY -m src.entrenamiento.entrenar_cordoba --modelo $M --sin-2017 \
             --dir-train $DIR_TRAIN --dir-train-extra $DIR_TRAIN_1718 --dir-exp $EXP > $EXP/train.log 2>&1
         tail -4 $EXP/train.log
     fi

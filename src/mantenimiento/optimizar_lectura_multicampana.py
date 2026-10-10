@@ -107,7 +107,9 @@ def proceso_actual(pid, exp):
     command = (path/'cmdline').read_bytes()
     if not command:
         return False  # proceso zombie, ya termino
-    if b'1_train_cordoba.py' not in command or str(exp).encode() not in command:
+    es_entrenador = (b'1_train_cordoba.py' in command
+                     or b'\x00-m\x00src.entrenamiento.entrenar_cordoba\x00' in command)
+    if not es_entrenador or str(exp).encode() not in command:
         raise RuntimeError('PID reutilizado o proceso ajeno; no detener')
     return True
 
@@ -212,7 +214,7 @@ def main(argv=None):
         source = exp/name
         if source.exists():
             source.rename(exp/(name+'.antes_paralelo'))
-    command_args = ['bash','src/entrenar_multicampana_unet.sh',str(exp),'--lectura-bloques',
+    command_args = ['bash','scripts/entrenamiento/entrenar_multicampana_unet.sh',str(exp),'--lectura-bloques',
                     '--bloque-parches','512','--bloques-pool','16','--workers','4','--prefetch','2',
                     '--anticipar-pool','--cache-lectura',str(manifest),'--reanudar',str(snapshot)]
     command = 'nohup env OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 ' + shlex.join(command_args) + ' >> ' + shlex.quote(str(exp/'train.log')) + ' 2>&1 < /dev/null & echo $!'

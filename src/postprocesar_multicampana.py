@@ -188,5 +188,5 @@ if __name__=='__main__':
         if '--lock-adquirido' in sys.argv: sys.argv.remove('--lock-adquirido')
         main()
     else:
-        from evaluar_test_actual import main as test_actual_main
+        from src.evaluacion.test_actual import main as test_actual_main
         test_actual_main()

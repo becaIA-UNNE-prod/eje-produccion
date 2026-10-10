@@ -71,7 +71,7 @@ for M in $MODELOS; do
     if [ ! -f $EXP/modelo_final.pth ]; then
         paso "entrenamiento $M (log: $EXP/train.log)"
         mkdir -p $EXP
-        $PY src/1_train_cordoba.py --modelo $M --sin-2017 \
+        $PY -m src.entrenamiento.entrenar_cordoba --modelo $M --sin-2017 \
             --dir-train $DIR_TRAIN --dir-exp $EXP > $EXP/train.log 2>&1
         tail -4 $EXP/train.log
     fi

@@ -104,7 +104,7 @@ with patch('os.kill', side_effect=AssertionError('senal')), patch('subprocess.ru
                 mod.main(['--dir-exp', d, '--pid-train', '12345', '--sin-esperar-epoca'])
                 detener.assert_called_once_with(12345, exp)
                 command = relanzar.call_args.args[0]
-                self.assertIn('src/entrenar_multicampana_unet.sh', command)
+                self.assertIn('scripts/entrenamiento/entrenar_multicampana_unet.sh', command)
                 self.assertIn('--reanudar', command)
                 self.assertIn('checkpoint_antes_precarga_paralela.pth', command)
                 self.assertIn('--bloques-pool 16 --workers 4 --prefetch 2', command)

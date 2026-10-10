@@ -38,7 +38,7 @@ este índice. Los grupos describen su función actual; no implican moverlos toda
 | `00_descargar_stac.py` | Búsqueda, descarga y verificación Sentinel por STAC. |
 | `01_moldear_mascaras.py` | Reproyección de máscaras del flujo original. |
 | `01b_mascaras_mnc_2018_2019.py` | Máscaras MNC 2018/2019 y su remapeo. |
-| `01c_mascaras_nivel3_2017_2018.py` | Máscaras Nivel3 2017/2018; depende por ruta del archivo `01b`. |
+| `01c_mascaras_nivel3_2017_2018.py` | Máscaras Nivel3 2017/2018; carga REMAP_NIVEL3 del generador `03c`. |
 | `01d_mascaras_mnc_2020_2021.py` | Máscaras MNC 2020/2021 y verificación de códigos. Usado por preparación multicampaña. |
 | `02_composites_mensuales.py`, `02b_composites_2019_2020.py` | Composites del procesamiento original y de 2019/2020. No equivalen automáticamente al método SCL. |
 | `02c_composites_cog.py` | Composites desde entradas COG. |
@@ -114,11 +114,11 @@ desde los módulos compartidos indicados arriba:
 
 ```text
 1_train_cordoba.py
-  └─ subprocess → evaluar_test_actual.py (cierre multicampaña vigente)
+  └─ subprocess → src.evaluacion.test_actual (cierre multicampaña vigente)
 
 inferencia_multicampana.sh
   └─ postprocesar_multicampana.py como comando
-       ├─ por defecto → evaluar_test_actual.main
+       ├─ por defecto → src.evaluacion.test_actual.main
        └─ --historico → su propio main histórico
 
 evaluar_test_actual.py y regenerar_figuras_test_actual.py
@@ -127,7 +127,7 @@ evaluar_test_actual.py y regenerar_figuras_test_actual.py
 
 preparar_multicampana.py
   ├─ src.datos.campanas (catálogo de configuración)
-  ├─ carga por ruta 01d_mascaras_mnc_2020_2021.py
+  ├─ importa src.datos.mascaras_mnc_2020_2021
   └─ ejecuta generadores mediante subprocess
 
 recuperar_multicampana.py
@@ -379,3 +379,27 @@ Matriz: ignora referencia 0 y cuenta predicción 0 como error; la figura muestra
 solo clases no cero con referencia presente. Comparación: mosaico de los primeros
 floor(sqrt(N))² parches de 256, y mapa de errores solo sobre etiquetas >1.
 Mantener diferencias de remapeo dataset_T entre ambos hasta una revisión propia.
+
+### Evaluador y figuras del TEST vigente trasladados
+
+Implementaciones: `evaluacion/test_actual.py` y `figuras/regenerar_test_actual.py`.
+Las rutas anteriores delegan y reexportan funciones. Entrenador y postprocesador
+usan el módulo nuevo. El evaluador expone crear_parser y main(argv=None), sin
+alterar el protocolo, preflight, locks, checkpoints, firmas o salidas.
+TEST 20HNJ/20HNH, 24 canales y cinco clases; criterios completa/independiente
+preservados. Regeneración conserva espera de inferencia y figuras.exitcode.
+
+### Entrenador multicampaña trasladado
+
+Implementación: `entrenamiento/entrenar_cordoba.py`.
+Shell: `scripts/entrenamiento/entrenar_multicampana_unet.sh`.
+Las entradas anteriores reexportan/delegan. Pipelines y pruebas usan -m;
+el coordinador de cachés reconoce la entrada anterior y la nueva por módulo.
+Conserva todos los modos, datos, semillas, checkpoints y cierre TEST vigente.
+
+### Máscaras trasladadas
+
+Implementaciones en datos/: moldear_mascaras.py, mascaras_mnc_2018_2019.py,
+mascaras_nivel3_2017_2018.py y mascaras_mnc_2020_2021.py. Entradas anteriores
+compatibles; preparación multicampaña y pipeline 1718 usan los módulos nuevos.
+La dependencia real de Nivel3 es el remapeo de 03c, no 01b; se conserva.
