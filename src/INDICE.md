@@ -149,9 +149,12 @@ main(); importarlos no procesa argumentos, fija semillas ni escribe salidas.
 Los comandos históricos de curvas, matriz de confusión y comparación visual
 (4, 5, 6, 7, 9 y 10) también exponen crear_parser() y main(argv=None), sin leer datos ni
 cargar modelos al importar. Conservan sus canales, remapeos y cálculos originales.
-Quedan dos comandos con procesamiento de argumentos y acceso a datos al importar:
-0b_calcular_pesos.py y 03b_convertir_datasets_a_mmap.py. Otros ya protegen su
-ejecución con __main__, aunque no todos exponen una función main().
+Los comandos de pesos y conversión mmap también separan crear_parser() y
+main(argv=None): importarlos no cuenta etiquetas ni convierte o borra archivos.
+Conservan el modo histórico de pesos, TRAIN con --dirs y las verificaciones de
+conversión. Queda confirmado mejorar_calidad_extension.py, que accede a sys.argv
+y ejecuta mantenimiento al importar. Otros ya protegen su ejecución con
+__main__, aunque no todos exponen una función main().
 Por eso no se deben importar indiscriminadamente para hacer un inventario.
 
 ## Secuencia de reorganización propuesta

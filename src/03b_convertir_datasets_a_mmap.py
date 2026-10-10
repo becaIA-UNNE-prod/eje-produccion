@@ -26,25 +26,22 @@ from pathlib import Path
 
 import numpy as np
 
-parser = argparse.ArgumentParser()
-parser.add_argument("dir_datasets", help="Carpeta con los .npz a convertir")
-parser.add_argument("--borrar-original", action="store_true",
-                     help="Borra el .npz de origen despues de verificar que la conversion es identica")
-args = parser.parse_args()
+def crear_parser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("dir_datasets", help="Carpeta con los .npz a convertir")
+    parser.add_argument("--borrar-original", action="store_true",
+                         help="Borra el .npz de origen despues de verificar que la conversion es identica")
+    return parser
 
-dir_datasets = Path(args.dir_datasets)
-archivos = sorted(dir_datasets.glob("*.npz"))
-if not archivos:
-    sys.exit(f"No hay .npz en {dir_datasets}")
 
-for ruta_npz in archivos:
+def convertir_npz(ruta_npz, borrar_original=False):
     base = ruta_npz.with_suffix("")
     ruta_x = base.parent / f"{base.name}_X.npy"
     ruta_y = base.parent / f"{base.name}_Y.npy"
 
     if ruta_x.exists() and ruta_y.exists():
         print(f"{ruta_npz.name}: ya convertido, omitiendo")
-        continue
+        return
 
     print(f"{ruta_npz.name}: convirtiendo...")
     with np.load(ruta_npz) as data:
@@ -52,7 +49,7 @@ for ruta_npz in archivos:
         Y = data["Y"]
         if len(X) != len(Y):
             print(f"  ERROR: X tiene {len(X)} parches pero Y tiene {len(Y)}, se omite")
-            continue
+            return
 
         # Algunos .npz (ej. train_cordoba_f16) traen un flag "remap_aplicado"
         # que 1_train_cordoba.py verificaba al cargar, para no entrenar por
@@ -62,7 +59,7 @@ for ruta_npz in archivos:
         # verificado y el chequeo en tiempo de entrenamiento deja de hacer falta.
         if "remap_aplicado" in data and not bool(data["remap_aplicado"]):
             print(f"  ERROR: remap_aplicado=0 en {ruta_npz.name}, se omite (dataset sin remapear)")
-            continue
+            return
 
         tmp_x = ruta_x.with_suffix(ruta_x.suffix + ".tmp")
         tmp_y = ruta_y.with_suffix(ruta_y.suffix + ".tmp")
@@ -79,15 +76,28 @@ for ruta_npz in archivos:
         print(f"  ERROR: la verificacion post-escritura no coincide con el original, se descarta")
         tmp_x.unlink(missing_ok=True)
         tmp_y.unlink(missing_ok=True)
-        continue
+        return
     del X_verif, Y_verif
 
     os.replace(tmp_x, ruta_x)
     os.replace(tmp_y, ruta_y)
     print(f"  OK: {len(X)} parches -> {ruta_x.name} / {ruta_y.name}")
 
-    if args.borrar_original:
+    if borrar_original:
         ruta_npz.unlink()
         print(f"  borrado {ruta_npz.name}")
 
-print("\nListo.")
+
+def main(argv=None):
+    args = crear_parser().parse_args(argv)
+    dir_datasets = Path(args.dir_datasets)
+    archivos = sorted(dir_datasets.glob("*.npz"))
+    if not archivos:
+        sys.exit(f"No hay .npz en {dir_datasets}")
+    for ruta_npz in archivos:
+        convertir_npz(ruta_npz, borrar_original=args.borrar_original)
+    print("\nListo.")
+
+
+if __name__ == "__main__":
+    main()

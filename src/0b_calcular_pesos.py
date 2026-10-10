@@ -26,41 +26,63 @@ TILES_TRAIN = ['19HGC', '20HLG', '20HLH', '20HMJ', '20HMK', '20HNK', '20JML',
 NOMBRES = {0:"NoData", 1:"Fondo", 2:"Maiz", 3:"Soja", 4:"Mani"}
 NUM_CLASSES = 5
 
-ap = argparse.ArgumentParser()
-ap.add_argument("--dirs", nargs="+", type=Path, default=None)
-ARGS = ap.parse_args()
-if ARGS.dirs:
-    rutas = [d / f"dataset_{t}_Y.npy" for d in ARGS.dirs
-             for t in SPLIT['train']]
-else:
-    rutas = [DIR / f"dataset_{t}_Y.npy" for t in TILES_TRAIN]
+def crear_parser():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--dirs", nargs="+", type=Path, default=None)
+    return ap
 
-conteos = np.zeros(NUM_CLASSES, dtype=np.int64)
-for f in rutas:
-    if not f.exists():
-        if ARGS.dirs:
-            raise FileNotFoundError(f)
-        print(f"{f}: no existe, salteado")
-        continue
-    Y = np.load(f, mmap_mode="r")
-    conteos += contar_etiquetas(Y)
 
-pesos = pesos_desde_conteos(conteos)
-total = conteos[1:].sum()
-print("\nDistribucion en TRAIN (excluye NoData):")
-for c in range(1, NUM_CLASSES):
-    print(f"  {NOMBRES[c]:<8}: {conteos[c]:>14,} px  ({conteos[c]/total*100:6.3f}%)")
-print(f"  {'NoData':<8}: {conteos[0]:>14,} px  (ignorado)")
+def seleccionar_rutas(dirs=None):
+    if dirs:
+        rutas = [d / f"dataset_{t}_Y.npy" for d in dirs
+                 for t in SPLIT['train']]
+    else:
+        rutas = [DIR / f"dataset_{t}_Y.npy" for t in TILES_TRAIN]
 
-n = NUM_CLASSES - 1
-print("\nPesos — raiz del inverso de frecuencia (recomendado):")
-print(f"  PESOS = {pesos}")
-pesos_sqrt = pesos
+    return rutas
 
-print("\nPesos — inverso puro (mas agresivo, puede desestabilizar):")
-pesos2 = [0.0]
-for c in range(1, NUM_CLASSES):
-    p = total / (n * conteos[c]) if conteos[c] > 0 else 0.0
-    pesos2.append(round(float(p), 3))
-print(f"  PESOS = {pesos2}")
-print("PESOS_ARGS " + " ".join(str(p) for p in pesos_sqrt))
+
+def contar_rutas(rutas, estricto=False):
+    conteos = np.zeros(NUM_CLASSES, dtype=np.int64)
+    for f in rutas:
+        if not f.exists():
+            if estricto:
+                raise FileNotFoundError(f)
+            print(f"{f}: no existe, salteado")
+            continue
+        Y = np.load(f, mmap_mode="r")
+        conteos += contar_etiquetas(Y)
+
+    return conteos
+
+
+def imprimir_pesos(conteos):
+    pesos = pesos_desde_conteos(conteos)
+    total = conteos[1:].sum()
+    print("\nDistribucion en TRAIN (excluye NoData):")
+    for c in range(1, NUM_CLASSES):
+        print(f"  {NOMBRES[c]:<8}: {conteos[c]:>14,} px  ({conteos[c]/total*100:6.3f}%)")
+    print(f"  {'NoData':<8}: {conteos[0]:>14,} px  (ignorado)")
+
+    n = NUM_CLASSES - 1
+    print("\nPesos — raiz del inverso de frecuencia (recomendado):")
+    print(f"  PESOS = {pesos}")
+    pesos_sqrt = pesos
+
+    print("\nPesos — inverso puro (mas agresivo, puede desestabilizar):")
+    pesos2 = [0.0]
+    for c in range(1, NUM_CLASSES):
+        p = total / (n * conteos[c]) if conteos[c] > 0 else 0.0
+        pesos2.append(round(float(p), 3))
+    print(f"  PESOS = {pesos2}")
+    print("PESOS_ARGS " + " ".join(str(p) for p in pesos_sqrt))
+
+
+def main(argv=None):
+    args = crear_parser().parse_args(argv)
+    conteos = contar_rutas(seleccionar_rutas(args.dirs), estricto=bool(args.dirs))
+    imprimir_pesos(conteos)
+
+
+if __name__ == "__main__":
+    main()
