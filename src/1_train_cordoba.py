@@ -64,7 +64,8 @@ import torch
 import torch.optim as optim
 from torch.utils.data import DataLoader, ConcatDataset
 
-sys.path.append(os.path.abspath("."))
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 from utils.test_actual import CONFIG as CONFIG_TEST, cargar_config as cargar_config_test, preflight as preflight_test
 from model import SimpleUNet, TransUNet, UTAE, FCRTransUNet
 from utils.lectura_bloques import MezclaBloques
@@ -78,132 +79,141 @@ from src.evaluacion.metricas import metricas_confusion
 # ══════════════════════════════════════════════════════════════════════════════
 # CONFIGURACION
 # ══════════════════════════════════════════════════════════════════════════════
-parser = argparse.ArgumentParser()
-parser.add_argument("--modelo", choices=["unet", "transunet", "utae", "fcrtransunet"],
-                     default="unet",
-                     help="unet=SimpleUNet (baseline), transunet=SimpleUNet con "
-                          "self-attention global en el bottleneck, utae=U-Net "
-                          "temporal con L-TAE, fcrtransunet=TransUNet + FEM/CA/RAM "
-                          "(ver model/README.md)")
-parser.add_argument("--dir-train", default=None,
-                     help="dir con los dataset_<TILE>_X/_Y.npy (default: train_cordoba_f16)")
-parser.add_argument("--dir-exp", default=None,
-                     help="dir de salida de pesos/historial (default: exp_cordoba_[<modelo>_]f16)")
-parser.add_argument("--sin-2017", action="store_true",
-                     help="no sumar los tiles de la campana 2017-2018 a TRAIN")
-parser.add_argument("--dir-train-extra", default=None,
-                     help="dir con dataset_<TILE>_X/_Y.npy de otra campana: sus tiles de "
-                          "TRAIN se suman a TRAIN (val/test siguen saliendo de --dir-train)")
-parser.add_argument("--pesos", nargs=5, type=float, default=None,
-                     help="pesos por clase [NoData Fondo Maiz Soja Mani] (default: los de abajo)")
-parser.add_argument("--campana", nargs=2, action="append", metavar=("AAAA_AAAA", "DIRECTORIO"),
-                    help="repetible: incorpora TRAIN/VAL/TEST de cada campana")
-parser.add_argument("--verificar-datos", action="store_true",
-                    help="valida multicampana y pesos, sin crear salidas ni entrenar")
-parser.add_argument('--lectura-bloques', action='store_true', help='precarga secuencial y mezcla en pools de page cache')
-parser.add_argument('--bloque-parches', type=int, default=512)
-parser.add_argument('--bloques-pool', type=int, default=16)
-parser.add_argument('--workers', type=int, default=16)
-parser.add_argument('--prefetch', type=int, default=4)
-parser.add_argument('--init-pesos', type=Path, help='warm start: solo pesos, sin recuperar optimizador/epoca')
-parser.add_argument('--reanudar', type=Path, help='checkpoint completo generado por esta version')
-parser.add_argument('--anticipar-pool', action='store_true', help='precargar siguiente pool durante computo; dos pools en RAM')
-parser.add_argument('--cache-lectura', type=Path, help='manifest de caches de TRAIN verificadas')
-parser.add_argument('--split-config', type=Path, default=CONFIG_TEST, help='Configuracion de TEST vigente (20HNJ/20HNH por defecto)')
-parser.add_argument('--test-historico', action='store_true', help='Reproducir evaluacion historica 20HLK/20HLJ de parches')
-ARGS = parser.parse_args()
-if (ARGS.anticipar_pool or ARGS.cache_lectura) and not ARGS.lectura_bloques:
-    parser.error('--anticipar-pool/--cache-lectura requieren --lectura-bloques')
-if ARGS.cache_lectura and not ARGS.campana:
-    parser.error('--cache-lectura requiere --campana')
-if ARGS.reanudar and ARGS.init_pesos:
-    parser.error('--reanudar no se combina con --init-pesos')
-if min(ARGS.bloque_parches, ARGS.bloques_pool, ARGS.prefetch) <= 0 or ARGS.workers < 0:
-    parser.error('bloques/prefetch deben ser positivos y workers >= 0')
-if ARGS.campana:
-    if ARGS.dir_train or ARGS.dir_train_extra or ARGS.sin_2017:
-        parser.error("--campana no se combina con --dir-train/--dir-train-extra/--sin-2017")
-    try:
-        ARGS.campana = normalizar_campanas(ARGS.campana)
-    except ValueError as exc:
-        parser.error(str(exc))
-elif ARGS.verificar_datos:
-    parser.error("--verificar-datos requiere --campana")
-if ARGS.pesos is not None and (not np.isfinite(ARGS.pesos).all()
-                              or min(ARGS.pesos) < 0 or ARGS.pesos[0] != 0
-                              or max(ARGS.pesos[1:]) <= 0):
-    parser.error("--pesos requiere cinco valores finitos no negativos; NoData=0")
-
 BASE_DIR   = "/mnt/yacy_1/prod/ferreyra/dataset"
-DIR_TRAIN  = ARGS.dir_train or f"{BASE_DIR}/train_cordoba_f16"
-# exp_cordoba_f16 se deja intacto (compatibilidad con 2_inferencia.py y demas
-# scripts que ya apuntan ahi) -- las variantes escriben en dirs aparte para no
-# pisar el checkpoint del baseline.
-DIR_EXP    = f"{BASE_DIR}/exp_cordoba_f16" if ARGS.modelo == "unet" \
-             else f"{BASE_DIR}/exp_cordoba_{ARGS.modelo}_f16"
-if ARGS.campana:
-    DIR_EXP = str(Path(ARGS.campana[0][1]).parent /
-                  ("exp_multicampana_" + "_".join(n for n, _ in ARGS.campana) + "_" + ARGS.modelo))
-DIR_EXP    = ARGS.dir_exp or DIR_EXP
 PREFIJO    = "dataset_"
-
-# Split por franjas de cobertura de cultivo (ver analisis de cobertura MNC)
-# Split espacial por tiles completos, balanceado en tres criterios:
-#   1) gradiente geografico oeste-centro-este (evita mismatch de dominio)
-#   2) presencia de Mani (clase minoritaria) en los tres conjuntos
-#   3) validacion ampliada a 4 tiles para reducir el ruido de la curva Val
-# Split de 17 tiles (11 originales + 6 sumados via
-# 03c_generar_dataset_cordoba_f16.py, verificados con 0_verificar_pipeline.py).
-# Los 6 nuevos se suman todos a TRAIN -- val/test quedan igual que antes para
-# poder comparar resultados contra las corridas previas con el mismo test set.
-TILES_TRAIN = list(SPLIT['train'])
-TILE_VAL = list(SPLIT['val'])
-TILES_TEST = list(SPLIT['test'])
-
-# Campana 2017-2018 (legacy, ver 03d_generar_dataset_cordoba_2017_f16.py):
-# mismos tiles Sentinel-2 que algunos de arriba pero de otra campana agricola
-# (etiquetas Nivel3 remapeadas a las 5 clases MNC vigentes), con sufijo
-# "_2017" en el nombre de archivo para no pisar el dataset 2019-2020 de esos
-# mismos tiles. Meses alineados a la misma ventana del ciclo agricola que la
-# campana 2020 (oct-abr, ver 03d) -- de los 6 tiles con mascara, solo estos 4
-# tienen esa ventana completa (20JML y 20HNK quedan afuera, les faltan meses).
-# Se suman todos a TRAIN (mas diversidad interanual) -- val/test quedan
-# intactos, igual que con los 6 tiles de 03c.
 TILES_TRAIN_2017 = ['20HLJ_2017', '20HLK_2017', '20JLL_2017', '20JNL_2017']
-if not ARGS.sin_2017 and not ARGS.campana:
-    TILES_TRAIN = TILES_TRAIN + TILES_TRAIN_2017
-
 NUM_CLASSES   = 5
-# utae corre el encoder T=7 veces por batch (una por mes) -- a batch 32 la
-# RTX 3090 tira OOM; 16 usa ~17GB de pico, medido con smoke test.
-BATCH_SIZE    = 16 if ARGS.modelo == "utae" else 32
 EPOCHS        = 100
 LEARNING_RATE = 1e-4
 WEIGHT_DECAY  = 1e-3
 PATIENCE      = 30
 SEED          = 42
-
-# floryacy: 32 nucleos de CPU / RTX 3090. Con TileDatasetMmap cada __getitem__
-# lee del disco bajo demanda (antes el dataset ya estaba entero en RAM), asi
-# que varios workers en paralelo si aportan (se solapan con el computo en GPU).
 NUM_WORKERS = 16
 PREFETCH_FACTOR = 4
-
-# Pesos por clase — recalculados con 0b_calcular_pesos.py sobre los tiles de
-# TRAIN vigentes, incluida la campana 2017-2018 (raiz del inverso de frecuencia).
-# Orden: [NoData, Fondo, Maiz, Soja, Mani]
-PESOS = [0.0, 0.742, 1.119, 0.868, 4.105]
-# Sin la campana 2017-2018: los pesos previos, calculados sobre los 13 tiles
-# 2019-2020 (las etiquetas no dependen de la ventana de meses).
-if ARGS.sin_2017:
-    PESOS = [0.0, 0.851, 1.019, 0.79, 4.245]
-if ARGS.pesos:
-    PESOS = ARGS.pesos
-
 NOMBRES = {0:"NoData", 1:"Fondo", 2:"Maiz", 3:"Soja", 4:"Mani"}
 
-torch.manual_seed(SEED)
-np.random.seed(SEED)
+def crear_parser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--modelo", choices=["unet", "transunet", "utae", "fcrtransunet"],
+                         default="unet",
+                         help="unet=SimpleUNet (baseline), transunet=SimpleUNet con "
+                              "self-attention global en el bottleneck, utae=U-Net "
+                              "temporal con L-TAE, fcrtransunet=TransUNet + FEM/CA/RAM "
+                              "(ver model/README.md)")
+    parser.add_argument("--dir-train", default=None,
+                         help="dir con los dataset_<TILE>_X/_Y.npy (default: train_cordoba_f16)")
+    parser.add_argument("--dir-exp", default=None,
+                         help="dir de salida de pesos/historial (default: exp_cordoba_[<modelo>_]f16)")
+    parser.add_argument("--sin-2017", action="store_true",
+                         help="no sumar los tiles de la campana 2017-2018 a TRAIN")
+    parser.add_argument("--dir-train-extra", default=None,
+                         help="dir con dataset_<TILE>_X/_Y.npy de otra campana: sus tiles de "
+                              "TRAIN se suman a TRAIN (val/test siguen saliendo de --dir-train)")
+    parser.add_argument("--pesos", nargs=5, type=float, default=None,
+                         help="pesos por clase [NoData Fondo Maiz Soja Mani] (default: los de abajo)")
+    parser.add_argument("--campana", nargs=2, action="append", metavar=("AAAA_AAAA", "DIRECTORIO"),
+                        help="repetible: incorpora TRAIN/VAL/TEST de cada campana")
+    parser.add_argument("--verificar-datos", action="store_true",
+                        help="valida multicampana y pesos, sin crear salidas ni entrenar")
+    parser.add_argument('--lectura-bloques', action='store_true', help='precarga secuencial y mezcla en pools de page cache')
+    parser.add_argument('--bloque-parches', type=int, default=512)
+    parser.add_argument('--bloques-pool', type=int, default=16)
+    parser.add_argument('--workers', type=int, default=16)
+    parser.add_argument('--prefetch', type=int, default=4)
+    parser.add_argument('--init-pesos', type=Path, help='warm start: solo pesos, sin recuperar optimizador/epoca')
+    parser.add_argument('--reanudar', type=Path, help='checkpoint completo generado por esta version')
+    parser.add_argument('--anticipar-pool', action='store_true', help='precargar siguiente pool durante computo; dos pools en RAM')
+    parser.add_argument('--cache-lectura', type=Path, help='manifest de caches de TRAIN verificadas')
+    parser.add_argument('--split-config', type=Path, default=CONFIG_TEST, help='Configuracion de TEST vigente (20HNJ/20HNH por defecto)')
+    parser.add_argument('--test-historico', action='store_true', help='Reproducir evaluacion historica 20HLK/20HLJ de parches')
+    return parser
+
+
+def leer_argumentos(argv=None):
+    parser = crear_parser()
+    ARGS = parser.parse_args(argv)
+    if (ARGS.anticipar_pool or ARGS.cache_lectura) and not ARGS.lectura_bloques:
+        parser.error('--anticipar-pool/--cache-lectura requieren --lectura-bloques')
+    if ARGS.cache_lectura and not ARGS.campana:
+        parser.error('--cache-lectura requiere --campana')
+    if ARGS.reanudar and ARGS.init_pesos:
+        parser.error('--reanudar no se combina con --init-pesos')
+    if min(ARGS.bloque_parches, ARGS.bloques_pool, ARGS.prefetch) <= 0 or ARGS.workers < 0:
+        parser.error('bloques/prefetch deben ser positivos y workers >= 0')
+    if ARGS.campana:
+        if ARGS.dir_train or ARGS.dir_train_extra or ARGS.sin_2017:
+            parser.error("--campana no se combina con --dir-train/--dir-train-extra/--sin-2017")
+        try:
+            ARGS.campana = normalizar_campanas(ARGS.campana)
+        except ValueError as exc:
+            parser.error(str(exc))
+    elif ARGS.verificar_datos:
+        parser.error("--verificar-datos requiere --campana")
+    if ARGS.pesos is not None and (not np.isfinite(ARGS.pesos).all()
+                                  or min(ARGS.pesos) < 0 or ARGS.pesos[0] != 0
+                                  or max(ARGS.pesos[1:]) <= 0):
+        parser.error("--pesos requiere cinco valores finitos no negativos; NoData=0")
+    return ARGS
+
+
+def configurar(ARGS):
+    DIR_TRAIN  = ARGS.dir_train or f"{BASE_DIR}/train_cordoba_f16"
+    # exp_cordoba_f16 se deja intacto (compatibilidad con 2_inferencia.py y demas
+    # scripts que ya apuntan ahi) -- las variantes escriben en dirs aparte para no
+    # pisar el checkpoint del baseline.
+    DIR_EXP    = f"{BASE_DIR}/exp_cordoba_f16" if ARGS.modelo == "unet" \
+                 else f"{BASE_DIR}/exp_cordoba_{ARGS.modelo}_f16"
+    if ARGS.campana:
+        DIR_EXP = str(Path(ARGS.campana[0][1]).parent /
+                      ("exp_multicampana_" + "_".join(n for n, _ in ARGS.campana) + "_" + ARGS.modelo))
+    DIR_EXP    = ARGS.dir_exp or DIR_EXP
+
+    # Split por franjas de cobertura de cultivo (ver analisis de cobertura MNC)
+    # Split espacial por tiles completos, balanceado en tres criterios:
+    #   1) gradiente geografico oeste-centro-este (evita mismatch de dominio)
+    #   2) presencia de Mani (clase minoritaria) en los tres conjuntos
+    #   3) validacion ampliada a 4 tiles para reducir el ruido de la curva Val
+    # Split de 17 tiles (11 originales + 6 sumados via
+    # 03c_generar_dataset_cordoba_f16.py, verificados con 0_verificar_pipeline.py).
+    # Los 6 nuevos se suman todos a TRAIN -- val/test quedan igual que antes para
+    # poder comparar resultados contra las corridas previas con el mismo test set.
+    TILES_TRAIN = list(SPLIT['train'])
+    TILE_VAL = list(SPLIT['val'])
+    TILES_TEST = list(SPLIT['test'])
+
+    # Campana 2017-2018 (legacy, ver 03d_generar_dataset_cordoba_2017_f16.py):
+    # mismos tiles Sentinel-2 que algunos de arriba pero de otra campana agricola
+    # (etiquetas Nivel3 remapeadas a las 5 clases MNC vigentes), con sufijo
+    # "_2017" en el nombre de archivo para no pisar el dataset 2019-2020 de esos
+    # mismos tiles. Meses alineados a la misma ventana del ciclo agricola que la
+    # campana 2020 (oct-abr, ver 03d) -- de los 6 tiles con mascara, solo estos 4
+    # tienen esa ventana completa (20JML y 20HNK quedan afuera, les faltan meses).
+    # Se suman todos a TRAIN (mas diversidad interanual) -- val/test quedan
+    # intactos, igual que con los 6 tiles de 03c.
+    if not ARGS.sin_2017 and not ARGS.campana:
+        TILES_TRAIN = TILES_TRAIN + TILES_TRAIN_2017
+
+    # utae corre el encoder T=7 veces por batch (una por mes) -- a batch 32 la
+    # RTX 3090 tira OOM; 16 usa ~17GB de pico, medido con smoke test.
+    BATCH_SIZE    = 16 if ARGS.modelo == "utae" else 32
+
+    # floryacy: 32 nucleos de CPU / RTX 3090. Con TileDatasetMmap cada __getitem__
+    # lee del disco bajo demanda (antes el dataset ya estaba entero en RAM), asi
+    # que varios workers en paralelo si aportan (se solapan con el computo en GPU).
+
+    # Pesos por clase — recalculados con 0b_calcular_pesos.py sobre los tiles de
+    # TRAIN vigentes, incluida la campana 2017-2018 (raiz del inverso de frecuencia).
+    # Orden: [NoData, Fondo, Maiz, Soja, Mani]
+    PESOS = [0.0, 0.742, 1.119, 0.868, 4.105]
+    # Sin la campana 2017-2018: los pesos previos, calculados sobre los 13 tiles
+    # 2019-2020 (las etiquetas no dependen de la ventana de meses).
+    if ARGS.sin_2017:
+        PESOS = [0.0, 0.851, 1.019, 0.79, 4.245]
+    if ARGS.pesos:
+        PESOS = ARGS.pesos
+
+    return {'DIR_TRAIN': DIR_TRAIN, 'DIR_EXP': DIR_EXP, 'TILES_TRAIN': TILES_TRAIN, 'TILE_VAL': TILE_VAL, 'TILES_TEST': TILES_TEST, 'BATCH_SIZE': BATCH_SIZE, 'PESOS': PESOS}
+
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -217,11 +227,12 @@ np.random.seed(SEED)
 # augmentacion (flips + rotaciones de 90) cuando augment=True, solo para TRAIN.
 
 def cargar_tiles(tiles, etiqueta, augment=False, dir_train=None):
+    directorio = dir_train or f"{BASE_DIR}/train_cordoba_f16"
     print(f"\nCargando {etiqueta}...", flush=True)
     datasets = []
     canales = set()
     for t in tiles:
-        ruta_base = f"{dir_train or DIR_TRAIN}/{PREFIJO}{t}"
+        ruta_base = f"{directorio}/{PREFIJO}{t}"
         if not os.path.exists(f"{ruta_base}_X.npy"):
             print(f"  {t}: NO EXISTE, salteado", flush=True)
             continue
@@ -306,12 +317,19 @@ def evaluar_confusion(modelo, loader, device):
             cm += torch.bincount(y[validos] * 5 + pred[validos], minlength=25)
     return cm.reshape(5, 5).cpu().numpy()
 
-def entrenar():
+def entrenar(ARGS, config=None):
+    config = config if config is not None else configurar(ARGS)
+    DIR_TRAIN = config['DIR_TRAIN']
+    DIR_EXP = config['DIR_EXP']
+    TILES_TRAIN = config['TILES_TRAIN']
+    TILE_VAL = config['TILE_VAL']
+    TILES_TEST = config['TILES_TEST']
+    BATCH_SIZE = config['BATCH_SIZE']
+    PESOS = config['PESOS']
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     torch.backends.cudnn.benchmark = True
     print(f"Dispositivo: {device}", flush=True)
 
-    global PESOS
     test_actual = not ARGS.test_historico and (bool(ARGS.campana) or (ARGS.dir_train is not None and 'dicmay' in ARGS.dir_train and ARGS.sin_2017))
     config_test = cargar_config_test(ARGS.split_config) if test_actual else None
     split_activo = {r: config_test[r] for r in ('train', 'val', 'test')} if test_actual else SPLIT
@@ -333,7 +351,7 @@ def entrenar():
         ds_train, ds_val = conjuntos['train'], conjuntos['val']
         ds_test = conjuntos.get('test')
     else:
-        ds_train = cargar_tiles(TILES_TRAIN, "TRAIN", augment=True)
+        ds_train = cargar_tiles(TILES_TRAIN, "TRAIN", augment=True, dir_train=DIR_TRAIN)
         if ARGS.dir_train_extra:
             # Los tiles _2017 son de train_cordoba_f16 (oct-abr), no de este dataset
             ds_extra = cargar_tiles([t for t in TILES_TRAIN if not t.endswith("_2017")],
@@ -342,8 +360,8 @@ def entrenar():
             ds_train = ConcatDataset([ds_train, ds_extra])
             if ds_train[0][0].shape != ds_extra[0][0].shape:
                 raise RuntimeError("Canales distintos entre --dir-train y --dir-train-extra")
-        ds_val   = cargar_tiles(TILE_VAL,    "VAL")
-        ds_test  = None if test_actual else cargar_tiles(TILES_TEST,  "TEST")
+        ds_val   = cargar_tiles(TILE_VAL,    "VAL", dir_train=DIR_TRAIN)
+        ds_test  = None if test_actual else cargar_tiles(TILES_TEST,  "TEST", dir_train=DIR_TRAIN)
 
     os.makedirs(DIR_EXP, exist_ok=True)
     if informe is not None:
@@ -540,5 +558,13 @@ def entrenar():
     print(f'\nResultados en: {DIR_EXP}', flush=True)
 
 
+def main(argv=None):
+    args = leer_argumentos(argv)
+    config = configurar(args)
+    torch.manual_seed(SEED)
+    np.random.seed(SEED)
+    return entrenar(args, config)
+
+
 if __name__ == "__main__":
-    entrenar()
+    main()

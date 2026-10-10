@@ -142,9 +142,14 @@ rutas. Las pruebas cargan algunos scripts con `importlib` o agregando `src` a
 Las arquitecturas están en [model/](../model/README.md), con un archivo por
 modelo y bloques compartidos. utils/model.py conserva imports anteriores.
 
-`utils/` contiene parte del código compartido, pero no todo: las leyendas
-y figuras todavía residen en scripts de `src/`. Varios comandos procesan
-argumentos al importar; el entrenador además fija semillas en el nivel superior.
+El código compartido de modelos, datos, inferencia, métricas y figuras tiene
+módulos propios; algunas variantes históricas siguen dentro de sus scripts.
+El entrenador y la regeneración de figuras separan parser y ejecución en
+main(); importarlos no procesa argumentos, fija semillas ni escribe salidas.
+Los comandos históricos de curvas, matriz de confusión y comparación visual
+(4, 5 y 6) también exponen crear_parser() y main(argv=None), sin leer datos ni
+cargar modelos al importar. Conservan sus canales, remapeos y cálculos originales.
+Otros comandos históricos todavía procesan argumentos al importar.
 Por eso no se deben importar indiscriminadamente para hacer un inventario.
 
 ## Secuencia de reorganización propuesta
