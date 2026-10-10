@@ -21,7 +21,7 @@ from rasterio.windows import Window
 import sys
 
 sys.path.append(os.path.abspath("."))
-from utils.model import SimpleUNet, TransUNet, UTAE, FCRTransUNet
+from model import SimpleUNet, TransUNet, UTAE, FCRTransUNet
 from utils.rutas import LEGACY_PREDICTIONS
 
 def generar_mapa_clasificacion():
@@ -31,7 +31,7 @@ def generar_mapa_clasificacion():
     parser.add_argument("--modelo", choices=["unet", "transunet", "utae", "fcrtransunet"],
                          default="unet",
                          help="unet=SimpleUNet (baseline), transunet=TransUNet, "
-                              "utae=UTAE, fcrtransunet=FCRTransUNet (ver utils/model.py) "
+                              "utae=UTAE, fcrtransunet=FCRTransUNet (ver model/README.md) "
                               "-- debe coincidir con el modelo usado para entrenar los "
                               "pesos de exp_cordoba_*_f16")
     parser.add_argument("--dir-composites", default=None,

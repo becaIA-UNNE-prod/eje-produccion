@@ -17,18 +17,18 @@ Uso:
     python3 src/03b_convertir_datasets_a_mmap.py /mnt/yacy_1/prod/ferreyra/dataset/train_cordoba_f16
     python3 src/1_train_cordoba.py [--modelo unet|transunet]
 
---modelo transunet usa utils/model.py::TransUNet (SimpleUNet + self-attention
+--modelo transunet usa model/transunet.py::TransUNet (SimpleUNet + self-attention
 global en el bottleneck, ver docstring de la clase) en vez del baseline, y
 escribe en exp_cordoba_transunet_f16 para no pisar el checkpoint del baseline.
 
---modelo utae usa utils/model.py::UTAE (U-Net temporal, ver docstring de la
+--modelo utae usa model/utae.py::UTAE (U-Net temporal, ver docstring de la
 clase): en vez de aplanar los 7 meses como canales sueltos, corre el encoder
 por mes (T plegado en el batch) y colapsa el tiempo con L-TAE. El encoder T
 veces por batch pesa mucho mas en memoria -- BATCH_SIZE se reduce a 16 (ver
 smoke test que sondeo el batch maximo en la RTX 3090) solo para este modelo.
 Escribe en exp_cordoba_utae_f16.
 
---modelo fcrtransunet usa utils/model.py::FCRTransUNet (adaptacion de Han et
+--modelo fcrtransunet usa model/fcrtransunet.py::FCRTransUNet (adaptacion de Han et
 al. 2026, MDPI Agriculture 16(7):727, ver docstring de la clase): TransUNet
 + FEM (self-attention no-local + gated conv) en el nivel 3 del encoder +
 Coordinate Attention en los 4 skips + Reverse Attention en la segunda etapa
@@ -66,7 +66,7 @@ from torch.utils.data import DataLoader, ConcatDataset
 
 sys.path.append(os.path.abspath("."))
 from utils.test_actual import CONFIG as CONFIG_TEST, cargar_config as cargar_config_test, preflight as preflight_test
-from utils.model import SimpleUNet, TransUNet, UTAE, FCRTransUNet
+from model import SimpleUNet, TransUNet, UTAE, FCRTransUNet
 from utils.lectura_bloques import MezclaBloques
 from utils.cache_lectura import cargar_cache
 from utils.tile_dataset import TileDatasetMmap
@@ -83,7 +83,7 @@ parser.add_argument("--modelo", choices=["unet", "transunet", "utae", "fcrtransu
                      help="unet=SimpleUNet (baseline), transunet=SimpleUNet con "
                           "self-attention global en el bottleneck, utae=U-Net "
                           "temporal con L-TAE, fcrtransunet=TransUNet + FEM/CA/RAM "
-                          "(ver utils/model.py)")
+                          "(ver model/README.md)")
 parser.add_argument("--dir-train", default=None,
                      help="dir con los dataset_<TILE>_X/_Y.npy (default: train_cordoba_f16)")
 parser.add_argument("--dir-exp", default=None,

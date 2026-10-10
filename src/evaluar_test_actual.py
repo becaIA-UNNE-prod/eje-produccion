@@ -14,7 +14,7 @@ import preparar_evaluar_extension as ext
 import postprocesar_multicampana as post
 from utils.test_actual import CONFIG,cargar_config,preflight
 from utils.integridad_raster import auditar_rasters,firma
-from utils.model import TransUNet,UTAE
+from model import TransUNet,UTAE
 
 def constructor(name):
  return {'unet':post.SimpleUNet,'fcrtransunet':post.FCRTransUNet,'transunet':TransUNet,'utae':lambda c,n:UTAE(c,n,T=c//4)}[name]

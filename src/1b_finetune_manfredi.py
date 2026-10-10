@@ -5,7 +5,7 @@ from torch.utils.data import DataLoader, Subset
 import numpy as np
 import sys
 sys.path.append(os.path.abspath("."))
-from utils.model import SimpleUNet
+from model import SimpleUNet
 from utils.tile_dataset import TileDatasetMmap
 from utils.losses import CEDiceLoss
 

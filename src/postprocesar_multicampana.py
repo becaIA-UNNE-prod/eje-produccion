@@ -23,7 +23,7 @@ from matplotlib.patches import Patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from utils.model import SimpleUNet, FCRTransUNet
+from model import SimpleUNet, FCRTransUNet
 from utils.multicampana import SPLIT, metricas_confusion
 from utils.leyendas_mnc import REMAP_2021, verificar_codigos
 

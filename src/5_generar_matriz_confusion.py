@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 import torch
 import sys, os
 sys.path.append(os.path.abspath("."))
-from utils.model import SimpleUNet, TransUNet, UTAE, FCRTransUNet
+from model import SimpleUNet, TransUNet, UTAE, FCRTransUNet
 from pathlib import Path
 
 parser = argparse.ArgumentParser()

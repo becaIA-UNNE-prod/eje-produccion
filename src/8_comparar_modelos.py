@@ -20,12 +20,12 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
 import sys, os
 sys.path.append(os.path.abspath("."))
-from utils.model import SimpleUNet, TransUNet, UTAE, FCRTransUNet
+from model import SimpleUNet, TransUNet, UTAE, FCRTransUNet
 from utils.rutas import LEGACY_FIGURES
 
 BASE_DIR = "/mnt/yacy_1/prod/ferreyra/dataset"
 # Mismo orden en el que se fueron probando en la sesion (ver docstrings de
-# utils/model.py para el porque de cada uno).
+# model/README.md para el porque de cada uno).
 MODELOS = {
     "unet":         (SimpleUNet,    f"{BASE_DIR}/exp_cordoba_f16"),
     "transunet":    (TransUNet,     f"{BASE_DIR}/exp_cordoba_transunet_f16"),
