@@ -19,3 +19,7 @@ Para resultados y ubicaciones físicas, consultar [artifacts](../artifacts/READM
 Actualizar la guía existente antes de crear otra. Una corrida se documenta en
 sus metadatos externos; incorporar al historial del repo solo decisiones que
 expliquen cambios de método o almacenamiento. Evitar copias locales de la misma guía.
+
+## Mapas de tiles
+
+[Guía de mapas](guias/mapas_tiles.md). Abrir `artifacts/maps/index.html`: split vigente y mapas por corrida.

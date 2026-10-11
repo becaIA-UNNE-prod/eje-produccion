@@ -30,3 +30,11 @@ wheels/
 
 # Entradas físicas en /mnt; aliases locales y TIFF fuera de Git
 /data/
+
+# Mapas navegables livianos distribuidos con Git
+!/artifacts/maps/
+/artifacts/maps/**
+!/artifacts/maps/**/
+!/artifacts/maps/**/*.html
+!/artifacts/maps/**/*.json
+!/artifacts/maps/**/*.geojson

@@ -57,3 +57,7 @@ checkpoints y predicciones permanecen en sus ubicaciones; nuevas salidas se
 eligen por capacidad del disco. El manifiesto registra las rutas reales y permite
 relacionar corridas mediante `--padre`. No se trasladan artefactos para ordenarlos.
 Ver [lanzamiento y capacidad](../CONTRIBUTING.md#cómo-ejecutar-sin-ensuciar-la-raíz).
+
+## Mapas de tiles
+
+Abrir `maps/index.html`: mapa vigente. Cada nueva corrida conserva `mapas/mapa_tiles.html`. Ver [guía](../docs/guias/mapas_tiles.md).

@@ -17,6 +17,7 @@ sys.path.insert(0, str(ROOT))
 from utils.rutas import RUNS_ROOT, RUNTIME_ROOT
 from utils.corridas import guardar_json, ruta_externa, capacidad, registrar_rutas
 from scripts.registrar_rutas_corrida import pares
+from utils.mapas_tiles import generar_mapa, actualizar_indice
 
 
 def main():
@@ -87,6 +88,15 @@ def main():
     guardar_json(record, metadata)
     for source in sorted((ROOT / 'config').glob('*.json')):
         (run / 'configuracion' / source.name).write_bytes(source.read_bytes())
+    generar_mapa(run / "configuracion", run / "mapas",
+                 titulo=f"Split configurado · {args.etapa} / {args.nombre} · {stamp}")
+    mapa_repo = ROOT / 'artifacts/maps/corridas' / run.name
+    generar_mapa(run / 'configuracion', mapa_repo,
+                 titulo=f"Split configurado · {args.etapa} / {args.nombre} · {stamp}")
+    actualizar_indice(ROOT / 'artifacts/maps')
+    metadata['mapa_repo'] = str(mapa_repo.relative_to(ROOT) / 'mapa_tiles.html')
+    metadata["mapa_split"] = "mapas/mapa_tiles.html"
+    guardar_json(record, metadata)
     registrar_rutas(run, inputs, outputs)
     state = {'id': run_id, 'estado': 'ejecutando', 'inicio_utc': metadata['inicio_utc'], 'pid_supervisor': os.getpid()}
     guardar_json(run / 'estado.json', state)

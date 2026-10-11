@@ -40,6 +40,9 @@ class OrganizacionTests(unittest.TestCase):
             self.assertEqual(json.loads((run / 'estado.json').read_text())['exitcode'], 0)
             self.assertEqual((run / 'configuracion/split_extension_este.json').read_bytes(),
                              (ROOT / 'config/split_extension_este.json').read_bytes())
+            self.assertTrue((run / 'mapas/mapa_tiles.html').is_file())
+            published = ROOT / record['mapa_repo']
+            self.assertEqual(published.read_bytes(), (run / 'mapas/mapa_tiles.html').read_bytes())
             self.assertFalse((run / 'predicciones').exists())
             self.assertTrue((run / 'logs/workers').is_dir())
 
@@ -131,7 +134,8 @@ class ShellAutomaticoTests(unittest.TestCase):
             repo = base / 'repo'
             for name in ['scripts/ejecutar_con_log.py', 'scripts/registrar_rutas_corrida.py',
                          'scripts/lib/corridas.sh', 'utils/rutas.py',
-                         'utils/corridas.py', 'config/almacenamiento.json', 'config/split_extension_este.json']:
+                         'utils/corridas.py', 'utils/mapas_tiles.py', 'utils/mapa_tiles.html',
+                         'config/geometria_tiles.json', 'config/campanas.json', 'config/almacenamiento.json', 'config/split_extension_este.json']:
                 target = repo / name
                 target.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copyfile(ROOT / name, target)

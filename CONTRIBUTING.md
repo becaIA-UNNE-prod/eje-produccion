@@ -80,7 +80,7 @@ para antiguas imágenes/logs en la raíz. Nuevos módulos usan las constantes de
 
 Cada nueva corrida tiene nombre `<fechaUTC>_<etapa>_<nombre>_<id>` y contiene
 solo registros livianos: `run.json`, `estado.json`, `exitcode`, `logs/` (con
-`coordinador.log`, pasos y `workers/`), `configuracion/` e `inventarios/`.
+`coordinador.log`, pasos y `workers/`), `configuracion/`, `inventarios/` y `mapas/` (split configurado).
 Imágenes, arrays, caches, pesos, predicciones y resultados existentes no se
 mueven ni copian para agruparlos con estos registros. Las nuevas salidas pesadas
 usan destinos explícitos, elegidos según capacidad, y se registran en `run.json`.
@@ -269,3 +269,10 @@ infraestructura; consultar `test/README.md`. Los comandos de descubrimiento
 por nombre siguen funcionando recursivamente. Las utilidades manuales están
 en `scripts/diagnostico/`, con rutas/coordenadas explícitas. No incorporar
 lecturas de datos reales como efecto lateral de importar una prueba.
+
+Los mapas de tiles se consultan desde `artifacts/maps/index.html`; ver
+[guía de mapas](docs/guias/mapas_tiles.md). Sus contornos y registros son livianos.
+
+Excepción explícita: los mapas navegables livianos de tiles (HTML/GeoJSON/JSON)
+se guardan y versionan en `artifacts/maps/`, incluyendo `vigente/` y
+`corridas/<ID>/`, para distribuirlos con Git al mirror. No es un enlace a /mnt.
