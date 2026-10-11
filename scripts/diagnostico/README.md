@@ -17,3 +17,18 @@ separar inventarios por corrida. El segundo ejemplo conserva las coordenadas
 aproximadas antes fijadas para Manfredi; se pueden pasar otras coordenadas.
 La búsqueda comprueba huella, índice y muestra de la primera banda; no acredita
 que el píxel tenga datos válidos ni que se haya usado para entrenar.
+
+## Preparación acreditada del TEST vigente
+
+Las pruebas `test/evaluacion/test_test_actual.py` usan fixtures temporales;
+no leen la preparación acreditada. La comprobación real se solicita por separado:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 ~/s4a-venv/bin/python scripts/diagnostico/verificar_preparacion_test_actual.py
+```
+
+Verifica metadatos, TRAIN/VAL, tiles/campañas y presencia de máscaras completas
+e independientes. Solo lee; falla ante incompatibilidades o archivos faltantes,
+sin skips. No valida contenido raster, hashes, grillas ni checkpoints: conservar
+las auditorías y el evaluador --verificar para esos controles.
+--split-config permite seleccionar explícitamente otra configuración.

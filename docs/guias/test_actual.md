@@ -104,3 +104,18 @@ El dispatcher acepta --historico desde Python para reproducir el protocolo
 anterior; conserva su propio preflight/split y no aplica exclusiones vigentes.
 Los wrappers anteriores conservan exports; main importado del postprocesador
 sigue siendo histórico. Para API/CLI vigente usar src.evaluacion.test_actual.
+
+## Pruebas pequeñas y comprobación operativa
+
+Las pruebas `test/evaluacion/test_test_actual.py` usan fixtures temporales;
+no leen la preparación acreditada. La comprobación real se solicita por separado:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 ~/s4a-venv/bin/python scripts/diagnostico/verificar_preparacion_test_actual.py
+```
+
+Verifica metadatos, TRAIN/VAL, tiles/campañas y presencia de máscaras completas
+e independientes. Solo lee; falla ante incompatibilidades o archivos faltantes,
+sin skips. No valida contenido raster, hashes, grillas ni checkpoints: conservar
+las auditorías y el evaluador --verificar para esos controles.
+--split-config permite seleccionar explícitamente otra configuración.

@@ -176,6 +176,16 @@ PYTHONDONTWRITEBYTECODE=1 ~/s4a-venv/bin/python -m unittest discover -s test -p 
 PYTHONDONTWRITEBYTECODE=1 ~/s4a-venv/bin/python -m unittest discover -s test -p test_extension_este.py -v
 ```
 
+Las pruebas anteriores usan fixtures y no requieren la preparación real en /mnt.
+Para comprobar explícitamente los metadatos y la presencia de máscaras acreditadas:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 ~/s4a-venv/bin/python scripts/diagnostico/verificar_preparacion_test_actual.py
+```
+
+Esta comprobación es de solo lectura, falla ante faltantes y queda fuera de
+unittest discover. No reemplaza una auditoría raster ni el preflight de checkpoints.
+
 Para el lanzador y las rutas de figuras, ejecutar también `python -m unittest
 discover -s test -p test_organizacion.py -v` con el entorno operativo.
 Agregar las pruebas pertinentes a los componentes modificados; para una

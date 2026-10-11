@@ -103,6 +103,20 @@ class MulticampanaTest(unittest.TestCase):
     def test_cli_y_verificacion_sin_salidas(self):
         salida = self.base/'experimento'
         comando = [sys.executable, '-m', 'src.entrenamiento.entrenar_cordoba', '--verificar-datos', '--dir-exp', str(salida)]
+        from utils.test_actual import cargar_config
+        cfg = cargar_config()
+        preparacion = self.base / 'preparacion_test'
+        (preparacion / 'mascaras').mkdir(parents=True)
+        cfg['preparacion_base'] = str(preparacion)
+        (preparacion / 'protocolo.json').write_text(json.dumps({'split_original': {r: cfg[r] for r in ('train', 'val')}}))
+        (preparacion / 'preparacion_verificada.json').write_text(json.dumps({'tiles': cfg['test'], 'campanas': cfg['campanas']}))
+        for year in cfg['campanas']:
+            for tile in cfg['test']:
+                for scope in ('completa', 'independiente'):
+                    (preparacion / 'mascaras' / f'{year}_{tile}_{scope}.tif').write_bytes(b'fixture de presencia')
+        split_config = self.base / 'split_fixture.json'
+        split_config.write_text(json.dumps(cfg))
+        comando += ['--split-config', str(split_config)]
         # Fixture completo de 51 pares con forma productiva, sin modelos/GPU.
         for nombre, d in self.entradas:
             for tile in sum(SPLIT.values(), []):

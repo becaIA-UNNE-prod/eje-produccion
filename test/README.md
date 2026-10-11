@@ -21,9 +21,22 @@ nombre, conservando los comandos anteriores, por ejemplo `-p test_test_actual.py
 Para un grupo, usar `-s test/datos`. No ejecutar herramientas de diagnóstico al
 importar módulos de pruebas. Usar entradas temporales, sin entrenamientos completos.
 
-La mayoría de las pruebas usa fixtures pequeños y CPU. El preflight de
-`evaluacion/test_test_actual.py` requiere la preparación real acreditada en `/mnt`.
-La suite completa se valida en floryacy; no es totalmente independiente del servidor.
+La suite usa fixtures y CPU; no requiere datasets, TIFF, pesos ni preparación
+acreditada del servidor. Requiere las dependencias Python del proyecto; esta
+independencia de volúmenes no elimina esas dependencias.
+`evaluacion/test_test_actual.py` valida preflight con metadatos y archivos mínimos
+temporales: estos fixtures prueban presencia y contrato, no integridad raster.
+
+La comprobación operativa queda fuera del descubrimiento de pruebas. Pedirla
+explícitamente en floryacy:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 ~/s4a-venv/bin/python scripts/diagnostico/verificar_preparacion_test_actual.py
+```
+
+Lee el split vigente y su preparación real; falla si faltan volúmenes, metadatos
+o máscaras, sin skips ni inferencia. No sustituye auditorías de bloques ni la
+verificación de checkpoints del evaluador. Ver [TEST vigente](../docs/guias/test_actual.md).
 Las pruebas de compatibilidad histórica cubren código aún disponible y no definen
 el split vigente, que se toma de `config/split_extension_este.json`.
 
