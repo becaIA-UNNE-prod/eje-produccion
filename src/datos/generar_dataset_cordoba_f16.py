@@ -2,7 +2,7 @@
 Genera el dataset de entrenamiento (formato train_cordoba_f16, 5 clases sin
 Sorgo) para tiles de Cordoba que todavia no lo tienen, a partir de los
 composites 2019-2020 y las mascaras MNC ya verificados por
-0_verificar_pipeline.py.
+src.historico.verificar_pipeline.
 
 El generador original de train_cordoba_f16 se corrio como algo suelto en la
 maquina remota y no quedo versionado (ver bash_history: aparecia
@@ -55,7 +55,7 @@ SIZE = 256
 STEP = 256
 
 # Tiles con composites (7/7 meses) y mascara con distribucion aceptable segun
-# 0_verificar_pipeline.py, que todavia no estan en train_cordoba_f16 (no
+# src.historico.verificar_pipeline, que todavia no estan en train_cordoba_f16 (no
 # forman parte de TILES_TRAIN/TILE_VAL/TILES_TEST en 1_train_cordoba.py).
 TILES_DEFAULT = ["20HKH", "20HMG", "20HNG", "20HPG", "20HPH", "20JNL"]
 

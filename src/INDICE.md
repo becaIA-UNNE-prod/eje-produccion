@@ -238,7 +238,7 @@ son relativos a `src/`. Son destinos previstos, no archivos creados todavía.
 | `recuperar_multicampana.py` | `mantenimiento/recuperar_multicampana.py` |
 | `optimizar_lectura_multicampana.py` | `mantenimiento/optimizar_lectura_multicampana.py` |
 | `0_verificar_pipeline.py` | `historico/verificar_pipeline.py` |
-| `1b_finetune_manfredi.py` | `historico/finetune_manfredi.py` |
+| `1b_finetune_manfredi.py` | `entrenamiento/finetune_manfredi.py` |
 | `4_generar_metricas.py` | `figuras/curvas_entrenamiento.py` |
 | `5_generar_matriz_confusion.py` | `evaluacion/matriz_confusion_parches.py` |
 | `6_generar_comparacion_visual.py` | `figuras/comparacion_parches.py` |
@@ -475,3 +475,12 @@ Wrapper postprocesar reexporta perezosamente y mantiene main importado históric
 Shell: scripts/evaluacion/inferencia_multicampana.sh; anterior delega. Mantiene
 lock, PID, timestamps, exitcode y --lock-adquirido. Preparar año no visto llama
 al módulo nuevo por -m, conservando la preparación temporal previa.
+
+### Verificador anterior y ajuste fino de Manfredi trasladados
+
+Implementaciones: historico/verificar_pipeline.py y entrenamiento/finetune_manfredi.py.
+Las entradas 0 y 1b reexportan y delegan; ejecutar por -m desde la raíz.
+El verificador conserva 2019/2020, octubre–abril, NPZ, 28 canales y seis clases;
+no sustituye el preflight vigente. Manfredi conserva 20HMK, cinco clases,
+checkpoint base, VAL 0.15 y seed42. Sus imports no crean carpetas ni fijan
+semillas; esas acciones ocurren al ejecutar finetune(). No cambian cálculos.

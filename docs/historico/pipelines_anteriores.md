@@ -326,3 +326,9 @@ El dataset sigue una estructura jerárquica estricta de tres niveles: `Ruta_Base
         ├── [TILE]_[FECHA]_B04.jp2   # Banda Roja (Red) - 10m
         └── [TILE]_[FECHA]_B08.jp2   # Banda Infrarrojo Cercano (NIR) - 10m
 ```
+
+Las entradas históricas `0_verificar_pipeline.py` y `1b_finetune_manfredi.py`
+se conservan como wrappers. Las implementaciones actuales están en
+`src.historico.verificar_pipeline` y `src.entrenamiento.finetune_manfredi`;
+ejecutar por `python -m` desde la raíz. Los contratos descritos arriba permanecen
+intactos; importar el ajuste fino ya no crea carpetas ni fija semillas.

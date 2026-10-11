@@ -173,7 +173,7 @@ def configurar(ARGS):
     #   2) presencia de Mani (clase minoritaria) en los tres conjuntos
     #   3) validacion ampliada a 4 tiles para reducir el ruido de la curva Val
     # Split de 17 tiles (11 originales + 6 sumados via
-    # 03c_generar_dataset_cordoba_f16.py, verificados con 0_verificar_pipeline.py).
+    # 03c_generar_dataset_cordoba_f16.py, verificados con src.historico.verificar_pipeline).
     # Los 6 nuevos se suman todos a TRAIN -- val/test quedan igual que antes para
     # poder comparar resultados contra las corridas previas con el mismo test set.
     TILES_TRAIN = list(SPLIT['train'])

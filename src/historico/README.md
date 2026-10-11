@@ -22,3 +22,8 @@ pero su CLI deriva a TEST vigente por defecto y acepta --historico.
 Los datos/resultados mantienen ubicaciones acreditadas externas; no ejecutar
 estos protocolos para validar traslados. Las figuras de resumen y comparación
 están en src.figuras.historico; la inferencia reusable sigue en src.inferencia.raster.
+
+`python -m src.historico.verificar_pipeline --etapa ETAPA --tiles_train TILE`
+conserva la auditoría anterior 2019/2020, octubre–abril, NPZ, 28 canales y
+seis clases. No sustituye el preflight vigente. La entrada 0 reexporta/delega;
+importar no audita entradas. Revisar rutas originales antes de ejecutarlo.
