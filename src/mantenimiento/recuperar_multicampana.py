@@ -1,3 +1,9 @@
+
+# Validar antes de cargar dependencias o iniciar operaciones.
+if __name__ == "__main__":
+    from src.soporte.cli_fija import validar_entrada_fija
+    validar_entrada_fija('recuperar_multicampana')
+
 """Reconstruye composites corruptos, audita entradas y reanuda solo preparacion."""
 import importlib
 import json

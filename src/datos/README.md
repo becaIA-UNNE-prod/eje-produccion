@@ -32,7 +32,7 @@ Las implementaciones están en moldear_mascaras.py, mascaras_mnc_2018_2019.py,
 mascaras_nivel3_2017_2018.py y mascaras_mnc_2020_2021.py. Las entradas numeradas
 anteriores conservan compatibilidad. Las variantes por campaña se ejecutan con
 `python -m src.datos.<modulo> --help`; importar no ejecuta la preparación.
-Moldear conserva su ejecución fija original sobre JP2 y no tiene parser CLI.
+Moldear conserva su ejecución fija original sobre JP2.
 Se mantienen nearest, grillas, códigos crudos, NoData y salidas por campaña.
 Nivel3 importa REMAP_NIVEL3 directamente de generar_dataset_cordoba_f16;
 la tabla permanece única.
@@ -125,3 +125,13 @@ No sustituyen configuraciones fijas de métodos JP2, defaults oct–abr, variant
 Nivel3 ni shells específicos; cambiar el catálogo no parametriza todo el proyecto.
 Leyendas comunes están en leyendas.py; los contratos específicos mantienen sus
 tipos/remapeos y políticas de exclusión. Ver src/INDICE.md para dependencias.
+
+## Ayuda segura de entradas con configuración fija
+
+Moldear máscaras, composites_mensuales, composites_2019_2020 y
+generar_arrays_originales admiten únicamente -h/--help. La ayuda y el rechazo
+de argumentos inválidos ocurren antes de cargar dependencias operativas o
+acceder a datos, tanto por -m como por sus wrappers numerados.
+Sin argumentos conservan su ejecución original y pueden escribir salidas;
+revisar la configuración antes de ejecutarlos. main() y las funciones importadas
+mantienen su API. No se agregan opciones para cambiar parámetros científicos.

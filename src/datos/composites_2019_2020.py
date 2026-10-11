@@ -1,3 +1,9 @@
+
+# Validar antes de cargar dependencias o iniciar operaciones.
+if __name__ == "__main__":
+    from src.soporte.cli_fija import validar_entrada_fija
+    validar_entrada_fija('composites_2019_2020')
+
 """
 Genera composites mensuales para la campana 2019-2020 a partir de imagenes
 Sentinel-2 L2A descargadas.

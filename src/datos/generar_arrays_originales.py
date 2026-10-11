@@ -1,3 +1,9 @@
+
+# Validar antes de cargar dependencias o iniciar operaciones.
+if __name__ == "__main__":
+    from src.soporte.cli_fija import validar_entrada_fija
+    validar_entrada_fija('generar_arrays_originales')
+
 import os
 import numpy as np
 import rasterio

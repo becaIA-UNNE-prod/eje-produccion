@@ -19,6 +19,10 @@ Conserva bloqueos y estado, y continúa con preparación sin entrenamiento.
 Entrada: `python -m src.mantenimiento.recuperar_multicampana` desde la raíz.
 Importarlo no carga los comandos de preparación/composición ni repara datos.
 La entrada anterior en src delega y conserva los códigos de salida.
+Ambas CLI admiten únicamente -h/--help: muestran ayuda con código 0 y rechazan
+otros argumentos con código 2 antes de cargar dependencias operativas, escribir
+logs/exitcodes, adquirir locks o modificar datos. Sin argumentos ejecutan la
+recuperación existente; main(), reparar() y ejecutar() mantienen su API importada.
 
 ## Cachés de lectura y reanudación del entrenamiento
 
