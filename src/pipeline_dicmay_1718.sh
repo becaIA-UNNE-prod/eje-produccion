@@ -46,7 +46,7 @@ TILES_TRAIN="19HGC 20HLG 20HLH 20HMJ 20HMK 20HNK 20JML 20HKH 20HMG 20HNG 20HPG 2
 TILES_REF="20HLJ 20HLK 20HKJ 20HMH"   # test + val
 TILES_1718="20HLG 20HLH 20HMJ 20HMK 20HNK 20JML 20HKH 20HMG 20HNG 20HPG 20HPH 20JNL"   # TRAIN sin 19HGC
 mkdir -p $LOGS
-[ -d $COMP_1819 ] || { echo "falta $COMP_1819: correr antes src/rehacer_2018_2019_scl.sh"; exit 1; }
+[ -d $COMP_1819 ] || { echo "falta $COMP_1819: correr antes scripts/preparacion/rehacer_2018_2019_scl.sh"; exit 1; }
 
 paso() { echo; echo "===== $(date '+%F %T') $* ====="; }
 
@@ -116,7 +116,7 @@ inferir() {   # $1 modelo  $2 dir composites  $3 meses  $4 dir salida  $5.. tile
     local SUF=$([ $M = unet ] && echo "" || echo "_$M")
     for t in "$@"; do
         [ -f $OUT/prediccion_${t}${SUF}.tif ] && { echo "$t $M: ya existe"; continue; }
-        $PY src/2_inferencia.py $t --modelo $M --dir-composites $COMP --meses $MESES \
+        $PY -m src.inferencia.inferir_tile $t --modelo $M --dir-composites $COMP --meses $MESES \
             --dir-exp $Y3/dataset/exp_cordoba_dicmay_con1718_${M}_f16 --dir-salida $OUT \
             2>&1 | grep -v nested_tensor \
             || { rm -f $OUT/prediccion_${t}${SUF}.tif; exit 1; }

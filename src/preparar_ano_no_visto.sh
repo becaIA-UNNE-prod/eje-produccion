@@ -39,4 +39,4 @@ paso 'Esperando turno de GPU para inferencia'
 exec 9>"$Y3/logs_multicampana/inferencia.lock"
 flock 9
 paso 'Inferencia y evaluacion temporal: ningun reentrenamiento'
-"$PY" -u src/evaluar_ano_no_visto.py --exp "$EXP" --salida "$OUT"
+"$PY" -u -m src.historico.evaluar_ano_no_visto --exp "$EXP" --salida "$OUT"

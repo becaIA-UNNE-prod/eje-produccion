@@ -1,4 +1,5 @@
 """Comparacion de mapas del protocolo espacial historico."""
+import csv
 import numpy as np
 import rasterio
 from rasterio.enums import Resampling
@@ -6,7 +7,9 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
-from .comunes import NAMES, COLORS
+from .comunes import NAMES, COLORS, matriz_fig
+from src.evaluacion.metricas import metricas_confusion
+from src.soporte.archivos import guardar
 from src.datos.leyendas import LEGENDS
 
 def figura_tile(year,tile,campaign,models,out,mascaras,split):
@@ -48,3 +51,46 @@ def figura_tile(year,tile,campaign,models,out,mascaras,split):
     destination = out/'figuras'/year/f'comparacion_{tile}.png'
     destination.parent.mkdir(parents=True,exist_ok=True)
     fig.savefig(destination,dpi=140); plt.close(fig)
+
+
+def resumen_multicampana(records,models,out,years):
+    aggregates = {}
+    for record in records:
+        key=(record['modelo'],record['campana'],record['rol'])
+        aggregates.setdefault(key,np.zeros((5,5),dtype=np.int64))
+        aggregates[key] += np.array(record['confusion'],dtype=np.int64)
+    values = []
+    for (model,year,role),cm in aggregates.items():
+        metric = metricas_confusion(cm)
+        values.append({'modelo':model,'campana':year,'rol':role,**metric})
+        matriz_fig(cm,f'{models[model]["nombre"]} | {year} | {role.upper()}',out/'figuras'/f'confusion_{model}_{year}_{role}.png')
+    guardar(out/'metricas_mapas.json',{'tiles':records,'grupos':values,
+            'criterio':'MNC>0; prediccion=0 cuenta como error. Mapas completos, ventanas 512. No mezclar con metricas de parches 256.'})
+    fields=['modelo','campana','rol','accuracy','f1_macro','miou','pixeles','sin_prediccion']+[f'f1_{c}' for c in NAMES[1:]]
+    with (out/'comparacion_metricas.csv').open('w',newline='') as file:
+        writer=csv.DictWriter(file,fieldnames=fields); writer.writeheader()
+        for row in values:
+            writer.writerow({**{key:row[key] for key in fields if key in row},
+                             'sin_prediccion':sum(r[0] for r in row['confusion'][1:]),
+                             **{f'f1_{name}':row['clases'][name]['f1'] for name in NAMES[1:]}})
+    tests = {(row['modelo'],row['campana']):row for row in values if row['rol']=='test'}
+    fig,axes=plt.subplots(1,2,figsize=(14,5))
+    model_names=list(models); width=.8/max(len(model_names),1); x=np.arange(3)
+    for i,name in enumerate(model_names):
+        for ax,metric in zip(axes,['accuracy','f1_macro']):
+            vals=[tests.get((name,year),{}).get(metric,np.nan) for year in years]
+            ax.bar(x+(i-(len(model_names)-1)/2)*width,vals,width,label=models[name]['nombre'])
+            ax.set_xticks(x,[y.replace('_','/') for y in years]); ax.set_ylim(0,1)
+            ax.set_title('TEST: '+metric); ax.legend(fontsize=8); ax.grid(axis='y',alpha=.2)
+    fig.suptitle('Mismos tiles TEST, composites y mascara MNC para todos los modelos',fontsize=12)
+    fig.tight_layout(); fig.savefig(out/'figuras/comparacion_test.png',dpi=160); plt.close(fig)
+    fig,axes=plt.subplots(1,3,figsize=(17,5))
+    x=np.arange(4)
+    for ax,year in zip(axes,years):
+        for i,name in enumerate(model_names):
+            row=tests.get((name,year))
+            if row:
+                ax.bar(x+(i-(len(model_names)-1)/2)*width,[row['clases'][c]['f1'] for c in NAMES[1:]],width,label=models[name]['nombre'])
+        ax.set_xticks(x,NAMES[1:]); ax.set_ylim(0,1); ax.set_title(year.replace('_','/')); ax.grid(axis='y',alpha=.2)
+    axes[0].legend(fontsize=8); fig.suptitle('F1 por clase en TEST: mapas completos')
+    fig.tight_layout(); fig.savefig(out/'figuras/comparacion_f1_clases.png',dpi=160); plt.close(fig)

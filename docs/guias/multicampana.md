@@ -18,7 +18,7 @@ Almacenamiento y lanzamientos: [CONTRIBUTING](../../CONTRIBUTING.md).
    procedencia; estas verificaciones no sustituyen su comparación. Si faltan
    entradas, completar la preparación del paso 4 y volver a verificar antes de
    entrenar.
-4. Si hay que preparar TRAIN/VAL, revisar `src/preparar_multicampana.sh` y
+4. Si hay que preparar TRAIN/VAL, revisar `scripts/preparacion/preparar_multicampana.sh` y
    ejecutar esa preparación con log externo según CONTRIBUTING. El proceso
    audita composites, prepara máscaras MNC2021 y genera arrays; requiere
    espacio y no entrena. Reutiliza salidas solo con procedencia compatible.
@@ -74,7 +74,7 @@ Desde la raíz, usar `~/s4a-venv/bin/python -m` con el módulo de cada fila:
 Consultar --help antes de construir el comando concreto. La política
 --max-nodata 100 de los shells SCL permite escenas parciales y se conserva;
 el default general de STAC sigue siendo 50. No cambiar umbrales por el traslado.
-Los wrappers src/rehacer_2018_2019_scl.sh y src/descargar_2020_2021_scl.sh
+Los wrappers scripts/preparacion/rehacer_2018_2019_scl.sh y scripts/preparacion/descargar_2020_2021_scl.sh
 coordinan sus campañas específicas. Revisar sus rutas, locks, logs y qué etapas
 incluyen antes de ejecutarlos; conservar procedencia y no relanzar por refactor.
 La extensión sigue su [guía específica](test_actual.md): su shell de preparación
@@ -107,7 +107,7 @@ no es el preparador multicampaña y no debe ejecutarse como paso del flujo vigen
 
 El generador de las campañas TRAIN/VAL es
 `src.datos.generar_dataset_cordoba_f16`. La coordinación
-`src/preparar_multicampana.py` lo llama con meses, leyenda, rutas y modo estricto;
+`src.datos.preparar_multicampana` lo llama con meses, leyenda, rutas y modo estricto;
 preferir el wrapper de preparación para conservar auditorías y procedencia.
 Para revisar la entrada específica: `~/s4a-venv/bin/python -m
 src.datos.generar_dataset_cordoba_f16 --help` (escribir el comando en una línea).
@@ -178,7 +178,7 @@ explica el alcance y los límites de su verificación por muestras.
 Desde la raíz del repo:
 
 ```bash
-~/s4a-venv/bin/python src/preparar_multicampana.py --solo-verificar --ignorar-codigo20
+~/s4a-venv/bin/python -m src.datos.preparar_multicampana --solo-verificar --ignorar-codigo20
 ~/s4a-venv/bin/python -m src.entrenamiento.entrenar_cordoba --verificar-datos \
   --campana 2018_2019 /mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_1819_scl_f16 \
   --campana 2019_2020 /mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_f16 \
@@ -187,7 +187,7 @@ Desde la raíz del repo:
 
 `--solo-verificar` comprueba entradas y grillas; comprobar por separado los JSON
 cuando cambien rutas resueltas o procedencia. `--verificar-datos` valida arrays
-sin entrenar. Para regenerar datos, revisar primero `src/preparar_multicampana.sh`:
+sin entrenar. Para regenerar datos, revisar primero `scripts/preparacion/preparar_multicampana.sh`:
 reutiliza pares solo con procedencia compatible y aborta ante incompatibilidades.
 Consultar auditoría y códigos de salida bajo `logs_multicampana/`; no interpretar
 un log antiguo como estado actual. No regenerar lo ya acreditado para probar documentación.
@@ -213,3 +213,99 @@ intercambiables. Los detalles de las corridas de octubre quedan en el
 
 El entrenador está en src/entrenamiento/entrenar_cordoba.py. Las entradas
 anteriores Python y shell de src conservan compatibilidad.
+
+## Ejecutar la coordinación de preparación
+
+Para verificar fuentes y grillas sin generar datos, desde la raíz:
+
+```bash
+~/s4a-venv/bin/python -m src.datos.preparar_multicampana \
+  --solo-verificar --ignorar-codigo20
+```
+
+No comprueba cada JSON de procedencia ni valida arrays X/Y; completar las
+verificaciones de esta guía antes de entrenar. Para preparar entradas realmente
+faltantes, revisar primero rutas, procedencia y recursos, y usar el shell:
+
+```bash
+bash scripts/preparacion/preparar_multicampana.sh --workers 4 --ignorar-codigo20
+```
+
+Guardar stdout/stderr en una corrida externa con el lanzador de CONTRIBUTING.
+El shell conserva su estado operativo en
+/mnt/yacy_3/prod_bis/ferreyra/logs_multicampana: lock exclusivo, PID y exitcode.
+Si se invoca el shell con --solo-verificar, también escribe ese estado; para
+verificación sin esos archivos, usar la entrada Python de arriba.
+
+La secuencia interna, con los composites ya disponibles, sigue siendo:
+
+1. Verificar los códigos de la fuente MNC2021 y las grillas de las campañas.
+2. Exigir la reserva de 210 GiB y auditar completamente los composites.
+3. Generar/verificar las máscaras MNC2021 y volver a comprobar alineación.
+4. Comprobar procedencia y generar arrays 2020/2021, luego 2018/2019.
+5. Validar todas las campañas, incluida 2019/2020 existente, calcular pesos
+   con TRAIN y registrar auditoria.json y campanas.json.
+6. Ejecutar después la verificación de arrays y, si corresponde, iniciar el
+   entrenamiento con su shell separado.
+
+No incorpora automáticamente 2017/2018 o 2021/2022. Las entradas antiguas
+src/preparar_multicampana.py y src/preparar_multicampana.sh siguen compatibles.
+
+## Shells específicos: elegir el flujo correspondiente
+
+Desde la raíz del repositorio, con PY apuntando al entorno operativo:
+
+| Entrada en scripts/preparacion/ | Secuencia y alcance |
+|---|---|
+| descargar_2020_2021_scl.sh | Buscar si falta productos.json → descargar SCL → seleccionar → descargar/verificar bandas → componer; conserva los tiles de tiles.txt y seis meses dic–may |
+| rehacer_2018_2019_scl.sh | Descargar SCL → seleccionar → descargar/verificar bandas → componer → inferir modelos base → evaluar contra MNC1819 → gráficos; usa productos.json existente y MODELOS |
+| descargar_extension_este.sh DIRECTORIO_LOGS | Cuatro campañas 2018/2019–2021/2022 para 20HNJ/20HNH; buscar si falta → SCL/verificación → selección → bandas/verificación; no compone |
+| preparar_extension_este.sh DIRECTORIO_RESULTADOS | Auditar bloques → componer cuatro campañas → preparar máscaras → esperar lock GPU → evaluar U-Net congelada |
+
+La descarga de extensión precede a su preparación cuando faltan fuentes. Revisar
+la preparación acreditada antes de ejecutar: estas entradas reutilizan destinos
+operativos existentes; no crean automáticamente una corrida científica nueva.
+Guardar logs externos según CONTRIBUTING. Los directorios requeridos por los
+shells de extensión deben estar en /mnt; locks, PID, exitcodes y reservas de
+100 GiB se conservan donde los scripts ya los registraban.
+
+Rehacer 2018/2019 es un flujo mixto de modelos base anterior al TEST canónico.
+No ejecutarlo como si solo preparara datos ni sustituirlo por evaluación vigente.
+Para evaluar checkpoints existentes en TEST seguir la guía correspondiente.
+El shell de preparación de extensión también evalúa; sus comandos Python
+de preparación y evaluación están separados como se describe abajo. Las cuatro rutas antiguas en src siguen compatibles.
+
+### Comandos separados de extensión
+
+El shell preparar_extension_este.sh llama a
+`python -m src.datos.preparar_extension --salida CORRIDA` para auditar composites
+y generar máscaras, y después del lock GPU llama a
+`python -m src.evaluacion.evaluar_extension --salida CORRIDA` para evaluar la
+U-Net congelada. Sustituir CORRIDA por un destino externo acreditado.
+Mantener el mismo directorio entre etapas: contiene protocolo, modelo congelado
+y preparación. La entrada src/preparar_evaluar_extension.py conserva --modo
+preparar/evaluar. Separar los módulos no cambia el protocolo específico ni
+lo convierte en el evaluador canónico del TEST; consultar test_actual.md.
+
+### Inferencia de un tile con entradas explícitas
+
+El comando general está en `src.inferencia.inferir_tile` y se ejecuta por -m.
+La entrada src/2_inferencia.py sigue compatible. Los pipelines anteriores y
+rehacer_2018_2019_scl.sh usan el módulo nuevo con sus mismos argumentos.
+Revisar `python -m src.inferencia.inferir_tile --help`; --meses debe tener
+la ventana/orden del entrenamiento y --dir-exp un checkpoint compatible.
+Su default conserva siete meses oct–abr/28 canales y no representa el flujo
+multicampaña dic–may ni la evaluación vigente de TEST. Para TEST usar
+src.evaluacion.test_actual; el comando de tile solo produce un mapa.
+
+### Coordinación de evaluación y protocolos anteriores
+
+`bash scripts/evaluacion/inferencia_multicampana.sh EXP SALIDA` conserva lock
+GPU y archivos de estado. SALIDA debe existir; la entrada antigua en src delega.
+El shell ejecuta por -m src.evaluacion.postprocesar_multicampana, que deriva
+al TEST vigente por defecto. Para argumentos/preflight vigente ver test_actual.md.
+El dispatcher Python conserva --historico para el flujo anterior; la implementación
+está en src.historico.postprocesar_multicampana. No confundir sus mapas completos
+20HLK/20HLJ con las máscaras independientes 20HNJ/20HNH del TEST canónico.
+El protocolo temporal anterior 2021/2022 está en src.historico.evaluar_ano_no_visto;
+su shell aún está en src/preparar_ano_no_visto.sh y llama al módulo nuevo por -m.

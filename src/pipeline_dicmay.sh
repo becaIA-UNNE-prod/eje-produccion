@@ -79,7 +79,7 @@ for M in $MODELOS; do
     for t in $TILES; do
         SUF=$([ $M = unet ] && echo "" || echo "_$M")
         [ -f $DIR_PRED/prediccion_${t}${SUF}.tif ] && { echo "$t: ya existe"; continue; }
-        $PY src/2_inferencia.py $t --modelo $M --dir-composites $COMP_1819 \
+        $PY -m src.inferencia.inferir_tile $t --modelo $M --dir-composites $COMP_1819 \
             --meses $MESES_1819 --dir-exp $EXP --dir-salida $DIR_PRED \
             || { rm -f $DIR_PRED/prediccion_${t}${SUF}.tif; exit 1; }
     done

@@ -34,3 +34,24 @@ Mantiene selección previa de checkpoint con VAL, preflight, firmas y métricas
 completas/independientes. Consultar docs/guias/test_actual.md para precondiciones.
 La ruta src/evaluar_test_actual.py conserva compatibilidad. --verificar exige
 checkpoints y preparación compatibles; omitirlo ejecuta inferencia y escribe reportes.
+
+## Evaluación específica de extensión
+
+`python -m src.evaluacion.evaluar_extension --salida CORRIDA` conserva la U-Net
+congelada, protocolo/checksum, preparación verificada, GPU obligatoria y
+reutilización de predicciones por firmas. Escribe métricas completas e
+independientes y las figuras originales. No sustituye al evaluador canónico
+src.evaluacion.test_actual ni añade su preflight. Importar no carga checkpoints,
+infiere ni escribe salidas. La entrada mixta anterior conserva sus exports y
+--modo; las máscaras se preparan en src.datos.preparar_extension.
+
+## Despacho y shell multicampaña
+
+src.evaluacion.postprocesar_multicampana.main(argv) carga solo el evaluador
+seleccionado: TEST vigente por defecto; --historico deriva al protocolo anterior
+en src.historico.postprocesar_multicampana. Quita --lock-adquirido solamente en
+esa rama, como antes. Importar el dispatcher no carga Torch, figuras ni protocolos.
+El shell scripts/evaluacion/inferencia_multicampana.sh conserva lock/PID/exitcode,
+llama por -m al dispatcher y pasa --lock-adquirido al evaluador vigente.
+El wrapper Python anterior conserva main importado histórico y exports perezosos;
+su ejecución CLI conserva el despacho. Consultar la guía TEST para operar.

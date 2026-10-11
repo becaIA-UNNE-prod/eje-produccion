@@ -12,4 +12,4 @@ echo "$(date -Is) RECUPERACION: codigo 0 MNC2020 excluido como en remap anterior
 flock -u 8
 exec 8>&-
 trap - EXIT
-exec bash src/preparar_extension_este.sh "$OUT"
+exec bash scripts/preparacion/preparar_extension_este.sh "$OUT"

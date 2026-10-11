@@ -19,7 +19,7 @@ LOGS = MULTICAMPANA_ROOT / 'logs_multicampana'
 
 def cargar_dependencias():
     """Cargar comandos existentes solo al ejecutar, hasta su propia migración."""
-    preparacion = importlib.import_module('src.preparar_multicampana')
+    preparacion = importlib.import_module('src.datos.preparar_multicampana')
     compositor = importlib.import_module('src.datos.composites_scl')
     return preparacion, compositor
 
@@ -121,7 +121,7 @@ def main(preparacion=None, compositor=None, logs=None):
         # Liberar preparacion.lock antes de entrar al wrapper que lo adquiere.
         print('Entradas verificadas; reanudando preparacion sin entrenamiento', flush=True)
         with open(logs/'preparacion.log', 'w') as out:
-            r = subprocess.run(['bash', 'src/preparar_multicampana.sh', '--ignorar-codigo20'],
+            r = subprocess.run(['bash', 'scripts/preparacion/preparar_multicampana.sh', '--ignorar-codigo20'],
                                cwd=ROOT, stdout=out, stderr=subprocess.STDOUT)
         if r.returncode:
             raise RuntimeError(f'Preparacion fallo con codigo {r.returncode}; ver preparacion.log')

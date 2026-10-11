@@ -19,11 +19,11 @@ en `/mnt/yacy_*`; no cambiar rutas acreditadas solo para uniformar nombres.
 
 | Necesidad | Entrada | Alcance y precauciones |
 |---|---|---|
-| Verificar o preparar TRAIN/VAL multicampaña | `preparar_multicampana.py`, wrapper `preparar_multicampana.sh` | `--solo-verificar` comprueba entradas y grillas; la procedencia se revisa por separado. La preparación conserva el conjunto histórico de 17 tiles: no define el TEST vigente. |
+| Verificar o preparar TRAIN/VAL multicampaña | `datos/preparar_multicampana.py`, shell `../scripts/preparacion/preparar_multicampana.sh` | `--solo-verificar` comprueba entradas y grillas; la procedencia se revisa por separado. La preparación conserva el conjunto histórico de 17 tiles: no define el TEST vigente. |
 | Verificar arrays sin entrenar | `1_train_cordoba.py --verificar-datos --campana ...` | Valida los datos multicampaña; no requiere arrays de los nuevos tiles TEST. |
 | Entrenar | `1_train_cordoba.py`, wrapper `entrenar_multicampana_unet.sh` | El wrapper selecciona U-Net y tres campañas. Requiere un directorio de experimento existente. El cierre multicampaña evalúa TEST vigente salvo modo histórico explícito. |
 | Evaluar checkpoints congelados | `evaluar_test_actual.py` | Entrada canónica del TEST vigente. `--verificar` hace preflight sin inferencia, pero necesita checkpoints compatibles. |
-| Ejecutar inferencia/evaluación con lock y estado | `inferencia_multicampana.sh` | Invoca `postprocesar_multicampana.py`, cuya ejecución por defecto deriva a `evaluar_test_actual.py`. |
+| Ejecutar inferencia/evaluación con lock y estado | `../scripts/evaluacion/inferencia_multicampana.sh` | Invoca por -m el dispatcher src.evaluacion.postprocesar_multicampana; deriva al TEST vigente y conserva lock/PID/exitcode. Entrada anterior compatible. |
 | Regenerar figuras de un reporte vigente | `regenerar_figuras_test_actual.py` | Usa protocolo y predicciones existentes; no genera inferencias nuevas. |
 
 ## Inventario por responsabilidad
@@ -55,7 +55,7 @@ este índice. Los grupos describen su función actual; no implican moverlos toda
 | Archivos | Función |
 |---|---|
 | `descargar_extension_este.sh` | Descarga y selección de fuentes para los tiles de la extensión. |
-| `preparar_evaluar_extension.py` | Preparación de máscaras completas/independientes y evaluación específica de la extensión. Expone funciones consumidas por el evaluador vigente. |
+| `preparar_evaluar_extension.py` | Wrapper compatible: datos/preparar_extension.py y evaluacion/evaluar_extension.py; conserva --modo y exports. El evaluador vigente no depende de él. |
 | `preparar_extension_este.sh` | Audita fuentes, compone, prepara máscaras **y luego evalúa una U-Net congelada**. No es una entrada de solo preparación ni sustituye el evaluador canónico. |
 
 Esta preparación todavía contiene tiles, campañas y rutas explícitos en código.
@@ -68,12 +68,12 @@ relanzarlos sin revisar salidas y metadatos acreditados.
 |---|---|
 | `1_train_cordoba.py`, `entrenar_multicampana_unet.sh` | Entrenador y wrapper vigente. El entrenador conserva también opciones históricas. |
 | `1b_finetune_manfredi.py` | Fine-tuning específico de Manfredi; no es la entrada multicampaña. |
-| `2_inferencia.py` | Inferencia parametrizable de un tile, usada por pipelines anteriores. |
+| `2_inferencia.py` | Wrapper de inferencia/inferir_tile.py; CLI y exports compatibles, usado por pipelines anteriores. |
 | `4_generar_metricas.py`, `5_generar_matriz_confusion.py`, `6_generar_comparacion_visual.py`, `7_visualizar_inferencia.py` | Métricas y visualizaciones de los flujos originales. |
 | `8_comparar_modelos.py`, `9_comparar_inferencia_etiqueta.py`, `10_metricas_test.py` | Comparación y métricas históricas. No adaptar cambiando solo nombres de tiles para evaluar TEST vigente. |
 | `11_evaluar_contra_mnc.py`, `12_comparar_con_1718.py` | Evaluación contra MNC y comparación con experimentos 2017/2018. |
-| `postprocesar_multicampana.py` | Compatibilidad para inferencia y métricas; implementación de figuras; conserva un flujo histórico en `main()`. Como comando deriva al TEST vigente por defecto; `--historico` selecciona el anterior. |
-| `evaluar_test_actual.py`, `inferencia_multicampana.sh` | Evaluación canónica y wrapper operativo del TEST vigente. |
+| `postprocesar_multicampana.py` | Wrapper con exports perezosos y main importado histórico. CLI deriva al dispatcher evaluacion/postprocesar_multicampana: TEST vigente por defecto, --historico explícito. Implementación anterior en historico; resumen en figuras/historico. |
+| `evaluar_test_actual.py`, `inferencia_multicampana.sh` | Entradas compatibles de evaluacion/test_actual.py y scripts/evaluacion/inferencia_multicampana.sh. |
 | `regenerar_figuras_test_actual.py` | Figuras desde predicciones acreditadas existentes. |
 
 ### Pipelines de campañas y protocolos anteriores
@@ -82,7 +82,7 @@ relanzarlos sin revisar salidas y metadatos acreditados.
 |---|---|
 | `pipeline_dicmay.sh`, `pipeline_dicmay_1718.sh` | Pipelines de experimentos dic–may de una campaña y de la incorporación 2017/2018. |
 | `evaluar_dicmay.sh` | Evaluación de esos experimentos con los tiles anteriores de TEST y VAL. |
-| `evaluar_ano_no_visto.py`, `preparar_ano_no_visto.sh` | Protocolo temporal 2021/2022 con los cuatro tiles espaciales anteriores. No es el protocolo vigente de TEST 20HNJ/20HNH. |
+| `evaluar_ano_no_visto.py`, `preparar_ano_no_visto.sh` | Python compatible de historico/evaluar_ano_no_visto.py; shell llama por -m. Protocolo temporal 2021/2022 con cuatro tiles anteriores; no es TEST vigente 20HNJ/20HNH. |
 | `descargar_2020_2021_scl.sh`, `rehacer_2018_2019_scl.sh` | Preparación específica de fuentes/campañas; revisar reutilización, rutas y salidas antes de ejecutar. |
 
 Histórico describe aquí un protocolo o configuración anterior, no código
@@ -116,10 +116,10 @@ desde los módulos compartidos indicados arriba:
 1_train_cordoba.py
   └─ subprocess → src.evaluacion.test_actual (cierre multicampaña vigente)
 
-inferencia_multicampana.sh
-  └─ postprocesar_multicampana.py como comando
+scripts/evaluacion/inferencia_multicampana.sh
+  └─ src.evaluacion.postprocesar_multicampana (dispatcher)
        ├─ por defecto → src.evaluacion.test_actual.main
-       └─ --historico → su propio main histórico
+       └─ --historico → src.historico.postprocesar_multicampana.main
 
 evaluar_test_actual.py y regenerar_figuras_test_actual.py
   └─ módulos de datos, figuras, inferencia, evaluación y soporte
@@ -131,7 +131,7 @@ preparar_multicampana.py
   └─ ejecuta generadores mediante subprocess
 
 recuperar_multicampana.py
-  ├─ carga por ruta preparar_multicampana.py
+  ├─ importa src.datos.preparar_multicampana al ejecutar
   └─ importa src.datos.composites_scl al ejecutar
 ```
 
@@ -250,16 +250,16 @@ son relativos a `src/`. Son destinos previstos, no archivos creados todavía.
 | `12_comparar_con_1718.py` | `historico/comparar_con_1718.py` |
 | `evaluar_ano_no_visto.py` | `historico/evaluar_ano_no_visto.py` |
 
-Dos comandos mezclan responsabilidades y necesitan separación propia:
+La extensión y el postprocesador ya están separados; se conservan estas entradas:
 
 - `preparar_evaluar_extension.py`: preparación en `datos/preparar_extension.py`
   y evaluación específica en `evaluacion/evaluar_extension.py`. Conservar su
   orquestación CLI mediante compatibilidad; no equiparar este protocolo al
   evaluador canónico ni duplicar helpers ya extraídos.
-- `postprocesar_multicampana.py`: conservar el despacho vigente hacia
-  `evaluacion/test_actual.py`; ubicar el protocolo anterior en
-  `historico/postprocesar_multicampana.py`. Revisar figuras aún embebidas y
-  exports consumidos por `evaluar_ano_no_visto.py` antes de separarlo.
+- `postprocesar_multicampana.py`: despacho implementado en evaluacion hacia
+  `evaluacion/test_actual.py`; protocolo anterior en historico/postprocesar_multicampana.py.
+  Resumen gráfico en figuras/historico, exports compatibles y consumidor temporal
+  evaluar_ano_no_visto también trasladado a historico.
 
 Curvas y visualización general pertenecen a `figuras/`. Los comandos 5 y 6
 se ubicarán por responsabilidad en evaluación/figuras, describiendo su contrato
@@ -422,3 +422,56 @@ Nivel3 importa directamente el remapeo compartido del generador parametrizable.
 Se preservan calendarios, ventanas, remapeos, normalización, tipos, nombres,
 procedencia y comportamiento ante faltantes o salidas existentes.
 Coordinación de preparación y sus shells quedan para el paso siguiente.
+
+### Coordinación de preparación multicampaña trasladada
+
+Python: datos/preparar_multicampana.py, con crear_parser/main y exports
+compatibles. Shell: scripts/preparacion/preparar_multicampana.sh. Las entradas
+anteriores delegan. Recuperación importa la implementación nueva solo al
+ejecutar y continúa por el nuevo shell; no se ejecuta mantenimiento al importar.
+Locks, estado y logs externos conservan sus rutas. No cambia el orden de
+operaciones, procedencia, campañas ni separación entre preparación y entrenamiento.
+Los restantes wrappers de preparación y el comando mixto de extensión siguen
+pendientes de su propio paso.
+
+### Shells de preparación por campaña/extensión trasladados
+
+En scripts/preparacion/: descargar_2020_2021_scl.sh,
+rehacer_2018_2019_scl.sh, descargar_extension_este.sh y preparar_extension_este.sh.
+Entradas anteriores compatibles; recuperación de extensión usa el shell nuevo.
+Raíz recalculada; rutas físicas, campañas, meses, locks, PID, logs y exitcodes
+conservados. Descargar 2020/2021 también compone; descargar extensión selecciona
+pero no compone. Rehacer 2018/2019 compone, infiere, evalúa y grafica modelos base:
+es un flujo mixto anterior, no solo preparación ni el TEST canónico.
+Preparar extensión audita, compone, prepara máscaras y evalúa U-Net congelada.
+La separación de preparar_evaluar_extension.py está implementada (ver abajo).
+
+### Preparación y evaluación de extensión separadas
+
+Implementaciones únicas: datos/preparar_extension.py (shapes/write/prepare) y
+evaluacion/evaluar_extension.py (figure/evaluate), con crear_parser/main.
+El wrapper anterior mantiene --modo y exports; el shell usa -m para ambas etapas.
+Conserva campañas, tiles, fuentes, máscaras completas/independientes, SHA256,
+firmas, GPU, predicciones, métricas y figuras. No sustituye TEST canónico.
+La preparación no importa Torch ni Matplotlib; no se agrega src a sys.path.
+
+### Comando de inferencia de tile trasladado
+
+Implementación: inferencia/inferir_tile.py, con crear_parser, ejecutar_inferencia,
+main(argv=None) y generar_mapa_clasificacion compatible. Entrada 2 reexporta/delega.
+Los cuatro shells consumidores usan -m. Se conservan modelos, defaults oct–abr,
+meses explícitos, normalización float32, bloques512, padding/recorte, NoData,
+metadatos y nombres de salida. No se sustituye por raster.py, cuyo contrato
+de precisión y publicación del TIFF difiere. No evalúa el TEST canónico.
+
+### Postprocesado, coordinación y evaluación temporal separados
+
+Dispatcher: evaluacion/postprocesar_multicampana.py (vigente por defecto,
+--historico explícito). Implementaciones anteriores: historico/postprocesar_multicampana.py
+e historico/evaluar_ano_no_visto.py, con parser/main separados. Resumen gráfico:
+figuras/historico.resumen_multicampana. Mantienen split anterior, leyendas,
+calendarios, modelos, firmas, métricas, figuras y salidas; no se convierten a TEST.
+Wrapper postprocesar reexporta perezosamente y mantiene main importado histórico.
+Shell: scripts/evaluacion/inferencia_multicampana.sh; anterior delega. Mantiene
+lock, PID, timestamps, exitcode y --lock-adquirido. Preparar año no visto llama
+al módulo nuevo por -m, conservando la preparación temporal previa.

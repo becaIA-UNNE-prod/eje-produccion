@@ -26,8 +26,10 @@ El orden general y la secuencia SCL se describen en
 [Multicampaña](multicampana.md); para TEST usar siempre los tiles y la preparación
 acreditada de esta guía.
 
-Scripts: `descargar_extension_este.sh`, `preparar_extension_este.sh` y
-`preparar_evaluar_extension.py`, bajo `src/`. Antes de relanzarlos revisar
+Shells en `scripts/preparacion/`: `descargar_extension_este.sh DIRECTORIO_LOGS`
+y `preparar_extension_este.sh DIRECTORIO_RESULTADOS`. El shell llama por `-m` a
+`src.datos.preparar_extension` y `src.evaluacion.evaluar_extension`;
+`src/preparar_evaluar_extension.py --modo preparar|evaluar` conserva compatibilidad; las rutas antiguas de los shells delegan. Antes de relanzarlos revisar
 configuración, salidas, locks y metadatos de la preparación existente. Auditar
 íntegramente fuentes/composites/máscaras; una lectura de ventana de descarga
 no acredita todos los bloques. La leyenda depende de la campaña, especialmente
@@ -52,7 +54,7 @@ El evaluador verifica pesos de 24 canales/5 clases, grillas y preparación.
 La ejecución completa requiere GPU, congela pesos y acredita SHA256 y entradas.
 Una predicción existente se reutiliza solo con firmas compatibles.
 
-El entrenador y `src/inferencia_multicampana.sh` usan este TEST por defecto
+El entrenador y `scripts/evaluacion/inferencia_multicampana.sh` usan este TEST por defecto
 en los flujos correspondientes; el postprocesador ofrece `--historico` para
 reproducir el anterior. No adaptar los scripts históricos 8/9/10 cambiando tiles.
 
@@ -79,3 +81,26 @@ El evaluador está en `src/evaluacion/test_actual.py` y el regenerador en
 rutas anteriores de src conservan compatibilidad. Para figuras existentes:
 `python -m src.figuras.regenerar_test_actual --salida CORRIDA [--esperar]`.
 Conservar la preparación acreditada y revisar protocolo/estado antes de ejecutar.
+
+## Orden de los shells de extensión
+
+Si faltan fuentes, descargar_extension_este.sh busca/descarga/selecciona las
+cuatro campañas para 20HNJ/20HNH. Después, preparar_extension_este.sh audita
+fuentes, compone, prepara máscaras y finalmente evalúa una U-Net congelada con
+el comando mixto existente, conservando su lock GPU. Ambos están bajo
+scripts/preparacion/. No relanzar sobre entradas acreditadas solo por un traslado.
+Para evaluar otro checkpoint con el protocolo vigente, usar la entrada canónica
+src.evaluacion.test_actual descrita arriba; no asumir que el shell mixto es
+intercambiable con ella. El orden detallado de SCL está en la guía multicampaña.
+
+## Coordinación con lock y estado
+
+Desde la raíz, `bash scripts/evaluacion/inferencia_multicampana.sh EXP SALIDA`
+adquiere inferencia.lock y registra PID, inicio, fin y exitcode en SALIDA.
+Ambos directorios son explícitos; SALIDA debe existir en almacenamiento externo.
+El shell llama a src.evaluacion.postprocesar_multicampana por -m, con
+--lock-adquirido, y deriva al evaluador canónico. La entrada shell anterior delega.
+El dispatcher acepta --historico desde Python para reproducir el protocolo
+anterior; conserva su propio preflight/split y no aplica exclusiones vigentes.
+Los wrappers anteriores conservan exports; main importado del postprocesador
+sigue siendo histórico. Para API/CLI vigente usar src.evaluacion.test_actual.

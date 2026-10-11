@@ -33,7 +33,7 @@ for M in $MODELOS; do
     for t in $TILES_REF; do
         OUT=$Y3/predicciones_2019_2020_dicmay/prediccion_${t}${SUF}.tif
         [ -f $OUT ] && { echo "$t $M: ya existe"; continue; }
-        $PY src/2_inferencia.py $t --modelo $M --dir-composites $COMP_DICMAY --meses $MESES_1920 \
+        $PY -m src.inferencia.inferir_tile $t --modelo $M --dir-composites $COMP_DICMAY --meses $MESES_1920 \
             --dir-exp $Y3/dataset/exp_cordoba_dicmay_${M}_f16 --dir-salida $Y3/predicciones_2019_2020_dicmay \
             || { rm -f $OUT; exit 1; }
     done

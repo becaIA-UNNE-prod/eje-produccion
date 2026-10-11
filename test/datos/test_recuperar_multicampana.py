@@ -27,7 +27,7 @@ sys.path.insert(0, sys.argv[1])
 import utils.integridad_raster, utils.rutas
 original = importlib.import_module
 def cargar(nombre, *args):
-    if nombre in ('src.preparar_multicampana', 'src.datos.composites_scl'):
+    if nombre in ('src.datos.preparar_multicampana', 'src.datos.composites_scl'):
         raise AssertionError('carga de comando')
     return original(nombre, *args)
 with patch('importlib.import_module', side_effect=cargar), patch('subprocess.run', side_effect=AssertionError('ejecucion')), patch('utils.integridad_raster.auditar_rasters', side_effect=AssertionError('auditoria')):
@@ -93,7 +93,7 @@ with patch('importlib.import_module', side_effect=cargar), patch('subprocess.run
                     if modo == 'correcto':
                         mod.main(prep, object(), logs)
                         self.assertEqual(json.loads((logs / 'recuperacion.json').read_text())['estado'], 'preparacion_completa')
-                        self.assertEqual(ejecutar.call_args.args[0], ['bash', 'src/preparar_multicampana.sh', '--ignorar-codigo20'])
+                        self.assertEqual(ejecutar.call_args.args[0], ['bash', 'scripts/preparacion/preparar_multicampana.sh', '--ignorar-codigo20'])
                         self.assertEqual(ejecutar.call_args.kwargs['cwd'], ROOT)
                     else:
                         with self.assertRaises(RuntimeError):

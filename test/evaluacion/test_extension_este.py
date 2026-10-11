@@ -4,8 +4,9 @@ import numpy as np
 import rasterio
 from rasterio.transform import from_origin
 from rasterio.features import rasterize
-sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'src'))
-from preparar_evaluar_extension import legend,check_codes,confusion
+sys.path.insert(0,str(Path(__file__).resolve().parents[2]))
+from src.datos.leyendas import legend,check_codes
+from src.evaluacion.metricas import confusion_remapeada as confusion
 class ExtensionTests(unittest.TestCase):
  def test_codigo20_exclusivo_2021(self):
   lut,allowed,_=legend('2020_2021');check_codes([20],allowed);self.assertEqual(int(lut[20]),0)

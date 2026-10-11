@@ -8,7 +8,10 @@
 Estos módulos no importan scripts de src, no eligen checkpoints, no hacen
 inferencia ni calculan métricas científicas sobre las imágenes reducidas.
 Los scripts conservan wrappers/imports compatibles y coordinan las salidas.
-Las gráficas de resumen ligadas a cada protocolo todavía están en los comandos.
+historico.resumen_multicampana agrega matrices y produce CSV/gráficos desde
+registros de métricas ya calculados; recibe campañas explícitas. El wrapper
+histórico conserva resumen(records,models,out) pasando su lista YEARS.
+Las otras gráficas de resumen específicas conservan sus comandos actuales.
 
 ## Comandos generales
 

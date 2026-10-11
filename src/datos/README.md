@@ -77,3 +77,41 @@ Las ventanas siguen excluyendo el inicio en el borde size exacto, como en el
 código original; mover no corrige esa política ni cambia el número de parches.
 No unificar remapeos Nivel3 dic–may y 2017 oct–abr: difieren en códigos 20/21.
 Ver el procedimiento y ejemplo explícito de arrays en la guía multicampaña.
+
+## Coordinación de preparación multicampaña
+
+Entrada Python: `python -m src.datos.preparar_multicampana` desde la raíz.
+Shell: `bash scripts/preparacion/preparar_multicampana.sh`; las entradas
+anteriores de src delegan. La recuperación usa estos destinos nuevos.
+Importar carga configuración ligera, sin abrir rasters, preparar arrays ni
+adquirir locks. crear_parser/main(argv=None) separan argumentos y ejecución.
+
+La coordinación conserva fuente MNC2021, grillas, reserva de 210 GiB,
+auditoría completa de composites, máscaras, procedencia, generación de
+2020/2021 y 2018/2019, validación de campañas y pesos TRAIN. 2019/2020 se
+conserva como entrada existente. No descarga escenas, compone ni entrena.
+El conjunto preparado histórico de 17 tiles no redefine el TEST vigente.
+Python --solo-verificar revisa fuente y grillas; no verifica cada JSON de
+procedencia ni los arrays. El shell conserva preparacion.lock, PID, limpieza
+del exitcode anterior y trap en logs_multicampana externo, incluso al verificar.
+Ver el [procedimiento](../../docs/guias/multicampana.md) para elegir la entrada.
+
+## Shells por campaña y extensión
+
+Los cinco shells de este grupo están en scripts/preparacion/ (incluido el
+multicampaña ya trasladado). Las rutas anteriores delegan. Ver la guía para
+el orden: descargar_2020_2021_scl también compone; descargar_extension_este
+solo descarga/selecciona; preparar_extension_este termina evaluando U-Net;
+rehacer_2018_2019_scl termina con inferencia, evaluación y gráficos anteriores.
+La carpeta describe el punto de entrada; conservar estos contratos mixtos.
+
+## Preparación de extensión
+
+`python -m src.datos.preparar_extension --salida CORRIDA` audita composites,
+reproyecta etiquetas y escribe máscaras completas e independientes, excluyendo
+grillas completas TRAIN/VAL con all_touched=True. Conserva cuatro campañas y
+20HNJ/20HNH del flujo original; sus constantes no redefinen el split canónico.
+Importar no abre rasters ni ejecuta auditorías, y no carga Torch ni figuras.
+La evaluación específica está en src.evaluacion.evaluar_extension; el shell
+preparar_extension_este conserva el orden y su lock GPU. La entrada mixta
+anterior reexporta las funciones y mantiene --modo preparar/evaluar.
