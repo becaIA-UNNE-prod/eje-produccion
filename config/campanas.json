@@ -77,5 +77,24 @@
       "patron_mascara": "etiqueta_mnc2022_{}_10m.tif",
       "fuente_mnc": "2021_2022/MNC_verano2022.tif"
     }
+  },
+  "protocolos": {
+    "extension_este_original": {
+      "campanas": [
+        "2018_2019",
+        "2019_2020",
+        "2020_2021",
+        "2021_2022"
+      ],
+      "tiles": [
+        "20HNJ",
+        "20HNH"
+      ],
+      "campanas_exclusion": [
+        "2018_2019",
+        "2019_2020",
+        "2020_2021"
+      ]
+    }
   }
 }

@@ -41,6 +41,38 @@ class CampanasTest(unittest.TestCase):
                 with self.subTest(kind=kind), self.assertRaises(ValueError):
                     cargar_config(path)
 
+    def test_protocolo_extension_conserva_alcance_y_no_comparte_listas(self):
+        from src.datos.campanas import protocolo, NORMALIZACION
+        scope = protocolo('extension_este_original')
+        self.assertEqual(scope['campanas'], ['2018_2019', '2019_2020', '2020_2021', '2021_2022'])
+        self.assertEqual(scope['tiles'], ['20HNJ', '20HNH'])
+        self.assertEqual(scope['campanas_exclusion'], ['2018_2019', '2019_2020', '2020_2021'])
+        scope['tiles'].clear()
+        self.assertEqual(protocolo('extension_este_original')['tiles'], ['20HNJ', '20HNH'])
+        self.assertEqual(NORMALIZACION, 10000)
+        self.assertIsNone(CATALOGO['campanas']['2021_2022']['dataset'])
+
+    def test_rechaza_catalogo_ambiguo_o_fuera_de_base(self):
+        cases = [
+            ('ventana', lambda c: c.update(ventana='octubre-abril')),
+            ('dataset', lambda c: c['campanas']['2019_2020'].update(dataset='../otro')),
+            ('patron', lambda c: c['campanas']['2019_2020'].update(patron_mascara='../{}.tif')),
+            ('leyenda', lambda c: c['campanas']['2019_2020'].update(leyenda='otra')),
+            ('duplicada', lambda c: c['preparacion_train_val'].append('2019_2020')),
+            ('sin_dataset', lambda c: c['preparacion_train_val'].append('2021_2022')),
+            ('campana', lambda c: c['protocolos']['extension_este_original']['campanas'].append('2099_2100')),
+            ('tiles', lambda c: c['protocolos']['extension_este_original']['tiles'].append('20HNJ')),
+            ('exclusion', lambda c: c['protocolos']['extension_este_original']['campanas_exclusion'].append('2021_2022')),
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'catalogo.json'
+            for name, change in cases:
+                cfg = copy.deepcopy(CATALOGO)
+                change(cfg)
+                path.write_text(json.dumps(cfg))
+                with self.subTest(name=name), self.assertRaises(ValueError):
+                    cargar_config(path)
+
     def test_evaluador_no_importa_otros_comandos(self):
         code = (
             "import sys; sys.argv = ['prueba', '--argumento-invalido']; "

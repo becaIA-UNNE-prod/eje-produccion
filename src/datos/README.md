@@ -118,13 +118,32 @@ anterior reexporta las funciones y mantiene --modo preparar/evaluar.
 
 ## Catálogo y límites de configuración
 
-config/campanas.json y campanas.py describen dic–may, bandas y rutas acreditadas.
-Los consumen preparar_multicampana, preparar_extension, evaluar_extension y
-evaluacion/test_actual. Distinguen composites de TRAIN/VAL y extensión2019/2020.
-No sustituyen configuraciones fijas de métodos JP2, defaults oct–abr, variantes
-Nivel3 ni shells específicos; cambiar el catálogo no parametriza todo el proyecto.
-Leyendas comunes están en leyendas.py; los contratos específicos mantienen sus
-tipos/remapeos y políticas de exclusión. Ver src/INDICE.md para dependencias.
+config/campanas.json y campanas.py describen dic–may, bandas, normalización y
+rutas acreditadas. Su sección protocolos registra el alcance original de extensión
+(cuatro campañas, 20HNJ/20HNH y tres campañas de referencia para exclusión).
+Ese alcance específico no redefine el TEST: el evaluador canónico y el entrenador
+siguen leyendo config/split_extension_este.json. Los callers reciben copias de listas.
+
+| Consumidor | Parámetros del catálogo | Contrato que conserva por separado |
+|---|---|---|
+| preparar_multicampana | Tuplas de campañas, bandas, normalización, rutas y patrones | 17 tiles de preparación, orden de regeneración, excepciones de dtype/leyenda y código 20 |
+| preparar_extension | Alcance original, archivos, fuentes MNC y referencias de exclusión | SPLIT histórico acreditado de TRAIN/VAL, nearest y all_touched, remapeos de leyendas.py |
+| evaluar_extension | Archivos; campañas/tiles heredados de preparar_extension | U-Net congelada y protocolo específico de extensión |
+| evaluacion/test_actual | Archivos de extensión | Split vigente, checkpoints, métricas completas e independientes |
+| figuras/regenerar_test_actual | Archivos de extensión por import compatible | Campañas/tiles del protocolo guardado de la corrida |
+| recuperar_multicampana | Tuplas heredadas de preparar_multicampana | Reparación SCL con fechas originales y respaldo |
+
+Se validan ventana, bandas/normalización, campañas consecutivas, listas sin
+duplicados, nombres de dataset, rutas relativas, patrones de máscara, leyendas
+soportadas y referencias de exclusión. El catálogo no verifica datos físicos.
+
+Los métodos JP2, COG y SCL, calendarios jul–abr/oct–abr de arrays e inferencia,
+Nivel3 y evaluaciones históricas conservan sus parámetros propios. Los shells
+siguen fijando calendarios/tiles, políticas de descarga, locks y reservas; no son
+consumidores del catálogo. Compartir cuatro bandas o 24 canales no vuelve
+equivalentes esas preparaciones. Remapeos, códigos crudos, NoData, dtype y
+excepciones científicas siguen en sus implementaciones/leyendas.
+El catálogo no parametriza todo el proyecto. Ver src/INDICE.md para dependencias.
 
 ## Ayuda segura de entradas con configuración fija
 

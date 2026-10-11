@@ -7,21 +7,22 @@ import rasterio
 from rasterio.warp import reproject, transform_geom, Resampling
 from rasterio.features import rasterize
 from src.soporte.archivos import guardar
-from src.datos.campanas import files, fuentes_mnc
+from src.datos.campanas import files, fuentes_mnc, composites, protocolo
 from utils.rutas import ROOT, EXTENSION_ROOT as BASE, MULTICAMPANA_ROOT as Y3, MNC_ROOT as MNC
 from utils.integridad_raster import auditar_rasters, firma
 from utils.multicampana import SPLIT
 from src.datos.leyendas import legend, check_codes
 
 # Alcance original de extensión; no redefine el split ni el evaluador canónico.
-YEARS=['2018_2019','2019_2020','2020_2021','2021_2022'];TILES=['20HNJ','20HNH']
+ALCANCE = protocolo('extension_este_original')
+YEARS=ALCANCE['campanas'];TILES=ALCANCE['tiles']
 SOURCES=fuentes_mnc(YEARS)
 
 def shapes(crs):
  result=[]
- for directory,month in [('composites_2018_2019_scl','201812'),('composites_dicmay_2019_2020','201912'),('composites_2020_2021_scl','202012')]:
+ for year in ALCANCE['campanas_exclusion']:
   for tile in SPLIT['train']+SPLIT['val']:
-   with rasterio.open(Y3/directory/f'{tile}_{month}_median.tif') as src:
+   with rasterio.open(composites(year,tile,base=Y3)[0]) as src:
     b=src.bounds;poly={'type':'Polygon','coordinates':[[[b.left,b.bottom],[b.right,b.bottom],[b.right,b.top],[b.left,b.top],[b.left,b.bottom]]]}
     result.append((transform_geom(src.crs,crs,poly),1))
  return result

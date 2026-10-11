@@ -141,6 +141,22 @@ assert 'src.evaluacion.evaluar_extension' not in sys.modules
             with self.assertRaisesRegex(ValueError,'Checkpoint congelado modificado'):
                 evaluation.evaluate(out)
 
+    def test_referencias_exclusion_conservan_rutas_y_orden(self):
+        from contextlib import contextmanager
+        paths = []
+        @contextmanager
+        def abrir(path):
+            paths.append(path)
+            yield SimpleNamespace(bounds=SimpleNamespace(left=0, bottom=0, right=10, top=10), crs='EPSG:32720')
+        tiles = ['20AAA', '20BBB']
+        with patch.object(prep, 'Y3', Path('/tmp/base_fixture')), patch.dict(prep.SPLIT, train=tiles[:1], val=tiles[1:]), patch.object(prep.rasterio, 'open', side_effect=abrir), patch.object(prep, 'transform_geom', side_effect=lambda a, b, geometry: geometry):
+            geometries = prep.shapes('EPSG:32720')
+        expected = [Path('/tmp/base_fixture') / directory / f'{tile}_{month}_median.tif'
+                    for directory, month in [('composites_2018_2019_scl', '201812'), ('composites_dicmay_2019_2020', '201912'), ('composites_2020_2021_scl', '202012')]
+                    for tile in tiles]
+        self.assertEqual(paths, expected)
+        self.assertEqual(len(geometries), 6)
+
     def test_evaluacion_rechaza_preparacion_faltante_y_sin_gpu(self):
         with tempfile.TemporaryDirectory() as tmp:
             out=Path(tmp)

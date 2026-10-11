@@ -14,6 +14,7 @@ lanzamientos antiguos ni asumir que sus rutas o splits siguen vigentes.
 | [Retiro de uv, 11/10/2026](retiro_uv_20261011.md) | Retiro de metadatos y pin obsoletos; entorno operativo externo |
 | [Rutas del checkout, 11/10/2026](rutas_checkout_20261011.md) | Defaults portables de máscaras, sin traslado de datos |
 | [Pruebas y comprobación operativa, 11/10/2026](pruebas_operativas_20261011.md) | Fixtures sin volúmenes y comando explícito de preparación |
+| [Catálogo por campaña, 11/10/2026](catalogo_campanas_20261011.md) | Consumidores, alcance original de extensión y diferencias conservadas |
 | `migraciones/` | Manifiestos JSON originales de movimientos y eliminación |
 
 Las métricas de TEST 20HLK/20HLJ son históricas. Las referencias a corridas

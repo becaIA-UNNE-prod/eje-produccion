@@ -16,7 +16,7 @@ from utils.leyendas_mnc import verificar_codigos
 from utils.integridad_raster import auditar_rasters
 
 from utils.rutas import MULTICAMPANA_ROOT as Y3
-from src.datos.campanas import BANDAS, MASCARAS, LOGS, campanas_preparacion
+from src.datos.campanas import BANDAS, NORMALIZACION, MASCARAS, LOGS, campanas_preparacion
 TILES = sum(SPLIT.values(), [])
 CAMPANAS = campanas_preparacion()
 
@@ -69,7 +69,7 @@ def comprobar_procedencia(campana, ignorar_codigo20=False):
                          'composites_mtime_ns': [p.stat().st_mtime_ns for p in refs],
                          'mascara': str((MASCARAS/patron.format(tile)).resolve()),
                          'mascara_mtime_ns': (MASCARAS/patron.format(tile)).stat().st_mtime_ns,
-                         'bandas': list(BANDAS), 'normalizacion': 10000, 'leyenda_version': 1,
+                         'bandas': list(BANDAS), 'normalizacion': NORMALIZACION, 'leyenda_version': 1,
                          'codigos_ignorados': [20] if ignorar_codigo20 and leyenda == '2021' else []}
             if any(datos.get(k) != v for k, v in esperados.items()):
                 raise ValueError(f'{nombre}/{tile}: procedencia distinta; no se reutiliza')
