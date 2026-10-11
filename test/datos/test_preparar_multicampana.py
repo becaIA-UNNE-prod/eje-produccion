@@ -179,12 +179,15 @@ with patch('rasterio.open',side_effect=AssertionError('raster')), patch('numpy.l
         import fcntl
         # Copy only the two shell entries; relocate their status path to /tmp.
         replica=self.base/'replica'
-        logs=replica/'logs'
+        logs=self.base/'logs_shell'
         logs.mkdir(parents=True)
         for name in ['scripts/preparacion/preparar_multicampana.sh','src/preparar_multicampana.sh']:
             path=replica/name
             path.parent.mkdir(parents=True,exist_ok=True)
             path.write_text((ROOT/name).read_text().replace('/mnt/yacy_3/prod_bis/ferreyra/logs_multicampana',str(logs)))
+        helper=replica/'scripts/lib/corridas.sh'
+        helper.parent.mkdir(parents=True,exist_ok=True)
+        helper.write_text((ROOT/'scripts/lib/corridas.sh').read_text())
         fake=self.base/'python_simulado'
         fake.write_text('#!'+sys.executable+'\n'+'''import json,os,sys
 from pathlib import Path
@@ -196,7 +199,7 @@ else:
 ''')
         fake.chmod(0o755)
         command_record=self.base/'comando.json'
-        env=dict(os.environ,PY=str(fake),FIXTURE_LOGS=str(logs),FIXTURE_COMANDO=str(command_record))
+        env=dict(os.environ,PY=str(fake),FIXTURE_LOGS=str(logs),FIXTURE_COMANDO=str(command_record),CORDOBA_RUN_DIR=str(logs),CORDOBA_RUNTIME_ROOT=str(self.base/'runtime'))
         for entry in ['scripts/preparacion/preparar_multicampana.sh','src/preparar_multicampana.sh']:
             for rc in [0,7]:
                 env['FIXTURE_RC']=str(rc)

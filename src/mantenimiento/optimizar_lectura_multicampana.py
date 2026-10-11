@@ -12,6 +12,7 @@ import signal
 import subprocess
 import sys
 import time
+from utils.rutas import RUNTIME_ROOT
 
 ROOT = Path(__file__).resolve().parents[2]
 from utils.cache_lectura import firma, cargar_cache
@@ -209,7 +210,11 @@ def main(argv=None):
     del state
     time.sleep(3)  # permitir liberar flock del supervisor y workers
     old_log = exp/f'train_antes_paralelo_epoch{epoch}.log'
-    shutil.copyfile(exp/'train.log', old_log)
+    training_log = exp/'train.log'
+    pointer = exp/'corrida_entrenamiento.json'
+    if pointer.exists():
+        training_log = Path(json.loads(pointer.read_text())['run_dir'])/'logs/coordinador.log'
+    shutil.copyfile(training_log, old_log)
     for name in ('train.exitcode','fin.txt'):
         source = exp/name
         if source.exists():
@@ -217,13 +222,17 @@ def main(argv=None):
     command_args = ['bash','scripts/entrenamiento/entrenar_multicampana_unet.sh',str(exp),'--lectura-bloques',
                     '--bloque-parches','512','--bloques-pool','16','--workers','4','--prefetch','2',
                     '--anticipar-pool','--cache-lectura',str(manifest),'--reanudar',str(snapshot)]
-    command = 'nohup env OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 ' + shlex.join(command_args) + ' >> ' + shlex.quote(str(exp/'train.log')) + ' 2>&1 < /dev/null & echo $!'
+    if os.environ.get('CORDOBA_RUN_DIR'):
+        command_args = [sys.executable, 'scripts/ejecutar_con_log.py', '--nombre', 'reanudar_unet',
+                        '--etapa', 'entrenamiento', '--padre', os.environ['CORDOBA_RUN_DIR'],
+                        '--salida', 'experimento=' + str(exp), '--', *command_args]
+    command = 'nohup env OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 ' + shlex.join(command_args) + ' >> ' + shlex.quote('/dev/null' if os.environ.get('CORDOBA_RUN_DIR') else str(exp/'train.log')) + ' 2>&1 < /dev/null & echo $!'
     pid = int(subprocess.check_output(command,shell=True,cwd=ROOT,text=True).strip())
     record = {'estado':'relanzado','pid':pid,'epoch_recuperada':epoch,'experimento':str(exp),
               'cache':str(manifest),'comando':command,'fecha':datetime.datetime.now().isoformat()}
     guardar(status, record)
     guardar(exp/'lanzamiento_precarga_paralela.json', record)
-    latest = Path('/mnt/yacy_3/prod_bis/ferreyra/logs_multicampana/ultimo_entrenamiento_unet.json')
+    latest = (RUNTIME_ROOT/'punteros/ultimo_entrenamiento_unet.json' if os.environ.get('CORDOBA_RUN_DIR') else Path('/mnt/yacy_3/prod_bis/ferreyra/logs_multicampana/ultimo_entrenamiento_unet.json'))
     guardar(latest, record)
     time.sleep(5)
     if not (Path('/proc')/str(pid)).exists():

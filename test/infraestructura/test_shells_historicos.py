@@ -106,6 +106,9 @@ def run_flow(name, entry='canonical', scenario='', baseline=None):
                 path = repo / relative; path.parent.mkdir(parents=True, exist_ok=True)
                 path.write_text(relocate((ROOT / relative).read_text())); path.chmod(0o755)
             actual = repo / ('src' if entry == 'wrapper' else 'scripts/historico') / (name + '.sh')
+        helper = repo/'scripts/lib/corridas.sh'
+        helper.parent.mkdir(parents=True, exist_ok=True)
+        helper.write_text((ROOT/'scripts/lib/corridas.sh').read_text())
         binpath = base / 'bin'; binpath.mkdir()
         fake = binpath / 'python_simulado'; fake.write_text('#!' + sys.executable + '\n' + FAKE_PY); fake.chmod(0o755)
         for command in ['sleep', 'pgrep']:
@@ -121,6 +124,7 @@ def run_flow(name, entry='canonical', scenario='', baseline=None):
         else:
             env.pop('ESPERAR_PID', None)
         env.pop('MODELOS', None)
+        env.update(CORDOBA_RUN_DIR=str(out), CORDOBA_RUNTIME_ROOT=str(base/'runtime'))
         command = ['bash', str(actual)]
         if name == 'preparar_ano_no_visto':
             if scenario != 'argumentos_faltantes': command.extend([str(out), str(exp), 'argumento-extra'])

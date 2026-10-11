@@ -2,15 +2,22 @@
 set -euo pipefail
 cd "$(dirname "$0")/../.."
 PY=${PY:-$HOME/s4a-venv/bin/python}
-Y3=/mnt/yacy_3/prod_bis/ferreyra
+source scripts/lib/corridas.sh
 OUT=${1:?Directorio de evaluacion requerido}
 EXP=${2:?Experimento congelado requerido}
+cordoba_run_init historico preparar_ano_no_visto "$@"
+Y3=/mnt/yacy_3/prod_bis/ferreyra
+cordoba_registrar --salida "resultados=$OUT"
+cordoba_registrar --salida "experimento=$EXP"
 S2=$Y3/sentinel2_cordoba_2021_2022
+cordoba_registrar --salida "fuentes=$S2"
 COMP=$Y3/composites_2021_2022_scl
+cordoba_registrar --salida "composites=$COMP"
 TILES="20HLK 20HLJ 20HKJ 20HMH"
 MESES="202112 202201 202202 202203 202204 202205"
 exec 8>"$OUT/preparacion.lock"
 flock -n 8 || { echo 'Ya hay una preparacion de este anio activa'; exit 1; }
+cordoba_lock ano_no_visto_preparacion
 printf '%s\n' "$$" > "$OUT/preparacion.pid"
 trap 'rc=$?; printf "%s\n" "$rc" > "$OUT/preparacion.exitcode"; date -Is > "$OUT/fin.txt"' EXIT
 mkdir -p "$S2" "$COMP"
@@ -36,7 +43,9 @@ done
 test -f /mnt/yacy_1/prod/ferreyra/MNC_INTA/2021_2022/MNC_verano2022.tif
 test -f config/leyenda_mnc_2021_2022.json
 paso 'Esperando turno de GPU para inferencia'
+mkdir -p "$Y3/logs_multicampana"
 exec 9>"$Y3/logs_multicampana/inferencia.lock"
 flock 9
+cordoba_lock inferencia esperar
 paso 'Inferencia y evaluacion temporal: ningun reentrenamiento'
 "$PY" -u -m src.historico.evaluar_ano_no_visto --exp "$EXP" --salida "$OUT"

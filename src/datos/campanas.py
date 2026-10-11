@@ -1,6 +1,7 @@
 """Catalogo dic-may y rutas acreditadas; no abre datasets ni comandos."""
 import json
 import copy
+import os
 import re
 from pathlib import Path
 from utils.rutas import ROOT, MULTICAMPANA_ROOT, EXTENSION_ROOT, MNC_ROOT
@@ -55,7 +56,7 @@ CATALOGO = cargar_config()
 BANDAS = tuple(CATALOGO['bandas'])
 NORMALIZACION = CATALOGO['normalizacion']
 MASCARAS = ROOT / 'mascaras_procesadas'  # Alias acreditado, bytes externos.
-LOGS = MULTICAMPANA_ROOT / 'logs_multicampana'
+LOGS = Path(os.environ['CORDOBA_INVENTARIOS_DIR']) if 'CORDOBA_INVENTARIOS_DIR' in os.environ else MULTICAMPANA_ROOT / 'logs_multicampana'
 
 
 def meses(year):

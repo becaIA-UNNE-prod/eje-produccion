@@ -9,6 +9,7 @@ Uso:
     python3 -m src.historico.comparar_inferencia_etiqueta --tile 20JML --modelo fcrtransunet
 """
 import argparse
+import os
 from pathlib import Path
 from utils.rutas import LEGACY_PREDICTIONS, LEGACY_FIGURES
 
@@ -55,8 +56,8 @@ def crear_parser():
                          choices=["unet", "transunet", "utae", "fcrtransunet"])
     parser.add_argument("--dir_mascaras", default="./mascaras_procesadas")
     parser.add_argument("--max_lado", type=int, default=2048)
-    parser.add_argument("--dir-pred", type=Path, default=LEGACY_PREDICTIONS)
-    parser.add_argument("--dir-salida", type=Path, default=LEGACY_FIGURES)
+    parser.add_argument("--dir-pred", required=os.environ.get("CORDOBA_REGISTRO_LIVIANO") == "1", type=Path, default=LEGACY_PREDICTIONS)
+    parser.add_argument("--dir-salida", required=os.environ.get("CORDOBA_REGISTRO_LIVIANO") == "1", type=Path, default=LEGACY_FIGURES)
     return parser
 
 

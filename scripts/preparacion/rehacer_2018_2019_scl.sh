@@ -8,45 +8,50 @@
 # La busqueda con --max-nodata 100 ya reemplazo productos.json (el original
 # quedo en productos_v1_maxnodata50.json). Cada paso saltea lo que ya existe.
 # Uso (desde la raiz del repo):
-#   nohup bash scripts/preparacion/rehacer_2018_2019_scl.sh > /mnt/yacy_3/prod_bis/ferreyra/logs_scl/rehacer_2018_2019.log 2>&1 &
+#   nohup bash scripts/preparacion/rehacer_2018_2019_scl.sh > /dev/null 2>&1 &  # logs automáticos por corrida
 set -euo pipefail
 cd "$(dirname "$0")/../.."
-
 PY=${PY:-$HOME/s4a-venv/bin/python}
+source scripts/lib/corridas.sh
+cordoba_run_init preparacion rehacer_2018_2019_scl "$@"
+
 Y3=/mnt/yacy_3/prod_bis/ferreyra
 S2_1819=$Y3/sentinel2_cordoba_2018_2019
+cordoba_registrar --salida "fuentes_1819=$S2_1819"
 COMP=$Y3/composites_2018_2019_scl
+cordoba_registrar --salida "composites=$COMP"
 PRED=$Y3/predicciones_2018_2019_scl
-LOGS=$Y3/logs_scl
+cordoba_registrar --salida "predicciones=$PRED"
+LOGS="$CORDOBA_LOG_DIR"
 MODELOS=${MODELOS:-"unet fcrtransunet"}
 MESES_1819="201812 201901 201902 201903 201904 201905"
 TILES=$(tr '\n' ' ' < $Y3/tiles.txt)
-mkdir -p $LOGS
+mkdir -p "$LOGS"
 
 paso() { echo; echo "===== $(date '+%F %T') $* ====="; }
 
 paso "SCL de todos los candidatos 2018-2019"
-$PY -m src.datos.descargar_stac descargar --out $S2_1819 --bandas SCL > $LOGS/descarga_scl_2018_2019.log 2>&1 \
-    || $PY -m src.datos.descargar_stac descargar --out $S2_1819 --bandas SCL >> $LOGS/descarga_scl_2018_2019.log 2>&1
-tail -1 $LOGS/descarga_scl_2018_2019.log
+$PY -m src.datos.descargar_stac descargar --out $S2_1819 --bandas SCL > "$LOGS/descarga_scl_2018_2019.log" 2>&1 \
+    || $PY -m src.datos.descargar_stac descargar --out $S2_1819 --bandas SCL >> "$LOGS/descarga_scl_2018_2019.log" 2>&1
+tail -1 "$LOGS/descarga_scl_2018_2019.log"
 
 paso "seleccion de escenas por SCL"
 $PY -m src.datos.composites_scl seleccionar --base $S2_1819 --tiles $TILES --meses $MESES_1819 \
-    > $LOGS/seleccion_2018_2019.log 2>&1
-tail -2 $LOGS/seleccion_2018_2019.log
+    > "$LOGS/seleccion_2018_2019.log" 2>&1
+tail -2 "$LOGS/seleccion_2018_2019.log"
 
 paso "bandas de las escenas elegidas (log: $LOGS/descarga_bandas_2018_2019.log)"
 $PY -m src.datos.descargar_stac descargar --out $S2_1819 --seleccion $S2_1819/seleccion_scl.json \
-    > $LOGS/descarga_bandas_2018_2019.log 2>&1 \
+    > "$LOGS/descarga_bandas_2018_2019.log" 2>&1 \
     || $PY -m src.datos.descargar_stac descargar --out $S2_1819 --seleccion $S2_1819/seleccion_scl.json \
-    >> $LOGS/descarga_bandas_2018_2019.log 2>&1
+    >> "$LOGS/descarga_bandas_2018_2019.log" 2>&1
 $PY -m src.datos.descargar_stac verificar --out $S2_1819 --seleccion $S2_1819/seleccion_scl.json | head -3
 
 paso "composites 2018-2019 con SCL (log: $LOGS/composites_2018_2019.log)"
 $PY -m src.datos.composites_scl componer --base $S2_1819 --out $COMP --tiles $TILES \
-    > $LOGS/composites_2018_2019.log 2>&1
-tail -1 $LOGS/composites_2018_2019.log
-grep "ATENCION" $LOGS/composites_2018_2019.log || echo "todos los composites >= 95% despejado"
+    > "$LOGS/composites_2018_2019.log" 2>&1
+tail -1 "$LOGS/composites_2018_2019.log"
+grep "ATENCION" "$LOGS/composites_2018_2019.log" || echo "todos los composites >= 95% despejado"
 
 for M in $MODELOS; do
     paso "inferencia 2018-2019 (SCL) con modelo base $M"

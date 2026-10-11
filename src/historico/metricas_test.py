@@ -13,6 +13,7 @@ Uso:
     python3 -m src.historico.metricas_test --modelo fcrtransunet --tiles 20HLJ 20HLK
 """
 import argparse
+import os
 from pathlib import Path
 from utils.rutas import LEGACY_PREDICTIONS
 
@@ -57,7 +58,7 @@ def crear_parser():
                          choices=["unet", "transunet", "utae", "fcrtransunet"])
     parser.add_argument("--tiles", nargs="+", default=["20HLJ", "20HLK"])
     parser.add_argument("--dir_mascaras", default="./mascaras_procesadas")
-    parser.add_argument("--dir-pred", type=Path, default=LEGACY_PREDICTIONS)
+    parser.add_argument("--dir-pred", required=os.environ.get("CORDOBA_REGISTRO_LIVIANO") == "1", type=Path, default=LEGACY_PREDICTIONS)
     return parser
 
 

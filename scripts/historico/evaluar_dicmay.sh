@@ -9,14 +9,17 @@
 # Con ESPERAR_PID=<pid> espera a que termine ese proceso (pipeline_dicmay.sh)
 # y solo sigue si el pipeline termino bien.
 # Uso (desde la raiz del repo):
-#   ESPERAR_PID=5421 nohup bash scripts/historico/evaluar_dicmay.sh > /mnt/yacy_3/prod_bis/ferreyra/logs_dicmay/evaluacion.log 2>&1 &
+#   ESPERAR_PID=5421 nohup bash scripts/historico/evaluar_dicmay.sh > /dev/null 2>&1 &  # logs automáticos por corrida
 set -euo pipefail
 cd "$(dirname "$0")/../.."
-
 PY=${PY:-$HOME/s4a-venv/bin/python}
+source scripts/lib/corridas.sh
+cordoba_run_init historico evaluar_dicmay "$@"
+
 Y3=/mnt/yacy_3/prod_bis/ferreyra
-LOGS=$Y3/logs_dicmay
+LOGS="$CORDOBA_LOG_DIR"
 COMP_DICMAY=$Y3/composites_dicmay_2019_2020
+cordoba_registrar --salida "composites_1920=$COMP_DICMAY"
 MODELOS=${MODELOS:-"unet fcrtransunet"}
 MESES_1920="201912 202001 202002 202003 202004 202005"
 TILES_REF="20HLJ 20HLK 20HKJ 20HMH"   # test + val
@@ -24,7 +27,7 @@ TILES_REF="20HLJ 20HLK 20HKJ 20HMH"   # test + val
 if [ -n "${ESPERAR_PID:-}" ]; then
     echo "$(date '+%F %T') esperando a que termine el PID $ESPERAR_PID..."
     while kill -0 $ESPERAR_PID 2>/dev/null; do sleep 300; done
-    grep -q "LISTO" $LOGS/pipeline.log || { echo "pipeline_dicmay.sh no termino bien, ver $LOGS/pipeline.log"; exit 1; }
+    grep -q "LISTO" "${PIPELINE_LOG:-$Y3/logs_dicmay/pipeline.log}" || { echo "pipeline_dicmay.sh no termino bien, ver "$LOGS/pipeline.log""; exit 1; }
 fi
 
 echo; echo "===== $(date '+%F %T') inferencia de referencia 2019-2020 dic-may ====="

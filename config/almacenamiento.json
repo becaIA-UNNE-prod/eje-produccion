@@ -13,5 +13,6 @@
     "multicampana": "/mnt/yacy_3/prod_bis/ferreyra",
     "extension_este": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana",
     "mnc": "/mnt/yacy_1/prod/ferreyra/MNC_INTA"
-  }
+  },
+  "runtime_root": "/mnt/yacy_3/prod_bis/ferreyra/cordoba_ia_unne/runtime"
 }

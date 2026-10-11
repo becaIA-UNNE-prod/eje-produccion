@@ -3,11 +3,17 @@
 set -euo pipefail
 cd "$(dirname "$0")/../.."
 PY=${PY:-$HOME/s4a-venv/bin/python}
-Y3=/mnt/yacy_3/prod_bis/ferreyra
+source scripts/lib/corridas.sh
 EXP=${1:?Uso: bash scripts/entrenamiento/entrenar_multicampana_unet.sh DIRECTORIO_EXPERIMENTO}
+cordoba_run_init entrenamiento entrenar_multicampana_unet "$@"
+Y3=/mnt/yacy_3/prod_bis/ferreyra
+cordoba_registrar --salida "experimento=$EXP"
 shift
+mkdir -p "$Y3/logs_multicampana"
 exec 9>"$Y3/logs_multicampana/entrenamiento.lock"
 flock -n 9 || { echo 'Ya existe un entrenamiento multicampana activo'; exit 1; }
+cordoba_lock entrenamiento
+cordoba_vincular "$EXP/corrida_entrenamiento.json"
 printf '%s\n' "$$" > "$EXP/train.pid"
 trap 'rc=$?; printf "%s\n" "$rc" > "$EXP/train.exitcode"; date -Is > "$EXP/fin.txt"' EXIT
 date -Is > "$EXP/inicio.txt"

@@ -37,7 +37,7 @@ def crear_parser():
                          help="meses AAAAMM en el orden de entrenamiento (default: 201910..202004)")
     parser.add_argument("--dir-exp", default=None,
                          help="dir con best_model.pth (default: exp_cordoba_[<modelo>_]f16)")
-    parser.add_argument("--dir-salida", default=str(LEGACY_PREDICTIONS),
+    parser.add_argument("--dir-salida", required=os.environ.get("CORDOBA_REGISTRO_LIVIANO") == "1", default=str(LEGACY_PREDICTIONS),
                          help="dir donde escribir prediccion_<TILE>[_<modelo>].tif")
     return parser
 

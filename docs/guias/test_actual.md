@@ -26,8 +26,10 @@ El orden general y la secuencia SCL se describen en
 [Multicampaña](multicampana.md); para TEST usar siempre los tiles y la preparación
 acreditada de esta guía.
 
-Shells en `scripts/preparacion/`: `descargar_extension_este.sh DIRECTORIO_LOGS`
-y `preparar_extension_este.sh DIRECTORIO_RESULTADOS`. El shell llama por `-m` a
+Shells en `scripts/preparacion/`: `descargar_extension_este.sh [DIRECTORIO_LOGS_HISTORICO]`
+y `preparar_extension_este.sh DIRECTORIO_RESULTADOS`. Ambos crean una corrida
+con logs propios; el argumento histórico de logs ya no determina su destino.
+El directorio de resultados conserva su función. El shell llama por `-m` a
 `src.datos.preparar_extension` y `src.evaluacion.evaluar_extension`;
 `src/preparar_evaluar_extension.py --modo preparar|evaluar` conserva compatibilidad; las rutas antiguas de los shells delegan. Antes de relanzarlos revisar
 configuración, salidas, locks y metadatos de la preparación existente. Auditar

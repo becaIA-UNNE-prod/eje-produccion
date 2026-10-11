@@ -60,6 +60,9 @@ def run_flow(name,entry='canonical',scenario='',baseline=None):
                 path.parent.mkdir(parents=True,exist_ok=True)
                 path.write_text(relocate((ROOT/relative).read_text()))
             actual=repo/('src' if entry=='wrapper' else 'scripts/preparacion')/f'{name}.sh'
+        helper = repo/'scripts/lib/corridas.sh'
+        helper.parent.mkdir(parents=True, exist_ok=True)
+        helper.write_text((ROOT/'scripts/lib/corridas.sh').read_text())
         binpath=base/'bin'; binpath.mkdir()
         fake=binpath/'python_simulado'
         fake.write_text('#!'+sys.executable+'\n'+FAKE_PY)
@@ -70,6 +73,7 @@ def run_flow(name,entry='canonical',scenario='',baseline=None):
         trace=base/'trace.jsonl'
         env=dict(os.environ,PY=str(fake),PATH=str(binpath)+os.pathsep+os.environ['PATH'],
                  FIXTURE_TRACE=str(trace),FIXTURE_SCENARIO=scenario)
+        env.update(CORDOBA_RUN_DIR=str(out), CORDOBA_RUNTIME_ROOT=str(base/'runtime'))
         command=['bash',str(actual)]
         if name in ['descargar_extension_este','preparar_extension_este']:
             command.append(str(out))

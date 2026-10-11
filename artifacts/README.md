@@ -7,7 +7,7 @@ Las copias ligeras del mirror son solo para revisión.
 | Ubicación | Contenido |
 |---|---|
 | `reports/test_actual/` | Enlace al reporte vigente; en floryacy apunta al reporte de `/mnt` y en el mirror a la copia local. |
-| `runs/<nombre_FECHA_ID>/` | Nuevas corridas del lanzador, con `run.json`, `exitcode`, logs, figuras y resultados. |
+| `runs/<fechaUTC_etapa_nombre_ID>/` | Registros livianos: `run.json`, `estado.json`, `exitcode`, logs, configuración e inventarios. Resultados pesados en destinos explícitos registrados. |
 | `runs/legacy_octabr/` | Espacio manual de las herramientas históricas si no se especifica `CORDOBA_RUN_DIR`. |
 | `archive/legacy_root/figuras/` | PNG, mapas y comparaciones antes sueltos en la raíz. |
 | `archive/legacy_root/predicciones/` | GeoTIFF de inferencias históricas. |
@@ -22,7 +22,7 @@ Las copias ligeras del mirror son solo para revisión.
 
 - Reporte TEST: `/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436`.
 - Preparación y exclusiones: usar `preparacion_base` de `config/split_extension_este.json`.
-- Experimentos multicampaña y logs: `/mnt/yacy_3/prod_bis/ferreyra/dataset/` y `/mnt/yacy_3/prod_bis/ferreyra/logs_multicampana/`.
+- Experimentos multicampaña y logs históricos: `/mnt/yacy_3/prod_bis/ferreyra/dataset/` y `/mnt/yacy_3/prod_bis/ferreyra/logs_multicampana/`.
 
 Los archivos históricos conservan sus nombres. La ubicación no convierte una
 imagen o una métrica antigua en un resultado del TEST vigente: consultar protocolo,
@@ -44,3 +44,16 @@ sin comprobar el estado actual y el alcance de los respaldos.
 
 Ver [traslado a discos](../docs/historico/migraciones/almacenamiento_discos_20261010.json)
 y [CONTRIBUTING](../CONTRIBUTING.md).
+
+## Nuevas ejecuciones
+
+Los shells operativos crean su corrida automáticamente. Para comandos Python,
+usar `scripts/ejecutar_con_log.py`. Todos los logs de una ejecución quedan en
+`runs/<fechaUTC_etapa_nombre_ID>/logs/`; los pasos no reutilizan las carpetas
+históricas `logs_scl`, `logs_dicmay` o `logs_multicampana`.
+
+La carpeta de corrida contiene registros pequeños. Imágenes, datasets, caches,
+checkpoints y predicciones permanecen en sus ubicaciones; nuevas salidas se
+eligen por capacidad del disco. El manifiesto registra las rutas reales y permite
+relacionar corridas mediante `--padre`. No se trasladan artefactos para ordenarlos.
+Ver [lanzamiento y capacidad](../CONTRIBUTING.md#cómo-ejecutar-sin-ensuciar-la-raíz).

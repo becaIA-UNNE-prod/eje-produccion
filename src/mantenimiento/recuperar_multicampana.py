@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parents[2]
 from utils.integridad_raster import auditar_rasters, verificar_raster
 
 
+from utils.corridas import lock_runtime, registrar_rutas
 from utils.rutas import MULTICAMPANA_ROOT
 
 LOGS = MULTICAMPANA_ROOT / 'logs_multicampana'
@@ -91,21 +92,38 @@ def main(preparacion=None, compositor=None, logs=None):
     if preparacion is None or compositor is None:
         preparacion, compositor = cargar_dependencias()
     prep = preparacion
+    runtime_preparation = runtime_recovery = None
+    managed = logs is None and bool(os.environ.get('CORDOBA_RUN_DIR'))
     logs = LOGS if logs is None else Path(logs)
+    records = Path(os.environ['CORDOBA_INVENTARIOS_DIR']) if managed else logs
+    records.mkdir(parents=True, exist_ok=True)
+    if managed:
+        destino = os.environ.get('CORDOBA_RECOVERY_ROOT')
+        if not destino:
+            raise ValueError('Indicar CORDOBA_RECOVERY_ROOT fuera del repo para respaldos pesados de reparación')
+        backup_base = Path(destino).expanduser().resolve()
+        from utils.corridas import ruta_externa
+        ruta_externa(backup_base)
+        registrar_rutas(os.environ['CORDOBA_RUN_DIR'], salidas=[('respaldos_reparacion', backup_base)])
+    else:
+        backup_base = logs
+    backup_base.mkdir(parents=True, exist_ok=True)
     logs.mkdir(parents=True, exist_ok=True)
     with open(logs/'recuperacion.lock', 'w') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         # No cambiar entradas si existe una preparacion activa.
         with open(logs/'preparacion.lock', 'a') as p_lock:
             fcntl.flock(p_lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            runtime_recovery = lock_runtime('recuperacion_multicampana') if managed else None
+            runtime_preparation = lock_runtime('preparacion_multicampana') if managed else None
             inicio = time.strftime('%Y%m%dT%H%M%S')
-            respaldo = logs/f'recuperacion_{inicio}'
+            respaldo = backup_base/f'recuperacion_{inicio}_{os.getpid()}'
             respaldo.mkdir()
             for nombre in ('preparacion.log', 'preparacion.exitcode', 'preparacion.pid'):
                 ruta = logs/nombre
                 if ruta.exists():
                     shutil.copy2(ruta, respaldo/nombre)
-            (logs/'recuperacion.pid').write_text(str(os.getpid())+'\n')
+            (records/'recuperacion.pid').write_text(str(os.getpid())+'\n')
             reparaciones = []
             conocido = prep.Y3/'composites_2020_2021_scl/20JNL_202104_median.tif'
             try:
@@ -114,7 +132,7 @@ def main(preparacion=None, compositor=None, logs=None):
                 reparaciones.append(reparar(conocido, respaldo, preparacion, compositor))
             rutas = [d/f'{t}_{mes}_median.tif' for _, d, meses, _, _, _ in prep.CAMPANAS
                      for t in prep.TILES for mes in meses]
-            cache = logs/'integridad_composites.json'
+            cache = records/'integridad_composites.json'
             fallos = auditar_rasters(rutas, cache)
             for ruta in fallos:
                 reparaciones.append(reparar(ruta, respaldo, preparacion, compositor))
@@ -122,18 +140,21 @@ def main(preparacion=None, compositor=None, logs=None):
                 fallos = auditar_rasters(rutas, cache)
             if fallos:
                 raise RuntimeError(f'Persisten composites corruptos: {fallos}')
-            prep.json_atomico(logs/'recuperacion.json', {'estado': 'composites_verificados',
+            prep.json_atomico(records/'recuperacion.json', {'estado': 'composites_verificados',
                 'respaldo': str(respaldo), 'reparaciones': reparaciones, 'rasters_verificados': len(rutas)})
+        if runtime_preparation is not None:
+            runtime_preparation.close()
         # Liberar preparacion.lock antes de entrar al wrapper que lo adquiere.
         print('Entradas verificadas; reanudando preparacion sin entrenamiento', flush=True)
-        with open(logs/'preparacion.log', 'w') as out:
+        preparation_log = Path(os.environ['CORDOBA_LOG_DIR'])/'preparacion.log' if managed else logs/'preparacion.log'
+        with open(preparation_log, 'w') as out:
             r = subprocess.run(['bash', 'scripts/preparacion/preparar_multicampana.sh', '--ignorar-codigo20'],
                                cwd=ROOT, stdout=out, stderr=subprocess.STDOUT)
         if r.returncode:
             raise RuntimeError(f'Preparacion fallo con codigo {r.returncode}; ver preparacion.log')
-        resumen = json.loads((logs/'recuperacion.json').read_text())
+        resumen = json.loads((records/'recuperacion.json').read_text())
         resumen['estado'] = 'preparacion_completa'
-        prep.json_atomico(logs/'recuperacion.json', resumen)
+        prep.json_atomico(records/'recuperacion.json', resumen)
         print('RECUPERACION Y PREPARACION COMPLETAS', flush=True)
 
 
@@ -142,10 +163,10 @@ def ejecutar():
     try:
         main()
     except Exception:
-        (LOGS / 'recuperacion.exitcode').write_text('1\n')
+        (Path(os.environ.get('CORDOBA_RUN_DIR', str(LOGS))) / 'recuperacion.exitcode').write_text('1\n')
         raise
     else:
-        (LOGS / 'recuperacion.exitcode').write_text('0\n')
+        (Path(os.environ.get('CORDOBA_RUN_DIR', str(LOGS))) / 'recuperacion.exitcode').write_text('0\n')
 
 
 if __name__ == '__main__':

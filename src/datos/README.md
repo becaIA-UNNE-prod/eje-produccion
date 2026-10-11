@@ -93,7 +93,9 @@ conserva como entrada existente. No descarga escenas, compone ni entrena.
 El conjunto preparado histórico de 17 tiles no redefine el TEST vigente.
 Python --solo-verificar revisa fuente y grillas; no verifica cada JSON de
 procedencia ni los arrays. El shell conserva preparacion.lock, PID, limpieza
-del exitcode anterior y trap en logs_multicampana externo, incluso al verificar.
+del exitcode anterior y trap en el registro de la nueva corrida, incluso al verificar.
+Las auditorías van a `inventarios/` de esa corrida; los arrays y composites
+conservan sus destinos acreditados. Ver CONTRIBUTING.md para logs y capacidad.
 Ver el [procedimiento](../../docs/guias/multicampana.md) para elegir la entrada.
 
 ## Shells por campaña y extensión

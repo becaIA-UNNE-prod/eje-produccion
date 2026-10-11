@@ -135,7 +135,7 @@ secuencia ni el protocolo del shell.
 | scripts/historico/ | pipeline_dicmay.sh, pipeline_dicmay_1718.sh, evaluar_dicmay.sh, preparar_ano_no_visto.sh |
 
 Rehacer2018/2019 termina infiriendo/evaluando/graficando modelos base anteriores.
-Preparar año no visto requiere SALIDA y logs_multicampana existentes; conserva
+Preparar año no visto requiere SALIDA; crea un registro liviano por ejecución y conserva
 fd8 de preparación, PID/trap/exitcode/fin, espera MNC y fd9 GPU. Mantenimiento
 puede reemplazar rasters, invalidar arrays o detener/reanudar entrenamiento:
 no ejecutar esos shells como diagnóstico ni para validar la organización.

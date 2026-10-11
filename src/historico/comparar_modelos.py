@@ -10,6 +10,7 @@ Uso:
     python3 -m src.historico.comparar_modelos --tile 20HLJ
 """
 import argparse
+import os
 from pathlib import Path
 
 import numpy as np
@@ -137,7 +138,7 @@ def crear_parser():
     parser.add_argument("--dir_train", default="/mnt/yacy_1/prod/ferreyra/dataset/train_cordoba_f16")
     parser.add_argument("--prefijo", default="dataset_")
     parser.add_argument("--n_clases", type=int, default=5)
-    parser.add_argument("--salida_dir", default=str(LEGACY_FIGURES))
+    parser.add_argument("--salida_dir", required=os.environ.get("CORDOBA_REGISTRO_LIVIANO") == "1", default=str(LEGACY_FIGURES))
     return parser
 
 

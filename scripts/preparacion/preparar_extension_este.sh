@@ -2,11 +2,16 @@
 set -euo pipefail
 cd "$(dirname "$0")/../.."
 PY=${PY:-$HOME/s4a-venv/bin/python}
-BASE=/mnt/yacy_1/prod/ferreyra/extension_este_multicampana
+source scripts/lib/corridas.sh
 OUT=${1:?Directorio de resultados requerido}
+cordoba_run_init preparacion preparar_extension_este "$@"
+BASE=/mnt/yacy_1/prod/ferreyra/extension_este_multicampana
+cordoba_registrar --salida "base_operativa=$BASE"
+cordoba_registrar --salida "resultados=$OUT"
 mkdir -p "$OUT"
 exec 8>"$BASE/preparacion.lock"
 flock -n 8 || { echo 'Ya hay una preparacion activa'; exit 1; }
+cordoba_lock extension_preparacion
 echo "$$" > "$OUT/preparacion.pid"
 trap 'rc=$?; echo "$rc" > "$OUT/preparacion.exitcode"; date -Is > "$OUT/fin.txt"' EXIT
 date -Is > "$OUT/inicio.txt"
@@ -36,8 +41,10 @@ done
 echo "$(date -Is) AUDITORIA COMPUESTOS Y PREPARACION MASCARAS"
 "$PY" -u -m src.datos.preparar_extension --salida "$OUT"
 echo "$(date -Is) ESPERANDO TURNO DE GPU"
+mkdir -p /mnt/yacy_3/prod_bis/ferreyra/logs_multicampana
 exec 9>/mnt/yacy_3/prod_bis/ferreyra/logs_multicampana/inferencia.lock
 flock 9
+cordoba_lock inferencia esperar
 echo "$(date -Is) EVALUACION DE U-NET CONGELADA"
 "$PY" -u -m src.evaluacion.evaluar_extension --salida "$OUT"
 echo 'PREPARACION Y EVALUACION EXTENSION ESTE FINALIZADAS'

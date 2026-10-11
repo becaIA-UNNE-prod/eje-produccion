@@ -13,6 +13,9 @@ STORAGE_ROOT = Path(os.environ.get('CORDOBA_STORAGE_ROOT', CONFIG_STORAGE['stora
 RUNS_ROOT = Path(os.environ.get('CORDOBA_RUNS_ROOT', CONFIG_STORAGE['runs_root'])).expanduser()
 if not STORAGE_ROOT.is_absolute() or not RUNS_ROOT.is_absolute():
     raise ValueError('CORDOBA_STORAGE_ROOT y CORDOBA_RUNS_ROOT requieren rutas absolutas fuera del repositorio')
+RUNTIME_ROOT = Path(os.environ.get('CORDOBA_RUNTIME_ROOT', CONFIG_STORAGE.get('runtime_root', str(RUNS_ROOT.parent.parent / 'runtime')))).expanduser()
+if not RUNTIME_ROOT.is_absolute() or RUNTIME_ROOT.resolve() == ROOT or ROOT in RUNTIME_ROOT.resolve().parents:
+    raise ValueError('CORDOBA_RUNTIME_ROOT requiere una ruta absoluta fuera del repositorio')
 DATA_ROOT = STORAGE_ROOT / 'data'
 ARCHIVE_ROOT = STORAGE_ROOT / 'artifacts/archive'
 MASKS_ROOT = DATA_ROOT / 'mascaras'

@@ -2,11 +2,16 @@
 set -euo pipefail
 cd "$(dirname "$0")/../.."
 PY=${PY:-$HOME/s4a-venv/bin/python}
+source scripts/lib/corridas.sh
+cordoba_run_init preparacion descargar_extension_este "$@"
 BASE=/mnt/yacy_1/prod/ferreyra/extension_este_multicampana
-RUN=${1:?Directorio de logs requerido}
+cordoba_registrar --salida "base_operativa=$BASE"
+RUN="$CORDOBA_RUN_DIR"
+# El argumento histórico se acepta como referencia, pero los logs son por corrida.
 mkdir -p "$BASE" "$RUN"
 exec 8>"$BASE/descarga.lock"
 flock -n 8 || { echo 'Ya hay una descarga de extension este activa'; exit 1; }
+cordoba_lock extension_descarga
 echo "$$" > "$RUN/descarga.pid"
 trap 'rc=$?; printf "%s\n" "$rc" > "$RUN/descarga.exitcode"; date -Is > "$RUN/fin.txt"' EXIT
 date -Is > "$RUN/inicio.txt"
@@ -52,7 +57,7 @@ for anio in 2018 2019 2020 2021; do
  siguiente=$((anio + 1))
  # Un subshell mantiene errexit dentro de cada campaña y permite continuar las restantes.
  set +e
- (set -e; campana "${anio}-12-01" "${siguiente}-05-31" "$anio" "$siguiente") > "$RUN/${anio}_${siguiente}.log" 2>&1
+ (set -e; campana "${anio}-12-01" "${siguiente}-05-31" "$anio" "$siguiente") > "$CORDOBA_LOG_DIR/${anio}_${siguiente}.log" 2>&1
  rc=$?
  set -e
  echo "$rc" > "$RUN/${anio}_${siguiente}.exitcode"

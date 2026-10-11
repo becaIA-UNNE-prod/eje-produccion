@@ -319,3 +319,12 @@ por responsabilidad. La raíz de src conserva compatibilidad. Los cuatro shells
 de experimentos anteriores están en scripts/historico y no forman parte de
 una secuencia obligatoria del TEST vigente. Configurar meses/rutas por campaña
 no implica cambiar automáticamente los defaults de otros protocolos.
+
+## Registros de nuevas corridas
+
+Los shells crean automáticamente registros en `artifacts/runs/` de `/mnt/yacy_3`.
+Los logs del coordinador y de los pasos se guardan juntos allí; la configuración,
+el estado y las rutas de salidas quedan en el manifiesto. Los experimentos y
+composites pesados conservan sus ubicaciones; nuevos destinos se eligen según
+espacio disponible. Para comandos Python usar el lanzador y declarar sus rutas.
+Consultar CONTRIBUTING.md para `--padre`, previsión de espacio y reserva por disco.

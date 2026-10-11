@@ -9,6 +9,7 @@ Uso:
     python3 -m src.figuras.visualizar_inferencia prediccion_20HMK_fcrtransunet.tif --max_lado 3000
 """
 import argparse
+import os
 from pathlib import Path
 from utils.rutas import LEGACY_FIGURES
 
@@ -28,7 +29,7 @@ def crear_parser():
     parser.add_argument("tif", help="Ruta al GeoTIFF de clasificacion (1 banda, 0-4)")
     parser.add_argument("--max_lado", type=int, default=2048,
                          help="Lado maximo (px) de la imagen de salida (downsampling)")
-    parser.add_argument("--salida", default=None, help="Ruta de salida (default: figuras/ de CORDOBA_RUN_DIR)")
+    parser.add_argument("--salida", required=os.environ.get("CORDOBA_REGISTRO_LIVIANO") == "1", default=None, help="Ruta de salida (default: figuras/ de CORDOBA_RUN_DIR)")
     return parser
 
 

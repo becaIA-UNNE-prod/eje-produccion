@@ -47,7 +47,7 @@ Para un nuevo artefacto, determinar su rol y usar la ruta correspondiente:
 | Datos, referencias, máscaras y pesos compartidos | `/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/` |
 | Archivo de corridas históricas | `/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/artifacts/archive/` |
 | Respaldos y manifiestos de traslado | `/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/backups/` |
-| Nuevas corridas | `/mnt/yacy_3/prod_bis/ferreyra/cordoba_ia_unne/artifacts/runs/<nombre_FECHA_ID>/` |
+| Nuevas corridas | `/mnt/yacy_3/prod_bis/ferreyra/cordoba_ia_unne/artifacts/runs/<fechaUTC_etapa_nombre_ID>/` |
 
 `yacy_1` aloja entradas compartidas y archivo histórico; `yacy_3` aloja nuevas
 corridas. Esta separación sigue los flujos multicampaña establecidos y la
@@ -78,9 +78,14 @@ por directorios locales cuando falte un montaje. No crear enlaces individuales
 para antiguas imágenes/logs en la raíz. Nuevos módulos usan las constantes de
 `utils/rutas.py`; las etapas históricas pueden seguir usando los aliases listados.
 
-Cada nueva corrida tiene `run.json`, `exitcode`, `logs/`, `figuras/`,
-`predicciones/`, `metricas/` e `inventarios/`. Separar corridas por nombre,
-fecha UTC y PID, y distinguir artefactos completos de temporales. Los archivos
+Cada nueva corrida tiene nombre `<fechaUTC>_<etapa>_<nombre>_<id>` y contiene
+solo registros livianos: `run.json`, `estado.json`, `exitcode`, `logs/` (con
+`coordinador.log`, pasos y `workers/`), `configuracion/` e `inventarios/`.
+Imágenes, arrays, caches, pesos, predicciones y resultados existentes no se
+mueven ni copian para agruparlos con estos registros. Las nuevas salidas pesadas
+usan destinos explícitos, elegidos según capacidad, y se registran en `run.json`.
+`yacy_3` es el destino de los registros, no una obligación para las salidas pesadas.
+Cada reintento usa otra corrida; `--padre` relaciona ejecuciones sin reutilizar logs. Los archivos
 históricos preservan su agrupación de origen bajo `archive/`.
 
 El mirror local comparte código y configuración. Puede mantener copias ligeras
@@ -101,13 +106,57 @@ y `.python-version`; no usarlos para recrear o sincronizar un entorno local.
 El `.venv` histórico fue eliminado el 10/10/2026. No recrearlo ni introducir
 otro gestor de dependencias como reemplazo.
 
-El lanzador crea un directorio con fecha UTC y PID, captura stdout/stderr,
-registra el comando, HEAD, estado Git y la firma del split, y guarda `exitcode`:
+El lanzador crea un directorio con fecha UTC, etapa e ID único, captura stdout/stderr,
+registra el comando, HEAD, estado Git y la firma del split, copia los JSON de
+configuración y guarda estado, inicio/fin y `exitcode`:
 
 ```bash
 ~/s4a-venv/bin/python scripts/ejecutar_con_log.py --nombre verificar_test -- \
   ~/s4a-venv/bin/python -m unittest discover -s test -p test_test_actual.py -v
 ```
+
+Los shells de `scripts/preparacion/`, `entrenamiento/`, `evaluacion/`,
+`mantenimiento/` e `historico/` crean automáticamente una corrida al invocarlos
+sin `CORDOBA_RUN_DIR`. Para módulos Python y otros comandos, usar el lanzador.
+Los shells registran sus destinos efectivos y escriben los logs de pasos en
+`CORDOBA_LOG_DIR`; las auditorías de preparación van a `CORDOBA_INVENTARIOS_DIR`.
+El argumento antiguo de carpeta de logs de `descargar_extension_este.sh` se
+acepta por compatibilidad, pero ya no es el destino de los logs. Los directorios
+explícitos de resultados de los otros shells mantienen su función.
+
+Para declarar entradas/salidas y comprobar capacidad antes de ejecutar:
+
+```bash
+~/s4a-venv/bin/python scripts/ejecutar_con_log.py \
+  --etapa evaluacion --nombre comparar \
+  --entrada checkpoint=/mnt/RUTA_EXPERIMENTO/best_model.pth \
+  --salida resultados=/mnt/RUTA_NUEVA_SALIDA \
+  --prevision-gib resultados=10 --reserva-gib 100 \
+  -- ~/s4a-venv/bin/python -m src.evaluacion.test_actual \
+     --exp /mnt/RUTA_EXPERIMENTO --salida /mnt/RUTA_NUEVA_SALIDA
+```
+
+Son marcadores que deben sustituirse por rutas reales. `--entrada` y `--salida`
+son metadatos: no sustituyen los argumentos del comando ni crean esos destinos.
+La previsión es espacio adicional e incluye temporales; se suma por filesystem
+si varias salidas comparten disco. Sin `--prevision-gib`, solo se registra la
+capacidad disponible: no se estima automáticamente el tamaño de la operación.
+`--padre /mnt/RUTA_CORRIDA_ANTERIOR` relaciona evaluación, figuras o reintentos.
+
+Los locks nuevos viven en `runtime/locks/`, y los punteros en `runtime/punteros/`,
+según `runtime_root` de la configuración o `CORDOBA_RUNTIME_ROOT`. Se conservan
+también los locks históricos como puente de coordinación con consumidores
+anteriores; no mover ni borrar esos archivos durante una ejecución. Los shells
+adquieren ambos en el mismo orden. Los PID/exitcode pequeños en las salidas
+explícitas se conservan por compatibilidad. Cada entrenamiento enlaza su registro
+mediante `corrida_entrenamiento.json` en el experimento.
+
+La recuperación multicampaña lanzada como corrida requiere
+`CORDOBA_RECOVERY_ROOT=/mnt/DESTINO_RESPALDOS_REPARACION`: puede generar TIFF y
+arrays pesados; sus respaldos no pertenecen a la carpeta liviana de logs.
+Para esperar un pipeline histórico nuevo en `evaluar_dicmay.sh`, indicar
+`PIPELINE_LOG=/mnt/RUTA_CORRIDA/logs/coordinador.log` junto con `ESPERAR_PID`.
+Sin esa variable se conserva la lectura del log histórico anterior.
 
 La base por defecto del lanzador es `RUNS_ROOT` en `yacy_3`. Rechaza carpetas
 de corrida físicas dentro del repositorio y no crea un fallback local si falta
@@ -118,7 +167,10 @@ Exporta `CORDOBA_RUN_DIR` para las herramientas históricas `2`, `7`, `8`, `9`,
 `10` y el inventario Sentinel. Sin esa variable, usan
 `RUNS_ROOT/legacy_octabr/` en `yacy_3`, un espacio manual histórico compartido.
 Usar el lanzador o un `CORDOBA_RUN_DIR` nuevo para conservar cada corrida;
-para encadenar inferencia y figuras, usar el mismo directorio de corrida.
+En las corridas nuevas, las herramientas históricas 2/7/8/9/10 exigen sus
+argumentos de entrada/salida explícitos para no escribir imágenes en los registros.
+Para relacionar inferencia y figuras, usar destinos de resultados acreditados y
+`--padre` para enlazar sus corridas.
 Los parámetros explícitos `--dir-salida`, `--salida_dir`, `--salida` y
 `--dir-pred` prevalecen sobre esos valores por defecto.
 

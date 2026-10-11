@@ -21,21 +21,31 @@
 #
 # Cada paso saltea lo que ya existe, se puede relanzar si se corta.
 # Uso (desde la raiz del repo):
-#   nohup bash scripts/historico/pipeline_dicmay_1718.sh > /mnt/yacy_3/prod_bis/ferreyra/logs_dicmay_1718/pipeline.log 2>&1 &
+#   nohup bash scripts/historico/pipeline_dicmay_1718.sh > /dev/null 2>&1 &  # logs automáticos por corrida
 set -euo pipefail
 cd "$(dirname "$0")/../.."
-
 PY=${PY:-$HOME/s4a-venv/bin/python}
+source scripts/lib/corridas.sh
+cordoba_run_init historico pipeline_dicmay_1718 "$@"
+
 Y3=/mnt/yacy_3/prod_bis/ferreyra
 S2_1718=$Y3/sentinel2_cordoba_2017_2018_dicmay
+cordoba_registrar --salida "fuentes_1718=$S2_1718"
 COMP_1718=$Y3/composites_dicmay_2017_2018
+cordoba_registrar --salida "composites_1718=$COMP_1718"
 COMP_1819=$Y3/composites_2018_2019_scl
+cordoba_registrar --salida "composites_1819=$COMP_1819"
 COMP_DICMAY=$Y3/composites_dicmay_2019_2020
+cordoba_registrar --salida "composites_1920=$COMP_DICMAY"
 DIR_TRAIN=$Y3/dataset/train_cordoba_dicmay_f16
+cordoba_registrar --salida "dataset=$DIR_TRAIN"
 DIR_TRAIN_1718=$Y3/dataset/train_cordoba_dicmay_1718_f16
+cordoba_registrar --salida "dataset_1718=$DIR_TRAIN_1718"
 PRED_1819=$Y3/predicciones_2018_2019_con1718
+cordoba_registrar --salida "predicciones_1819=$PRED_1819"
 PRED_1920=$Y3/predicciones_2019_2020_dicmay_con1718
-LOGS=$Y3/logs_dicmay_1718
+cordoba_registrar --salida "predicciones_1920=$PRED_1920"
+LOGS="$CORDOBA_LOG_DIR"
 MODELOS=${MODELOS:-"unet fcrtransunet"}
 
 MESES_1718="201712 201801 201802 201803 201804 201805"
@@ -45,7 +55,7 @@ TILES=$(tr '\n' ' ' < $Y3/tiles.txt)
 TILES_TRAIN="19HGC 20HLG 20HLH 20HMJ 20HMK 20HNK 20JML 20HKH 20HMG 20HNG 20HPG 20HPH 20JNL"
 TILES_REF="20HLJ 20HLK 20HKJ 20HMH"   # test + val
 TILES_1718="20HLG 20HLH 20HMJ 20HMK 20HNK 20JML 20HKH 20HMG 20HNG 20HPG 20HPH 20JNL"   # TRAIN sin 19HGC
-mkdir -p $LOGS
+mkdir -p "$LOGS"
 [ -d $COMP_1819 ] || { echo "falta $COMP_1819: correr antes scripts/preparacion/rehacer_2018_2019_scl.sh"; exit 1; }
 
 paso() { echo; echo "===== $(date '+%F %T') $* ====="; }
@@ -55,39 +65,39 @@ paso() { echo; echo "===== $(date '+%F %T') $* ====="; }
 # (bajarian los mismos archivos a la vez).
 while pgrep -f "(00_descargar_stac[.]py|src[.]datos[.]descargar_stac) descargar --out $S2_1718" > /dev/null; do sleep 60; done
 paso "busqueda dic 2017 - may 2018 sin limite de % sin dato"
-echo "$TILES_1718" | tr ' ' '\n' > $LOGS/tiles_1718.txt
+echo "$TILES_1718" | tr ' ' '\n' > "$LOGS/tiles_1718.txt"
 if [ ! -f $S2_1718/productos_v2_maxnodata100.json ]; then
     $PY -m src.datos.descargar_stac buscar --inicio 2017-12-01 --fin 2018-05-31 \
-        --out $S2_1718 --tiles-file $LOGS/tiles_1718.txt --max-nodata 100 | tail -14
+        --out $S2_1718 --tiles-file "$LOGS/tiles_1718.txt" --max-nodata 100 | tail -14
     cp $S2_1718/productos.json $S2_1718/productos_v2_maxnodata100.json
 fi
 
 paso "SCL de todos los candidatos 2017-2018"
-$PY -m src.datos.descargar_stac descargar --out $S2_1718 --bandas SCL > $LOGS/descarga_scl_2017_2018.log 2>&1 \
-    || $PY -m src.datos.descargar_stac descargar --out $S2_1718 --bandas SCL >> $LOGS/descarga_scl_2017_2018.log 2>&1
-tail -1 $LOGS/descarga_scl_2017_2018.log
+$PY -m src.datos.descargar_stac descargar --out $S2_1718 --bandas SCL > "$LOGS/descarga_scl_2017_2018.log" 2>&1 \
+    || $PY -m src.datos.descargar_stac descargar --out $S2_1718 --bandas SCL >> "$LOGS/descarga_scl_2017_2018.log" 2>&1
+tail -1 "$LOGS/descarga_scl_2017_2018.log"
 
 paso "seleccion de escenas por SCL"
 $PY -m src.datos.composites_scl seleccionar --base $S2_1718 --tiles $TILES_1718 --meses $MESES_1718 \
-    > $LOGS/seleccion_2017_2018.log 2>&1
-tail -2 $LOGS/seleccion_2017_2018.log
+    > "$LOGS/seleccion_2017_2018.log" 2>&1
+tail -2 "$LOGS/seleccion_2017_2018.log"
 
 paso "bandas de las escenas elegidas (log: $LOGS/descarga_2017_2018.log)"
 $PY -m src.datos.descargar_stac descargar --out $S2_1718 --seleccion $S2_1718/seleccion_scl.json \
-    > $LOGS/descarga_2017_2018.log 2>&1 \
+    > "$LOGS/descarga_2017_2018.log" 2>&1 \
     || $PY -m src.datos.descargar_stac descargar --out $S2_1718 --seleccion $S2_1718/seleccion_scl.json \
-    >> $LOGS/descarga_2017_2018.log 2>&1
+    >> "$LOGS/descarga_2017_2018.log" 2>&1
 $PY -m src.datos.descargar_stac verificar --out $S2_1718 --seleccion $S2_1718/seleccion_scl.json | head -3
 
 paso "composites 2017-2018 con SCL (log: $LOGS/composites_2017_2018.log)"
 $PY -m src.datos.composites_scl componer --base $S2_1718 --out $COMP_1718 --tiles $TILES_1718 \
-    > $LOGS/composites_2017_2018.log 2>&1
-tail -1 $LOGS/composites_2017_2018.log
-grep "ATENCION" $LOGS/composites_2017_2018.log || echo "todos los composites >= 95% despejado"
+    > "$LOGS/composites_2017_2018.log" 2>&1
+tail -1 "$LOGS/composites_2017_2018.log"
+grep "ATENCION" "$LOGS/composites_2017_2018.log" || echo "todos los composites >= 95% despejado"
 
 # 2) Mascaras Nivel3 + dataset 2017-2018 (solo tiles de TRAIN)
 paso "mascaras Nivel3 2017-2018"
-$PY -m src.datos.mascaras_nivel3_2017_2018 --ref $S2_1718 --tiles $TILES_1718 | tee $LOGS/mascaras_nivel3.log
+$PY -m src.datos.mascaras_nivel3_2017_2018 --ref $S2_1718 --tiles $TILES_1718 | tee "$LOGS/mascaras_nivel3.log"
 
 paso "dataset dic-may 2017-2018"
 $PY -m src.datos.generar_dataset_cordoba_f16 --leyenda nivel3 --tiles $TILES_TRAIN --meses $MESES_1718 \
@@ -97,16 +107,17 @@ $PY -m src.datos.generar_dataset_cordoba_f16 --leyenda nivel3 --tiles $TILES_TRA
 # Mismos pesos por clase que los modelos base (--sin-2017), para que la unica
 # diferencia sea la campana sumada. Los recalculados quedan solo de referencia.
 paso "pesos por clase (2019-2020 + 2017-2018, solo referencia)"
-$PY -m src.entrenamiento.calcular_pesos --dirs $DIR_TRAIN $DIR_TRAIN_1718 | tee $LOGS/pesos.log
+$PY -m src.entrenamiento.calcular_pesos --dirs $DIR_TRAIN $DIR_TRAIN_1718 | tee "$LOGS/pesos.log"
 
 for M in $MODELOS; do
     EXP=$Y3/dataset/exp_cordoba_dicmay_con1718_${M}_f16
+    cordoba_registrar --salida "experimento_${M}=$EXP"
     if [ ! -f $EXP/modelo_final.pth ]; then
-        paso "entrenamiento $M (log: $EXP/train.log)"
+        paso "entrenamiento $M (log: ${CORDOBA_LOG_DIR}/train_${M}.log)"
         mkdir -p $EXP
         $PY -m src.entrenamiento.entrenar_cordoba --modelo $M --sin-2017 \
-            --dir-train $DIR_TRAIN --dir-train-extra $DIR_TRAIN_1718 --dir-exp $EXP > $EXP/train.log 2>&1
-        tail -4 $EXP/train.log
+            --dir-train $DIR_TRAIN --dir-train-extra $DIR_TRAIN_1718 --dir-exp $EXP > "${CORDOBA_LOG_DIR}/train_${M}.log" 2>&1
+        tail -4 "${CORDOBA_LOG_DIR}/train_${M}.log"
     fi
 done
 

@@ -13,6 +13,7 @@ ROOT=Path(__file__).resolve().parents[2]
 from src.datos.campanas import files
 from src.soporte.archivos import guardar, sha256
 from utils.rutas import MULTICAMPANA_ROOT as Y3
+from utils.corridas import lock_runtime
 from src.inferencia.raster import inferir_tile
 from src.figuras.comunes import matriz_fig, curvas
 from src.figuras.test_actual import figura_extension, comparar_modelos
@@ -58,7 +59,9 @@ def main(argv=None):
  if all((r['exp']/'historial.npy').exists() for r in models.values()):curvas(models,out/'figuras/curvas_comparadas.png')
  lock=None
  if not a.lock_adquirido:
+  (Y3/'logs_multicampana').mkdir(parents=True,exist_ok=True)
   lock=open(Y3/'logs_multicampana/inferencia.lock','w');fcntl.flock(lock,fcntl.LOCK_EX)
+  runtime_lock=lock_runtime('inferencia')
  failures=auditar_rasters([p for y in years for t in tiles for p in files(y,t)],maskbase/'integridad_composites.json',workers=2)
  failures.update(auditar_rasters([maskbase/'mascaras'/f'{y}_{t}_{s}.tif' for y in years for t in tiles for s in ['completa','independiente']],maskbase/'integridad_mascaras.json',workers=2))
  if failures:raise ValueError(str(failures))

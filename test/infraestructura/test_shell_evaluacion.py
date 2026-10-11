@@ -22,6 +22,9 @@ def run_shell(entry='canonical',scenario='',baseline=None):
                 p=repo/name;p.parent.mkdir(parents=True,exist_ok=True)
                 p.write_text((ROOT/name).read_text().replace('/mnt/yacy_3/prod_bis/ferreyra/logs_multicampana',str(logs)))
             actual=repo/('src/inferencia_multicampana.sh' if entry=='wrapper' else 'scripts/evaluacion/inferencia_multicampana.sh')
+        helper = repo/'scripts/lib/corridas.sh'
+        helper.parent.mkdir(parents=True, exist_ok=True)
+        helper.write_text((ROOT/'scripts/lib/corridas.sh').read_text())
         binpath=base/'bin';binpath.mkdir();fake=binpath/'python_simulado'
         fake.write_text('#!'+sys.executable+'''\nimport json,os,sys
 from pathlib import Path
@@ -33,6 +36,7 @@ raise SystemExit(int(os.environ['FIXTURE_EXIT']))
         date=binpath/'date';date.write_text('#!/bin/sh\nprintf "%s\\n" FECHA_FIXTURE\n');date.chmod(0o755)
         trace=base/'trace.json'
         env=dict(os.environ,PY=str(fake),PATH=str(binpath)+os.pathsep+os.environ['PATH'],FIXTURE_TRACE=str(trace),FIXTURE_EXIT='7' if scenario=='fallo' else '0')
+        env.update(CORDOBA_RUN_DIR=str(out), CORDOBA_RUNTIME_ROOT=str(base/'runtime'))
         argv=['bash',str(actual),str(exp),str(out)]
         if scenario=='faltan_args':argv=argv[:2]
         if scenario=='lock':
@@ -41,7 +45,7 @@ raise SystemExit(int(os.environ['FIXTURE_EXIT']))
                 result=subprocess.run(argv,cwd=base,env=env,capture_output=True,text=True)
         else:result=subprocess.run(argv,cwd=base,env=env,capture_output=True,text=True)
         event=json.loads(trace.read_text()) if trace.exists() else None
-        state={p.name:p.read_text() for p in out.iterdir()}
+        state={p.name:p.read_text() for p in out.iterdir() if p.is_file()}
         if 'inferencia.pid' in state:
             assert state['inferencia.pid'].strip().isdigit();state['inferencia.pid']='PID_FIXTURE\n'
         if event:assert event['cwd']==str(repo)
