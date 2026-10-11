@@ -12,8 +12,8 @@ MODULOS = (
     "src.evaluacion.matriz_confusion_parches",
     "src.figuras.comparacion_parches",
     "src.figuras.visualizar_inferencia",
-    "src.9_comparar_inferencia_etiqueta",
-    "src.10_metricas_test",
+    "src.historico.comparar_inferencia_etiqueta",
+    "src.historico.metricas_test",
 )
 
 
@@ -36,7 +36,9 @@ with (
                    'src.5_generar_matriz_confusion', 'src.6_generar_comparacion_visual',
                    'src.figuras.curvas_entrenamiento', 'src.evaluacion.matriz_confusion_parches',
                    'src.figuras.comparacion_parches', 'src.figuras.visualizar_inferencia',
-                   'src.9_comparar_inferencia_etiqueta', 'src.10_metricas_test'):
+                   'src.8_comparar_modelos', 'src.9_comparar_inferencia_etiqueta', 'src.10_metricas_test',
+                   'src.historico.comparar_modelos', 'src.historico.comparar_inferencia_etiqueta',
+                   'src.historico.metricas_test'):
         importlib.import_module(nombre)
 """
         with tempfile.TemporaryDirectory() as temporal:

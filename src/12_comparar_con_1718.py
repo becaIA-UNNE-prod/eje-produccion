@@ -65,7 +65,7 @@ COLOR = {"unet": "#2a78d6", "fcrtransunet": "#eb6834"}
 CLARO = {"unet": "#a9c8ee", "fcrtransunet": "#f6c0aa"}
 TINTA, TINTA2, GRILLA = "#0b0b0b", "#52514e", "#e4e3df"
 
-# Mismos colores de clase que 9_comparar_inferencia_etiqueta.py
+# Mismos colores de clase que src.historico.comparar_inferencia_etiqueta
 COLORES_CLASE = {0: [255, 255, 255], 1: [70, 130, 180], 2: [255, 165, 0], 3: [0, 100, 0], 4: [165, 42, 42]}
 NOMBRES_CLASE = {1: "Fondo", 2: "Maiz", 3: "Soja", 4: "Mani"}
 REMAP_1819 = np.zeros(256, dtype=np.int64)

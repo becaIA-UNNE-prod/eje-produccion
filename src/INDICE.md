@@ -484,3 +484,13 @@ El verificador conserva 2019/2020, octubre–abril, NPZ, 28 canales y seis clase
 no sustituye el preflight vigente. Manfredi conserva 20HMK, cinco clases,
 checkpoint base, VAL 0.15 y seed42. Sus imports no crean carpetas ni fijan
 semillas; esas acciones ocurren al ejecutar finetune(). No cambian cálculos.
+
+### Comparaciones anteriores 8, 9 y 10 trasladadas
+
+Implementaciones: historico/comparar_modelos.py, comparar_inferencia_etiqueta.py
+y metricas_test.py. Las entradas numeradas reexportan/delegan; usar -m desde
+la raíz. El 8 ahora separa crear_parser/main sin cambiar sus cálculos; el 9
+y el 10 conservan las separaciones ya existentes. Parche NPZ/28 canales,
+remapeos de mapas MNC, tiles originales, figuras, métricas y salidas intactos.
+Ver historico/README.md para las diferencias entre cultivos, confusión y
+accuracy impresa del protocolo anterior. No sustituyen el TEST vigente.
