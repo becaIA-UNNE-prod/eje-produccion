@@ -60,10 +60,10 @@ for M in $MODELOS; do
 done
 
 paso "evaluacion modelos base sobre composites SCL (2018-2019 vs MNC 2018/2019)"
-$PY src/11_evaluar_contra_mnc.py --leyenda 1819 --modelos $MODELOS \
+$PY -m src.historico.evaluar_contra_mnc --leyenda 1819 --modelos $MODELOS \
     --dir-pred $PRED --dir-salida $Y3/evaluacion_2018_2019_scl
 
 paso "graficos: composites 02c vs 02d (SCL)"
-$PY src/12_comparar_con_1718.py --comparacion scl
+$PY -m src.historico.comparar_con_1718 --comparacion scl
 
 paso "LISTO -- base sobre composites SCL"

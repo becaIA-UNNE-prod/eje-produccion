@@ -50,3 +50,44 @@ Las entradas 8/9/10 en src reexportan y delegan. Todos tienen crear_parser/main;
 importar no lee datos/pesos, consulta GPU, crea salidas ni procesa argumentos.
 Salidas explícitas prevalecen sobre CORDOBA_RUN_DIR y el destino legacy
 establecido en utils.rutas. No lanzar inferencias reales para probar traslados.
+
+## Evaluación MNC y comparación de variantes
+
+`python -m src.historico.evaluar_contra_mnc --leyenda 1819|2020 --dir-pred PRED
+--dir-salida SALIDA` conserva TRAIN/VAL y TEST anterior20HLK/20HLJ. Remapea
+MNC según campaña, exige grillas iguales y evalúa solo referencia>0 y pred>0.
+Guarda confusiones NPY, matrices PNG, metricas.csv y resumen.json por tile/rol.
+No equivale al TEST vigente ni a los comandos que cuentan pred0 como error.
+
+`python -m src.historico.comparar_con_1718 --comparacion 1718|scl` consume
+esos resúmenes y curvas originales. 1718 compara base2019/2020 con +2017/2018
+Nivel3; scl compara composites02c/02d, sin curvas de entrenamiento. Conserva
+rutas externas, grupos/tiles, factor8 nearest, acuerdo sobre ref>0/pred>0,
+blanco sin dato, barras/kappa/curvas/mapas y CSV delta segunda menos primera.
+--dir-salida explícita prevalece sobre el default de la variante en Y3.
+
+Ambos tienen crear_parser/ejecución/main, wrappers compatibles y exports.
+Importar no evalúa datos, escribe resultados ni cambia rcParams de Matplotlib.
+La matriz del 11 y helpers lectura/RGB/estilo del 12 viven en src.figuras;
+las figuras ligadas a VARIANTES/EVALS siguen con la coordinación histórica.
+El estilo se aplica en cada gráfico y se restaura al salir.
+
+## Shells de coordinación anteriores
+
+Implementaciones en `scripts/historico/`, desde la raíz:
+
+- `bash scripts/historico/pipeline_dicmay.sh`: preparación2019/2020,
+  entrenamiento base e inferencia2018/2019. Conserva MODELOS y PY.
+- `bash scripts/historico/pipeline_dicmay_1718.sh`: incorpora TRAIN2017/2018
+  Nivel3, espera descargas anteriores, prepara SCL/arrays/pesos, entrena,
+  infiere y compara las campañas anteriores.
+- `bash scripts/historico/evaluar_dicmay.sh`: inferencia2019/2020 en VAL/TEST
+  anterior y evaluación MNC de ambas campañas. ESPERAR_PID espera al proceso
+  y exige LISTO en el log antes de continuar.
+- `bash scripts/historico/preparar_ano_no_visto.sh SALIDA EXP`: prepara2021/2022
+  y evalúa pesos congelados. SALIDA debe existir; conserva posiciones1/2,
+  lock preparación fd8, PID/trap/exitcode/fin, espera MNC y lock GPU fd9.
+
+Las rutas antiguas en src son wrappers ejecutables. No ejecutar estos flujos
+para comprobar un traslado: pueden descargar, entrenar e inferir. Las pruebas
+usan réplicas en /tmp, comandos simulados y locks de archivos temporales.

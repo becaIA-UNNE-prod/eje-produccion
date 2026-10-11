@@ -140,8 +140,8 @@ class ShellsPreparacionTest(unittest.TestCase):
         self.assertEqual([a[a.index('-m')+2] for a in modules(actual) if a[a.index('-m')+1].startswith('src.datos.')],['descargar','seleccionar','descargar','verificar','componer'])
         inference=[a for a in args if 'src.inferencia.inferir_tile' in a]
         self.assertEqual([a[a.index('--modelo')+1] for a in inference],['unet','fcrtransunet'])
-        self.assertEqual(args[-2][:3],['src/11_evaluar_contra_mnc.py','--leyenda','1819'])
-        self.assertEqual(args[-1],['src/12_comparar_con_1718.py','--comparacion','scl'])
+        self.assertEqual(args[-2][:4],['-m','src.historico.evaluar_contra_mnc','--leyenda','1819'])
+        self.assertEqual(args[-1],['-m','src.historico.comparar_con_1718','--comparacion','scl'])
 
     def test_extension_continua_otras_campanas_y_registra_fallo(self):
         actual=run_flow('descargar_extension_este',scenario='campana2020')

@@ -40,3 +40,9 @@ no equivale a las figuras del protocolo TEST de mapas y 24 canales.
 protocolo.json y predicciones existentes. Conserva espera de inferencia.exitcode,
 rechazo de inferencia fallida y figuras.exitcode. No ejecuta inferencia nueva.
 La ruta src/regenerar_figuras_test_actual.py conserva compatibilidad.
+
+`evaluacion_mnc.py` dibuja la matriz histórica del 11 con nombres explícitos.
+`comparacion_1718.py` contiene lectura nearest, RGB con paleta explícita y
+estilo temporal para los gráficos del 12. Importar no cambia rcParams; cada
+render usa rc_context y restaura el estilo. Configuración de variantes,
+rutas y secuencia de figuras permanecen en src.historico.comparar_con_1718.

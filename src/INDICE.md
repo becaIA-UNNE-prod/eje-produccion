@@ -494,3 +494,21 @@ y el 10 conservan las separaciones ya existentes. Parche NPZ/28 canales,
 remapeos de mapas MNC, tiles originales, figuras, métricas y salidas intactos.
 Ver historico/README.md para las diferencias entre cultivos, confusión y
 accuracy impresa del protocolo anterior. No sustituyen el TEST vigente.
+
+### Evaluación MNC y comparación 2017/2018 trasladadas
+
+Implementaciones: historico/evaluar_contra_mnc.py y historico/comparar_con_1718.py.
+Entradas 11/12 reexportan perezosamente y delegan; shells consumidores usan -m.
+CLI separada de ejecución. Figuras: figuras/evaluacion_mnc.py y helpers en
+figuras/comparacion_1718.py. El estilo del 12 no altera rcParams al importar.
+Conservados MNC1819/2020, exclusión pred0, split anterior, variantes1718/scl,
+rutas, salidas, métricas/deltas y gráficos. No sustituyen el TEST vigente.
+
+### Cuatro shells de protocolos anteriores trasladados
+
+Implementaciones en scripts/historico/: pipeline_dicmay.sh,
+pipeline_dicmay_1718.sh, evaluar_dicmay.sh y preparar_ano_no_visto.sh.
+Las entradas src delegan todos los argumentos. Raíz recalculada por profundidad;
+cuerpos operativos intactos. Orden, rutas físicas, PY/MODELOS/ESPERAR_PID,
+reintentos, omisiones, esperas, locks/PID/traps y códigos de salida conservados.
+Los protocolos siguen siendo anteriores; no redefinen TEST vigente.

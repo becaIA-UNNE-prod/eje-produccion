@@ -332,3 +332,15 @@ se conservan como wrappers. Las implementaciones actuales están en
 `src.historico.verificar_pipeline` y `src.entrenamiento.finetune_manfredi`;
 ejecutar por `python -m` desde la raíz. Los contratos descritos arriba permanecen
 intactos; importar el ajuste fino ya no crea carpetas ni fija semillas.
+
+Las entradas 11/12 conservan compatibilidad; sus implementaciones están en
+`src.historico.evaluar_contra_mnc` y `src.historico.comparar_con_1718`.
+Los shells llaman por -m. Los protocolos y resultados descritos mantienen
+sus contratos originales, incluida la exclusión de predicción0 del evaluador MNC.
+
+Los cuatro shells de estos protocolos están en `scripts/historico/`:
+`pipeline_dicmay.sh`, `pipeline_dicmay_1718.sh`, `evaluar_dicmay.sh` y
+`preparar_ano_no_visto.sh`. Las rutas anteriores de src delegan todos los
+argumentos y conservan códigos de salida. Los comandos fechados de arriba
+conservan sus rutas históricas; usar las implementaciones nuevas al revisar
+el flujo actual. Los protocolos, rutas externas, esperas y locks no cambian.

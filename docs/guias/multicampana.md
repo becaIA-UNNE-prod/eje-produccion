@@ -308,4 +308,5 @@ El dispatcher Python conserva --historico para el flujo anterior; la implementac
 está en src.historico.postprocesar_multicampana. No confundir sus mapas completos
 20HLK/20HLJ con las máscaras independientes 20HNJ/20HNH del TEST canónico.
 El protocolo temporal anterior 2021/2022 está en src.historico.evaluar_ano_no_visto;
-su shell aún está en src/preparar_ano_no_visto.sh y llama al módulo nuevo por -m.
+su shell está en scripts/historico/preparar_ano_no_visto.sh y llama al módulo por -m;
+la entrada anterior src/preparar_ano_no_visto.sh delega y conserva argumentos.
