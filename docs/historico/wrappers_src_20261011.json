@@ -1,0 +1,1284 @@
+{
+  "head": "a6d096eabe395012a0b57f8207713be2b7e9b6fe",
+  "wrappers": [
+    {
+      "archivo": "src/00_descargar_stac.py",
+      "destinos": [
+        "src.datos.descargar_stac"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/datos/test_fuentes_composites.py",
+          "lineas": [
+            177
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/01_moldear_mascaras.py",
+      "destinos": [
+        "src.datos.moldear_mascaras",
+        "src.soporte.cli_fija"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/infraestructura/test_cli_fija.py",
+          "lineas": [
+            17
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/01b_mascaras_mnc_2018_2019.py",
+      "destinos": [
+        "src.datos.mascaras_mnc_2018_2019"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/infraestructura/test_rutas_checkout.py",
+          "lineas": [
+            15
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/01c_mascaras_nivel3_2017_2018.py",
+      "destinos": [
+        "src.datos.mascaras_nivel3_2017_2018"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/infraestructura/test_rutas_checkout.py",
+          "lineas": [
+            15
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/01d_mascaras_mnc_2020_2021.py",
+      "destinos": [
+        "src.datos.mascaras_mnc_2020_2021"
+      ],
+      "codigo": [],
+      "pruebas": [],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/02_composites_mensuales.py",
+      "destinos": [
+        "src.datos.composites_mensuales",
+        "src.soporte.cli_fija"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/datos/test_fuentes_composites.py",
+          "lineas": [
+            177
+          ]
+        },
+        {
+          "archivo": "test/infraestructura/test_cli_fija.py",
+          "lineas": [
+            18
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/02b_composites_2019_2020.py",
+      "destinos": [
+        "src.datos.composites_2019_2020",
+        "src.soporte.cli_fija"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/datos/test_fuentes_composites.py",
+          "lineas": [
+            177
+          ]
+        },
+        {
+          "archivo": "test/infraestructura/test_cli_fija.py",
+          "lineas": [
+            19
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/02c_composites_cog.py",
+      "destinos": [
+        "src.datos.composites_cog"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/datos/test_fuentes_composites.py",
+          "lineas": [
+            177,
+            200
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/02d_composites_scl.py",
+      "destinos": [
+        "src.datos.composites_scl"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/datos/test_fuentes_composites.py",
+          "lineas": [
+            177,
+            208
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [
+        {
+          "archivo": "docs/historico/geografia_20261009.md",
+          "lineas": [
+            209
+          ]
+        }
+      ],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/03_generar_datasets_npz.py",
+      "destinos": [
+        "src.datos.generar_arrays_originales",
+        "src.soporte.cli_fija"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/infraestructura/test_cli_fija.py",
+          "lineas": [
+            20
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/03b_convertir_datasets_a_mmap.py",
+      "destinos": [
+        "src.datos.convertir_datasets_a_mmap"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/datos/test_cli_datos.py",
+          "lineas": [
+            18,
+            109,
+            127
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/03c_generar_dataset_cordoba_f16.py",
+      "destinos": [
+        "src.datos.generar_dataset_cordoba_f16"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/datos/test_generadores_arrays.py",
+          "lineas": [
+            149
+          ]
+        },
+        {
+          "archivo": "test/infraestructura/test_rutas_checkout.py",
+          "lineas": [
+            15
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [
+        {
+          "archivo": "docs/historico/migraciones/reorganizacion_20261010.json",
+          "lineas": [
+            216,
+            217,
+            667,
+            668
+          ]
+        }
+      ],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/03d_generar_dataset_cordoba_2017_f16.py",
+      "destinos": [
+        "src.datos.generar_dataset_cordoba_2017_f16"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/datos/test_generadores_arrays.py",
+          "lineas": [
+            149
+          ]
+        },
+        {
+          "archivo": "test/infraestructura/test_rutas_checkout.py",
+          "lineas": [
+            15
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/0_verificar_pipeline.py",
+      "destinos": [
+        "src.historico.verificar_pipeline"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/entrenamiento/test_verificador_finetune.py",
+          "lineas": [
+            22,
+            39
+          ]
+        },
+        {
+          "archivo": "test/infraestructura/test_rutas_checkout.py",
+          "lineas": [
+            15
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/0b_calcular_pesos.py",
+      "destinos": [
+        "src.entrenamiento.calcular_pesos"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/datos/test_cli_datos.py",
+          "lineas": [
+            18,
+            108,
+            119
+          ]
+        }
+      ],
+      "documentacion": [
+        {
+          "archivo": "src/entrenamiento/README.md",
+          "lineas": [
+            7
+          ]
+        }
+      ],
+      "historico": [],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/10_metricas_test.py",
+      "destinos": [
+        "src.historico.metricas_test"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/evaluacion/test_cli_historicas.py",
+          "lineas": [
+            22
+          ]
+        },
+        {
+          "archivo": "test/evaluacion/test_comparaciones_trasladadas.py",
+          "lineas": [
+            44
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/11_evaluar_contra_mnc.py",
+      "destinos": [
+        "src.historico.evaluar_contra_mnc"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/evaluacion/test_mnc_1718_trasladados.py",
+          "lineas": [
+            30,
+            48
+          ]
+        },
+        {
+          "archivo": "test/infraestructura/test_rutas_checkout.py",
+          "lineas": [
+            15
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/12_comparar_con_1718.py",
+      "destinos": [
+        "src.historico.comparar_con_1718"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/evaluacion/test_mnc_1718_trasladados.py",
+          "lineas": [
+            30,
+            48,
+            81
+          ]
+        },
+        {
+          "archivo": "test/infraestructura/test_rutas_checkout.py",
+          "lineas": [
+            15
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/1_train_cordoba.py",
+      "destinos": [
+        "src.entrenamiento.entrenar_cordoba"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/entrenamiento/test_cli_imports.py",
+          "lineas": [
+            22
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [
+        {
+          "archivo": "docs/historico/experimentos_20261006_10.md",
+          "lineas": [
+            135,
+            549
+          ]
+        },
+        {
+          "archivo": "docs/historico/geografia_20261009.md",
+          "lineas": [
+            209
+          ]
+        }
+      ],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/1b_finetune_manfredi.py",
+      "destinos": [
+        "src.entrenamiento.finetune_manfredi"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/entrenamiento/test_verificador_finetune.py",
+          "lineas": [
+            22,
+            39
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/2_inferencia.py",
+      "destinos": [
+        "src.inferencia.inferir_tile"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/inferencia/test_inferir_tile.py",
+          "lineas": [
+            108,
+            117,
+            134
+          ]
+        }
+      ],
+      "documentacion": [
+        {
+          "archivo": "docs/guias/multicampana.md",
+          "lineas": [
+            293
+          ]
+        },
+        {
+          "archivo": "src/inferencia/README.md",
+          "lineas": [
+            17
+          ]
+        }
+      ],
+      "historico": [],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/4_generar_metricas.py",
+      "destinos": [
+        "src.figuras.curvas_entrenamiento"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/evaluacion/test_cli_historicas.py",
+          "lineas": [
+            22
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/5_generar_matriz_confusion.py",
+      "destinos": [
+        "src.evaluacion.matriz_confusion_parches"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/evaluacion/test_cli_historicas.py",
+          "lineas": [
+            22
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/6_generar_comparacion_visual.py",
+      "destinos": [
+        "src.figuras.comparacion_parches"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/evaluacion/test_cli_historicas.py",
+          "lineas": [
+            22
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/7_visualizar_inferencia.py",
+      "destinos": [
+        "src.figuras.visualizar_inferencia"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/evaluacion/test_cli_historicas.py",
+          "lineas": [
+            22
+          ]
+        },
+        {
+          "archivo": "test/infraestructura/test_organizacion.py",
+          "lineas": [
+            61
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/8_comparar_modelos.py",
+      "destinos": [
+        "src.historico.comparar_modelos"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/evaluacion/test_cli_historicas.py",
+          "lineas": [
+            22
+          ]
+        },
+        {
+          "archivo": "test/evaluacion/test_comparaciones_trasladadas.py",
+          "lineas": [
+            42
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/9_comparar_inferencia_etiqueta.py",
+      "destinos": [
+        "src.historico.comparar_inferencia_etiqueta"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/evaluacion/test_cli_historicas.py",
+          "lineas": [
+            22
+          ]
+        },
+        {
+          "archivo": "test/evaluacion/test_comparaciones_trasladadas.py",
+          "lineas": [
+            43
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/descargar_2020_2021_scl.sh",
+      "destinos": [
+        "../scripts/preparacion/descargar_2020_2021_scl.sh"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/infraestructura/test_shells_preparacion.py",
+          "lineas": [
+            12,
+            125,
+            131,
+            133
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": []
+    },
+    {
+      "archivo": "src/descargar_extension_este.sh",
+      "destinos": [
+        "../scripts/preparacion/descargar_extension_este.sh"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/infraestructura/test_shells_preparacion.py",
+          "lineas": [
+            12,
+            74,
+            77,
+            112,
+            147,
+            155
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [
+        {
+          "archivo": "docs/historico/experimentos_20261006_10.md",
+          "lineas": [
+            403,
+            408
+          ]
+        }
+      ],
+      "pruebas_genericas": []
+    },
+    {
+      "archivo": "src/entrenar_multicampana_unet.sh",
+      "destinos": [
+        "../scripts/entrenamiento/entrenar_multicampana_unet.sh"
+      ],
+      "codigo": [],
+      "pruebas": [],
+      "documentacion": [],
+      "historico": [
+        {
+          "archivo": "docs/historico/experimentos_20261006_10.md",
+          "lineas": [
+            226
+          ]
+        }
+      ],
+      "pruebas_genericas": []
+    },
+    {
+      "archivo": "src/evaluar_ano_no_visto.py",
+      "destinos": [
+        "src.historico.evaluar_ano_no_visto"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/evaluacion/test_postprocesado_separado.py",
+          "lineas": [
+            140,
+            148,
+            170
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [
+        {
+          "archivo": "docs/historico/geografia_20261009.md",
+          "lineas": [
+            209
+          ]
+        }
+      ],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/evaluar_dicmay.sh",
+      "destinos": [],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/infraestructura/test_shells_historicos.py",
+          "lineas": [
+            13,
+            215,
+            218,
+            221,
+            222
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": []
+    },
+    {
+      "archivo": "src/evaluar_test_actual.py",
+      "destinos": [
+        "src.evaluacion.test_actual"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/datos/test_campanas.py",
+          "lineas": [
+            78
+          ]
+        },
+        {
+          "archivo": "test/evaluacion/test_cli_test_actual.py",
+          "lineas": [
+            21,
+            35
+          ]
+        }
+      ],
+      "documentacion": [
+        {
+          "archivo": "src/evaluacion/README.md",
+          "lineas": [
+            36
+          ]
+        }
+      ],
+      "historico": [],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/inferencia_multicampana.sh",
+      "destinos": [
+        "../scripts/evaluacion/inferencia_multicampana.sh"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/infraestructura/test_shell_evaluacion.py",
+          "lineas": [
+            18,
+            19,
+            21,
+            24
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [
+        {
+          "archivo": "docs/historico/experimentos_20261006_10.md",
+          "lineas": [
+            317,
+            557
+          ]
+        }
+      ],
+      "pruebas_genericas": []
+    },
+    {
+      "archivo": "src/mejorar_calidad_extension.py",
+      "destinos": [
+        "src.mantenimiento.mejorar_calidad_extension"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/datos/test_mejorar_calidad.py",
+          "lineas": [
+            49,
+            129
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/optimizar_lectura_multicampana.py",
+      "destinos": [
+        "src.mantenimiento.optimizar_lectura_multicampana"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/entrenamiento/test_optimizar_lectura.py",
+          "lineas": [
+            18,
+            33
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/optimizar_lectura_multicampana.sh",
+      "destinos": [
+        "../scripts/mantenimiento/optimizar_lectura_multicampana.sh"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/entrenamiento/test_optimizar_lectura.py",
+          "lineas": [
+            18,
+            83
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": []
+    },
+    {
+      "archivo": "src/pipeline_dicmay.sh",
+      "destinos": [],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/infraestructura/test_shells_historicos.py",
+          "lineas": [
+            13,
+            158,
+            208
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [
+        {
+          "archivo": "docs/historico/pipelines_anteriores.md",
+          "lineas": [
+            271
+          ]
+        }
+      ],
+      "pruebas_genericas": []
+    },
+    {
+      "archivo": "src/pipeline_dicmay_1718.sh",
+      "destinos": [],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/infraestructura/test_shells_historicos.py",
+          "lineas": [
+            13,
+            209,
+            210
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": []
+    },
+    {
+      "archivo": "src/postprocesar_multicampana.py",
+      "destinos": [
+        "src.evaluacion.postprocesar_multicampana",
+        "src.historico.postprocesar_multicampana"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/evaluacion/test_componentes.py",
+          "lineas": [
+            26
+          ]
+        },
+        {
+          "archivo": "test/evaluacion/test_postprocesado_separado.py",
+          "lineas": [
+            135,
+            148,
+            170
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [
+        {
+          "archivo": "docs/historico/experimentos_20261006_10.md",
+          "lineas": [
+            557
+          ]
+        },
+        {
+          "archivo": "docs/historico/geografia_20261009.md",
+          "lineas": [
+            209
+          ]
+        }
+      ],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/preparar_ano_no_visto.sh",
+      "destinos": [],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/infraestructura/test_shells_historicos.py",
+          "lineas": [
+            13,
+            125,
+            189,
+            227,
+            233,
+            239
+          ]
+        }
+      ],
+      "documentacion": [
+        {
+          "archivo": "docs/guias/multicampana.md",
+          "lineas": [
+            312
+          ]
+        }
+      ],
+      "historico": [],
+      "pruebas_genericas": []
+    },
+    {
+      "archivo": "src/preparar_evaluar_extension.py",
+      "destinos": [
+        "src.datos.preparar_extension",
+        "src.evaluacion.evaluar_extension"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/evaluacion/test_componentes.py",
+          "lineas": [
+            27
+          ]
+        },
+        {
+          "archivo": "test/evaluacion/test_extension_separada.py",
+          "lineas": [
+            38,
+            57,
+            64
+          ]
+        }
+      ],
+      "documentacion": [
+        {
+          "archivo": "docs/guias/multicampana.md",
+          "lineas": [
+            286
+          ]
+        },
+        {
+          "archivo": "docs/guias/test_actual.md",
+          "lineas": [
+            32
+          ]
+        }
+      ],
+      "historico": [
+        {
+          "archivo": "docs/historico/experimentos_20261006_10.md",
+          "lineas": [
+            515
+          ]
+        }
+      ],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/preparar_extension_este.sh",
+      "destinos": [
+        "../scripts/preparacion/preparar_extension_este.sh"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/infraestructura/test_shells_preparacion.py",
+          "lineas": [
+            12,
+            74,
+            118,
+            155,
+            166
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [
+        {
+          "archivo": "docs/historico/experimentos_20261006_10.md",
+          "lineas": [
+            515
+          ]
+        }
+      ],
+      "pruebas_genericas": []
+    },
+    {
+      "archivo": "src/preparar_multicampana.py",
+      "destinos": [
+        "src.datos.preparar_multicampana"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/datos/test_preparar_multicampana.py",
+          "lineas": [
+            160,
+            174
+          ]
+        }
+      ],
+      "documentacion": [
+        {
+          "archivo": "docs/guias/multicampana.md",
+          "lineas": [
+            252
+          ]
+        }
+      ],
+      "historico": [
+        {
+          "archivo": "docs/historico/experimentos_20261006_10.md",
+          "lineas": [
+            108
+          ]
+        }
+      ],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/preparar_multicampana.sh",
+      "destinos": [
+        "../scripts/preparacion/preparar_multicampana.sh"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/datos/test_preparar_multicampana.py",
+          "lineas": [
+            160,
+            184,
+            200
+          ]
+        }
+      ],
+      "documentacion": [
+        {
+          "archivo": "docs/guias/multicampana.md",
+          "lineas": [
+            252
+          ]
+        }
+      ],
+      "historico": [
+        {
+          "archivo": "docs/historico/experimentos_20261006_10.md",
+          "lineas": [
+            115
+          ]
+        }
+      ],
+      "pruebas_genericas": []
+    },
+    {
+      "archivo": "src/recuperar_extension_este.sh",
+      "destinos": [
+        "../scripts/mantenimiento/recuperar_extension_este.sh"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/datos/test_mejorar_calidad.py",
+          "lineas": [
+            134
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": []
+    },
+    {
+      "archivo": "src/recuperar_multicampana.py",
+      "destinos": [
+        "src.mantenimiento.recuperar_multicampana",
+        "src.soporte.cli_fija"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/datos/test_recuperar_multicampana.py",
+          "lineas": [
+            23
+          ]
+        },
+        {
+          "archivo": "test/infraestructura/test_cli_fija.py",
+          "lineas": [
+            16
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [
+        {
+          "archivo": "docs/historico/experimentos_20261006_10.md",
+          "lineas": [
+            191
+          ]
+        }
+      ],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/regenerar_figuras_test_actual.py",
+      "destinos": [
+        "src.figuras.regenerar_test_actual"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/entrenamiento/test_cli_imports.py",
+          "lineas": [
+            22
+          ]
+        },
+        {
+          "archivo": "test/evaluacion/test_cli_test_actual.py",
+          "lineas": [
+            21,
+            35
+          ]
+        }
+      ],
+      "documentacion": [
+        {
+          "archivo": "src/figuras/README.md",
+          "lineas": [
+            42
+          ]
+        }
+      ],
+      "historico": [],
+      "pruebas_genericas": [
+        "test/infraestructura/test_estructura_src.py"
+      ]
+    },
+    {
+      "archivo": "src/rehacer_2018_2019_scl.sh",
+      "destinos": [
+        "../scripts/preparacion/rehacer_2018_2019_scl.sh"
+      ],
+      "codigo": [],
+      "pruebas": [
+        {
+          "archivo": "test/infraestructura/test_shells_preparacion.py",
+          "lineas": [
+            12,
+            138
+          ]
+        }
+      ],
+      "documentacion": [],
+      "historico": [],
+      "pruebas_genericas": []
+    }
+  ],
+  "consumidores_runtime": [],
+  "crontab_estado": "sin_crontab",
+  "systemd_usuario_directorio": false,
+  "limites": "Checkout versionado, procesos del usuario, crontab y unidades de usuario. No certifica comandos externos, otros usuarios ni imports dinámicos no expresados como literales."
+}

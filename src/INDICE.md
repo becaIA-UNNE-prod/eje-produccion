@@ -32,6 +32,23 @@ se ejecutan por `python -m src.DOMINIO.MODULO` desde la raíz; los wrappers
 Python resuelven raíz por __file__ y los shell por su ubicación. No insertar
 src globalmente en sys.path: puede colisionar con paquetes de las pruebas.
 
+## Por qué se conservan scripts sueltos
+
+Las carpetas contienen la implementación. Los 36 scripts Python y 13 shells
+de la raíz son entradas de compatibilidad con nombres anteriores, incluidos
+los numerados; no son otra copia de los algoritmos ni una secuencia vigente.
+Para trabajo nuevo usar python -m src.DOMINIO.MODULO o scripts/RESPONSABILIDAD/.
+Una entrada antigua puede delegar al flujo vigente o a un protocolo histórico;
+ver las tablas siguientes. También quedan variantes históricas en datos/,
+evaluacion/ y figuras/: pertenecer a una carpeta no acredita un protocolo vigente.
+
+Las pruebas de compatibilidad usan las entradas antiguas y deben migrarse si
+se decide retirarlas. Dos wrappers tienen contratos adicionales: postprocesar
+mantiene API histórica y CLI vigente; preparar_evaluar_extension reúne dos modos.
+El [inventario de consumidores](../docs/historico/wrappers_src_20261011.md)
+registra evidencia, límites y un orden propuesto de retiro. Esa revisión no
+retiró entradas; sus nombres siguen disponibles.
+
 ## Entradas del flujo vigente
 
 Con el entorno `~/s4a-venv/bin/python`, desde la raíz:
@@ -148,20 +165,23 @@ no ejecutar esos shells como diagnóstico ni para validar la organización.
 config/almacenamiento.json y utils/rutas.py centralizan almacenamiento y aliases.
 config/split_extension_este.json define TEST vigente; utils.multicampana.SPLIT
 conserva el conjunto anterior de preparación/protocolos históricos.
-config/campanas.json y datos/campanas.py centralizan dic–may, bandas y rutas
-para preparación multicampaña, extensión y evaluador vigente. Su consumo es
-parcial: variantes históricas, preparación específica y shells conservan
-configuraciones explícitas. Cambiar ese catálogo no parametriza todo el proyecto.
+config/campanas.json y datos/campanas.py centralizan dic–may, bandas,
+normalización, rutas y el alcance original de extensión, incluidas las campañas
+que aportan referencias de exclusión. TEST vigente sigue leyendo su split propio.
+El inventario de consumidores y diferencias está en datos/README.md.
+Su consumo es parcial: variantes históricas y shells conservan configuraciones
+explícitas. Cambiar ese catálogo no parametriza todo el proyecto.
 En2019/2020, composites_multicampana y composites_extension difieren a propósito.
 
 Los módulos revisados no ejecutan comandos, leen datasets/rasters/pesos, escriben
 salidas, fijan semillas ni consultan GPU al importar. Pueden cargar configuración
 JSON pequeña, crear tablas en memoria y seleccionar backendAgg para figuras.
-Recuperar multicampaña no admite --help: cualquier argumento ejecuta mantenimiento.
-No usar ese comando en auditorías CLI. Moldear máscaras, composites JP2 originales
-y generador03 conservan main() con
-configuración fija: no invocar --help en esas entradas suponiendo que tienen parser.
-Los comandos con parser admiten ayuda; postprocesar tiene dispatcher propio.
+Recuperar multicampaña, moldear máscaras, composites JP2 originales y
+generador03 admiten -h/--help y rechazan otros argumentos antes de cargar
+dependencias operativas o modificar datos/estado. Sin argumentos conservan
+la ejecución con configuración fija. La validación temprana está en
+soporte/cli_fija.py y se aplica también a los wrappers compatibles.
+Los demás comandos con parser admiten ayuda; postprocesar tiene dispatcher propio.
 Las APIs puras no necesitan CLI.
 
 La reorganización permite localizar y reutilizar responsabilidades. No demuestra
