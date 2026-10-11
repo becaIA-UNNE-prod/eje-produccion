@@ -12,3 +12,6 @@ TEST vigente: **20HNJ y 20HNH**, diciembre–mayo, 24 canales.
 
 Código en `src/` y `utils/`; pruebas en `test/`. Los datos y resultados físicos
 viven en `/mnt/yacy_*`, según [almacenamiento](config/almacenamiento.json).
+
+Ejecutar desde la raíz con `~/s4a-venv/bin/python` en floryacy (Python 3.11).
+El entorno operativo se administra fuera del repo; ver [CONTRIBUTING](CONTRIBUTING.md).

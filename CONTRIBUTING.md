@@ -91,10 +91,15 @@ pruebas ligeras pueden usar un directorio temporal explícito fuera del repo.
 ## Cómo ejecutar sin ensuciar la raíz
 
 Trabajar desde la raíz del repositorio. El entorno operativo en floryacy es
-**`~/s4a-venv/bin/python`**. El `.venv` histórico fue eliminado el 10/10/2026
-por solicitud del usuario. `pyproject.toml` no describe ese entorno
-de entrenamiento; no instalar ni cambiar dependencias como efecto lateral de
-una reorganización de archivos.
+**`~/s4a-venv/bin/python`** (Python 3.11). Usar ese intérprete explícitamente
+para comandos y pruebas; el proyecto se ejecuta desde su raíz, sin instalarlo
+como paquete. El entorno se administra fuera del repositorio: no instalar,
+actualizar ni cambiar dependencias como efecto lateral del mantenimiento.
+
+El flujo uv fue retirado del proyecto, incluidos `pyproject.toml`, `uv.lock`
+y `.python-version`; no usarlos para recrear o sincronizar un entorno local.
+El `.venv` histórico fue eliminado el 10/10/2026. No recrearlo ni introducir
+otro gestor de dependencias como reemplazo.
 
 El lanzador crea un directorio con fecha UTC y PID, captura stdout/stderr,
 registra el comando, HEAD, estado Git y la firma del split, y guarda `exitcode`:
