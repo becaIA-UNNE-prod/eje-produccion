@@ -47,7 +47,7 @@ from rasterio.windows import Window
 from utils.leyendas_mnc import REMAP_2021, verificar_codigos
 
 DIR_COMPOSITES = Path("/mnt/yacy_1/prod/ferreyra/cordoba_dataset_filtrado/composites_2019_2020")
-DIR_MASCARAS   = Path("/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas")
+DIR_MASCARAS   = Path(__file__).resolve().parents[2] / "mascaras_procesadas"
 DIR_SALIDA     = Path("/mnt/yacy_1/prod/ferreyra/dataset/train_cordoba_f16")
 
 MESES_FIJOS = ["201910", "201911", "201912", "202001", "202002", "202003", "202004"]

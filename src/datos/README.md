@@ -135,3 +135,12 @@ acceder a datos, tanto por -m como por sus wrappers numerados.
 Sin argumentos conservan su ejecución original y pueden escribir salidas;
 revisar la configuración antes de ejecutarlos. main() y las funciones importadas
 mantienen su API. No se agregan opciones para cambiar parámetros científicos.
+
+## Ubicación del checkout y alias de máscaras
+
+Los defaults de generadores Córdoba f16 (2020 y 2017), máscaras MNC1819 y
+Nivel3, y consumidores históricos MNC/1718/verificación resuelven
+mascaras_procesadas desde __file__, sin fijar /home1 ni depender del cwd.
+En floryacy conservan el alias acreditado al almacenamiento físico de máscaras.
+Las rutas operativas /mnt, parámetros científicos y procedencia no se modifican;
+las opciones explícitas de ruta existentes conservan precedencia.

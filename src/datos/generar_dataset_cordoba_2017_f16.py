@@ -61,7 +61,7 @@ import rasterio
 from rasterio.windows import Window
 
 DIR_COMPOSITES = Path("/mnt/yacy_1/prod/ferreyra/cordoba_dataset_filtrado/composites_filtrado")
-DIR_MASCARAS   = Path("/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas")
+DIR_MASCARAS   = Path(__file__).resolve().parents[2] / "mascaras_procesadas"
 DIR_SALIDA     = Path("/mnt/yacy_1/prod/ferreyra/dataset/train_cordoba_f16")
 
 # Ventana calendario equivalente a MESES_FIJOS de 03c (oct 2019 - abr 2020),

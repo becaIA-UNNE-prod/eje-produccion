@@ -27,7 +27,7 @@ import numpy as np
 import rasterio
 from src.figuras.evaluacion_mnc import graficar as graficar_mnc
 
-DIR_MASCARAS = Path("/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas")
+DIR_MASCARAS = Path(__file__).resolve().parents[2] / "mascaras_procesadas"
 NOMBRES = ["Fondo", "Maiz", "Soja", "Mani"]   # clases 1..4
 
 # Mismos remapeos que 03c_generar_dataset_cordoba_f16.py (2020) y

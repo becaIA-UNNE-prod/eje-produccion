@@ -34,7 +34,7 @@ from matplotlib.patches import Patch
 from src.figuras.comparacion_1718 import con_estilo, leer_reducido as leer_mapa_reducido, a_rgb as mapa_a_rgb
 
 Y3 = Path("/mnt/yacy_3/prod_bis/ferreyra")
-DIR_MASCARAS = Path("/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas")
+DIR_MASCARAS = Path(__file__).resolve().parents[2] / "mascaras_procesadas"
 MODELOS = ["unet", "fcrtransunet"]
 TITULOS = {"2018_2019": ("Interanual: 2018-19 vs MNC 2018/2019", ["train", "val", "test", "todos"]),
            "2019_2020_dicmay": ("Mismo anio: 2019-20 vs MNC 2020", ["val", "test", "todos"])}

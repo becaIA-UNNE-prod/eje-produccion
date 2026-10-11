@@ -16,7 +16,7 @@ from pathlib import Path
 # ── Configuracion ─────────────────────────────────────────────────────────────
 DIR_S2 = Path("/mnt/yacy_1/prod/ferreyra/sentinel2_cordoba_2019_2020")
 DIR_COMPOSITES = Path("/mnt/yacy_1/prod/ferreyra/cordoba_dataset_filtrado/composites_2019_2020")
-DIR_MASCARAS = Path("/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas")
+DIR_MASCARAS = Path(__file__).resolve().parents[2] / "mascaras_procesadas"
 DIR_DATASETS = Path("/mnt/yacy_1/prod/ferreyra/dataset/train_cordoba_mnc")
 
 BANDAS = ["B02", "B03", "B04", "B08"]

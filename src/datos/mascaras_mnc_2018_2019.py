@@ -28,7 +28,7 @@ from rasterio.warp import reproject, Resampling
 
 RUTA_MNC = Path("/mnt/yacy_1/prod/ferreyra/MNC_INTA/2018_2019/mnc_2018-2019_V1R1.tif")
 DIR_REF = Path("/mnt/yacy_3/prod_bis/ferreyra/sentinel2_cordoba_2018_2019")
-DIR_SALIDA = Path("/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas")
+DIR_SALIDA = Path(__file__).resolve().parents[2] / "mascaras_procesadas"
 NODATA = 16
 
 # IDN1 2018/2019 -> 0=NoData, 1=Fondo, 2=Maiz, 3=Soja, 4=Mani. Los dobles

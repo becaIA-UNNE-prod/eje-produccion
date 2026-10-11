@@ -12,6 +12,7 @@ lanzamientos antiguos ni asumir que sus rutas o splits siguen vigentes.
 | [Mantenimiento, 10/10/2026](mantenimiento_20261010.md) | Movimientos, eliminaciones y criterios de retención |
 | [Reorganización de src, 11/10/2026](reorganizacion_src_20261011.md) | Estructura final, contratos preservados y validación de cierre |
 | [Retiro de uv, 11/10/2026](retiro_uv_20261011.md) | Retiro de metadatos y pin obsoletos; entorno operativo externo |
+| [Rutas del checkout, 11/10/2026](rutas_checkout_20261011.md) | Defaults portables de máscaras, sin traslado de datos |
 | `migraciones/` | Manifiestos JSON originales de movimientos y eliminación |
 
 Las métricas de TEST 20HLK/20HLJ son históricas. Las referencias a corridas

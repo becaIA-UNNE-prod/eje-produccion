@@ -25,7 +25,7 @@ from rasterio.warp import reproject, Resampling
 
 RAIZ = Path(__file__).resolve().parents[2]
 RUTA_NIVEL3 = RAIZ / "data/referencias/Nivel3_28_dic_2018_30m_completo.tif"
-DIR_SALIDA = Path("/home1/ferreyra/cordoba_ia_unne/mascaras_procesadas")
+DIR_SALIDA = Path(__file__).resolve().parents[2] / "mascaras_procesadas"
 NODATA = 0
 
 # Mismo remapeo que el que usa 03c para entrenar (no duplicar la tabla).
