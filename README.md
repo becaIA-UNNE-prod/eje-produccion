@@ -4,6 +4,8 @@ Repositorio principal: `floryacy:~/cordoba_ia_unne`. Esta copia es un mirror.
 TEST vigente: **20HNJ y 20HNH**, diciembre–mayo, 24 canales.
 
 - [CONTRIBUTING](CONTRIBUTING.md): reglas para agentes, ejecución y almacenamiento.
+- [Mapa del código](src/INDICE.md): dominios, entradas actuales y compatibilidad.
+- [Arquitecturas](model/README.md): modelos y bloques compartidos.
 - [Documentación](docs/README.md): guías actuales, etiquetas y archivo histórico.
 - [Configuración del split](config/split_extension_este.json).
 - [Resultados y ubicaciones](artifacts/README.md).

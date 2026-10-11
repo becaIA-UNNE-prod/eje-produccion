@@ -26,3 +26,9 @@ La mayoría de las pruebas usa fixtures pequeños y CPU. El preflight de
 La suite completa se valida en floryacy; no es totalmente independiente del servidor.
 Las pruebas de compatibilidad histórica cubren código aún disponible y no definen
 el split vigente, que se toma de `config/split_extension_este.json`.
+
+Las pruebas de infraestructura incluyen compatibilidad de shells en réplicas
+/tmp y auditoría de imports de los dominios revisados. Las esperas/descargas/
+modelos/procesos se simulan; los locks probados son archivos temporales.
+Los wrappers se importan con src.<nombre>, sin agregar src globalmente a
+sys.path. El catálogo de entradas y excepciones CLI está en src/INDICE.md.

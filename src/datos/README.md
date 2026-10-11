@@ -115,3 +115,13 @@ Importar no abre rasters ni ejecuta auditorías, y no carga Torch ni figuras.
 La evaluación específica está en src.evaluacion.evaluar_extension; el shell
 preparar_extension_este conserva el orden y su lock GPU. La entrada mixta
 anterior reexporta las funciones y mantiene --modo preparar/evaluar.
+
+## Catálogo y límites de configuración
+
+config/campanas.json y campanas.py describen dic–may, bandas y rutas acreditadas.
+Los consumen preparar_multicampana, preparar_extension, evaluar_extension y
+evaluacion/test_actual. Distinguen composites de TRAIN/VAL y extensión2019/2020.
+No sustituyen configuraciones fijas de métodos JP2, defaults oct–abr, variantes
+Nivel3 ni shells específicos; cambiar el catálogo no parametriza todo el proyecto.
+Leyendas comunes están en leyendas.py; los contratos específicos mantienen sus
+tipos/remapeos y políticas de exclusión. Ver src/INDICE.md para dependencias.

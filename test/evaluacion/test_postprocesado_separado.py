@@ -132,8 +132,7 @@ class PostprocesadoSeparadoTest(unittest.TestCase):
             history.assert_called_once()
 
     def test_exports_compatibles_y_leyenda_temporal_compartida(self):
-        sys.path.insert(0,str(ROOT/'src'))
-        wrapper=importlib.import_module('postprocesar_multicampana')
+        wrapper=importlib.import_module('src.postprocesar_multicampana')
         for name in ['main','inferir_tile','normalizar','evaluar','metricas_confusion','LEGENDS','SPLIT','guardar','sha256','SimpleUNet','FCRTransUNet','figura_tile','resumen']:
             self.assertIs(getattr(wrapper,name),getattr(post,name))
         self.assertIs(temporal.post,post)

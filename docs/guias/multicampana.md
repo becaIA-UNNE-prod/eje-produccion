@@ -310,3 +310,12 @@ está en src.historico.postprocesar_multicampana. No confundir sus mapas complet
 El protocolo temporal anterior 2021/2022 está en src.historico.evaluar_ano_no_visto;
 su shell está en scripts/historico/preparar_ano_no_visto.sh y llama al módulo por -m;
 la entrada anterior src/preparar_ano_no_visto.sh delega y conserva argumentos.
+
+## Ubicaciones del código y compatibilidad
+
+El [mapa del código](../../src/INDICE.md) enumera implementaciones actuales,
+wrappers y contratos. Entradas Python por -m desde la raíz; shells en scripts
+por responsabilidad. La raíz de src conserva compatibilidad. Los cuatro shells
+de experimentos anteriores están en scripts/historico y no forman parte de
+una secuencia obligatoria del TEST vigente. Configurar meses/rutas por campaña
+no implica cambiar automáticamente los defaults de otros protocolos.

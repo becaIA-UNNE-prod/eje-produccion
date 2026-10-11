@@ -15,7 +15,8 @@ Las funciones no eligen split, modelos ni checkpoints, y no generan figuras.
 No convertir una máscara ya remapeada como si fueran códigos crudos MNC.
 
 Se conservan imports anteriores desde utils.multicampana y los scripts.
-Los protocolos y las figuras siguen en sus comandos hasta el siguiente paso.
+Los protocolos están en src.evaluacion y src.historico; las figuras reutilizables
+están en src.figuras. Consultar src/INDICE.md para las entradas y diferencias.
 
 ## Matriz de confusión de parches NPZ
 

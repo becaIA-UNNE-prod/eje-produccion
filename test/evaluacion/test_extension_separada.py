@@ -35,8 +35,7 @@ assert 'src.evaluacion.evaluar_extension' not in sys.modules
         subprocess.run([sys.executable, '-B', '-c', code], cwd=ROOT, check=True)
 
     def test_wrapper_exports_y_despacho_ambos_modos(self):
-        sys.path.insert(0, str(ROOT/'src'))
-        wrapper = importlib.import_module('preparar_evaluar_extension')
+        wrapper = importlib.import_module('src.preparar_evaluar_extension')
         for name in ['shapes', 'write', 'prepare', 'legend', 'check_codes', 'files']:
             self.assertIs(getattr(wrapper, name), getattr(prep, name))
         for name in ['figure', 'evaluate', 'confusion', 'inferir_tile', 'sha256']:

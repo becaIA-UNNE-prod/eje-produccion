@@ -23,9 +23,8 @@ class ComponentesTest(unittest.TestCase):
         subprocess.run([sys.executable, '-B', '-c', code], cwd=ROOT, check=True)
 
     def test_imports_anteriores_son_las_mismas_funciones(self):
-        sys.path.insert(0, str(ROOT / 'src'))
-        post = importlib.import_module('postprocesar_multicampana')
-        ext = importlib.import_module('preparar_evaluar_extension')
+        post = importlib.import_module('src.postprocesar_multicampana')
+        ext = importlib.import_module('src.preparar_evaluar_extension')
         from utils.multicampana import metricas_confusion as anterior
         from src.evaluacion.metricas import confusion_mnc, confusion_remapeada
         from src.inferencia.raster import inferir_tile, normalizar

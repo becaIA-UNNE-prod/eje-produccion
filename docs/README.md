@@ -5,6 +5,7 @@ El código y `config/split_extension_este.json` definen el comportamiento vigent
 
 | Necesidad | Documento |
 |---|---|
+| Localizar código, entradas y contratos | [Mapa del código](../src/INDICE.md) |
 | Pasos para correr el flujo, preparar/verificar datos y entrenar | [Multicampaña](guias/multicampana.md) |
 | Preparar y evaluar TEST 20HNJ/20HNH | [TEST vigente](guias/test_actual.md) |
 | Interpretar códigos de las etiquetas | [Leyenda MNC](referencias/leyenda_mnc.md) |
