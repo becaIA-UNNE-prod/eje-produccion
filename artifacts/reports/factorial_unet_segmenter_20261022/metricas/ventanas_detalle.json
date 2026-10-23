@@ -1,0 +1,26 @@
+[
+  {
+    "campana": "2021_2022",
+    "tile": "20HNJ",
+    "window": [
+      0,
+      0,
+      1024,
+      1024
+    ],
+    "regla": "Bloque con más maní de referencia; sin consultar modelos",
+    "max_mani_px_bloque": 0
+  },
+  {
+    "campana": "2021_2022",
+    "tile": "20HNH",
+    "window": [
+      2176,
+      7040,
+      1024,
+      1024
+    ],
+    "regla": "Bloque con más maní de referencia; sin consultar modelos",
+    "max_mani_px_bloque": 20930
+  }
+]

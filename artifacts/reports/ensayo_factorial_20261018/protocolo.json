@@ -1,0 +1,371 @@
+{
+  "version": 1,
+  "fecha_utc": "2026-10-18T22:52:02.430427+00:00",
+  "objetivo": "Diversidad espacial x temporal a cantidad y ubicaciones fijas dentro de cada nivel espacial",
+  "campanas": [
+    [
+      "2018_2019",
+      "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_1819_scl_f16"
+    ],
+    [
+      "2019_2020",
+      "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_f16"
+    ],
+    [
+      "2020_2021",
+      "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_2021_f16"
+    ]
+  ],
+  "split": {
+    "train": [
+      "19HGC",
+      "20HLG",
+      "20HLH",
+      "20HMJ",
+      "20HMK",
+      "20HNK",
+      "20JML",
+      "20HKH",
+      "20HMG",
+      "20HNG",
+      "20HPG",
+      "20HPH",
+      "20JNL"
+    ],
+    "val": [
+      "20HKJ",
+      "20HMH"
+    ]
+  },
+  "test": [
+    "20HNJ",
+    "20HNH"
+  ],
+  "split_sha256": "80aaf8acb58d0d31a745e46e893c59c25224ea037fc155b52d44a66fdd142441",
+  "semillas": [
+    42,
+    43,
+    44
+  ],
+  "n": 3072,
+  "epochs": 100,
+  "batch_size": 32,
+  "actualizaciones_por_modelo": 9600,
+  "esquema": "mani_soja",
+  "pesos_comunes_train": [
+    0.0,
+    0.883,
+    1.22,
+    0.978
+  ],
+  "conteos_train_original": [
+    83943801,
+    1834613864,
+    960391395,
+    1465883634,
+    28450122
+  ],
+  "reducida_tiles": [
+    "20HLG",
+    "20HLH",
+    "20HMG"
+  ],
+  "amplia_tiles": [
+    "19HGC",
+    "20HLG",
+    "20HLH",
+    "20HMJ",
+    "20HMK",
+    "20HNK",
+    "20JML",
+    "20HKH",
+    "20HMG",
+    "20HNG",
+    "20HPG",
+    "20HPH",
+    "20JNL"
+  ],
+  "pools": {
+    "reducida": 4739,
+    "amplia": 18086
+  },
+  "seleccion": "Mismas N ubicaciones para los cuatro tratamientos temporales por superficie y semilla; tres reparte N/3 por campana sin repetir ubicaciones",
+  "limites": [
+    "Superficie significa extension y distribucion del dominio, no km2 observados: N parches tienen igual area total.",
+    "En tres campanas cada lugar se observa en un solo ano, no en los tres.",
+    "Campana individual repetida para cada ano; no confundir tres anos individuales con tres replicas aleatorias.",
+    "2019/2020 tiene procesamiento de composites diferente; diversidad temporal no separa ano y procesamiento.",
+    "Un dominio reducido sur frente a todo TRAIN no demuestra un efecto universal de superficie.",
+    "INTA es referencia cartografica, no validacion independiente a campo."
+  ],
+  "evaluacion": "VAL completo de tres campanas elige menor perdida; 100 epocas sin early stopping; TEST congelado independiente principal, completa secundaria; 2021/2022 no vista",
+  "codigo_sha256": {
+    "src/01b_mascaras_mnc_2018_2019.py": "c98fd213301518132ecb6f6f8d3ec7b397e25bd015300a63649b0b8e26e1f217",
+    "src/mejorar_calidad_extension.py": "6e6a96f2a895fb44cb1d546ab6d83a8fd45e14f52fa38215defe986b285412a1",
+    "src/6_generar_comparacion_visual.py": "96adc8ebd724e0ffdb93defdd2b4b9e63d9c5265933a21b7120ce22eddc9820e",
+    "src/03c_generar_dataset_cordoba_f16.py": "189178d34f39bed25334c7ff98638b5d22e6bf1fd0fb71e8a40165132fdccb0a",
+    "src/evaluar_ano_no_visto.py": "3978f3a3ffeb26c809b328f2aacb54a2ebb49dcf4e821f3540a333041c5d5c6c",
+    "src/02b_composites_2019_2020.py": "5da735af6aa627e6b30052eacf004cce62bb467284ad114b3407abff910ec977",
+    "src/10_metricas_test.py": "7da63ac43a06b18a0eae69c64e519ed1a0a41c19b55c93f0e420ef97410eeaf6",
+    "src/optimizar_lectura_multicampana.py": "fa4f5cdf0b8f459a2610e879da4a51ca6ac90bac077f33657790415a22b13803",
+    "src/7_visualizar_inferencia.py": "a227df5ec1ec25d76d7e32f7cbf54978336a6f68c66b5ccc9699d4867a02057d",
+    "src/02_composites_mensuales.py": "f51e41c339a6c80e82fb03868cd467658b5ff89af4f3ac11dc0af9e88d2280d8",
+    "src/03b_convertir_datasets_a_mmap.py": "a203e69081db35f1a90386a2f24255be40ec99a13f7fbc301bec15fa5c0b622f",
+    "src/03d_generar_dataset_cordoba_2017_f16.py": "a4da89bc8847bb3edcbfd0c9418eaa13c03439d803d949f462eac3638f0b0d36",
+    "src/5_generar_matriz_confusion.py": "afaee1556f5a594d85a6ad9f4ff40e030e21a3052e9ac94d8ea14673e87d3ced",
+    "src/__init__.py": "a3444206af53417da5d940e20063e593ec33b4579eca6ac39e8d3c9eb73fd5e2",
+    "src/2_inferencia.py": "71dbbd0d1089bbe1ce5744d0bd65a22f2d3a795b5db26da144baf34f424c0255",
+    "src/1_train_cordoba.py": "7aa3b10e3638ec48c285d78f36d532b9868ec160d8daf04081d4bfbdafc7b566",
+    "src/8_comparar_modelos.py": "27af5ab4a2de065e278ec16fec4db1ed9054dd784e7a6eba8cf6d5fb2faa31a8",
+    "src/01_moldear_mascaras.py": "df381f4b0936719c58b3108f22d8b8a127a9c80bfca206823f53ac1fd19720c0",
+    "src/0b_calcular_pesos.py": "0e1141841e59dfda1821af73b02aff638bd8284f0afb7dcd82eb6b805711ee6d",
+    "src/01c_mascaras_nivel3_2017_2018.py": "0f2762928e1ef8e821f54f2c188db2853a0a4176e23c5fb766e41cb047c8f89c",
+    "src/01d_mascaras_mnc_2020_2021.py": "3fa266dbbf0254c7b4f46a82b80ae6e779633ae33c7ed4751498ec02fa4f9fa8",
+    "src/4_generar_metricas.py": "b760d6e4728445998fc7eefc1e7940f8b36d5b849237484b71f65ff2f4555882",
+    "src/1b_finetune_manfredi.py": "ee16e413cb0ef50eb850f4a8f09ce1d5a578196913f328a214d9b7c2ad208dbb",
+    "src/12_comparar_con_1718.py": "375af50fedef6f019bb9c01d40335024be6478f95b13428495e28fe672e3334f",
+    "src/recuperar_multicampana.py": "506273ea56c95cce03f5ec67f50ecc0fbd35320e37a366b6fa23ba4a5f204d97",
+    "src/02c_composites_cog.py": "7ff3eab0fdb4908ad915e686a0400a2723057d4156d69b4902afcd4b6cc8f91e",
+    "src/02d_composites_scl.py": "777be1e10f1a3b2199d301c1e1c432d195408f96ce6b0bc976b99190451afacf",
+    "src/9_comparar_inferencia_etiqueta.py": "0e68589c660bf24e466d38cb5a23282eb30c391e7ddee0456e9ae50fb404db1c",
+    "src/preparar_multicampana.py": "b460cd0823f8a73136b82f57dc8edf718ad9eb465d950b94b48647905c459069",
+    "src/regenerar_figuras_test_actual.py": "9ed40d74c882bd471c2b3aa015c5bf5ceebf4d6e3cde7eb07d8bab266a7d9863",
+    "src/postprocesar_multicampana.py": "729d964501ef75f166f0e0091bc75f901a344e7b41dd71245ab4f644d97b0c41",
+    "src/00_descargar_stac.py": "cc269685ea7d64d2c9a671560f2e0c882aa2df0582b36f6f8d934f9844eb29ac",
+    "src/preparar_evaluar_extension.py": "6ed81d084c8c7c18a08821848a8299390a1da46b2a6c9f67131f4b18775808ba",
+    "src/evaluar_test_actual.py": "fe489b28b68352bfe0701f8b608ab497be25b028bf62edc77eecdb02259a1e5f",
+    "src/03_generar_datasets_npz.py": "7a546f7ff7f6c5aa326e1f5d76d5e98daa844d791058228c7309e2b01ae4aec1",
+    "src/11_evaluar_contra_mnc.py": "8012c57d01bd9514cffca27cbb2e5dae630254559baaaba4555f65c7fee71ef5",
+    "src/0_verificar_pipeline.py": "a076ad57bd3222841b20597420fcbfad23c88cdcbca61c2dab40c5a93a303761",
+    "src/soporte/__init__.py": "921cd5431237901cabe23f6d0b46e064bf38ac8d56bddbf49575e74536825c08",
+    "src/soporte/cli_fija.py": "3b32b8dcf7ff6b57fc3ab7036854965f26d47d9396bd79c2536c48d3d89686f4",
+    "src/soporte/archivos.py": "568733ae4ac50c7510a1ac572d526c803159b0f1f7f60d9b74a50bec9f2ca667",
+    "src/figuras/comparacion_parches.py": "9e4cd2a138dafb6e467a88493e213de3bfcdfc33ee98283c053d8019fd2029ee",
+    "src/figuras/reporte_chaco_agrupado.py": "5176644386a1d4cb4c9b0cae274ab37867c01b807531cc76135487bccc5fe608",
+    "src/figuras/__init__.py": "e79507e45c64ebabb78bd9c72669e0df52fd204b67cd81c5f6175985a6988945",
+    "src/figuras/comparacion_1718.py": "d96ac75724e8ac64e9ab8743eff48bc7fec9a4ffe923b25353d5b9c0529112e2",
+    "src/figuras/evaluacion_mnc.py": "38f85ed59dd19059c5401ebb7608620c565715d4f1c8807edc32df3f94ae7494",
+    "src/figuras/historico.py": "26fddc102d145758d5c767a82350d70b4594b0d7806cfa972103d99f9c0d6906",
+    "src/figuras/test_actual.py": "8d82e362776ffe09f1e95869d9a3d8f2649e78512c2fdd1a2c83ef390f482706",
+    "src/figuras/curvas_entrenamiento.py": "e040cc8316f778eb5a96a5e537b209edebca1dd4f4f4ee2a406ba84166062039",
+    "src/figuras/regenerar_test_actual.py": "4daf72f61e29de934c747d1b0064b71aac85b342d4872bd0bf7a2d7fcc59efa8",
+    "src/figuras/visualizar_inferencia.py": "5ef0e15fe7935cf03d080b2d94d12f39519c07b7d774ced08b9a21f94a44a39a",
+    "src/figuras/comunes.py": "a312d8fc36657df312f12e716b937464f8b2258a7929fe08f7ac06960af86c44",
+    "src/entrenamiento/calcular_pesos.py": "5ec0d849f245c1545e2cf2879fddc418751974c5353da395ebb0201422cb5537",
+    "src/entrenamiento/entrenar_cordoba.py": "30dcb769b13f70afe731e25b62c8ba7a41b8e9feba2297930ee1c86ff3aaea94",
+    "src/entrenamiento/__init__.py": "baebc4cf20e4889911fe2c3ec1910778fce429d329e2d4dee09462989aab875a",
+    "src/entrenamiento/finetune_manfredi.py": "425b90695249bc486128096ebeb77c8e57308d54f3bd74d584f0fcffb57f838f",
+    "src/entrenamiento/factorial.py": "deb26400f2b67cbcedb2d84e02599cb77362d84ab5c9536ce10513317e2bb2b9",
+    "src/inferencia/inferir_tile.py": "51363a3a1c3e8f03082ca2bb7b7fba619a0e76932a9f803efa2381928517df26",
+    "src/inferencia/__init__.py": "28a3db62cb1b433da63ca961682f767d43ec5173d48fe0cfd96a496fbc8f1e28",
+    "src/inferencia/raster.py": "4707d2df2da974ae2984e58f08739eeaaf743e6fe7eb28bdf025331d5da99772",
+    "src/mantenimiento/mejorar_calidad_extension.py": "275cfaa45989a72f5c4bd02d148fde2df92e7cfb68286df8acbd56af0da2be21",
+    "src/mantenimiento/optimizar_lectura_multicampana.py": "ca643c0338e78ed472c241aa4733afda60f7a52fbc7f8c39d5ef04cc47cc78b7",
+    "src/mantenimiento/__init__.py": "039ad5f5aceab89a3df2a4b3d4f9085047b3f96f0430ed33eec781ed4bd62f74",
+    "src/mantenimiento/recuperar_multicampana.py": "badde5b915548d02c3c5aca55e01af7a0e8c7d3ea40537189236522b4a62c962",
+    "src/datos/clases_agrupadas.py": "271c2e496f8fce0bd8f60da178dcbeaad357408d62e30b36752d57521a865204",
+    "src/datos/generar_arrays_originales.py": "f92075c04619ee3324f90f3cbf0d74f9dac13bdfea7648c4bc716c138b796154",
+    "src/datos/__init__.py": "85c09acef18ca36f9f3df534bfb80c6cb554b3a6c0c97dee6497c353ea27242a",
+    "src/datos/composites_scl.py": "a599d9acd1a8ca468bfc79b53136841d3aa274944647d5a7b3f75d8dc4e8112b",
+    "src/datos/campanas.py": "d492474e6c4bee8aa44f5a994f6d53fa4c2204ba14debe90bef848b89ae4c275",
+    "src/datos/leyendas.py": "80dd3c34671ffceeaeb2004ddb7f6abe8ac7661191f9957c504fe750b8bf361f",
+    "src/datos/generar_dataset_cordoba_f16.py": "9fc290564b5ce35f7ad83af04e5c7a528158d253f49c8e0a78a99a6502c1869e",
+    "src/datos/mascaras_nivel3_2017_2018.py": "a5060b75aa2d1cd4b1dbadd201c40f8bbf72b25c6b021bac3e8157357b6f107c",
+    "src/datos/preparar_extension.py": "dd9314c891dd28d79ec80ac4d9c4f7ebe91ec45129f05d214c35265bffbfabb8",
+    "src/datos/mascaras_mnc_2020_2021.py": "20382d4f3464903831150f3d50037a02e2af1e08a86a0b9835345eb237e33ef0",
+    "src/datos/composites_2019_2020.py": "9c169e34a4b1b7d8b9dce6e32a95bed7b2bd2fb721293c53626223417fbed39f",
+    "src/datos/mascaras_mnc_2018_2019.py": "6cdc57167dddd52051e3e4b6b97d7646d60d031fbc23dd5a48cc4d3b92b8cf96",
+    "src/datos/descargar_chaco.py": "5750bb183607fd5447ae02bb3311636271125cee3bb9fa13ec937d90f390762f",
+    "src/datos/generar_dataset_cordoba_2017_f16.py": "2a8d663a629d77faac3128a2076c80c330c55dafca80b238aaa13925daa0a029",
+    "src/datos/convertir_datasets_a_mmap.py": "82467d081d6a3d3b1e3fb8bd018842b510e037e625d68263ce3d7452074b7d13",
+    "src/datos/preparar_multicampana.py": "1ad9abe542ae44f4c302b3c4fca40e64b210da0905f485751b455e524881a8df",
+    "src/datos/moldear_mascaras.py": "612f14e4a92fcae07552900bbbc2cefa54ec68c7e8cdf0ca6095753f9cc26393",
+    "src/datos/descargar_stac.py": "1dc431f7e91b21647e8feffe9a03e9f88913525e69ee59f27b6185b6f7716301",
+    "src/datos/composites_mensuales.py": "a5fddf655ed456776797f398db74be970aea19b7901b09a7f12ba01a34db6ea3",
+    "src/datos/composites_cog.py": "cb9a47c6806af4c41aa1646d30c441e6dcb4fab4803c01f17ece7ae81cd186e3",
+    "src/historico/evaluar_contra_mnc.py": "f044c9615628cd3e6d647cd9d742e29317663ae26a11fe16451c634ee9b2226c",
+    "src/historico/evaluar_ano_no_visto.py": "0d097f236102495b153e13dbb47a019405d7700356f055ef25652efef98e0b59",
+    "src/historico/__init__.py": "24d747d2fe56b3f6f010cf5febdd643240679d5d6d78d0cf6528d5f95d9590b2",
+    "src/historico/verificar_pipeline.py": "993be74bf0d17c80fe5ad68c9b152a41e202c1a2660fb29f79af96a8a29d0da0",
+    "src/historico/comparar_modelos.py": "998779bc0bf940a320a300245f2840aa75a277c3a8e4dfa040eab105e594adff",
+    "src/historico/comparar_inferencia_etiqueta.py": "0c441aebb1eed7eb4c5ededa54454a7be0438c00d62951fb33e3a02666ca29a5",
+    "src/historico/metricas_test.py": "d4c69ae8f98612741af560606bc89d3d4c45ad35deb02c66d7b83c3e7ba86c9d",
+    "src/historico/postprocesar_multicampana.py": "ff7aab6d68d80aeadf7e3bc36b97f587791f7187ffc44e874f3117e16104c952",
+    "src/historico/comparar_con_1718.py": "1b95a32641a1879c2b558b7ce29275fc0066846015bd9d90fbf93e12137f162f",
+    "src/evaluacion/evaluar_extension.py": "4c0d7bc4eebcefa535225d17edc9dd6d01a766ced01410dbb553a9254bcd218e",
+    "src/evaluacion/__init__.py": "d050ad022c0e9b44eacec31da351e9befd1f8b5c7e93ba7c4c30e2b2da4a66ca",
+    "src/evaluacion/chaco_agrupado.py": "b0a717969623af058dd05bf8b138c43ea0216ab255a8f8c2749555ea4ebbd833",
+    "src/evaluacion/metricas.py": "e3935574a69363f38480efce1884010bdf7e2a3a83c5c386e36c95254c7276cb",
+    "src/evaluacion/matriz_confusion_parches.py": "8b7856db6c127083614322414da687756d45b3137d3b19c9f0bea23b646961e9",
+    "src/evaluacion/test_actual.py": "4a54d284ea9bdc12962dbc12c56710f6a94ce50f5d20f2a2bde456745bfba647",
+    "src/evaluacion/test_agrupado.py": "d8df2e912460562264f95258209e92c7f5dea34baab0f77f38b35fe0bb0ccd86",
+    "src/evaluacion/postprocesar_multicampana.py": "4ec39260e2fdc6ec4635c231761dc626a5ca11916968d3014af5f71c71a7e19c",
+    "utils/lectura_bloques.py": "ec229e8cb36041836c863139692dbf40095f65280720b0245e542c1ff02b48e6",
+    "utils/cache_lectura.py": "e5bf83f1fbab82ea63d9475fa2d062850b42cfdd8f6070a8778c95fdfdee8c83",
+    "utils/dataset.py": "614ee1a4c3991ec1ebde0a6c2e113a7077ee5058337c226632e669bd4b934a2e",
+    "utils/model.py": "be8a0dc86660ddcd183ab3f324c70751061d10b0b91f3a04812bd4767c0358bf",
+    "utils/tile_dataset.py": "a830308fe3f5a1825b2d999b3c5be3dd0da0ab164f34b35bc64e26e8eafb1e66",
+    "utils/integridad_raster.py": "ae33aa63bae5fc89d7a47c723aa3c91e4d2df5c1828d69c969b66038bfc5c86d",
+    "utils/leyendas_mnc.py": "e0b5b51d8665c3b8cb2fde013d905acac15826377bcf279ca7f93e4808217a8c",
+    "utils/corridas.py": "6c73aea23ca9c1ef6658dce64ca6f87696b1cbe2cb62d917ee331d70f59056f7",
+    "utils/test_actual.py": "a8374d5dd9a13fba4383ce184300eea5f3acf4712dbf78bc3e9a3b8d5f2e9648",
+    "utils/multicampana.py": "2fabdecdec416e9c275425a6bc91127dd02f1474a594e865ecaa3ff5cc2c4687",
+    "utils/rutas.py": "938da8f903e95b28fb02b98fb4241ddb27c09d864e9e2cbd2504bc4824a0554c",
+    "utils/factorial.py": "ddf912372cab748a5a363c270abcb4e7e7229e683ff45421cdd76f083b1bb73f",
+    "utils/mapas_tiles.py": "5366e956925b1cd88cdaa830dcb116c21e0f7f3cba3e46e1cf08c6742a05ec75",
+    "utils/losses.py": "fb85cc2133058948f03953a50a51d8186c7436621677a1511caafa58665a908a",
+    "model/bloques.py": "c43cc1c87b02c0ccca6df825e8ca6ce16945b9af4dd7d58bad52c2d1616c0ec1",
+    "model/unet.py": "4ef25913a8ec59c2b2e483085a4c0ac8b5012d1e8d525d0148f40351c403c0e6",
+    "model/fcrtransunet.py": "9040a6cecfd0b2781729fb48d8e5dd4ba4d663e23c0d2bb814c77e7d09d9aa74",
+    "model/__init__.py": "db23693bb3257372aea5a11e1ffe4e7239e8e1a3da7fa9fbe6d8709e5f3d3db9",
+    "model/utae.py": "4fe8b3232c9fed9f6fdf3036bfeda5b350be4ea43af500565950c3f98df9381f",
+    "model/transunet.py": "025968444fa2520975c4c7bc615d2d1e8d95fb1e76547176e8e5761f449d94f7"
+  },
+  "jobs": [
+    {
+      "nombre": "amplia_2020_2021_s44",
+      "seleccion": "/mnt/yacy_3/prod_bis/ferreyra/dataset/ensayo_factorial_20261018_v1/selecciones/amplia_2020_2021_s44.json",
+      "sha256": "3378ff3ca07c5c73aebb670536bff5b369e84bbd8a6ca2c2851c5f0675a6c5a2",
+      "seed": 44
+    },
+    {
+      "nombre": "amplia_tres_s42",
+      "seleccion": "/mnt/yacy_3/prod_bis/ferreyra/dataset/ensayo_factorial_20261018_v1/selecciones/amplia_tres_s42.json",
+      "sha256": "d017a677ee818b66ed851b038be43a23cf4b859d07830929c81b0f215b960c90",
+      "seed": 42
+    },
+    {
+      "nombre": "amplia_2018_2019_s44",
+      "seleccion": "/mnt/yacy_3/prod_bis/ferreyra/dataset/ensayo_factorial_20261018_v1/selecciones/amplia_2018_2019_s44.json",
+      "sha256": "4f19d2fc8a3279ce4cc944e51cb20c2dd1178a640a8e4f692313a2a8e252e985",
+      "seed": 44
+    },
+    {
+      "nombre": "amplia_2019_2020_s43",
+      "seleccion": "/mnt/yacy_3/prod_bis/ferreyra/dataset/ensayo_factorial_20261018_v1/selecciones/amplia_2019_2020_s43.json",
+      "sha256": "e623b36ea80b5c17409207e623cbdee7bcfce35af7cdd957ded9e3defc640159",
+      "seed": 43
+    },
+    {
+      "nombre": "reducida_tres_s44",
+      "seleccion": "/mnt/yacy_3/prod_bis/ferreyra/dataset/ensayo_factorial_20261018_v1/selecciones/reducida_tres_s44.json",
+      "sha256": "76e79d9267ed55cb55c4aa9addb7b05a0d0545cbcf783eeca94ca2724f5e0e84",
+      "seed": 44
+    },
+    {
+      "nombre": "amplia_2018_2019_s42",
+      "seleccion": "/mnt/yacy_3/prod_bis/ferreyra/dataset/ensayo_factorial_20261018_v1/selecciones/amplia_2018_2019_s42.json",
+      "sha256": "69fb87776508d59f726d3fe2d37e80224b8eb24feb34e006834c21b7b1557a60",
+      "seed": 42
+    },
+    {
+      "nombre": "reducida_tres_s42",
+      "seleccion": "/mnt/yacy_3/prod_bis/ferreyra/dataset/ensayo_factorial_20261018_v1/selecciones/reducida_tres_s42.json",
+      "sha256": "3b305fdd5ce04c0321fb4efe0a4d278ca94f11afe051217ade80c5d3e1b394b3",
+      "seed": 42
+    },
+    {
+      "nombre": "reducida_2018_2019_s44",
+      "seleccion": "/mnt/yacy_3/prod_bis/ferreyra/dataset/ensayo_factorial_20261018_v1/selecciones/reducida_2018_2019_s44.json",
+      "sha256": "a38433cd872c5846173921ae13fc9ac7df003d2927c94cd4cc8e193e5985998d",
+      "seed": 44
+    },
+    {
+      "nombre": "reducida_2020_2021_s43",
+      "seleccion": "/mnt/yacy_3/prod_bis/ferreyra/dataset/ensayo_factorial_20261018_v1/selecciones/reducida_2020_2021_s43.json",
+      "sha256": "0883072bd7ef936004d030617656c2b79cc0fa74ed2f58b10900ebf52aa72b44",
+      "seed": 43
+    },
+    {
+      "nombre": "amplia_2019_2020_s44",
+      "seleccion": "/mnt/yacy_3/prod_bis/ferreyra/dataset/ensayo_factorial_20261018_v1/selecciones/amplia_2019_2020_s44.json",
+      "sha256": "3d2095f0b869da1c41a344b5edd15853710165135a9660949a4f4be9041b854f",
+      "seed": 44
+    },
+    {
+      "nombre": "amplia_2018_2019_s43",
+      "seleccion": "/mnt/yacy_3/prod_bis/ferreyra/dataset/ensayo_factorial_20261018_v1/selecciones/amplia_2018_2019_s43.json",
+      "sha256": "fdf0d3f44d72ca1c7bd936dff516dc05e8fb037d9e3bb015520d0934cd174d17",
+      "seed": 43
+    },
+    {
+      "nombre": "reducida_2019_2020_s43",
+      "seleccion": "/mnt/yacy_3/prod_bis/ferreyra/dataset/ensayo_factorial_20261018_v1/selecciones/reducida_2019_2020_s43.json",
+      "sha256": "622e23830d652508cc572961b495729309074c96e98592a340adc75add9b1cbc",
+      "seed": 43
+    },
+    {
+      "nombre": "amplia_2019_2020_s42",
+      "seleccion": "/mnt/yacy_3/prod_bis/ferreyra/dataset/ensayo_factorial_20261018_v1/selecciones/amplia_2019_2020_s42.json",
+      "sha256": "f687135e4d7de8bda35736ed0b2dd49bc297c7badb472da73f44930db67879f2",
+      "seed": 42
+    },
+    {
+      "nombre": "amplia_2020_2021_s43",
+      "seleccion": "/mnt/yacy_3/prod_bis/ferreyra/dataset/ensayo_factorial_20261018_v1/selecciones/amplia_2020_2021_s43.json",
+      "sha256": "5611ebb1bfab74dcee13dcc46c4db06619ea328bc44eecfd72c81d29baca7963",
+      "seed": 43
+    },
+    {
+      "nombre": "amplia_2020_2021_s42",
+      "seleccion": "/mnt/yacy_3/prod_bis/ferreyra/dataset/ensayo_factorial_20261018_v1/selecciones/amplia_2020_2021_s42.json",
+      "sha256": "e7053192eaa410b776363a224beac1dcb5e3c0e8c268848b6d9e581c79fcf599",
+      "seed": 42
+    },
+    {
+      "nombre": "reducida_2020_2021_s42",
+      "seleccion": "/mnt/yacy_3/prod_bis/ferreyra/dataset/ensayo_factorial_20261018_v1/selecciones/reducida_2020_2021_s42.json",
+      "sha256": "36febb14cb2e5126580f1c7b9677cef059f77f67a341effd1d258657f473c5ed",
+      "seed": 42
+    },
+    {
+      "nombre": "reducida_2018_2019_s43",
+      "seleccion": "/mnt/yacy_3/prod_bis/ferreyra/dataset/ensayo_factorial_20261018_v1/selecciones/reducida_2018_2019_s43.json",
+      "sha256": "86fb2d581b026eda7b8e682601c2fb0542fb78bf9f134887fab4e881c338a618",
+      "seed": 43
+    },
+    {
+      "nombre": "reducida_2019_2020_s42",
+      "seleccion": "/mnt/yacy_3/prod_bis/ferreyra/dataset/ensayo_factorial_20261018_v1/selecciones/reducida_2019_2020_s42.json",
+      "sha256": "43ea293636ae2945d99419b126a91a04aa276d69e3883c967d40a66df58f0c1e",
+      "seed": 42
+    },
+    {
+      "nombre": "amplia_tres_s44",
+      "seleccion": "/mnt/yacy_3/prod_bis/ferreyra/dataset/ensayo_factorial_20261018_v1/selecciones/amplia_tres_s44.json",
+      "sha256": "ec7cfd52aa41e0f69c589045871adfda3544cdfa4d41e28ae432a4d5665be7cd",
+      "seed": 44
+    },
+    {
+      "nombre": "reducida_2020_2021_s44",
+      "seleccion": "/mnt/yacy_3/prod_bis/ferreyra/dataset/ensayo_factorial_20261018_v1/selecciones/reducida_2020_2021_s44.json",
+      "sha256": "5b46a4cf2dc8efc28d96466fe7ad93b552be2ff8df8c97f7f3ebf0768e260d32",
+      "seed": 44
+    },
+    {
+      "nombre": "amplia_tres_s43",
+      "seleccion": "/mnt/yacy_3/prod_bis/ferreyra/dataset/ensayo_factorial_20261018_v1/selecciones/amplia_tres_s43.json",
+      "sha256": "bed1f9edaa53d4b1c1c41e91e1c3832eceb50c7e432c1d02b5a61ad57d09006f",
+      "seed": 43
+    },
+    {
+      "nombre": "reducida_2018_2019_s42",
+      "seleccion": "/mnt/yacy_3/prod_bis/ferreyra/dataset/ensayo_factorial_20261018_v1/selecciones/reducida_2018_2019_s42.json",
+      "sha256": "5e9347403a409a3f480628b3597fb22fc1b2887718ab56cd2bce08fc2893a584",
+      "seed": 42
+    },
+    {
+      "nombre": "reducida_2019_2020_s44",
+      "seleccion": "/mnt/yacy_3/prod_bis/ferreyra/dataset/ensayo_factorial_20261018_v1/selecciones/reducida_2019_2020_s44.json",
+      "sha256": "140ed98485a0c506f016cd86bf08677a94ed2d0fd6adea42af438c7134961672",
+      "seed": 44
+    },
+    {
+      "nombre": "reducida_tres_s43",
+      "seleccion": "/mnt/yacy_3/prod_bis/ferreyra/dataset/ensayo_factorial_20261018_v1/selecciones/reducida_tres_s43.json",
+      "sha256": "047b4bf0b5042a2cf97155cf20703ff88ba35b558e2f5b59ff314b6e60741d34",
+      "seed": 43
+    }
+  ],
+  "coordenadas_sha256": "562328e5ab663f5a3c00dd17cfb7204f8ffdbeeb08e3c68e0c97a83fc8375a3d"
+}

@@ -1,0 +1,46 @@
+{
+  "fecha_utc": "2026-10-19T00:04:47.198562+00:00",
+  "mapa": "https://mapascordoba.gob.ar/api/v1/config/getMapConfigByNumber/565",
+  "aviso_editor": "Aviso de uso: Este mapa fue elaborado como herramienta cartográfica de escala regional para analizar la dinámica geográfica del carbón del maní en la provincia de Córdoba. La presencia o ausencia del cultivo en cada lote y campaña se estimó mediante modelado espacial. Por lo tanto, la información debe interpretarse a escala regional y no es apta para usos que requieran un mayor nivel de detalle. Cualquier uso fuera de este alcance queda bajo exclusiva responsabilidad del usuario.",
+  "uso": "Solo referencia auxiliar y priorizacion. No sobrescribir Y ni usar ausencia como negativo.",
+  "campanas": [
+    {
+      "campana": "2018_2019",
+      "capa": "cultivos_mani_historico_1819",
+      "url": "https://gn-idecor.mapascordoba.gob.ar/geoserver/wfs?service=WFS&request=GetFeature&version=2.0.0&typeNames=cultivos_mani_historico_1819&outputFormat=application%2Fjson&srsName=EPSG%3A4326&count=2255",
+      "objetos": 2255,
+      "sha256": "e623390bb2902b7abb4d5100aa957ed4883cddda0f860f4e22d51ea2249053a7",
+      "bytes": 4722506,
+      "ha_fuera_train_actual_excluyendo_val_test": 39307.24856909626,
+      "ha_fuera_train_HLJ_excluyendo_val_test": 6209.893332397798,
+      "fragmentos_candidatos": 65,
+      "geometrias_reparadas_solo_para_cobertura": 3
+    },
+    {
+      "campana": "2019_2020",
+      "capa": "cultivos_mani_historico_1920",
+      "url": "https://gn-idecor.mapascordoba.gob.ar/geoserver/wfs?service=WFS&request=GetFeature&version=2.0.0&typeNames=cultivos_mani_historico_1920&outputFormat=application%2Fjson&srsName=EPSG%3A4326&count=2182",
+      "objetos": 2182,
+      "sha256": "7269563a7543925de1a4db0aed111d5b62757141cf0d66ab5b5b5bc45b9f358d",
+      "bytes": 4445780,
+      "ha_fuera_train_actual_excluyendo_val_test": 35419.27298101449,
+      "ha_fuera_train_HLJ_excluyendo_val_test": 7764.807575024044,
+      "fragmentos_candidatos": 80,
+      "geometrias_reparadas_solo_para_cobertura": 1
+    },
+    {
+      "campana": "2020_2021",
+      "capa": "cultivos_mani_historico_2021",
+      "url": "https://gn-idecor.mapascordoba.gob.ar/geoserver/wfs?service=WFS&request=GetFeature&version=2.0.0&typeNames=cultivos_mani_historico_2021&outputFormat=application%2Fjson&srsName=EPSG%3A4326&count=2588",
+      "objetos": 2588,
+      "sha256": "fa00c2e7efd819690e92e20e557d43df404cfcf17a66c0c50f5f28f5c8c9187e",
+      "bytes": 5172367,
+      "ha_fuera_train_actual_excluyendo_val_test": 37707.20024997516,
+      "ha_fuera_train_HLJ_excluyendo_val_test": 11487.621664992035,
+      "fragmentos_candidatos": 106,
+      "geometrias_reparadas_solo_para_cobertura": 1
+    }
+  ],
+  "sentinel_descargado": false,
+  "siguiente_paso": "Cruzar candidatos con MNC de la misma campana, verificar etiquetas y elegir tiles/ROI antes de descargar Sentinel."
+}

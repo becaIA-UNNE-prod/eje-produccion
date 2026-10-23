@@ -1,0 +1,1347 @@
+{
+  "region": {
+    "nombre": "chaco_sudoeste_2021_2022_v1",
+    "campana": "2021_2022",
+    "tiles": [
+      "20JPQ",
+      "20JPR",
+      "20JQQ"
+    ],
+    "bbox": [
+      -62.2,
+      -28.3,
+      -60.1,
+      -26.4
+    ],
+    "nota_bbox": "Busqueda de escenas completas para los tiles acordados; no es limite provincial ni recorte de inferencia.",
+    "inicio": "2021-12-01",
+    "fin": "2022-05-31",
+    "meses": [
+      "202112",
+      "202201",
+      "202202",
+      "202203",
+      "202204",
+      "202205"
+    ],
+    "bandas": [
+      "B02",
+      "B03",
+      "B04",
+      "B08"
+    ],
+    "subdirectorio_fuentes": "sentinel2/chaco_sudoeste/2021_2022",
+    "max_nodata": 100,
+    "workers_descarga": 2,
+    "workers_seleccion": 2,
+    "reserva_gib": 100,
+    "estimacion_adicional_gib": 200,
+    "politica": "SCL primero; bandas de escenas seleccionadas; no modifica TRAIN/VAL/TEST ni inicia inferencia"
+  },
+  "esquema": "mani_soja",
+  "clases": [
+    "NoData",
+    "Otros",
+    "Maiz",
+    "Mani/Soja"
+  ],
+  "checkpoint_sha256": "f586ff8dd487249f6c9b75e78814590a6c80f76f52f4a78d6c6e597c62207402",
+  "arquitectura": "unet",
+  "mnc": {
+    "ruta": "/mnt/yacy_1/prod/ferreyra/MNC_INTA/2021_2022/MNC_verano2022.tif",
+    "size": 127476705,
+    "mtime_ns": 1791552214885452905,
+    "ctime_ns": 1791552215905452883,
+    "inode": 229507080
+  },
+  "leyenda_mnc": {
+    "campana": "2021_2022",
+    "fuente": "https://zenodo.org/records/8284081",
+    "informe_md5": "9111c2166f1c074430e435aa90cb6c59",
+    "tabla": 2,
+    "pagina_impresa": 6,
+    "pagina_pdf": 7,
+    "codigos_documentados": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      21,
+      22,
+      26,
+      28
+    ],
+    "remap": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      3,
+      1,
+      1,
+      1,
+      1,
+      4,
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "politica_desconocidos": "abortar; no heredar excepcion del codigo 20 de 2021"
+  },
+  "fuentes": [
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20211230/B02.tif",
+      "size": 197926224,
+      "mtime_ns": 1791898514114137910,
+      "ctime_ns": 1791898514114137910,
+      "inode": 220989752
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20211230/B03.tif",
+      "size": 197460001,
+      "mtime_ns": 1791898525130137677,
+      "ctime_ns": 1791898525130137677,
+      "inode": 220989751
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20211230/B04.tif",
+      "size": 207390264,
+      "mtime_ns": 1791898553590137076,
+      "ctime_ns": 1791898553594137076,
+      "inode": 220989753
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20211230/B08.tif",
+      "size": 204510906,
+      "mtime_ns": 1791898847246130873,
+      "ctime_ns": 1791898847246130873,
+      "inode": 220989754
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20211230/SCL.tif",
+      "size": 2603618,
+      "mtime_ns": 1791897989466148992,
+      "ctime_ns": 1791897989466148992,
+      "inode": 220989502
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220129/B02.tif",
+      "size": 205315050,
+      "mtime_ns": 1791898579458136530,
+      "ctime_ns": 1791898579458136530,
+      "inode": 220989755
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220129/B03.tif",
+      "size": 204971679,
+      "mtime_ns": 1791898616722135742,
+      "ctime_ns": 1791898616722135742,
+      "inode": 220989756
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220129/B04.tif",
+      "size": 216250080,
+      "mtime_ns": 1791898689718134201,
+      "ctime_ns": 1791898689718134201,
+      "inode": 220989757
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220129/B08.tif",
+      "size": 211241916,
+      "mtime_ns": 1791898940130128911,
+      "ctime_ns": 1791898940130128911,
+      "inode": 220989758
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220129/SCL.tif",
+      "size": 2636289,
+      "mtime_ns": 1791898102294146609,
+      "ctime_ns": 1791898102294146609,
+      "inode": 220989521
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220218/B02.tif",
+      "size": 199125509,
+      "mtime_ns": 1791898975078128173,
+      "ctime_ns": 1791898975078128173,
+      "inode": 220989759
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220218/B03.tif",
+      "size": 200441557,
+      "mtime_ns": 1791899011298127408,
+      "ctime_ns": 1791899011298127408,
+      "inode": 220989761
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220218/B04.tif",
+      "size": 211051515,
+      "mtime_ns": 1791899137314124746,
+      "ctime_ns": 1791899137314124746,
+      "inode": 220989760
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220218/B08.tif",
+      "size": 215031783,
+      "mtime_ns": 1791899103886125452,
+      "ctime_ns": 1791899103886125452,
+      "inode": 220989762
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220218/SCL.tif",
+      "size": 2356092,
+      "mtime_ns": 1791898130850146006,
+      "ctime_ns": 1791898130850146006,
+      "inode": 220989535
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220315/B02.tif",
+      "size": 195690136,
+      "mtime_ns": 1791899145390124575,
+      "ctime_ns": 1791899145390124575,
+      "inode": 220989763
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220315/B03.tif",
+      "size": 201184857,
+      "mtime_ns": 1791899268546121974,
+      "ctime_ns": 1791899268546121974,
+      "inode": 220989764
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220315/B04.tif",
+      "size": 205721284,
+      "mtime_ns": 1791899234098122701,
+      "ctime_ns": 1791899234098122701,
+      "inode": 220989765
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220315/B08.tif",
+      "size": 221851204,
+      "mtime_ns": 1791899316162120968,
+      "ctime_ns": 1791899316162120968,
+      "inode": 220989766
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220315/SCL.tif",
+      "size": 1766430,
+      "mtime_ns": 1791898145922145687,
+      "ctime_ns": 1791898145922145687,
+      "inode": 220989552
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220401/B02.tif",
+      "size": 38499412,
+      "mtime_ns": 1791899276690121802,
+      "ctime_ns": 1791899276690121802,
+      "inode": 220989767
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220401/B03.tif",
+      "size": 39467161,
+      "mtime_ns": 1791899283290121662,
+      "ctime_ns": 1791899283290121662,
+      "inode": 220989768
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220401/B04.tif",
+      "size": 40730312,
+      "mtime_ns": 1791899294582121424,
+      "ctime_ns": 1791899294582121424,
+      "inode": 220989769
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220401/B08.tif",
+      "size": 42668309,
+      "mtime_ns": 1791899317454120941,
+      "ctime_ns": 1791899317454120941,
+      "inode": 220989770
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220401/SCL.tif",
+      "size": 393933,
+      "mtime_ns": 1791898150938145581,
+      "ctime_ns": 1791898150938145581,
+      "inode": 220989559
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220419/B02.tif",
+      "size": 194200190,
+      "mtime_ns": 1791899407658119035,
+      "ctime_ns": 1791899407658119035,
+      "inode": 220989771
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220419/B03.tif",
+      "size": 202024077,
+      "mtime_ns": 1791899410546118974,
+      "ctime_ns": 1791899410546118974,
+      "inode": 220989772
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220419/B04.tif",
+      "size": 207443564,
+      "mtime_ns": 1791899447670118190,
+      "ctime_ns": 1791899447670118190,
+      "inode": 220989773
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220419/B08.tif",
+      "size": 218318787,
+      "mtime_ns": 1791899503646117008,
+      "ctime_ns": 1791899503646117008,
+      "inode": 220989774
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220419/SCL.tif",
+      "size": 1997268,
+      "mtime_ns": 1791898192138144711,
+      "ctime_ns": 1791898192138144711,
+      "inode": 220989570
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220504/B02.tif",
+      "size": 195121293,
+      "mtime_ns": 1791899544174116152,
+      "ctime_ns": 1791899544174116152,
+      "inode": 220989775
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220504/B03.tif",
+      "size": 199644706,
+      "mtime_ns": 1791899704690112761,
+      "ctime_ns": 1791899704690112761,
+      "inode": 220989776
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220504/B04.tif",
+      "size": 206462332,
+      "mtime_ns": 1791899705666112740,
+      "ctime_ns": 1791899705666112740,
+      "inode": 220989777
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220504/B08.tif",
+      "size": 214601740,
+      "mtime_ns": 1791899815450110421,
+      "ctime_ns": 1791899815450110421,
+      "inode": 220989778
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPQ/20220504/SCL.tif",
+      "size": 2297300,
+      "mtime_ns": 1791898195994144630,
+      "ctime_ns": 1791898195994144630,
+      "inode": 220989578
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20211230/B02.tif",
+      "size": 197100782,
+      "mtime_ns": 1791899904306108544,
+      "ctime_ns": 1791899904306108544,
+      "inode": 220989779
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20211230/B03.tif",
+      "size": 200155113,
+      "mtime_ns": 1791899936706107860,
+      "ctime_ns": 1791899936706107860,
+      "inode": 220989780
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20211230/B04.tif",
+      "size": 210216186,
+      "mtime_ns": 1791899938050107832,
+      "ctime_ns": 1791899938050107832,
+      "inode": 220989781
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20211230/B08.tif",
+      "size": 205354517,
+      "mtime_ns": 1791900008358106346,
+      "ctime_ns": 1791900008358106346,
+      "inode": 220989782
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20211230/SCL.tif",
+      "size": 2519719,
+      "mtime_ns": 1791898223882144041,
+      "ctime_ns": 1791898223882144041,
+      "inode": 220989600
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20220129/B02.tif",
+      "size": 203103284,
+      "mtime_ns": 1791900067658105094,
+      "ctime_ns": 1791900067658105094,
+      "inode": 220989783
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20220129/B03.tif",
+      "size": 205583790,
+      "mtime_ns": 1791900116086104071,
+      "ctime_ns": 1791900116086104071,
+      "inode": 220989784
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20220129/B04.tif",
+      "size": 216376662,
+      "mtime_ns": 1791900376934098561,
+      "ctime_ns": 1791900376934098561,
+      "inode": 220989785
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20220129/B08.tif",
+      "size": 212147618,
+      "mtime_ns": 1791900385282098385,
+      "ctime_ns": 1791900385282098385,
+      "inode": 220989786
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20220129/SCL.tif",
+      "size": 2234255,
+      "mtime_ns": 1791898246074143572,
+      "ctime_ns": 1791898246074143572,
+      "inode": 220989612
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20220218/B02.tif",
+      "size": 194477798,
+      "mtime_ns": 1791900452898096956,
+      "ctime_ns": 1791900452898096956,
+      "inode": 220989787
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20220218/B03.tif",
+      "size": 198901339,
+      "mtime_ns": 1791900460858096788,
+      "ctime_ns": 1791900460862096788,
+      "inode": 220989788
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20220218/B04.tif",
+      "size": 208840115,
+      "mtime_ns": 1791900485162096275,
+      "ctime_ns": 1791900485162096275,
+      "inode": 220989789
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20220218/B08.tif",
+      "size": 218391073,
+      "mtime_ns": 1791900657802092628,
+      "ctime_ns": 1791900657802092628,
+      "inode": 220989790
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20220218/SCL.tif",
+      "size": 1647591,
+      "mtime_ns": 1791898307570142273,
+      "ctime_ns": 1791898307570142273,
+      "inode": 220989618
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20220325/B02.tif",
+      "size": 186651359,
+      "mtime_ns": 1791900508342095785,
+      "ctime_ns": 1791900508342095785,
+      "inode": 220989791
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20220325/B03.tif",
+      "size": 196043402,
+      "mtime_ns": 1791900549042094925,
+      "ctime_ns": 1791900549042094925,
+      "inode": 220989792
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20220325/B04.tif",
+      "size": 196938181,
+      "mtime_ns": 1791900734642091005,
+      "ctime_ns": 1791900734642091005,
+      "inode": 220989793
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20220325/B08.tif",
+      "size": 232441989,
+      "mtime_ns": 1791900786486089910,
+      "ctime_ns": 1791900786486089910,
+      "inode": 220989794
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20220325/SCL.tif",
+      "size": 963880,
+      "mtime_ns": 1791898322306141962,
+      "ctime_ns": 1791898322306141962,
+      "inode": 220989630
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20220419/B02.tif",
+      "size": 191376354,
+      "mtime_ns": 1791900836266088858,
+      "ctime_ns": 1791900836266088858,
+      "inode": 220989795
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20220419/B03.tif",
+      "size": 201946621,
+      "mtime_ns": 1791901026298084844,
+      "ctime_ns": 1791901026298084844,
+      "inode": 220989796
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20220419/B04.tif",
+      "size": 204775635,
+      "mtime_ns": 1791901073482083848,
+      "ctime_ns": 1791901073482083848,
+      "inode": 220989797
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20220419/B08.tif",
+      "size": 219820188,
+      "mtime_ns": 1791901131170082629,
+      "ctime_ns": 1791901131170082629,
+      "inode": 220989798
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20220419/SCL.tif",
+      "size": 1577796,
+      "mtime_ns": 1791898336934141653,
+      "ctime_ns": 1791898336934141653,
+      "inode": 220989639
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20220504/B02.tif",
+      "size": 192662545,
+      "mtime_ns": 1791901102782083229,
+      "ctime_ns": 1791901102782083229,
+      "inode": 220989799
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20220504/B03.tif",
+      "size": 200480773,
+      "mtime_ns": 1791901228518080573,
+      "ctime_ns": 1791901228518080573,
+      "inode": 220989800
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20220504/B04.tif",
+      "size": 204703187,
+      "mtime_ns": 1791901275358079583,
+      "ctime_ns": 1791901275358079583,
+      "inode": 220989801
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20220504/B08.tif",
+      "size": 218297404,
+      "mtime_ns": 1791901277750079533,
+      "ctime_ns": 1791901277750079533,
+      "inode": 220989802
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JPR/20220504/SCL.tif",
+      "size": 2025923,
+      "mtime_ns": 1791898340374141580,
+      "ctime_ns": 1791898340374141580,
+      "inode": 220989642
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20211217/B02.tif",
+      "size": 207009127,
+      "mtime_ns": 1791901335198078319,
+      "ctime_ns": 1791901335198078319,
+      "inode": 220989803
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20211217/B03.tif",
+      "size": 211946488,
+      "mtime_ns": 1791901334858078326,
+      "ctime_ns": 1791901334858078326,
+      "inode": 220989804
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20211217/B04.tif",
+      "size": 216706253,
+      "mtime_ns": 1791901447310075951,
+      "ctime_ns": 1791901447310075951,
+      "inode": 220989806
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20211217/B08.tif",
+      "size": 235221387,
+      "mtime_ns": 1791901451738075857,
+      "ctime_ns": 1791901451738075857,
+      "inode": 220989805
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20211217/SCL.tif",
+      "size": 1659724,
+      "mtime_ns": 1791898358790141191,
+      "ctime_ns": 1791898358790141191,
+      "inode": 220989659
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220129/B02.tif",
+      "size": 89769826,
+      "mtime_ns": 1791901466522075545,
+      "ctime_ns": 1791901466522075545,
+      "inode": 220989807
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220129/B03.tif",
+      "size": 89846305,
+      "mtime_ns": 1791901468442075505,
+      "ctime_ns": 1791901468442075505,
+      "inode": 220989808
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220129/B04.tif",
+      "size": 94242790,
+      "mtime_ns": 1791901486366075126,
+      "ctime_ns": 1791901486366075126,
+      "inode": 220989809
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220129/B08.tif",
+      "size": 90929663,
+      "mtime_ns": 1791901489230075066,
+      "ctime_ns": 1791901489230075066,
+      "inode": 220989810
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220129/SCL.tif",
+      "size": 1500379,
+      "mtime_ns": 1791898423770139818,
+      "ctime_ns": 1791898423770139818,
+      "inode": 220989688
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220131/B02.tif",
+      "size": 216728759,
+      "mtime_ns": 1791901578646073177,
+      "ctime_ns": 1791901578646073177,
+      "inode": 220989811
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220131/B03.tif",
+      "size": 214656380,
+      "mtime_ns": 1791901595606072819,
+      "ctime_ns": 1791901595606072819,
+      "inode": 220989812
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220131/B04.tif",
+      "size": 226700280,
+      "mtime_ns": 1791901675086071140,
+      "ctime_ns": 1791901675086071140,
+      "inode": 220989813
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220131/B08.tif",
+      "size": 214633996,
+      "mtime_ns": 1791901706494070476,
+      "ctime_ns": 1791901706494070476,
+      "inode": 220989814
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220131/SCL.tif",
+      "size": 4201679,
+      "mtime_ns": 1791898424506139803,
+      "ctime_ns": 1791898424506139803,
+      "inode": 220989689
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220218/B02.tif",
+      "size": 86002456,
+      "mtime_ns": 1791901862122067189,
+      "ctime_ns": 1791901862122067189,
+      "inode": 220989819
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220218/B03.tif",
+      "size": 86659570,
+      "mtime_ns": 1791901878574066841,
+      "ctime_ns": 1791901878574066841,
+      "inode": 220989820
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220218/B04.tif",
+      "size": 91380452,
+      "mtime_ns": 1791901890350066593,
+      "ctime_ns": 1791901890350066593,
+      "inode": 220989821
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220218/B08.tif",
+      "size": 89789310,
+      "mtime_ns": 1791901909734066183,
+      "ctime_ns": 1791901909738066183,
+      "inode": 220989822
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220218/SCL.tif",
+      "size": 1405611,
+      "mtime_ns": 1791898431090139664,
+      "ctime_ns": 1791898431090139664,
+      "inode": 220989701
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220210/B02.tif",
+      "size": 212431048,
+      "mtime_ns": 1791901759842069349,
+      "ctime_ns": 1791901759842069349,
+      "inode": 220989815
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220210/B03.tif",
+      "size": 210636971,
+      "mtime_ns": 1791901756558069419,
+      "ctime_ns": 1791901756558069419,
+      "inode": 220989816
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220210/B04.tif",
+      "size": 223742941,
+      "mtime_ns": 1791901840974067636,
+      "ctime_ns": 1791901840978067635,
+      "inode": 220989817
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220210/B08.tif",
+      "size": 219374415,
+      "mtime_ns": 1791901896366066465,
+      "ctime_ns": 1791901896366066465,
+      "inode": 220989818
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220210/SCL.tif",
+      "size": 3739042,
+      "mtime_ns": 1791898428934139709,
+      "ctime_ns": 1791898428934139709,
+      "inode": 220989696
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220315/B02.tif",
+      "size": 83837489,
+      "mtime_ns": 1791901928078065796,
+      "ctime_ns": 1791901928078065796,
+      "inode": 220989823
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220315/B03.tif",
+      "size": 86273524,
+      "mtime_ns": 1791901925674065846,
+      "ctime_ns": 1791901925674065846,
+      "inode": 220989824
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220315/B04.tif",
+      "size": 88554952,
+      "mtime_ns": 1791901946062065416,
+      "ctime_ns": 1791901946062065416,
+      "inode": 220989825
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220315/B08.tif",
+      "size": 92230848,
+      "mtime_ns": 1791902000734064261,
+      "ctime_ns": 1791902000734064261,
+      "inode": 220989826
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220315/SCL.tif",
+      "size": 805088,
+      "mtime_ns": 1791898447390139319,
+      "ctime_ns": 1791898447390139319,
+      "inode": 220989717
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220327/B02.tif",
+      "size": 203275556,
+      "mtime_ns": 1791902041694063396,
+      "ctime_ns": 1791902041694063396,
+      "inode": 220989827
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220327/B03.tif",
+      "size": 210051603,
+      "mtime_ns": 1791902035490063527,
+      "ctime_ns": 1791902035490063527,
+      "inode": 220989828
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220327/B04.tif",
+      "size": 215196650,
+      "mtime_ns": 1791902108190061991,
+      "ctime_ns": 1791902108190061991,
+      "inode": 220989829
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220327/B08.tif",
+      "size": 236419922,
+      "mtime_ns": 1791902096134062246,
+      "ctime_ns": 1791902096134062246,
+      "inode": 220989830
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220327/SCL.tif",
+      "size": 1530029,
+      "mtime_ns": 1791898450630139251,
+      "ctime_ns": 1791898450630139251,
+      "inode": 220989724
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220414/B02.tif",
+      "size": 81926160,
+      "mtime_ns": 1791902234326059327,
+      "ctime_ns": 1791902234326059327,
+      "inode": 220989835
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220414/B03.tif",
+      "size": 85800111,
+      "mtime_ns": 1791902247758059043,
+      "ctime_ns": 1791902247758059043,
+      "inode": 220989836
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220414/B04.tif",
+      "size": 86540233,
+      "mtime_ns": 1791902271250058547,
+      "ctime_ns": 1791902271250058547,
+      "inode": 220989837
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220414/B08.tif",
+      "size": 94677530,
+      "mtime_ns": 1791902284610058264,
+      "ctime_ns": 1791902284614058264,
+      "inode": 220989838
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220414/SCL.tif",
+      "size": 711131,
+      "mtime_ns": 1791898453210139196,
+      "ctime_ns": 1791898453210139196,
+      "inode": 220989729
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220419/B02.tif",
+      "size": 84187049,
+      "mtime_ns": 1791902286190058231,
+      "ctime_ns": 1791902286190058231,
+      "inode": 220989839
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220419/B03.tif",
+      "size": 87699226,
+      "mtime_ns": 1791902301938057898,
+      "ctime_ns": 1791902301938057898,
+      "inode": 220989840
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220419/B04.tif",
+      "size": 89479794,
+      "mtime_ns": 1791902303022057876,
+      "ctime_ns": 1791902303022057876,
+      "inode": 220989841
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220419/B08.tif",
+      "size": 94758478,
+      "mtime_ns": 1791902392978055975,
+      "ctime_ns": 1791902392982055975,
+      "inode": 220989842
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220419/SCL.tif",
+      "size": 737129,
+      "mtime_ns": 1791898455534139147,
+      "ctime_ns": 1791898455534139147,
+      "inode": 220989733
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220401/B02.tif",
+      "size": 200096254,
+      "mtime_ns": 1791902209258059856,
+      "ctime_ns": 1791902209262059856,
+      "inode": 220989831
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220401/B03.tif",
+      "size": 208014451,
+      "mtime_ns": 1791902134034061445,
+      "ctime_ns": 1791902134034061445,
+      "inode": 220989832
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220401/B04.tif",
+      "size": 212350151,
+      "mtime_ns": 1791902204394059959,
+      "ctime_ns": 1791902204394059959,
+      "inode": 220989833
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220401/B08.tif",
+      "size": 237736876,
+      "mtime_ns": 1791902267534058625,
+      "ctime_ns": 1791902267538058625,
+      "inode": 220989834
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220401/SCL.tif",
+      "size": 1481562,
+      "mtime_ns": 1791898451306139237,
+      "ctime_ns": 1791898451306139237,
+      "inode": 220989725
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220504/B02.tif",
+      "size": 83736548,
+      "mtime_ns": 1791902391010056017,
+      "ctime_ns": 1791902391010056017,
+      "inode": 220989843
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220504/B03.tif",
+      "size": 86410881,
+      "mtime_ns": 1791902463974054476,
+      "ctime_ns": 1791902463974054476,
+      "inode": 220989844
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220504/B04.tif",
+      "size": 88370798,
+      "mtime_ns": 1791902449610054779,
+      "ctime_ns": 1791902449610054779,
+      "inode": 220989845
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220504/B08.tif",
+      "size": 92797908,
+      "mtime_ns": 1791902462014054517,
+      "ctime_ns": 1791902462014054517,
+      "inode": 220989846
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220504/SCL.tif",
+      "size": 829820,
+      "mtime_ns": 1791898458514139084,
+      "ctime_ns": 1791898458514139084,
+      "inode": 220989737
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220511/B02.tif",
+      "size": 203367034,
+      "mtime_ns": 1791902620338051173,
+      "ctime_ns": 1791902620338051173,
+      "inode": 220989847
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220511/B03.tif",
+      "size": 211695216,
+      "mtime_ns": 1791902568282052272,
+      "ctime_ns": 1791902568286052272,
+      "inode": 220989848
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220511/B04.tif",
+      "size": 213015803,
+      "mtime_ns": 1791902611698051355,
+      "ctime_ns": 1791902611774051354,
+      "inode": 220989849
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220511/B08.tif",
+      "size": 241771391,
+      "mtime_ns": 1791902682686049856,
+      "ctime_ns": 1791902682686049856,
+      "inode": 220989850
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/sentinel2/chaco_sudoeste/2021_2022/20JQQ/20220511/SCL.tif",
+      "size": 1390069,
+      "mtime_ns": 1791898460718139038,
+      "ctime_ns": 1791898460718139038,
+      "inode": 220989741
+    }
+  ],
+  "composites": [
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/composites/chaco_sudoeste/2021_2022/20261014T141241Z/20JPQ_202112_median.tif",
+      "size": 594132132,
+      "mtime_ns": 1791987363660261111,
+      "ctime_ns": 1791987363660261111,
+      "inode": 220989861
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/composites/chaco_sudoeste/2021_2022/20261014T141241Z/20JPQ_202201_median.tif",
+      "size": 626085798,
+      "mtime_ns": 1791987361212261163,
+      "ctime_ns": 1791987361212261163,
+      "inode": 220989862
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/composites/chaco_sudoeste/2021_2022/20261014T141241Z/20JPQ_202202_median.tif",
+      "size": 624169046,
+      "mtime_ns": 1791987426808259777,
+      "ctime_ns": 1791987426808259777,
+      "inode": 220989863
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/composites/chaco_sudoeste/2021_2022/20261014T141241Z/20JPQ_202203_median.tif",
+      "size": 626256320,
+      "mtime_ns": 1791987425916259796,
+      "ctime_ns": 1791987425916259796,
+      "inode": 220989864
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/composites/chaco_sudoeste/2021_2022/20261014T141241Z/20JPQ_202204_median.tif",
+      "size": 624984352,
+      "mtime_ns": 1791987491848258403,
+      "ctime_ns": 1791987491848258403,
+      "inode": 220989866
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/composites/chaco_sudoeste/2021_2022/20261014T141241Z/20JPQ_202205_median.tif",
+      "size": 619364324,
+      "mtime_ns": 1791987491504258411,
+      "ctime_ns": 1791987491504258411,
+      "inode": 220989865
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/composites/chaco_sudoeste/2021_2022/20261014T141241Z/20JPR_202112_median.tif",
+      "size": 602738288,
+      "mtime_ns": 1791987560712256949,
+      "ctime_ns": 1791987560712256949,
+      "inode": 220989867
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/composites/chaco_sudoeste/2021_2022/20261014T141241Z/20JPR_202201_median.tif",
+      "size": 628258750,
+      "mtime_ns": 1791987553944257092,
+      "ctime_ns": 1791987553944257092,
+      "inode": 220989868
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/composites/chaco_sudoeste/2021_2022/20261014T141241Z/20JPR_202202_median.tif",
+      "size": 628034400,
+      "mtime_ns": 1791987616284255775,
+      "ctime_ns": 1791987616284255775,
+      "inode": 220989869
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/composites/chaco_sudoeste/2021_2022/20261014T141241Z/20JPR_202203_median.tif",
+      "size": 624638446,
+      "mtime_ns": 1791987626584255557,
+      "ctime_ns": 1791987626584255557,
+      "inode": 220989870
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/composites/chaco_sudoeste/2021_2022/20261014T141241Z/20JPR_202204_median.tif",
+      "size": 241640886,
+      "mtime_ns": 1791987667460254694,
+      "ctime_ns": 1791987667460254694,
+      "inode": 220989871
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/composites/chaco_sudoeste/2021_2022/20261014T141241Z/20JPR_202205_median.tif",
+      "size": 623964546,
+      "mtime_ns": 1791987690768254202,
+      "ctime_ns": 1791987690768254202,
+      "inode": 220989872
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/composites/chaco_sudoeste/2021_2022/20261014T141241Z/20JQQ_202112_median.tif",
+      "size": 657996220,
+      "mtime_ns": 1791987721188253559,
+      "ctime_ns": 1791987721188253559,
+      "inode": 220989873
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/composites/chaco_sudoeste/2021_2022/20261014T141241Z/20JQQ_202201_median.tif",
+      "size": 652553094,
+      "mtime_ns": 1791987753968252867,
+      "ctime_ns": 1791987753968252867,
+      "inode": 220989874
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/composites/chaco_sudoeste/2021_2022/20261014T141241Z/20JQQ_202202_median.tif",
+      "size": 646821248,
+      "mtime_ns": 1791987783436252244,
+      "ctime_ns": 1791987783436252244,
+      "inode": 220989875
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/composites/chaco_sudoeste/2021_2022/20261014T141241Z/20JQQ_202203_median.tif",
+      "size": 655058054,
+      "mtime_ns": 1791987815260251572,
+      "ctime_ns": 1791987815260251572,
+      "inode": 220989876
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/composites/chaco_sudoeste/2021_2022/20261014T141241Z/20JQQ_202204_median.tif",
+      "size": 655450736,
+      "mtime_ns": 1791987846832250905,
+      "ctime_ns": 1791987846832250905,
+      "inode": 220989877
+    },
+    {
+      "ruta": "/mnt/yacy_1/prod/ferreyra/cordoba_ia_unne/data/composites/chaco_sudoeste/2021_2022/20261014T141241Z/20JQQ_202205_median.tif",
+      "size": 657937456,
+      "mtime_ns": 1791987877280250262,
+      "ctime_ns": 1791987877280250262,
+      "inode": 220989878
+    }
+  ],
+  "criterio": "grillas completas con referencia valida; sin recorte provincial; transferencia separada de TEST",
+  "run_dir": "/mnt/yacy_3/prod_bis/ferreyra/cordoba_ia_unne/artifacts/runs/20261014T141242Z_evaluacion_chaco_agrupado_pipeline_779e0a3788d1"
+}

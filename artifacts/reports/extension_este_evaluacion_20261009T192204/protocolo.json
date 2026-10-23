@@ -1,0 +1,73 @@
+{
+  "fecha": "2026-10-09T19:22:04.545180",
+  "exp": "/mnt/yacy_3/prod_bis/ferreyra/dataset/exp_multicampana_1819_1920_2021_unet_bloques_20261007T094404",
+  "checkpoint_sha256": "ffe573f3219ebaa0731ab2010d81756fb90e9adbb19436400024dcc66e365909",
+  "modelo": "SimpleUNet(24,5)",
+  "checkpoint_seleccion": "mejor VAL, epoca 60",
+  "split_original": {
+    "train": [
+      "19HGC",
+      "20HLG",
+      "20HLH",
+      "20HMJ",
+      "20HMK",
+      "20HNK",
+      "20JML",
+      "20HKH",
+      "20HMG",
+      "20HNG",
+      "20HPG",
+      "20HPH",
+      "20JNL"
+    ],
+    "val": [
+      "20HKJ",
+      "20HMH"
+    ],
+    "test": [
+      "20HLK",
+      "20HLJ"
+    ]
+  },
+  "split_evaluacion": {
+    "nombre": "extension_este_test_v1",
+    "train": [
+      "19HGC",
+      "20HLG",
+      "20HLH",
+      "20HMJ",
+      "20HMK",
+      "20HNK",
+      "20JML",
+      "20HKH",
+      "20HMG",
+      "20HNG",
+      "20HPG",
+      "20HPH",
+      "20JNL"
+    ],
+    "val": [
+      "20HKJ",
+      "20HMH"
+    ],
+    "test": [
+      "20HNJ",
+      "20HNH"
+    ],
+    "test_anterior_no_asignado": [
+      "20HLK",
+      "20HLJ"
+    ],
+    "campanas": [
+      "2018_2019",
+      "2019_2020",
+      "2020_2021",
+      "2021_2022"
+    ],
+    "criterio": "Evaluar checkpoint congelado; excluir geometrias completas TRAIN y VAL de las metricas espaciales estrictas",
+    "entrenador_actual_modificado": false
+  },
+  "sin_reentrenar": true,
+  "sin_ajustes_con_test": true,
+  "exclusion_conservadora": "rasterizar grillas completas TRAIN y VAL de las tres campanas; all_touched=True; se conservan ambas metricas"
+}

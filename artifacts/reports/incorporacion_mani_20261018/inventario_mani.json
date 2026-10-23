@@ -1,0 +1,512 @@
+[
+  {
+    "campana": "2018_2019",
+    "tile": "19HGC",
+    "parches": 980,
+    "parches_con_mani": 258,
+    "parches_mani_1pct": 47,
+    "parches_mani_10pct": 3,
+    "ha_pixeles_sin_deduplicar": 1393.46,
+    "elegibles_comunes": 422
+  },
+  {
+    "campana": "2018_2019",
+    "tile": "20HLG",
+    "parches": 1764,
+    "parches_con_mani": 360,
+    "parches_mani_1pct": 161,
+    "parches_mani_10pct": 19,
+    "ha_pixeles_sin_deduplicar": 6236.6,
+    "elegibles_comunes": 1752
+  },
+  {
+    "campana": "2018_2019",
+    "tile": "20HLH",
+    "parches": 1764,
+    "parches_con_mani": 783,
+    "parches_mani_1pct": 426,
+    "parches_mani_10pct": 66,
+    "ha_pixeles_sin_deduplicar": 16605.28,
+    "elegibles_comunes": 1505
+  },
+  {
+    "campana": "2018_2019",
+    "tile": "20HMJ",
+    "parches": 1764,
+    "parches_con_mani": 600,
+    "parches_mani_1pct": 365,
+    "parches_mani_10pct": 62,
+    "ha_pixeles_sin_deduplicar": 15348.25,
+    "elegibles_comunes": 1521
+  },
+  {
+    "campana": "2018_2019",
+    "tile": "20HMK",
+    "parches": 1764,
+    "parches_con_mani": 50,
+    "parches_mani_1pct": 40,
+    "parches_mani_10pct": 15,
+    "ha_pixeles_sin_deduplicar": 2314.31,
+    "elegibles_comunes": 1638
+  },
+  {
+    "campana": "2018_2019",
+    "tile": "20HNK",
+    "parches": 1764,
+    "parches_con_mani": 0,
+    "parches_mani_1pct": 0,
+    "parches_mani_10pct": 0,
+    "ha_pixeles_sin_deduplicar": 0.0,
+    "elegibles_comunes": 1504
+  },
+  {
+    "campana": "2018_2019",
+    "tile": "20JML",
+    "parches": 1764,
+    "parches_con_mani": 0,
+    "parches_mani_1pct": 0,
+    "parches_mani_10pct": 0,
+    "ha_pixeles_sin_deduplicar": 0.0,
+    "elegibles_comunes": 1638
+  },
+  {
+    "campana": "2018_2019",
+    "tile": "20HKH",
+    "parches": 1737,
+    "parches_con_mani": 626,
+    "parches_mani_1pct": 142,
+    "parches_mani_10pct": 11,
+    "ha_pixeles_sin_deduplicar": 4377.67,
+    "elegibles_comunes": 682
+  },
+  {
+    "campana": "2018_2019",
+    "tile": "20HMG",
+    "parches": 1764,
+    "parches_con_mani": 212,
+    "parches_mani_1pct": 117,
+    "parches_mani_10pct": 24,
+    "ha_pixeles_sin_deduplicar": 4724.14,
+    "elegibles_comunes": 1482
+  },
+  {
+    "campana": "2018_2019",
+    "tile": "20HNG",
+    "parches": 1764,
+    "parches_con_mani": 3,
+    "parches_mani_1pct": 0,
+    "parches_mani_10pct": 0,
+    "ha_pixeles_sin_deduplicar": 3.48,
+    "elegibles_comunes": 1482
+  },
+  {
+    "campana": "2018_2019",
+    "tile": "20HPG",
+    "parches": 1764,
+    "parches_con_mani": 0,
+    "parches_mani_1pct": 0,
+    "parches_mani_10pct": 0,
+    "ha_pixeles_sin_deduplicar": 0.0,
+    "elegibles_comunes": 1634
+  },
+  {
+    "campana": "2018_2019",
+    "tile": "20HPH",
+    "parches": 1764,
+    "parches_con_mani": 0,
+    "parches_mani_1pct": 0,
+    "parches_mani_10pct": 0,
+    "ha_pixeles_sin_deduplicar": 0.0,
+    "elegibles_comunes": 1475
+  },
+  {
+    "campana": "2018_2019",
+    "tile": "20JNL",
+    "parches": 1764,
+    "parches_con_mani": 0,
+    "parches_mani_1pct": 0,
+    "parches_mani_10pct": 0,
+    "ha_pixeles_sin_deduplicar": 0.0,
+    "elegibles_comunes": 1351
+  },
+  {
+    "campana": "2018_2019",
+    "tile": "20HLJ",
+    "parches": 1764,
+    "parches_con_mani": 679,
+    "parches_mani_1pct": 362,
+    "parches_mani_10pct": 51,
+    "ha_pixeles_sin_deduplicar": 13831.9,
+    "elegibles_comunes": 1364
+  },
+  {
+    "campana": "2018_2019",
+    "tile": "20HKJ",
+    "parches": 1706,
+    "parches_con_mani": 404,
+    "parches_mani_1pct": 66,
+    "parches_mani_10pct": 8,
+    "ha_pixeles_sin_deduplicar": 2354.51,
+    "elegibles_comunes": 0
+  },
+  {
+    "campana": "2018_2019",
+    "tile": "20HMH",
+    "parches": 1764,
+    "parches_con_mani": 461,
+    "parches_mani_1pct": 280,
+    "parches_mani_10pct": 53,
+    "ha_pixeles_sin_deduplicar": 12147.24,
+    "elegibles_comunes": 0
+  },
+  {
+    "campana": "2018_2019",
+    "tile": "20HLK",
+    "parches": 1511,
+    "parches_con_mani": 130,
+    "parches_mani_1pct": 77,
+    "parches_mani_10pct": 16,
+    "ha_pixeles_sin_deduplicar": 3413.52,
+    "elegibles_comunes": 0
+  },
+  {
+    "campana": "2019_2020",
+    "tile": "19HGC",
+    "parches": 980,
+    "parches_con_mani": 11,
+    "parches_mani_1pct": 3,
+    "parches_mani_10pct": 0,
+    "ha_pixeles_sin_deduplicar": 57.75,
+    "elegibles_comunes": 422
+  },
+  {
+    "campana": "2019_2020",
+    "tile": "20HLG",
+    "parches": 1764,
+    "parches_con_mani": 827,
+    "parches_mani_1pct": 508,
+    "parches_mani_10pct": 183,
+    "ha_pixeles_sin_deduplicar": 34836.99,
+    "elegibles_comunes": 1752
+  },
+  {
+    "campana": "2019_2020",
+    "tile": "20HLH",
+    "parches": 1764,
+    "parches_con_mani": 948,
+    "parches_mani_1pct": 654,
+    "parches_mani_10pct": 214,
+    "ha_pixeles_sin_deduplicar": 40774.17,
+    "elegibles_comunes": 1505
+  },
+  {
+    "campana": "2019_2020",
+    "tile": "20HMJ",
+    "parches": 1764,
+    "parches_con_mani": 538,
+    "parches_mani_1pct": 393,
+    "parches_mani_10pct": 115,
+    "ha_pixeles_sin_deduplicar": 22743.88,
+    "elegibles_comunes": 1521
+  },
+  {
+    "campana": "2019_2020",
+    "tile": "20HMK",
+    "parches": 1764,
+    "parches_con_mani": 19,
+    "parches_mani_1pct": 9,
+    "parches_mani_10pct": 3,
+    "ha_pixeles_sin_deduplicar": 628.27,
+    "elegibles_comunes": 1638
+  },
+  {
+    "campana": "2019_2020",
+    "tile": "20HNK",
+    "parches": 1747,
+    "parches_con_mani": 0,
+    "parches_mani_1pct": 0,
+    "parches_mani_10pct": 0,
+    "ha_pixeles_sin_deduplicar": 0.0,
+    "elegibles_comunes": 1504
+  },
+  {
+    "campana": "2019_2020",
+    "tile": "20JML",
+    "parches": 1764,
+    "parches_con_mani": 0,
+    "parches_mani_1pct": 0,
+    "parches_mani_10pct": 0,
+    "ha_pixeles_sin_deduplicar": 0.0,
+    "elegibles_comunes": 1638
+  },
+  {
+    "campana": "2019_2020",
+    "tile": "20HKH",
+    "parches": 1737,
+    "parches_con_mani": 172,
+    "parches_mani_1pct": 79,
+    "parches_mani_10pct": 16,
+    "ha_pixeles_sin_deduplicar": 3613.86,
+    "elegibles_comunes": 682
+  },
+  {
+    "campana": "2019_2020",
+    "tile": "20HMG",
+    "parches": 1764,
+    "parches_con_mani": 391,
+    "parches_mani_1pct": 179,
+    "parches_mani_10pct": 70,
+    "ha_pixeles_sin_deduplicar": 12016.64,
+    "elegibles_comunes": 1482
+  },
+  {
+    "campana": "2019_2020",
+    "tile": "20HNG",
+    "parches": 1760,
+    "parches_con_mani": 51,
+    "parches_mani_1pct": 2,
+    "parches_mani_10pct": 1,
+    "ha_pixeles_sin_deduplicar": 177.79,
+    "elegibles_comunes": 1482
+  },
+  {
+    "campana": "2019_2020",
+    "tile": "20HPG",
+    "parches": 1764,
+    "parches_con_mani": 1,
+    "parches_mani_1pct": 0,
+    "parches_mani_10pct": 0,
+    "ha_pixeles_sin_deduplicar": 0.51,
+    "elegibles_comunes": 1634
+  },
+  {
+    "campana": "2019_2020",
+    "tile": "20HPH",
+    "parches": 1757,
+    "parches_con_mani": 0,
+    "parches_mani_1pct": 0,
+    "parches_mani_10pct": 0,
+    "ha_pixeles_sin_deduplicar": 0.0,
+    "elegibles_comunes": 1475
+  },
+  {
+    "campana": "2019_2020",
+    "tile": "20JNL",
+    "parches": 1605,
+    "parches_con_mani": 0,
+    "parches_mani_1pct": 0,
+    "parches_mani_10pct": 0,
+    "ha_pixeles_sin_deduplicar": 0.0,
+    "elegibles_comunes": 1351
+  },
+  {
+    "campana": "2019_2020",
+    "tile": "20HLJ",
+    "parches": 1763,
+    "parches_con_mani": 654,
+    "parches_mani_1pct": 428,
+    "parches_mani_10pct": 121,
+    "ha_pixeles_sin_deduplicar": 23638.11,
+    "elegibles_comunes": 1364
+  },
+  {
+    "campana": "2019_2020",
+    "tile": "20HKJ",
+    "parches": 1706,
+    "parches_con_mani": 91,
+    "parches_mani_1pct": 12,
+    "parches_mani_10pct": 0,
+    "ha_pixeles_sin_deduplicar": 355.47,
+    "elegibles_comunes": 0
+  },
+  {
+    "campana": "2019_2020",
+    "tile": "20HMH",
+    "parches": 1764,
+    "parches_con_mani": 538,
+    "parches_mani_1pct": 358,
+    "parches_mani_10pct": 103,
+    "ha_pixeles_sin_deduplicar": 21159.19,
+    "elegibles_comunes": 0
+  },
+  {
+    "campana": "2019_2020",
+    "tile": "20HLK",
+    "parches": 1510,
+    "parches_con_mani": 63,
+    "parches_mani_1pct": 30,
+    "parches_mani_10pct": 6,
+    "ha_pixeles_sin_deduplicar": 1304.99,
+    "elegibles_comunes": 0
+  },
+  {
+    "campana": "2020_2021",
+    "tile": "19HGC",
+    "parches": 1706,
+    "parches_con_mani": 0,
+    "parches_mani_1pct": 0,
+    "parches_mani_10pct": 0,
+    "ha_pixeles_sin_deduplicar": 0.0,
+    "elegibles_comunes": 422
+  },
+  {
+    "campana": "2020_2021",
+    "tile": "20HLG",
+    "parches": 1764,
+    "parches_con_mani": 483,
+    "parches_mani_1pct": 337,
+    "parches_mani_10pct": 80,
+    "ha_pixeles_sin_deduplicar": 17400.79,
+    "elegibles_comunes": 1752
+  },
+  {
+    "campana": "2020_2021",
+    "tile": "20HLH",
+    "parches": 1764,
+    "parches_con_mani": 1037,
+    "parches_mani_1pct": 806,
+    "parches_mani_10pct": 308,
+    "ha_pixeles_sin_deduplicar": 50555.68,
+    "elegibles_comunes": 1505
+  },
+  {
+    "campana": "2020_2021",
+    "tile": "20HMJ",
+    "parches": 1764,
+    "parches_con_mani": 686,
+    "parches_mani_1pct": 506,
+    "parches_mani_10pct": 121,
+    "ha_pixeles_sin_deduplicar": 26443.600000000002,
+    "elegibles_comunes": 1521
+  },
+  {
+    "campana": "2020_2021",
+    "tile": "20HMK",
+    "parches": 1764,
+    "parches_con_mani": 478,
+    "parches_mani_1pct": 293,
+    "parches_mani_10pct": 51,
+    "ha_pixeles_sin_deduplicar": 11900.460000000001,
+    "elegibles_comunes": 1638
+  },
+  {
+    "campana": "2020_2021",
+    "tile": "20HNK",
+    "parches": 1747,
+    "parches_con_mani": 0,
+    "parches_mani_1pct": 0,
+    "parches_mani_10pct": 0,
+    "ha_pixeles_sin_deduplicar": 0.0,
+    "elegibles_comunes": 1504
+  },
+  {
+    "campana": "2020_2021",
+    "tile": "20JML",
+    "parches": 1764,
+    "parches_con_mani": 122,
+    "parches_mani_1pct": 62,
+    "parches_mani_10pct": 7,
+    "ha_pixeles_sin_deduplicar": 2139.68,
+    "elegibles_comunes": 1638
+  },
+  {
+    "campana": "2020_2021",
+    "tile": "20HKH",
+    "parches": 1764,
+    "parches_con_mani": 55,
+    "parches_mani_1pct": 33,
+    "parches_mani_10pct": 8,
+    "ha_pixeles_sin_deduplicar": 1424.0,
+    "elegibles_comunes": 682
+  },
+  {
+    "campana": "2020_2021",
+    "tile": "20HMG",
+    "parches": 1764,
+    "parches_con_mani": 261,
+    "parches_mani_1pct": 163,
+    "parches_mani_10pct": 47,
+    "ha_pixeles_sin_deduplicar": 8718.43,
+    "elegibles_comunes": 1482
+  },
+  {
+    "campana": "2020_2021",
+    "tile": "20HNG",
+    "parches": 1760,
+    "parches_con_mani": 4,
+    "parches_mani_1pct": 2,
+    "parches_mani_10pct": 0,
+    "ha_pixeles_sin_deduplicar": 50.1,
+    "elegibles_comunes": 1482
+  },
+  {
+    "campana": "2020_2021",
+    "tile": "20HPG",
+    "parches": 1764,
+    "parches_con_mani": 0,
+    "parches_mani_1pct": 0,
+    "parches_mani_10pct": 0,
+    "ha_pixeles_sin_deduplicar": 0.0,
+    "elegibles_comunes": 1634
+  },
+  {
+    "campana": "2020_2021",
+    "tile": "20HPH",
+    "parches": 1757,
+    "parches_con_mani": 0,
+    "parches_mani_1pct": 0,
+    "parches_mani_10pct": 0,
+    "ha_pixeles_sin_deduplicar": 0.0,
+    "elegibles_comunes": 1475
+  },
+  {
+    "campana": "2020_2021",
+    "tile": "20JNL",
+    "parches": 1594,
+    "parches_con_mani": 9,
+    "parches_mani_1pct": 0,
+    "parches_mani_10pct": 0,
+    "ha_pixeles_sin_deduplicar": 15.43,
+    "elegibles_comunes": 1351
+  },
+  {
+    "campana": "2020_2021",
+    "tile": "20HLJ",
+    "parches": 1763,
+    "parches_con_mani": 696,
+    "parches_mani_1pct": 449,
+    "parches_mani_10pct": 120,
+    "ha_pixeles_sin_deduplicar": 22645.47,
+    "elegibles_comunes": 1364
+  },
+  {
+    "campana": "2020_2021",
+    "tile": "20HKJ",
+    "parches": 1764,
+    "parches_con_mani": 7,
+    "parches_mani_1pct": 1,
+    "parches_mani_10pct": 0,
+    "ha_pixeles_sin_deduplicar": 20.400000000000002,
+    "elegibles_comunes": 0
+  },
+  {
+    "campana": "2020_2021",
+    "tile": "20HMH",
+    "parches": 1764,
+    "parches_con_mani": 688,
+    "parches_mani_1pct": 443,
+    "parches_mani_10pct": 117,
+    "ha_pixeles_sin_deduplicar": 23969.86,
+    "elegibles_comunes": 0
+  },
+  {
+    "campana": "2020_2021",
+    "tile": "20HLK",
+    "parches": 1763,
+    "parches_con_mani": 145,
+    "parches_mani_1pct": 67,
+    "parches_mani_10pct": 7,
+    "ha_pixeles_sin_deduplicar": 2401.54,
+    "elegibles_comunes": 0
+  }
+]

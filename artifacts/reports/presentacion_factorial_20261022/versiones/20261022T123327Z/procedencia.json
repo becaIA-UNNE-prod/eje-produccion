@@ -1,0 +1,11 @@
+{
+  "source": "artifacts/reports/factorial_unet_segmenter_20261022/metricas/resumen_2021_2022.json",
+  "source_sha256": "4e592986dee196fca9efb398ec91a05084d8c5ee38f874982400370acb280acb",
+  "files": {
+    "GUION.md": "da15af09f3e6fdb3fbff559ced5352291880a9c6098c18a9316fc209c9c73e96",
+    "LEEME.md": "06c591928b1025f8bbd7354d7d8f5a1a4c5bf788dd0f2e99bd21ee4ae899ce1b",
+    "PRESENTACION.html": "58bc0a6b49a89e0e4cbb02d626cf3f364ebf39da89aabea18a961a8b38793bf3"
+  },
+  "slides": 13,
+  "visual_browser_review": "not available; no connected browser"
+}

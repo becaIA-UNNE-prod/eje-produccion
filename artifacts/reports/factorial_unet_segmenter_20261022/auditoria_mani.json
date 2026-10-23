@@ -1,0 +1,688 @@
+{
+  "condiciones": {
+    "reducida_2020_2021": {
+      "por_campana_tile": [
+        {
+          "campana": "2020_2021",
+          "tile": "20HLG",
+          "parches": 1146,
+          "mani_mnc_px": 936366,
+          "mani_concordante_px": 857837,
+          "ipave_px": 2400477,
+          "ignorado_conflicto_px": 1542636
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20HLH",
+          "parches": 910,
+          "mani_mnc_px": 2402061,
+          "mani_concordante_px": 2125631,
+          "ipave_px": 3071460,
+          "ignorado_conflicto_px": 945820
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20HMG",
+          "parches": 1016,
+          "mani_mnc_px": 314143,
+          "mani_concordante_px": 255719,
+          "ipave_px": 588670,
+          "ignorado_conflicto_px": 332947
+        }
+      ],
+      "conteos_train": [
+        5846314,
+        78003055,
+        54446183,
+        59378470,
+        3652570
+      ],
+      "mani_ha": 36525.7,
+      "mani_concordante_ha": 32391.87,
+      "conflicto_ignorado_ha": 28214.03,
+      "parches_HLJ": 0
+    },
+    "amplia_tres": {
+      "por_campana_tile": [
+        {
+          "campana": "2018_2019",
+          "tile": "19HGC",
+          "parches": 17,
+          "mani_mnc_px": 1762,
+          "mani_concordante_px": 0,
+          "ipave_px": 0,
+          "ignorado_conflicto_px": 0
+        },
+        {
+          "campana": "2018_2019",
+          "tile": "20HKH",
+          "parches": 41,
+          "mani_mnc_px": 28891,
+          "mani_concordante_px": 0,
+          "ipave_px": 0,
+          "ignorado_conflicto_px": 0
+        },
+        {
+          "campana": "2018_2019",
+          "tile": "20HLG",
+          "parches": 77,
+          "mani_mnc_px": 118190,
+          "mani_concordante_px": 85337,
+          "ipave_px": 435439,
+          "ignorado_conflicto_px": 350102
+        },
+        {
+          "campana": "2018_2019",
+          "tile": "20HLH",
+          "parches": 97,
+          "mani_mnc_px": 189928,
+          "mani_concordante_px": 103805,
+          "ipave_px": 404178,
+          "ignorado_conflicto_px": 300373
+        },
+        {
+          "campana": "2018_2019",
+          "tile": "20HLJ",
+          "parches": 84,
+          "mani_mnc_px": 142630,
+          "mani_concordante_px": 82651,
+          "ipave_px": 318782,
+          "ignorado_conflicto_px": 236131
+        },
+        {
+          "campana": "2018_2019",
+          "tile": "20HMG",
+          "parches": 89,
+          "mani_mnc_px": 62613,
+          "mani_concordante_px": 57763,
+          "ipave_px": 167126,
+          "ignorado_conflicto_px": 109363
+        },
+        {
+          "campana": "2018_2019",
+          "tile": "20HMJ",
+          "parches": 98,
+          "mani_mnc_px": 191292,
+          "mani_concordante_px": 148031,
+          "ipave_px": 385760,
+          "ignorado_conflicto_px": 237729
+        },
+        {
+          "campana": "2018_2019",
+          "tile": "20HMK",
+          "parches": 89,
+          "mani_mnc_px": 24189,
+          "mani_concordante_px": 10980,
+          "ipave_px": 136452,
+          "ignorado_conflicto_px": 125472
+        },
+        {
+          "campana": "2018_2019",
+          "tile": "20HNG",
+          "parches": 63,
+          "mani_mnc_px": 0,
+          "mani_concordante_px": 0,
+          "ipave_px": 0,
+          "ignorado_conflicto_px": 0
+        },
+        {
+          "campana": "2018_2019",
+          "tile": "20HNK",
+          "parches": 82,
+          "mani_mnc_px": 0,
+          "mani_concordante_px": 0,
+          "ipave_px": 5512,
+          "ignorado_conflicto_px": 5512
+        },
+        {
+          "campana": "2018_2019",
+          "tile": "20HPG",
+          "parches": 76,
+          "mani_mnc_px": 0,
+          "mani_concordante_px": 0,
+          "ipave_px": 0,
+          "ignorado_conflicto_px": 0
+        },
+        {
+          "campana": "2018_2019",
+          "tile": "20HPH",
+          "parches": 73,
+          "mani_mnc_px": 0,
+          "mani_concordante_px": 0,
+          "ipave_px": 0,
+          "ignorado_conflicto_px": 0
+        },
+        {
+          "campana": "2018_2019",
+          "tile": "20JML",
+          "parches": 88,
+          "mani_mnc_px": 0,
+          "mani_concordante_px": 0,
+          "ipave_px": 40866,
+          "ignorado_conflicto_px": 40866
+        },
+        {
+          "campana": "2018_2019",
+          "tile": "20JNL",
+          "parches": 50,
+          "mani_mnc_px": 0,
+          "mani_concordante_px": 0,
+          "ipave_px": 0,
+          "ignorado_conflicto_px": 0
+        },
+        {
+          "campana": "2019_2020",
+          "tile": "19HGC",
+          "parches": 15,
+          "mani_mnc_px": 0,
+          "mani_concordante_px": 0,
+          "ipave_px": 0,
+          "ignorado_conflicto_px": 0
+        },
+        {
+          "campana": "2019_2020",
+          "tile": "20HKH",
+          "parches": 33,
+          "mani_mnc_px": 1071,
+          "mani_concordante_px": 0,
+          "ipave_px": 0,
+          "ignorado_conflicto_px": 0
+        },
+        {
+          "campana": "2019_2020",
+          "tile": "20HLG",
+          "parches": 107,
+          "mani_mnc_px": 342782,
+          "mani_concordante_px": 239969,
+          "ipave_px": 410879,
+          "ignorado_conflicto_px": 170777
+        },
+        {
+          "campana": "2019_2020",
+          "tile": "20HLH",
+          "parches": 121,
+          "mani_mnc_px": 449270,
+          "mani_concordante_px": 361399,
+          "ipave_px": 635876,
+          "ignorado_conflicto_px": 274477
+        },
+        {
+          "campana": "2019_2020",
+          "tile": "20HLJ",
+          "parches": 80,
+          "mani_mnc_px": 135402,
+          "mani_concordante_px": 110459,
+          "ipave_px": 236321,
+          "ignorado_conflicto_px": 125862
+        },
+        {
+          "campana": "2019_2020",
+          "tile": "20HMG",
+          "parches": 87,
+          "mani_mnc_px": 116684,
+          "mani_concordante_px": 87558,
+          "ipave_px": 137283,
+          "ignorado_conflicto_px": 49701
+        },
+        {
+          "campana": "2019_2020",
+          "tile": "20HMJ",
+          "parches": 95,
+          "mani_mnc_px": 208733,
+          "mani_concordante_px": 171364,
+          "ipave_px": 353148,
+          "ignorado_conflicto_px": 181784
+        },
+        {
+          "campana": "2019_2020",
+          "tile": "20HMK",
+          "parches": 91,
+          "mani_mnc_px": 0,
+          "mani_concordante_px": 0,
+          "ipave_px": 124312,
+          "ignorado_conflicto_px": 124312
+        },
+        {
+          "campana": "2019_2020",
+          "tile": "20HNG",
+          "parches": 64,
+          "mani_mnc_px": 42,
+          "mani_concordante_px": 0,
+          "ipave_px": 0,
+          "ignorado_conflicto_px": 0
+        },
+        {
+          "campana": "2019_2020",
+          "tile": "20HNK",
+          "parches": 49,
+          "mani_mnc_px": 0,
+          "mani_concordante_px": 0,
+          "ipave_px": 17001,
+          "ignorado_conflicto_px": 17001
+        },
+        {
+          "campana": "2019_2020",
+          "tile": "20HPG",
+          "parches": 59,
+          "mani_mnc_px": 0,
+          "mani_concordante_px": 0,
+          "ipave_px": 0,
+          "ignorado_conflicto_px": 0
+        },
+        {
+          "campana": "2019_2020",
+          "tile": "20HPH",
+          "parches": 72,
+          "mani_mnc_px": 0,
+          "mani_concordante_px": 0,
+          "ipave_px": 0,
+          "ignorado_conflicto_px": 0
+        },
+        {
+          "campana": "2019_2020",
+          "tile": "20JML",
+          "parches": 82,
+          "mani_mnc_px": 0,
+          "mani_concordante_px": 0,
+          "ipave_px": 20635,
+          "ignorado_conflicto_px": 20635
+        },
+        {
+          "campana": "2019_2020",
+          "tile": "20JNL",
+          "parches": 69,
+          "mani_mnc_px": 0,
+          "mani_concordante_px": 0,
+          "ipave_px": 0,
+          "ignorado_conflicto_px": 0
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "19HGC",
+          "parches": 17,
+          "mani_mnc_px": 0,
+          "mani_concordante_px": 0,
+          "ipave_px": 0,
+          "ignorado_conflicto_px": 0
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20HKH",
+          "parches": 30,
+          "mani_mnc_px": 3442,
+          "mani_concordante_px": 0,
+          "ipave_px": 0,
+          "ignorado_conflicto_px": 0
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20HLG",
+          "parches": 98,
+          "mani_mnc_px": 199762,
+          "mani_concordante_px": 187369,
+          "ipave_px": 399588,
+          "ignorado_conflicto_px": 212219
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20HLH",
+          "parches": 75,
+          "mani_mnc_px": 304201,
+          "mani_concordante_px": 270142,
+          "ipave_px": 384729,
+          "ignorado_conflicto_px": 114587
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20HLJ",
+          "parches": 64,
+          "mani_mnc_px": 131661,
+          "mani_concordante_px": 114247,
+          "ipave_px": 193810,
+          "ignorado_conflicto_px": 79563
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20HMG",
+          "parches": 77,
+          "mani_mnc_px": 58593,
+          "mani_concordante_px": 55916,
+          "ipave_px": 117537,
+          "ignorado_conflicto_px": 61621
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20HMJ",
+          "parches": 87,
+          "mani_mnc_px": 230380,
+          "mani_concordante_px": 191346,
+          "ipave_px": 436390,
+          "ignorado_conflicto_px": 244998
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20HMK",
+          "parches": 107,
+          "mani_mnc_px": 174717,
+          "mani_concordante_px": 156178,
+          "ipave_px": 365074,
+          "ignorado_conflicto_px": 208882
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20HNG",
+          "parches": 76,
+          "mani_mnc_px": 0,
+          "mani_concordante_px": 0,
+          "ipave_px": 0,
+          "ignorado_conflicto_px": 0
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20HNK",
+          "parches": 80,
+          "mani_mnc_px": 0,
+          "mani_concordante_px": 0,
+          "ipave_px": 0,
+          "ignorado_conflicto_px": 0
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20HPG",
+          "parches": 85,
+          "mani_mnc_px": 0,
+          "mani_concordante_px": 0,
+          "ipave_px": 0,
+          "ignorado_conflicto_px": 0
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20HPH",
+          "parches": 64,
+          "mani_mnc_px": 0,
+          "mani_concordante_px": 0,
+          "ipave_px": 0,
+          "ignorado_conflicto_px": 0
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20JML",
+          "parches": 71,
+          "mani_mnc_px": 16637,
+          "mani_concordante_px": 10783,
+          "ipave_px": 46150,
+          "ignorado_conflicto_px": 35367
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20JNL",
+          "parches": 93,
+          "mani_mnc_px": 0,
+          "mani_concordante_px": 0,
+          "ipave_px": 0,
+          "ignorado_conflicto_px": 0
+        }
+      ],
+      "conteos_train": [
+        6808801,
+        73538124,
+        46841648,
+        71005147,
+        3132872
+      ],
+      "mani_ha": 31328.72,
+      "mani_concordante_ha": 24452.97,
+      "conflicto_ignorado_ha": 33273.34,
+      "parches_HLJ": 228
+    },
+    "amplia_2020_2021": {
+      "por_campana_tile": [
+        {
+          "campana": "2020_2021",
+          "tile": "19HGC",
+          "parches": 49,
+          "mani_mnc_px": 0,
+          "mani_concordante_px": 0,
+          "ipave_px": 0,
+          "ignorado_conflicto_px": 0
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20HKH",
+          "parches": 104,
+          "mani_mnc_px": 4980,
+          "mani_concordante_px": 0,
+          "ipave_px": 0,
+          "ignorado_conflicto_px": 0
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20HLG",
+          "parches": 282,
+          "mani_mnc_px": 514355,
+          "mani_concordante_px": 482170,
+          "ipave_px": 1234461,
+          "ignorado_conflicto_px": 752287
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20HLH",
+          "parches": 293,
+          "mani_mnc_px": 1160924,
+          "mani_concordante_px": 1042030,
+          "ipave_px": 1445484,
+          "ignorado_conflicto_px": 403454
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20HLJ",
+          "parches": 228,
+          "mani_mnc_px": 460155,
+          "mani_concordante_px": 399096,
+          "ipave_px": 718281,
+          "ignorado_conflicto_px": 319183
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20HMG",
+          "parches": 253,
+          "mani_mnc_px": 199545,
+          "mani_concordante_px": 154456,
+          "ipave_px": 323639,
+          "ignorado_conflicto_px": 169183
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20HMJ",
+          "parches": 280,
+          "mani_mnc_px": 609797,
+          "mani_concordante_px": 500967,
+          "ipave_px": 1161480,
+          "ignorado_conflicto_px": 659799
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20HMK",
+          "parches": 287,
+          "mani_mnc_px": 334762,
+          "mani_concordante_px": 291549,
+          "ipave_px": 715932,
+          "ignorado_conflicto_px": 424240
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20HNG",
+          "parches": 203,
+          "mani_mnc_px": 0,
+          "mani_concordante_px": 0,
+          "ipave_px": 0,
+          "ignorado_conflicto_px": 0
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20HNK",
+          "parches": 211,
+          "mani_mnc_px": 0,
+          "mani_concordante_px": 0,
+          "ipave_px": 1029,
+          "ignorado_conflicto_px": 1029
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20HPG",
+          "parches": 220,
+          "mani_mnc_px": 0,
+          "mani_concordante_px": 0,
+          "ipave_px": 0,
+          "ignorado_conflicto_px": 0
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20HPH",
+          "parches": 209,
+          "mani_mnc_px": 0,
+          "mani_concordante_px": 0,
+          "ipave_px": 0,
+          "ignorado_conflicto_px": 0
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20JML",
+          "parches": 241,
+          "mani_mnc_px": 43556,
+          "mani_concordante_px": 28764,
+          "ipave_px": 176239,
+          "ignorado_conflicto_px": 147475
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20JNL",
+          "parches": 212,
+          "mani_mnc_px": 82,
+          "mani_concordante_px": 0,
+          "ipave_px": 1659,
+          "ignorado_conflicto_px": 1098
+        }
+      ],
+      "conteos_train": [
+        8492392,
+        66834209,
+        50818686,
+        71853149,
+        3328156
+      ],
+      "mani_ha": 33281.56,
+      "mani_concordante_ha": 28990.32,
+      "conflicto_ignorado_ha": 28777.48,
+      "parches_HLJ": 228
+    },
+    "reducida_tres": {
+      "por_campana_tile": [
+        {
+          "campana": "2018_2019",
+          "tile": "20HLG",
+          "parches": 376,
+          "mani_mnc_px": 337764,
+          "mani_concordante_px": 250930,
+          "ipave_px": 1497548,
+          "ignorado_conflicto_px": 1246618
+        },
+        {
+          "campana": "2018_2019",
+          "tile": "20HLH",
+          "parches": 330,
+          "mani_mnc_px": 422603,
+          "mani_concordante_px": 288024,
+          "ipave_px": 1081944,
+          "ignorado_conflicto_px": 793920
+        },
+        {
+          "campana": "2018_2019",
+          "tile": "20HMG",
+          "parches": 318,
+          "mani_mnc_px": 71105,
+          "mani_concordante_px": 48242,
+          "ipave_px": 368555,
+          "ignorado_conflicto_px": 320313
+        },
+        {
+          "campana": "2019_2020",
+          "tile": "20HLG",
+          "parches": 417,
+          "mani_mnc_px": 545916,
+          "mani_concordante_px": 373136,
+          "ipave_px": 702435,
+          "ignorado_conflicto_px": 328551
+        },
+        {
+          "campana": "2019_2020",
+          "tile": "20HLH",
+          "parches": 278,
+          "mani_mnc_px": 586373,
+          "mani_concordante_px": 493182,
+          "ipave_px": 981218,
+          "ignorado_conflicto_px": 488022
+        },
+        {
+          "campana": "2019_2020",
+          "tile": "20HMG",
+          "parches": 329,
+          "mani_mnc_px": 178918,
+          "mani_concordante_px": 132567,
+          "ipave_px": 215855,
+          "ignorado_conflicto_px": 83288
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20HLG",
+          "parches": 353,
+          "mani_mnc_px": 305654,
+          "mani_concordante_px": 277462,
+          "ipave_px": 773195,
+          "ignorado_conflicto_px": 495729
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20HLH",
+          "parches": 302,
+          "mani_mnc_px": 815144,
+          "mani_concordante_px": 732257,
+          "ipave_px": 1040260,
+          "ignorado_conflicto_px": 307994
+        },
+        {
+          "campana": "2020_2021",
+          "tile": "20HMG",
+          "parches": 369,
+          "mani_mnc_px": 118121,
+          "mani_concordante_px": 101921,
+          "ipave_px": 236837,
+          "ignorado_conflicto_px": 134912
+        }
+      ],
+      "conteos_train": [
+        6179019,
+        87934460,
+        44272791,
+        59558724,
+        3381598
+      ],
+      "mani_ha": 33815.98,
+      "mani_concordante_ha": 26977.21,
+      "conflicto_ignorado_ha": 41993.47,
+      "parches_HLJ": 0
+    }
+  },
+  "conteos_union_train": [
+    20543925,
+    241569689,
+    151236316,
+    204550977,
+    9868437
+  ],
+  "regla_nucleo": "Representación medida con todos los polígonos IPAVE de las campañas TRAIN; no equivale a garantizar cobertura exhaustiva de departamentos",
+  "umbral_rico_px": 656,
+  "cupo_rico": 615,
+  "mani_sin_cambiar": true,
+  "val_test_sin_cambiar": true
+}

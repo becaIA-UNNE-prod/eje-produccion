@@ -1,0 +1,7 @@
+{
+  "experimento": "/mnt/yacy_3/prod_bis/ferreyra/dataset/exp_base_agrupada_unet_20261013T130505Z",
+  "epocas": 50,
+  "mejor_epoca": 20,
+  "curvas": "TRAIN/VAL C\u00f3rdoba; no entrenamiento en Chaco",
+  "metricas": "INTA sobre grillas completas; no campo independiente; no sumar \u00e1reas de tiles solapados"
+}

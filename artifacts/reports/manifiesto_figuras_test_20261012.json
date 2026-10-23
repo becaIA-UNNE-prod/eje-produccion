@@ -1,0 +1,606 @@
+{
+  "fecha_utc": "2026-10-12T21:09:02.527096+00:00",
+  "servidor": "floryacy",
+  "test": [
+    "20HNJ",
+    "20HNH"
+  ],
+  "verificacion": "SHA256 remoto y local coinciden",
+  "archivos": [
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "README.md",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/README.md",
+      "bytes": 459,
+      "sha256": "8b72dce5b2bfcc4c84c4662178915e95685051cc3bb7fff33d5adc66b6c20256"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "comparacion_metricas.csv",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/comparacion_metricas.csv",
+      "bytes": 2503,
+      "sha256": "9305fbba24e2dc0a33571af863618a357a1ef4d07bcc14c1198ea17af846eaab"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "evaluacion_test_actual.json",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/evaluacion_test_actual.json",
+      "bytes": 121014,
+      "sha256": "4abc865e2e659e9cf49c9a440b3e7680833a36cabfc59387189249a93b7a658e"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/comparacion_modelos_2018_2019_20HNH.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/comparacion_modelos_2018_2019_20HNH.png",
+      "bytes": 4161119,
+      "sha256": "28052ceebdf721830d44c3caec2681eaa333f7c7f5842c6284eddab771735861"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/comparacion_modelos_2018_2019_20HNJ.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/comparacion_modelos_2018_2019_20HNJ.png",
+      "bytes": 4394063,
+      "sha256": "42e467889e7166a74d8763b39f46ec7c22f8b902f8f59feff9e813afdd500902"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/comparacion_modelos_2019_2020_20HNH.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/comparacion_modelos_2019_2020_20HNH.png",
+      "bytes": 4128119,
+      "sha256": "532539a8b82ed31cfa488f7ec4096bf098a37e2d11df97719c188a11bc3ac4b5"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/comparacion_modelos_2019_2020_20HNJ.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/comparacion_modelos_2019_2020_20HNJ.png",
+      "bytes": 4276047,
+      "sha256": "a890126879253183222084f43994ace18cda0cfedef8b4164a61e34bf3ea46c1"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/comparacion_modelos_2020_2021_20HNH.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/comparacion_modelos_2020_2021_20HNH.png",
+      "bytes": 4130220,
+      "sha256": "4158d0e67d053b96c751067dc965adfbfaf785a751a73838112759c320561cde"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/comparacion_modelos_2020_2021_20HNJ.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/comparacion_modelos_2020_2021_20HNJ.png",
+      "bytes": 4077843,
+      "sha256": "815a258e0a2cda97ffa2d5125b07668c49a91695b1f57242f87bd0b7803e2b16"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/comparacion_modelos_2021_2022_20HNH.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/comparacion_modelos_2021_2022_20HNH.png",
+      "bytes": 4503013,
+      "sha256": "f3883bb3ac6d9ceabd809b3ebadf1285c8a31b4cb2ea55959cf3105355fb5f23"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/comparacion_modelos_2021_2022_20HNJ.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/comparacion_modelos_2021_2022_20HNJ.png",
+      "bytes": 4137901,
+      "sha256": "34c6dcf629acc97ad52af2496049b32099b67ce69c319649a21a58ced5c67137"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/comparacion_test_actual.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/comparacion_test_actual.png",
+      "bytes": 53672,
+      "sha256": "72c92001dfdb0a61d17ac4743a149620aaf79b191ee444e9ca30730001a4cf9c"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/confusion_fcr_2019_2020_2018_2019_completa.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/confusion_fcr_2019_2020_2018_2019_completa.png",
+      "bytes": 57952,
+      "sha256": "5f1851d9e24c006cc4c0ce4cd9901d4c99f2c63174cb50be4bdcd6ea47ca5992"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/confusion_fcr_2019_2020_2018_2019_independiente.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/confusion_fcr_2019_2020_2018_2019_independiente.png",
+      "bytes": 57632,
+      "sha256": "5c96c68387c70159dd5cdedc6542f86ab50ed88bdcde887e90bf57ad50e1e702"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/confusion_fcr_2019_2020_2019_2020_completa.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/confusion_fcr_2019_2020_2019_2020_completa.png",
+      "bytes": 58103,
+      "sha256": "bac3a13ab81943b18279f5fc562a622b1a62f0b06ba79924f8c6e8554fe1bde3"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/confusion_fcr_2019_2020_2019_2020_independiente.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/confusion_fcr_2019_2020_2019_2020_independiente.png",
+      "bytes": 59312,
+      "sha256": "2ac9f88a02455720160c344a23d5a72b65a51033638454145a197f75e704fda0"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/confusion_fcr_2019_2020_2020_2021_completa.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/confusion_fcr_2019_2020_2020_2021_completa.png",
+      "bytes": 60710,
+      "sha256": "5502ec114ba5a050b6129104880b85ee8b3fd0539fb81b7571859f5b3dcb9c4c"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/confusion_fcr_2019_2020_2020_2021_independiente.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/confusion_fcr_2019_2020_2020_2021_independiente.png",
+      "bytes": 59696,
+      "sha256": "fa5b8422a45c3bc4c48b7fda0037b912d5cf148706312e19310f72f628f6a442"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/confusion_fcr_2019_2020_2021_2022_completa.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/confusion_fcr_2019_2020_2021_2022_completa.png",
+      "bytes": 56381,
+      "sha256": "f0b9ef0658f71f305dfe614e40c35e2709b32fcf782020cffd421d8673ff3145"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/confusion_fcr_2019_2020_2021_2022_independiente.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/confusion_fcr_2019_2020_2021_2022_independiente.png",
+      "bytes": 56966,
+      "sha256": "dd3312e1e02717686462f7390dc7eb3134e56737b3d2a9be71ea2c595066c9f8"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/confusion_principal_2018_2019_completa.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/confusion_principal_2018_2019_completa.png",
+      "bytes": 57900,
+      "sha256": "7d7f113efa4b868bb11dafeaa206dc504039d6ab476a478dc194af569019f832"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/confusion_principal_2018_2019_independiente.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/confusion_principal_2018_2019_independiente.png",
+      "bytes": 58386,
+      "sha256": "fa913f067f2f818f0b608dae2485ada56cb576591ef7de2e872e4dfd69063a15"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/confusion_principal_2019_2020_completa.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/confusion_principal_2019_2020_completa.png",
+      "bytes": 58668,
+      "sha256": "2258684e77812e697ecf693d3efc158f425d0715769ff7ad42b90fef817acb01"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/confusion_principal_2019_2020_independiente.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/confusion_principal_2019_2020_independiente.png",
+      "bytes": 59032,
+      "sha256": "92d6669781d16d4633810a96320b4cb36f824ed779ad05278ba4dc06e5c31372"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/confusion_principal_2020_2021_completa.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/confusion_principal_2020_2021_completa.png",
+      "bytes": 58605,
+      "sha256": "4bf476adecbc53a91ec9b96deb6f1b21689986de52cc727f2bbb96a316500faf"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/confusion_principal_2020_2021_independiente.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/confusion_principal_2020_2021_independiente.png",
+      "bytes": 60645,
+      "sha256": "ae00d636a47d531d5c62c1648ee85fa778b2580c1ba0d43d5bc98c4d1b0be9aa"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/confusion_principal_2021_2022_completa.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/confusion_principal_2021_2022_completa.png",
+      "bytes": 57464,
+      "sha256": "7b03ec7af52debb4374d8501b43a772131505d8ec75eeb936597e9eda17cef24"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/confusion_principal_2021_2022_independiente.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/confusion_principal_2021_2022_independiente.png",
+      "bytes": 57661,
+      "sha256": "c0600a156822a9d063e47cd578c5b42e14bae3f5478e0f457d0429fdb131030e"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/confusion_unet_2019_2020_2018_2019_completa.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/confusion_unet_2019_2020_2018_2019_completa.png",
+      "bytes": 57004,
+      "sha256": "66c18edce8a56c1536c2ce0318f65bd8964b5c8e11f182b92ebac26ba999bf7e"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/confusion_unet_2019_2020_2018_2019_independiente.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/confusion_unet_2019_2020_2018_2019_independiente.png",
+      "bytes": 56895,
+      "sha256": "d6613e3272cc0b924f37755b14bf0afb176ae9685877e9d8ee2b0050ce92a3e3"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/confusion_unet_2019_2020_2019_2020_completa.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/confusion_unet_2019_2020_2019_2020_completa.png",
+      "bytes": 57673,
+      "sha256": "f0bd72ea5646c5a2f7209977cd35041840150441804a5cc146fca827dffb4550"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/confusion_unet_2019_2020_2019_2020_independiente.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/confusion_unet_2019_2020_2019_2020_independiente.png",
+      "bytes": 58352,
+      "sha256": "c2ad79ed60d5b0f2249d7cd24ce869e044b93afe30470301c4a87baa37843b2f"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/confusion_unet_2019_2020_2020_2021_completa.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/confusion_unet_2019_2020_2020_2021_completa.png",
+      "bytes": 57079,
+      "sha256": "7babc967a9eeb74f98839b9fb8f17c992b4981afe4bf846480c631d5a052a737"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/confusion_unet_2019_2020_2020_2021_independiente.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/confusion_unet_2019_2020_2020_2021_independiente.png",
+      "bytes": 57583,
+      "sha256": "e2d2402781e586a672ae260f34c6fe73c71f6a14eb0288ec4ef834b5650db80f"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/confusion_unet_2019_2020_2021_2022_completa.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/confusion_unet_2019_2020_2021_2022_completa.png",
+      "bytes": 55755,
+      "sha256": "ffd71543875881b1eeb611fb31d6e9b3d5579c42a6638ac5ddc0598bb35f2318"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/confusion_unet_2019_2020_2021_2022_independiente.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/confusion_unet_2019_2020_2021_2022_independiente.png",
+      "bytes": 56123,
+      "sha256": "8769fa6c6c534633345529964e9b7a6388db57ebd9070d57cd6e88e0a24d7d54"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "figuras/curvas_comparadas.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/figuras/curvas_comparadas.png",
+      "bytes": 397106,
+      "sha256": "e51f0532b9b93ba69bd304fa83b9d5625336294c21b7587cd4d0472a9ea6cead"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "fin.txt",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/fin.txt",
+      "bytes": 26,
+      "sha256": "f6d76ad412ac2ca17f6b9a3cb4933e35a3a5319539e6ba72b659875b1aa84250"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "metricas_tiles.json",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/metricas_tiles.json",
+      "bytes": 71115,
+      "sha256": "222ce7ab4c1adcc8ebaf2fe5c78671d2a40569e710f363f96fd76cafbc6205b4"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "modelos/fcr_2019_2020/figuras/comparacion_2018_2019_20HNH.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/modelos/fcr_2019_2020/figuras/comparacion_2018_2019_20HNH.png",
+      "bytes": 3173243,
+      "sha256": "21162d23479b927a31cf760998b3e6fa17c1b9af212d388293428a42c0734f83"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "modelos/fcr_2019_2020/figuras/comparacion_2018_2019_20HNJ.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/modelos/fcr_2019_2020/figuras/comparacion_2018_2019_20HNJ.png",
+      "bytes": 3260274,
+      "sha256": "1244ed3a37d47a69f021daf350e8adb6c46ce3aa0544f7a7e3eea0add8ee2406"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "modelos/fcr_2019_2020/figuras/comparacion_2019_2020_20HNH.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/modelos/fcr_2019_2020/figuras/comparacion_2019_2020_20HNH.png",
+      "bytes": 3282333,
+      "sha256": "844cbe31f5d9626504b83c22ee4acb14c2baf0ed52656f78da2cbabe239ad7d8"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "modelos/fcr_2019_2020/figuras/comparacion_2019_2020_20HNJ.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/modelos/fcr_2019_2020/figuras/comparacion_2019_2020_20HNJ.png",
+      "bytes": 3282302,
+      "sha256": "ef0de0062de1b471946b717ec89bedc0bf2caf2e6851a70ce5767dda90050a06"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "modelos/fcr_2019_2020/figuras/comparacion_2020_2021_20HNH.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/modelos/fcr_2019_2020/figuras/comparacion_2020_2021_20HNH.png",
+      "bytes": 3308711,
+      "sha256": "bbebd6a5c9a4a25dadab07ebc934f3a81282d026f31fed65987d0dc29d6d51d8"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "modelos/fcr_2019_2020/figuras/comparacion_2020_2021_20HNJ.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/modelos/fcr_2019_2020/figuras/comparacion_2020_2021_20HNJ.png",
+      "bytes": 3158215,
+      "sha256": "68799e8bc1f035765d698c323e13a81994858ec5153a89f4a9b5ffa7fa8799a6"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "modelos/fcr_2019_2020/figuras/comparacion_2021_2022_20HNH.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/modelos/fcr_2019_2020/figuras/comparacion_2021_2022_20HNH.png",
+      "bytes": 3486656,
+      "sha256": "e787a92014c2559f56d1abb84d4e510524db0111a368b6cda103be195b8b0758"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "modelos/fcr_2019_2020/figuras/comparacion_2021_2022_20HNJ.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/modelos/fcr_2019_2020/figuras/comparacion_2021_2022_20HNJ.png",
+      "bytes": 3228082,
+      "sha256": "fb24cf78c8b5ade97b044ed928598436b44b811c7ddbfa349719e14a34b8a064"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "modelos/principal/figuras/comparacion_2018_2019_20HNH.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/modelos/principal/figuras/comparacion_2018_2019_20HNH.png",
+      "bytes": 3152407,
+      "sha256": "ea0802e5d4efe3d958922a2bd0adcca1546167a76921bf6f710bbf578ccd5436"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "modelos/principal/figuras/comparacion_2018_2019_20HNJ.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/modelos/principal/figuras/comparacion_2018_2019_20HNJ.png",
+      "bytes": 3233155,
+      "sha256": "b1974513f32a36b82e13c476ad753aa597957e39c89360fe04689b2dfb902134"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "modelos/principal/figuras/comparacion_2019_2020_20HNH.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/modelos/principal/figuras/comparacion_2019_2020_20HNH.png",
+      "bytes": 3247223,
+      "sha256": "8f86f8e931486708895d57d5f518f8402feceafe5fd54ead02ffb5bdded1d3b2"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "modelos/principal/figuras/comparacion_2019_2020_20HNJ.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/modelos/principal/figuras/comparacion_2019_2020_20HNJ.png",
+      "bytes": 3206543,
+      "sha256": "f025020034bb8f1923da687de8207adeb86f9f601f59e0fd85f9641ef2b7dddb"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "modelos/principal/figuras/comparacion_2020_2021_20HNH.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/modelos/principal/figuras/comparacion_2020_2021_20HNH.png",
+      "bytes": 3254144,
+      "sha256": "301d3a53abfa25c4e7b2add7a5b43f8299a6843eb9d746e0834a4961d92cbff4"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "modelos/principal/figuras/comparacion_2020_2021_20HNJ.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/modelos/principal/figuras/comparacion_2020_2021_20HNJ.png",
+      "bytes": 3062121,
+      "sha256": "fefa546296caf25191991818561eecb40c4f04393bde616b423c6006d2966fe9"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "modelos/principal/figuras/comparacion_2021_2022_20HNH.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/modelos/principal/figuras/comparacion_2021_2022_20HNH.png",
+      "bytes": 3390975,
+      "sha256": "3b47f73d6a1ced331f3937c6aa6cc94de654665146e14321cc6eca8d1d921cea"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "modelos/principal/figuras/comparacion_2021_2022_20HNJ.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/modelos/principal/figuras/comparacion_2021_2022_20HNJ.png",
+      "bytes": 3212269,
+      "sha256": "7609f9faac359c8e8d2f6fac1608ee794d51dca61e42adb4e9a8f5fef75adf68"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "modelos/unet_2019_2020/figuras/comparacion_2018_2019_20HNH.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/modelos/unet_2019_2020/figuras/comparacion_2018_2019_20HNH.png",
+      "bytes": 3175389,
+      "sha256": "832f4b8558ed0d8b98adeb80af5414da3e9169df26a745a00978d4e58f3e0060"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "modelos/unet_2019_2020/figuras/comparacion_2018_2019_20HNJ.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/modelos/unet_2019_2020/figuras/comparacion_2018_2019_20HNJ.png",
+      "bytes": 3272196,
+      "sha256": "f2e0fcb47e37c592b31d510fd60083613f355bf386517d6755bbee36b1ec4df9"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "modelos/unet_2019_2020/figuras/comparacion_2019_2020_20HNH.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/modelos/unet_2019_2020/figuras/comparacion_2019_2020_20HNH.png",
+      "bytes": 3280568,
+      "sha256": "43b6f493667880d611ed7f761fc2134912abf6d4725613a5bbe86cb0897dc716"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "modelos/unet_2019_2020/figuras/comparacion_2019_2020_20HNJ.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/modelos/unet_2019_2020/figuras/comparacion_2019_2020_20HNJ.png",
+      "bytes": 3257917,
+      "sha256": "a20e681d3fc52a2e0e12d13b4b7f92dbb5831884975601638abd441dac0ba242"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "modelos/unet_2019_2020/figuras/comparacion_2020_2021_20HNH.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/modelos/unet_2019_2020/figuras/comparacion_2020_2021_20HNH.png",
+      "bytes": 3329684,
+      "sha256": "ffc67e4fb134b86d21b8444fa172cf14f9d274f91cc58dc3fbea58b320b87ac1"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "modelos/unet_2019_2020/figuras/comparacion_2020_2021_20HNJ.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/modelos/unet_2019_2020/figuras/comparacion_2020_2021_20HNJ.png",
+      "bytes": 3166004,
+      "sha256": "e1dc7f1ff7839217a08005e553fe1a9703a882c69c3193a1b755f79099052354"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "modelos/unet_2019_2020/figuras/comparacion_2021_2022_20HNH.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/modelos/unet_2019_2020/figuras/comparacion_2021_2022_20HNH.png",
+      "bytes": 3483341,
+      "sha256": "9e940214c894f82ff179079f63170dc12d246219822abb7e83a36783317697ca"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "modelos/unet_2019_2020/figuras/comparacion_2021_2022_20HNJ.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/modelos/unet_2019_2020/figuras/comparacion_2021_2022_20HNJ.png",
+      "bytes": 3248163,
+      "sha256": "7cd0ad8e56e9242bd7aa70ee7ee6258ef7f64a6bb2cbf4d18fde8cb25803fd56"
+    },
+    {
+      "grupo": "resultados_test_actual_comparacion_20261010",
+      "relativo": "protocolo.json",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/comparacion_test_actual_20261010T092436/protocolo.json",
+      "bytes": 1894,
+      "sha256": "1001c518cefaab5694396bd12b055e6c5ceeaf8fbedecd9d8ba5595773386310"
+    },
+    {
+      "grupo": "extension_este_evaluacion_20261009T192204",
+      "relativo": "README.md",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/evaluacion_20261009T192204/README.md",
+      "bytes": 682,
+      "sha256": "509616f0ff742c913ee7f00a39e9cb587a96365eb235a0cbc601fe11d5df405f"
+    },
+    {
+      "grupo": "extension_este_evaluacion_20261009T192204",
+      "relativo": "figuras/comparacion_2018_2019_20HNH.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/evaluacion_20261009T192204/figuras/comparacion_2018_2019_20HNH.png",
+      "bytes": 3634759,
+      "sha256": "11ff3988a5e4cc7766f1ed9d3f043c6b29204bac1061ecca4bc13d384a9bbbfa"
+    },
+    {
+      "grupo": "extension_este_evaluacion_20261009T192204",
+      "relativo": "figuras/comparacion_2018_2019_20HNJ.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/evaluacion_20261009T192204/figuras/comparacion_2018_2019_20HNJ.png",
+      "bytes": 3718473,
+      "sha256": "494db20e65108bb48b6b5358d2c5718adefc37c121abb687a4635bc55051870d"
+    },
+    {
+      "grupo": "extension_este_evaluacion_20261009T192204",
+      "relativo": "figuras/comparacion_2019_2020_20HNH.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/evaluacion_20261009T192204/figuras/comparacion_2019_2020_20HNH.png",
+      "bytes": 3736071,
+      "sha256": "5146384aa2004dd0cfcb0053f3887d888aad44671cdadd11c2761da1663fa276"
+    },
+    {
+      "grupo": "extension_este_evaluacion_20261009T192204",
+      "relativo": "figuras/comparacion_2019_2020_20HNJ.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/evaluacion_20261009T192204/figuras/comparacion_2019_2020_20HNJ.png",
+      "bytes": 3675994,
+      "sha256": "dbe0b1b690144bb41196e523f586899f1fb24a11e67457ba5a6bbfcf24ee9c06"
+    },
+    {
+      "grupo": "extension_este_evaluacion_20261009T192204",
+      "relativo": "figuras/comparacion_2020_2021_20HNH.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/evaluacion_20261009T192204/figuras/comparacion_2020_2021_20HNH.png",
+      "bytes": 3738308,
+      "sha256": "cf945e1cc68bfc9f70bcc3640da55e326a50daecbe40cf689ff7e8000c5f4cac"
+    },
+    {
+      "grupo": "extension_este_evaluacion_20261009T192204",
+      "relativo": "figuras/comparacion_2020_2021_20HNJ.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/evaluacion_20261009T192204/figuras/comparacion_2020_2021_20HNJ.png",
+      "bytes": 3497295,
+      "sha256": "34f5a32f1730e7539d79ea7af801d2ad6c3f6ed3b23f9fdef49efb63d98e9450"
+    },
+    {
+      "grupo": "extension_este_evaluacion_20261009T192204",
+      "relativo": "figuras/comparacion_2021_2022_20HNH.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/evaluacion_20261009T192204/figuras/comparacion_2021_2022_20HNH.png",
+      "bytes": 3901854,
+      "sha256": "3e580c25770be20cd2fb586cea645b4e5935378355f0689213e55d30baebb5cb"
+    },
+    {
+      "grupo": "extension_este_evaluacion_20261009T192204",
+      "relativo": "figuras/comparacion_2021_2022_20HNJ.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/evaluacion_20261009T192204/figuras/comparacion_2021_2022_20HNJ.png",
+      "bytes": 3677577,
+      "sha256": "35a041c3257c3cfa3a7d52718ec69c295e07b16aee5fb85f111c164605252360"
+    },
+    {
+      "grupo": "extension_este_evaluacion_20261009T192204",
+      "relativo": "figuras/confusion_2018_2019_completa.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/evaluacion_20261009T192204/figuras/confusion_2018_2019_completa.png",
+      "bytes": 56314,
+      "sha256": "c2a4d1c91886d15e32db6c4668e38f42f7c4ac0e201d93478d704f70dea5befd"
+    },
+    {
+      "grupo": "extension_este_evaluacion_20261009T192204",
+      "relativo": "figuras/confusion_2018_2019_independiente.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/evaluacion_20261009T192204/figuras/confusion_2018_2019_independiente.png",
+      "bytes": 56684,
+      "sha256": "bfe0e33e5c9c4dee3b6aaaf530ca2160a85d5bc066dac9384c42e374d41740c7"
+    },
+    {
+      "grupo": "extension_este_evaluacion_20261009T192204",
+      "relativo": "figuras/confusion_2019_2020_completa.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/evaluacion_20261009T192204/figuras/confusion_2019_2020_completa.png",
+      "bytes": 56994,
+      "sha256": "a4c9ea8c99be4c79dfd3e4055f89a568ed283d06a2d4551ce5530e120147d1a5"
+    },
+    {
+      "grupo": "extension_este_evaluacion_20261009T192204",
+      "relativo": "figuras/confusion_2019_2020_independiente.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/evaluacion_20261009T192204/figuras/confusion_2019_2020_independiente.png",
+      "bytes": 57562,
+      "sha256": "4d9c476e52ef8d6467df75a00104ef8ea23f3b5fb5a82923759fbc9bcc8b937c"
+    },
+    {
+      "grupo": "extension_este_evaluacion_20261009T192204",
+      "relativo": "figuras/confusion_2020_2021_completa.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/evaluacion_20261009T192204/figuras/confusion_2020_2021_completa.png",
+      "bytes": 57023,
+      "sha256": "ed01c80f924666d0fee35d8975d9e8ba4f418fca02f6088994d7bca04249ee0f"
+    },
+    {
+      "grupo": "extension_este_evaluacion_20261009T192204",
+      "relativo": "figuras/confusion_2020_2021_independiente.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/evaluacion_20261009T192204/figuras/confusion_2020_2021_independiente.png",
+      "bytes": 59243,
+      "sha256": "8ea65ff9bc46e00880fbe7e5dd1ae19b8a11783a0e72e98a1f3eb986d1f3d17d"
+    },
+    {
+      "grupo": "extension_este_evaluacion_20261009T192204",
+      "relativo": "figuras/confusion_2021_2022_completa.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/evaluacion_20261009T192204/figuras/confusion_2021_2022_completa.png",
+      "bytes": 55888,
+      "sha256": "45b18955456368293483c651124050a0dcd1d92d2e90ae5fa056517e6ae35703"
+    },
+    {
+      "grupo": "extension_este_evaluacion_20261009T192204",
+      "relativo": "figuras/confusion_2021_2022_independiente.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/evaluacion_20261009T192204/figuras/confusion_2021_2022_independiente.png",
+      "bytes": 55870,
+      "sha256": "be2b8e179d2edf8a07a7784b8efe624c2f0659d716c1ee773e9aee9411d5cd98"
+    },
+    {
+      "grupo": "extension_este_evaluacion_20261009T192204",
+      "relativo": "figuras/resumen_nuevo_test.png",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/evaluacion_20261009T192204/figuras/resumen_nuevo_test.png",
+      "bytes": 48668,
+      "sha256": "2da6edc9044ce0a03b9554d477baabb7bf872e54baedbbe6b0e7c1a0b57b8c84"
+    },
+    {
+      "grupo": "extension_este_evaluacion_20261009T192204",
+      "relativo": "fin.txt",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/evaluacion_20261009T192204/fin.txt",
+      "bytes": 26,
+      "sha256": "26b61ecc5bb138b35eed62c90b1b0953d21050aee9528ca08a744f960a883655"
+    },
+    {
+      "grupo": "extension_este_evaluacion_20261009T192204",
+      "relativo": "metricas_tiles.json",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/evaluacion_20261009T192204/metricas_tiles.json",
+      "bytes": 23317,
+      "sha256": "7237fd1a0f4f8265855a1ba2622f25bf65beaee4d4ad3d89a764cf66be5786e4"
+    },
+    {
+      "grupo": "extension_este_evaluacion_20261009T192204",
+      "relativo": "protocolo.json",
+      "remoto": "/mnt/yacy_1/prod/ferreyra/extension_este_multicampana/evaluacion_20261009T192204/protocolo.json",
+      "bytes": 1590,
+      "sha256": "33521b6356ea16871be8909490981c7989001bf17da89d0dc9f2d86a53bcefa7"
+    }
+  ]
+}

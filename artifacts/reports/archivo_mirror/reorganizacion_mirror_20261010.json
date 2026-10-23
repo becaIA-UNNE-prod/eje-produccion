@@ -1,0 +1,920 @@
+{
+  "servidor_o_mirror": "/home/maxichr/Documents/eje-produccion",
+  "fecha_utc": "20261010T131734Z",
+  "backup": "/tmp/eje-produccion_backup_reorganizacion_20261010T131734Z",
+  "head": "0bbc25a1e8b935890216a344695d4813960a601e",
+  "movimientos": [
+    [
+      "AUDITORIA_GEOGRAFIA_TILES.md",
+      "docs/notas_locales/AUDITORIA_GEOGRAFIA_TILES.md"
+    ],
+    [
+      "DESCARGA_EXTENSION_ESTE.md",
+      "docs/notas_locales/DESCARGA_EXTENSION_ESTE.md"
+    ],
+    [
+      "IMAGENES_COBERTURA_Y_RED_MULTICAMPANA.md",
+      "docs/notas_locales/IMAGENES_COBERTURA_Y_RED_MULTICAMPANA.md"
+    ],
+    [
+      "Nivel3_28_dic_2018_30m.qml",
+      "data/referencias/Nivel3_28_dic_2018_30m.qml"
+    ],
+    [
+      "Nivel3_28_dic_2018_30m_completo.tif",
+      "data/referencias/Nivel3_28_dic_2018_30m_completo.tif"
+    ],
+    [
+      "PREPARACION_NUEVO_TEST_EXTENSION_ESTE.md",
+      "docs/notas_locales/PREPARACION_NUEVO_TEST_EXTENSION_ESTE.md"
+    ],
+    [
+      "TEST_ACTUAL_INTEGRADO.md",
+      "docs/notas_locales/TEST_ACTUAL_INTEGRADO.md"
+    ],
+    [
+      "auditoria_geografia_tiles.json",
+      "artifacts/archive/legacy_root/inventarios/auditoria_geografia_tiles.json"
+    ],
+    [
+      "comparacion_curvas.png",
+      "artifacts/archive/legacy_root/figuras/comparacion_curvas.png"
+    ],
+    [
+      "comparacion_inferencia_20HLJ_fcrtransunet.png",
+      "artifacts/archive/legacy_root/figuras/comparacion_inferencia_20HLJ_fcrtransunet.png"
+    ],
+    [
+      "comparacion_inferencia_20JML_fcrtransunet.png",
+      "artifacts/archive/legacy_root/figuras/comparacion_inferencia_20JML_fcrtransunet.png"
+    ],
+    [
+      "comparacion_mapa_20HLJ.png",
+      "artifacts/archive/legacy_root/figuras/comparacion_mapa_20HLJ.png"
+    ],
+    [
+      "comparacion_vdr3_mapa.png",
+      "artifacts/archive/legacy_root/figuras/comparacion_vdr3_mapa.png"
+    ],
+    [
+      "comparacion_verano.png",
+      "artifacts/archive/legacy_root/figuras/comparacion_verano.png"
+    ],
+    [
+      "composites_filtrado.log",
+      "artifacts/archive/legacy_root/logs/composites_filtrado.log"
+    ],
+    [
+      "composites_filtrado2.log",
+      "artifacts/archive/legacy_root/logs/composites_filtrado2.log"
+    ],
+    [
+      "composites_filtrado3.log",
+      "artifacts/archive/legacy_root/logs/composites_filtrado3.log"
+    ],
+    [
+      "composites_filtrado4.log",
+      "artifacts/archive/legacy_root/logs/composites_filtrado4.log"
+    ],
+    [
+      "composites_filtrado5.log",
+      "artifacts/archive/legacy_root/logs/composites_filtrado5.log"
+    ],
+    [
+      "composites_filtrado6.log",
+      "artifacts/archive/legacy_root/logs/composites_filtrado6.log"
+    ],
+    [
+      "estructura_sentinel2.json",
+      "artifacts/archive/legacy_root/inventarios/estructura_sentinel2.json"
+    ],
+    [
+      "generar_datasets.log",
+      "artifacts/archive/legacy_root/logs/generar_datasets.log"
+    ],
+    [
+      "huellas_parches_multicampana.geojson",
+      "artifacts/archive/legacy_root/inventarios/huellas_parches_multicampana.geojson"
+    ],
+    [
+      "logs.txt",
+      "artifacts/archive/legacy_root/logs/logs.txt"
+    ],
+    [
+      "mapa_tiles_multicampana.html",
+      "artifacts/archive/legacy_root/figuras/mapa_tiles_multicampana.html"
+    ],
+    [
+      "mapa_tiles_multicampana.svg",
+      "artifacts/archive/legacy_root/figuras/mapa_tiles_multicampana.svg"
+    ],
+    [
+      "metricas_fcrtransunet.png",
+      "artifacts/archive/legacy_root/figuras/metricas_fcrtransunet.png"
+    ],
+    [
+      "metricas_v2.png",
+      "artifacts/archive/legacy_root/figuras/metricas_v2.png"
+    ],
+    [
+      "nohup.out",
+      "artifacts/archive/legacy_root/logs/nohup.out"
+    ],
+    [
+      "prediccion_20JML_utae.png",
+      "artifacts/archive/legacy_root/figuras/prediccion_20JML_utae.png"
+    ],
+    [
+      "prueba_cruce_20JLL.png",
+      "artifacts/archive/legacy_root/figuras/prueba_cruce_20JLL.png"
+    ],
+    [
+      "resultados_test_actual_comparacion_20261010",
+      "artifacts/reports/resultados_test_actual_comparacion_20261010"
+    ],
+    [
+      "test.sh",
+      "scripts/verificar_npz_historicos.sh"
+    ],
+    [
+      "src/README.md",
+      "docs/PIPELINE_HISTORICO.md"
+    ],
+    [
+      "src/README_EXTENSION_ESTE.md",
+      "docs/README_EXTENSION_ESTE.md"
+    ],
+    [
+      "src/README_MNC.md",
+      "docs/README_MNC.md"
+    ],
+    [
+      "src/README_MULTICAMPANA.md",
+      "docs/README_MULTICAMPANA.md"
+    ],
+    [
+      "src/README_NUEVO_TEST_EXTENSION_ESTE.md",
+      "docs/README_NUEVO_TEST_EXTENSION_ESTE.md"
+    ],
+    [
+      "src/README_TEST_ACTUAL.md",
+      "docs/README_TEST_ACTUAL.md"
+    ],
+    [
+      "test/inicio.md",
+      "docs/exploracion_sentinel.md"
+    ]
+  ],
+  "archivos": [
+    {
+      "origen": "AUDITORIA_GEOGRAFIA_TILES.md",
+      "destino": "docs/notas_locales/AUDITORIA_GEOGRAFIA_TILES.md",
+      "size": 5202,
+      "sha256": "6dddc562da63dea783d4400dbcbf9f78dafdae542c6d37cd80c1ddaa158ad3fb",
+      "sha256_destino": "a55c6e73762ea4a0494c21622121253abb55230eb657ff90c5fbc79555f39f39"
+    },
+    {
+      "origen": "DESCARGA_EXTENSION_ESTE.md",
+      "destino": "docs/notas_locales/DESCARGA_EXTENSION_ESTE.md",
+      "size": 4339,
+      "sha256": "5ac6f7e612633d0a8dba84e84431ba50fe292e95199baa0212e1e3ecd1c58118",
+      "sha256_destino": "5ac6f7e612633d0a8dba84e84431ba50fe292e95199baa0212e1e3ecd1c58118"
+    },
+    {
+      "origen": "IMAGENES_COBERTURA_Y_RED_MULTICAMPANA.md",
+      "destino": "docs/notas_locales/IMAGENES_COBERTURA_Y_RED_MULTICAMPANA.md",
+      "size": 30436,
+      "sha256": "86503c9f5046c55b12842dfca159296880240290858a4c281ea48c1ed8617fc5",
+      "sha256_destino": "f61bddf55ef9925c3b03d33dfed2d5d9bb089aa3cbb860afb88fd8e8a82fdbb3"
+    },
+    {
+      "origen": "Nivel3_28_dic_2018_30m.qml",
+      "destino": "data/referencias/Nivel3_28_dic_2018_30m.qml",
+      "size": 4223,
+      "sha256": "7952da530133e28610a30fc5f8e80f3fa0e90f68855ba0c64b09d30fa28440a0",
+      "sha256_destino": "7952da530133e28610a30fc5f8e80f3fa0e90f68855ba0c64b09d30fa28440a0"
+    },
+    {
+      "origen": "Nivel3_28_dic_2018_30m_completo.tif",
+      "destino": "data/referencias/Nivel3_28_dic_2018_30m_completo.tif",
+      "size": 21346522,
+      "sha256": "5140995cbf012e1314933c35c54bf2379110a82fd97f5115daba65b3c15e58c6",
+      "sha256_destino": "5140995cbf012e1314933c35c54bf2379110a82fd97f5115daba65b3c15e58c6"
+    },
+    {
+      "origen": "PREPARACION_NUEVO_TEST_EXTENSION_ESTE.md",
+      "destino": "docs/notas_locales/PREPARACION_NUEVO_TEST_EXTENSION_ESTE.md",
+      "size": 6776,
+      "sha256": "7ae2066b3325feda4510d58c7c14b63c558359668ca45400e983de49cc09a5e8",
+      "sha256_destino": "7ae2066b3325feda4510d58c7c14b63c558359668ca45400e983de49cc09a5e8"
+    },
+    {
+      "origen": "TEST_ACTUAL_INTEGRADO.md",
+      "destino": "docs/notas_locales/TEST_ACTUAL_INTEGRADO.md",
+      "size": 4259,
+      "sha256": "705203d7cd77074bd1834c20a8eab65aca93a16b64a23ef7921cc8cdacd39c00",
+      "sha256_destino": "aebe90b364e1e3197329022d8fc38625ac812b209e3a604e40708055a3d4e5f2"
+    },
+    {
+      "origen": "auditoria_geografia_tiles.json",
+      "destino": "artifacts/archive/legacy_root/inventarios/auditoria_geografia_tiles.json",
+      "size": 1342888,
+      "sha256": "15bf1ddaa3f5452692b5586e3070b17facb8527b443a522ba713decadcd0da88",
+      "sha256_destino": "15bf1ddaa3f5452692b5586e3070b17facb8527b443a522ba713decadcd0da88"
+    },
+    {
+      "origen": "comparacion_curvas.png",
+      "destino": "artifacts/archive/legacy_root/figuras/comparacion_curvas.png",
+      "size": 265527,
+      "sha256": "baa30846efc99e15690bae036df3550d72705439ef54b76a35aa7ada834c1c60",
+      "sha256_destino": "baa30846efc99e15690bae036df3550d72705439ef54b76a35aa7ada834c1c60"
+    },
+    {
+      "origen": "comparacion_inferencia_20HLJ_fcrtransunet.png",
+      "destino": "artifacts/archive/legacy_root/figuras/comparacion_inferencia_20HLJ_fcrtransunet.png",
+      "size": 3007667,
+      "sha256": "d532e1ea5046998ac462171db9448758c7943e1a1000e899f7c60108d4b80f93",
+      "sha256_destino": "d532e1ea5046998ac462171db9448758c7943e1a1000e899f7c60108d4b80f93"
+    },
+    {
+      "origen": "comparacion_inferencia_20JML_fcrtransunet.png",
+      "destino": "artifacts/archive/legacy_root/figuras/comparacion_inferencia_20JML_fcrtransunet.png",
+      "size": 3462834,
+      "sha256": "9a778f07b5182483dc18e2e7800798762e9b8a59597a62532b5a39dc82c62f97",
+      "sha256_destino": "9a778f07b5182483dc18e2e7800798762e9b8a59597a62532b5a39dc82c62f97"
+    },
+    {
+      "origen": "comparacion_mapa_20HLJ.png",
+      "destino": "artifacts/archive/legacy_root/figuras/comparacion_mapa_20HLJ.png",
+      "size": 4136822,
+      "sha256": "3f3ff26042c6ac97c8fd13f14359d8a4475baf27aef3117e06274d8b64d5fe57",
+      "sha256_destino": "3f3ff26042c6ac97c8fd13f14359d8a4475baf27aef3117e06274d8b64d5fe57"
+    },
+    {
+      "origen": "comparacion_vdr3_mapa.png",
+      "destino": "artifacts/archive/legacy_root/figuras/comparacion_vdr3_mapa.png",
+      "size": 2912970,
+      "sha256": "807073c80cb8b7f6840688a5b9d33b0cc65b9a2112aeb3610fe78bc074aeeebc",
+      "sha256_destino": "807073c80cb8b7f6840688a5b9d33b0cc65b9a2112aeb3610fe78bc074aeeebc"
+    },
+    {
+      "origen": "comparacion_verano.png",
+      "destino": "artifacts/archive/legacy_root/figuras/comparacion_verano.png",
+      "size": 2543959,
+      "sha256": "44a14b2aabb4ab6394462212a744630113960319fe8ae3fee989167b33f2f770",
+      "sha256_destino": "44a14b2aabb4ab6394462212a744630113960319fe8ae3fee989167b33f2f770"
+    },
+    {
+      "origen": "composites_filtrado.log",
+      "destino": "artifacts/archive/legacy_root/logs/composites_filtrado.log",
+      "size": 5716,
+      "sha256": "4a8f36993b0ff9a551a74b5472a83aafb2cf5a22199528753745a2fe40864f7f",
+      "sha256_destino": "4a8f36993b0ff9a551a74b5472a83aafb2cf5a22199528753745a2fe40864f7f"
+    },
+    {
+      "origen": "composites_filtrado2.log",
+      "destino": "artifacts/archive/legacy_root/logs/composites_filtrado2.log",
+      "size": 6725,
+      "sha256": "91c65cd0f0dea0bda927055d5382bb2832173954d4b5a857a096e20e3602a4f7",
+      "sha256_destino": "91c65cd0f0dea0bda927055d5382bb2832173954d4b5a857a096e20e3602a4f7"
+    },
+    {
+      "origen": "composites_filtrado3.log",
+      "destino": "artifacts/archive/legacy_root/logs/composites_filtrado3.log",
+      "size": 156,
+      "sha256": "52b7d9e4de7806db87d113a42e08236228514d49926179d0b360d42048387a02",
+      "sha256_destino": "52b7d9e4de7806db87d113a42e08236228514d49926179d0b360d42048387a02"
+    },
+    {
+      "origen": "composites_filtrado4.log",
+      "destino": "artifacts/archive/legacy_root/logs/composites_filtrado4.log",
+      "size": 5246,
+      "sha256": "27224516e261b314ab830174ff539ba805adc2a24c287d61cfba9aa44d05cfad",
+      "sha256_destino": "27224516e261b314ab830174ff539ba805adc2a24c287d61cfba9aa44d05cfad"
+    },
+    {
+      "origen": "composites_filtrado5.log",
+      "destino": "artifacts/archive/legacy_root/logs/composites_filtrado5.log",
+      "size": 28127,
+      "sha256": "85eb5a71a5b7ec994538c90c4aa493ae19de868513b8de6831cef8b7e59dbd6f",
+      "sha256_destino": "85eb5a71a5b7ec994538c90c4aa493ae19de868513b8de6831cef8b7e59dbd6f"
+    },
+    {
+      "origen": "composites_filtrado6.log",
+      "destino": "artifacts/archive/legacy_root/logs/composites_filtrado6.log",
+      "size": 17779,
+      "sha256": "f8fa0297d1767dedd842be99d9d00a85551514ef22a107696a302248dfa5fb0b",
+      "sha256_destino": "f8fa0297d1767dedd842be99d9d00a85551514ef22a107696a302248dfa5fb0b"
+    },
+    {
+      "origen": "estructura_sentinel2.json",
+      "destino": "artifacts/archive/legacy_root/inventarios/estructura_sentinel2.json",
+      "size": 326069,
+      "sha256": "86eb90df14bfabcaf1cb6db1eb3c1262d2756d8f7b0e2df07443059dccb0e197",
+      "sha256_destino": "86eb90df14bfabcaf1cb6db1eb3c1262d2756d8f7b0e2df07443059dccb0e197"
+    },
+    {
+      "origen": "generar_datasets.log",
+      "destino": "artifacts/archive/legacy_root/logs/generar_datasets.log",
+      "size": 2069,
+      "sha256": "126611c68a914c1ba3913f99c154759d03d63405bd7ac32a08e6aef546554d69",
+      "sha256_destino": "126611c68a914c1ba3913f99c154759d03d63405bd7ac32a08e6aef546554d69"
+    },
+    {
+      "origen": "huellas_parches_multicampana.geojson",
+      "destino": "artifacts/archive/legacy_root/inventarios/huellas_parches_multicampana.geojson",
+      "size": 487758,
+      "sha256": "46edf6d3ddf3b2d679607bd7fa95e016dc77c9e49e7e2b8216b39e26b158c68e",
+      "sha256_destino": "46edf6d3ddf3b2d679607bd7fa95e016dc77c9e49e7e2b8216b39e26b158c68e"
+    },
+    {
+      "origen": "logs.txt",
+      "destino": "artifacts/archive/legacy_root/logs/logs.txt",
+      "size": 604,
+      "sha256": "35580798d82f02ca0e72f539720cbf3515ec1b178d5ebbb4a0b14cfc1e1cf747",
+      "sha256_destino": "35580798d82f02ca0e72f539720cbf3515ec1b178d5ebbb4a0b14cfc1e1cf747"
+    },
+    {
+      "origen": "mapa_tiles_multicampana.html",
+      "destino": "artifacts/archive/legacy_root/figuras/mapa_tiles_multicampana.html",
+      "size": 474600,
+      "sha256": "dd408666a14b3b77dc492e4b0233c1ce41557ceb87aeec0dd9e04e39f7045fce",
+      "sha256_destino": "dd408666a14b3b77dc492e4b0233c1ce41557ceb87aeec0dd9e04e39f7045fce"
+    },
+    {
+      "origen": "mapa_tiles_multicampana.svg",
+      "destino": "artifacts/archive/legacy_root/figuras/mapa_tiles_multicampana.svg",
+      "size": 10248,
+      "sha256": "48d319fd2f9843ccbf2e877ff63c890a698a2427facd6126f05ce82d60f84aac",
+      "sha256_destino": "48d319fd2f9843ccbf2e877ff63c890a698a2427facd6126f05ce82d60f84aac"
+    },
+    {
+      "origen": "metricas_fcrtransunet.png",
+      "destino": "artifacts/archive/legacy_root/figuras/metricas_fcrtransunet.png",
+      "size": 111295,
+      "sha256": "4fcf505740976d6bd3e419c072cf9220fe53e76c2940b0b73822547a9cd659db",
+      "sha256_destino": "4fcf505740976d6bd3e419c072cf9220fe53e76c2940b0b73822547a9cd659db"
+    },
+    {
+      "origen": "metricas_v2.png",
+      "destino": "artifacts/archive/legacy_root/figuras/metricas_v2.png",
+      "size": 137530,
+      "sha256": "0d48e326feff7e87d86354cd013b2d3da3090b497c78ff0d7f906debe3cfe627",
+      "sha256_destino": "0d48e326feff7e87d86354cd013b2d3da3090b497c78ff0d7f906debe3cfe627"
+    },
+    {
+      "origen": "nohup.out",
+      "destino": "artifacts/archive/legacy_root/logs/nohup.out",
+      "size": 37814,
+      "sha256": "9e858786cac859bc5461f1a615ef7b0bfcf238059d458b6f838243e75bb79e89",
+      "sha256_destino": "9e858786cac859bc5461f1a615ef7b0bfcf238059d458b6f838243e75bb79e89"
+    },
+    {
+      "origen": "prediccion_20JML_utae.png",
+      "destino": "artifacts/archive/legacy_root/figuras/prediccion_20JML_utae.png",
+      "size": 1900132,
+      "sha256": "72ea1badeed4f08ecac17b6d234ee3547b0de489759ce829e1d5e092a475199f",
+      "sha256_destino": "72ea1badeed4f08ecac17b6d234ee3547b0de489759ce829e1d5e092a475199f"
+    },
+    {
+      "origen": "prueba_cruce_20JLL.png",
+      "destino": "artifacts/archive/legacy_root/figuras/prueba_cruce_20JLL.png",
+      "size": 886085,
+      "sha256": "76b04d8c69dd856de41fd0b31757b7e36ddc40f3326025467abb751294c241ad",
+      "sha256_destino": "76b04d8c69dd856de41fd0b31757b7e36ddc40f3326025467abb751294c241ad"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/README.md",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/README.md",
+      "size": 459,
+      "sha256": "8b72dce5b2bfcc4c84c4662178915e95685051cc3bb7fff33d5adc66b6c20256",
+      "sha256_destino": "8b72dce5b2bfcc4c84c4662178915e95685051cc3bb7fff33d5adc66b6c20256"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/comparacion_metricas.csv",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/comparacion_metricas.csv",
+      "size": 2503,
+      "sha256": "9305fbba24e2dc0a33571af863618a357a1ef4d07bcc14c1198ea17af846eaab",
+      "sha256_destino": "9305fbba24e2dc0a33571af863618a357a1ef4d07bcc14c1198ea17af846eaab"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/estado_transferencia.json",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/estado_transferencia.json",
+      "size": 177,
+      "sha256": "719e04603b148d066ea0311fcfc9c61123194b2a9e70d26ad3c83191169ba665",
+      "sha256_destino": "719e04603b148d066ea0311fcfc9c61123194b2a9e70d26ad3c83191169ba665"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/evaluacion_test_actual.json",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/evaluacion_test_actual.json",
+      "size": 121014,
+      "sha256": "4abc865e2e659e9cf49c9a440b3e7680833a36cabfc59387189249a93b7a658e",
+      "sha256_destino": "4abc865e2e659e9cf49c9a440b3e7680833a36cabfc59387189249a93b7a658e"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2018_2019_20HNH.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2018_2019_20HNH.png",
+      "size": 4161119,
+      "sha256": "28052ceebdf721830d44c3caec2681eaa333f7c7f5842c6284eddab771735861",
+      "sha256_destino": "28052ceebdf721830d44c3caec2681eaa333f7c7f5842c6284eddab771735861"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2018_2019_20HNJ.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2018_2019_20HNJ.png",
+      "size": 4394063,
+      "sha256": "42e467889e7166a74d8763b39f46ec7c22f8b902f8f59feff9e813afdd500902",
+      "sha256_destino": "42e467889e7166a74d8763b39f46ec7c22f8b902f8f59feff9e813afdd500902"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2019_2020_20HNH.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2019_2020_20HNH.png",
+      "size": 4128119,
+      "sha256": "532539a8b82ed31cfa488f7ec4096bf098a37e2d11df97719c188a11bc3ac4b5",
+      "sha256_destino": "532539a8b82ed31cfa488f7ec4096bf098a37e2d11df97719c188a11bc3ac4b5"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2019_2020_20HNJ.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2019_2020_20HNJ.png",
+      "size": 4276047,
+      "sha256": "a890126879253183222084f43994ace18cda0cfedef8b4164a61e34bf3ea46c1",
+      "sha256_destino": "a890126879253183222084f43994ace18cda0cfedef8b4164a61e34bf3ea46c1"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2020_2021_20HNH.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2020_2021_20HNH.png",
+      "size": 4130220,
+      "sha256": "4158d0e67d053b96c751067dc965adfbfaf785a751a73838112759c320561cde",
+      "sha256_destino": "4158d0e67d053b96c751067dc965adfbfaf785a751a73838112759c320561cde"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2020_2021_20HNJ.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2020_2021_20HNJ.png",
+      "size": 4077843,
+      "sha256": "815a258e0a2cda97ffa2d5125b07668c49a91695b1f57242f87bd0b7803e2b16",
+      "sha256_destino": "815a258e0a2cda97ffa2d5125b07668c49a91695b1f57242f87bd0b7803e2b16"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2021_2022_20HNH.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2021_2022_20HNH.png",
+      "size": 4503013,
+      "sha256": "f3883bb3ac6d9ceabd809b3ebadf1285c8a31b4cb2ea55959cf3105355fb5f23",
+      "sha256_destino": "f3883bb3ac6d9ceabd809b3ebadf1285c8a31b4cb2ea55959cf3105355fb5f23"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2021_2022_20HNJ.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2021_2022_20HNJ.png",
+      "size": 4137901,
+      "sha256": "34c6dcf629acc97ad52af2496049b32099b67ce69c319649a21a58ced5c67137",
+      "sha256_destino": "34c6dcf629acc97ad52af2496049b32099b67ce69c319649a21a58ced5c67137"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/comparacion_test_actual.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/comparacion_test_actual.png",
+      "size": 53672,
+      "sha256": "72c92001dfdb0a61d17ac4743a149620aaf79b191ee444e9ca30730001a4cf9c",
+      "sha256_destino": "72c92001dfdb0a61d17ac4743a149620aaf79b191ee444e9ca30730001a4cf9c"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2018_2019_completa.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2018_2019_completa.png",
+      "size": 57952,
+      "sha256": "5f1851d9e24c006cc4c0ce4cd9901d4c99f2c63174cb50be4bdcd6ea47ca5992",
+      "sha256_destino": "5f1851d9e24c006cc4c0ce4cd9901d4c99f2c63174cb50be4bdcd6ea47ca5992"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2018_2019_independiente.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2018_2019_independiente.png",
+      "size": 57632,
+      "sha256": "5c96c68387c70159dd5cdedc6542f86ab50ed88bdcde887e90bf57ad50e1e702",
+      "sha256_destino": "5c96c68387c70159dd5cdedc6542f86ab50ed88bdcde887e90bf57ad50e1e702"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2019_2020_completa.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2019_2020_completa.png",
+      "size": 58103,
+      "sha256": "bac3a13ab81943b18279f5fc562a622b1a62f0b06ba79924f8c6e8554fe1bde3",
+      "sha256_destino": "bac3a13ab81943b18279f5fc562a622b1a62f0b06ba79924f8c6e8554fe1bde3"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2019_2020_independiente.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2019_2020_independiente.png",
+      "size": 59312,
+      "sha256": "2ac9f88a02455720160c344a23d5a72b65a51033638454145a197f75e704fda0",
+      "sha256_destino": "2ac9f88a02455720160c344a23d5a72b65a51033638454145a197f75e704fda0"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2020_2021_completa.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2020_2021_completa.png",
+      "size": 60710,
+      "sha256": "5502ec114ba5a050b6129104880b85ee8b3fd0539fb81b7571859f5b3dcb9c4c",
+      "sha256_destino": "5502ec114ba5a050b6129104880b85ee8b3fd0539fb81b7571859f5b3dcb9c4c"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2020_2021_independiente.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2020_2021_independiente.png",
+      "size": 59696,
+      "sha256": "fa5b8422a45c3bc4c48b7fda0037b912d5cf148706312e19310f72f628f6a442",
+      "sha256_destino": "fa5b8422a45c3bc4c48b7fda0037b912d5cf148706312e19310f72f628f6a442"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2021_2022_completa.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2021_2022_completa.png",
+      "size": 56381,
+      "sha256": "f0b9ef0658f71f305dfe614e40c35e2709b32fcf782020cffd421d8673ff3145",
+      "sha256_destino": "f0b9ef0658f71f305dfe614e40c35e2709b32fcf782020cffd421d8673ff3145"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2021_2022_independiente.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2021_2022_independiente.png",
+      "size": 56966,
+      "sha256": "dd3312e1e02717686462f7390dc7eb3134e56737b3d2a9be71ea2c595066c9f8",
+      "sha256_destino": "dd3312e1e02717686462f7390dc7eb3134e56737b3d2a9be71ea2c595066c9f8"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2018_2019_completa.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2018_2019_completa.png",
+      "size": 57900,
+      "sha256": "7d7f113efa4b868bb11dafeaa206dc504039d6ab476a478dc194af569019f832",
+      "sha256_destino": "7d7f113efa4b868bb11dafeaa206dc504039d6ab476a478dc194af569019f832"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2018_2019_independiente.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2018_2019_independiente.png",
+      "size": 58386,
+      "sha256": "fa913f067f2f818f0b608dae2485ada56cb576591ef7de2e872e4dfd69063a15",
+      "sha256_destino": "fa913f067f2f818f0b608dae2485ada56cb576591ef7de2e872e4dfd69063a15"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2019_2020_completa.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2019_2020_completa.png",
+      "size": 58668,
+      "sha256": "2258684e77812e697ecf693d3efc158f425d0715769ff7ad42b90fef817acb01",
+      "sha256_destino": "2258684e77812e697ecf693d3efc158f425d0715769ff7ad42b90fef817acb01"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2019_2020_independiente.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2019_2020_independiente.png",
+      "size": 59032,
+      "sha256": "92d6669781d16d4633810a96320b4cb36f824ed779ad05278ba4dc06e5c31372",
+      "sha256_destino": "92d6669781d16d4633810a96320b4cb36f824ed779ad05278ba4dc06e5c31372"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2020_2021_completa.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2020_2021_completa.png",
+      "size": 58605,
+      "sha256": "4bf476adecbc53a91ec9b96deb6f1b21689986de52cc727f2bbb96a316500faf",
+      "sha256_destino": "4bf476adecbc53a91ec9b96deb6f1b21689986de52cc727f2bbb96a316500faf"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2020_2021_independiente.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2020_2021_independiente.png",
+      "size": 60645,
+      "sha256": "ae00d636a47d531d5c62c1648ee85fa778b2580c1ba0d43d5bc98c4d1b0be9aa",
+      "sha256_destino": "ae00d636a47d531d5c62c1648ee85fa778b2580c1ba0d43d5bc98c4d1b0be9aa"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2021_2022_completa.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2021_2022_completa.png",
+      "size": 57464,
+      "sha256": "7b03ec7af52debb4374d8501b43a772131505d8ec75eeb936597e9eda17cef24",
+      "sha256_destino": "7b03ec7af52debb4374d8501b43a772131505d8ec75eeb936597e9eda17cef24"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2021_2022_independiente.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2021_2022_independiente.png",
+      "size": 57661,
+      "sha256": "c0600a156822a9d063e47cd578c5b42e14bae3f5478e0f457d0429fdb131030e",
+      "sha256_destino": "c0600a156822a9d063e47cd578c5b42e14bae3f5478e0f457d0429fdb131030e"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2018_2019_completa.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2018_2019_completa.png",
+      "size": 57004,
+      "sha256": "66c18edce8a56c1536c2ce0318f65bd8964b5c8e11f182b92ebac26ba999bf7e",
+      "sha256_destino": "66c18edce8a56c1536c2ce0318f65bd8964b5c8e11f182b92ebac26ba999bf7e"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2018_2019_independiente.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2018_2019_independiente.png",
+      "size": 56895,
+      "sha256": "d6613e3272cc0b924f37755b14bf0afb176ae9685877e9d8ee2b0050ce92a3e3",
+      "sha256_destino": "d6613e3272cc0b924f37755b14bf0afb176ae9685877e9d8ee2b0050ce92a3e3"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2019_2020_completa.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2019_2020_completa.png",
+      "size": 57673,
+      "sha256": "f0bd72ea5646c5a2f7209977cd35041840150441804a5cc146fca827dffb4550",
+      "sha256_destino": "f0bd72ea5646c5a2f7209977cd35041840150441804a5cc146fca827dffb4550"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2019_2020_independiente.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2019_2020_independiente.png",
+      "size": 58352,
+      "sha256": "c2ad79ed60d5b0f2249d7cd24ce869e044b93afe30470301c4a87baa37843b2f",
+      "sha256_destino": "c2ad79ed60d5b0f2249d7cd24ce869e044b93afe30470301c4a87baa37843b2f"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2020_2021_completa.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2020_2021_completa.png",
+      "size": 57079,
+      "sha256": "7babc967a9eeb74f98839b9fb8f17c992b4981afe4bf846480c631d5a052a737",
+      "sha256_destino": "7babc967a9eeb74f98839b9fb8f17c992b4981afe4bf846480c631d5a052a737"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2020_2021_independiente.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2020_2021_independiente.png",
+      "size": 57583,
+      "sha256": "e2d2402781e586a672ae260f34c6fe73c71f6a14eb0288ec4ef834b5650db80f",
+      "sha256_destino": "e2d2402781e586a672ae260f34c6fe73c71f6a14eb0288ec4ef834b5650db80f"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2021_2022_completa.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2021_2022_completa.png",
+      "size": 55755,
+      "sha256": "ffd71543875881b1eeb611fb31d6e9b3d5579c42a6638ac5ddc0598bb35f2318",
+      "sha256_destino": "ffd71543875881b1eeb611fb31d6e9b3d5579c42a6638ac5ddc0598bb35f2318"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2021_2022_independiente.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2021_2022_independiente.png",
+      "size": 56123,
+      "sha256": "8769fa6c6c534633345529964e9b7a6388db57ebd9070d57cd6e88e0a24d7d54",
+      "sha256_destino": "8769fa6c6c534633345529964e9b7a6388db57ebd9070d57cd6e88e0a24d7d54"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/figuras/curvas_comparadas.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/curvas_comparadas.png",
+      "size": 397106,
+      "sha256": "e51f0532b9b93ba69bd304fa83b9d5625336294c21b7587cd4d0472a9ea6cead",
+      "sha256_destino": "e51f0532b9b93ba69bd304fa83b9d5625336294c21b7587cd4d0472a9ea6cead"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/fin.txt",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/fin.txt",
+      "size": 26,
+      "sha256": "f6d76ad412ac2ca17f6b9a3cb4933e35a3a5319539e6ba72b659875b1aa84250",
+      "sha256_destino": "f6d76ad412ac2ca17f6b9a3cb4933e35a3a5319539e6ba72b659875b1aa84250"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/metricas_tiles.json",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/metricas_tiles.json",
+      "size": 71115,
+      "sha256": "222ce7ab4c1adcc8ebaf2fe5c78671d2a40569e710f363f96fd76cafbc6205b4",
+      "sha256_destino": "222ce7ab4c1adcc8ebaf2fe5c78671d2a40569e710f363f96fd76cafbc6205b4"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2018_2019_20HNH.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2018_2019_20HNH.png",
+      "size": 3173243,
+      "sha256": "21162d23479b927a31cf760998b3e6fa17c1b9af212d388293428a42c0734f83",
+      "sha256_destino": "21162d23479b927a31cf760998b3e6fa17c1b9af212d388293428a42c0734f83"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2018_2019_20HNJ.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2018_2019_20HNJ.png",
+      "size": 3260274,
+      "sha256": "1244ed3a37d47a69f021daf350e8adb6c46ce3aa0544f7a7e3eea0add8ee2406",
+      "sha256_destino": "1244ed3a37d47a69f021daf350e8adb6c46ce3aa0544f7a7e3eea0add8ee2406"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2019_2020_20HNH.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2019_2020_20HNH.png",
+      "size": 3282333,
+      "sha256": "844cbe31f5d9626504b83c22ee4acb14c2baf0ed52656f78da2cbabe239ad7d8",
+      "sha256_destino": "844cbe31f5d9626504b83c22ee4acb14c2baf0ed52656f78da2cbabe239ad7d8"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2019_2020_20HNJ.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2019_2020_20HNJ.png",
+      "size": 3282302,
+      "sha256": "ef0de0062de1b471946b717ec89bedc0bf2caf2e6851a70ce5767dda90050a06",
+      "sha256_destino": "ef0de0062de1b471946b717ec89bedc0bf2caf2e6851a70ce5767dda90050a06"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2020_2021_20HNH.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2020_2021_20HNH.png",
+      "size": 3308711,
+      "sha256": "bbebd6a5c9a4a25dadab07ebc934f3a81282d026f31fed65987d0dc29d6d51d8",
+      "sha256_destino": "bbebd6a5c9a4a25dadab07ebc934f3a81282d026f31fed65987d0dc29d6d51d8"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2020_2021_20HNJ.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2020_2021_20HNJ.png",
+      "size": 3158215,
+      "sha256": "68799e8bc1f035765d698c323e13a81994858ec5153a89f4a9b5ffa7fa8799a6",
+      "sha256_destino": "68799e8bc1f035765d698c323e13a81994858ec5153a89f4a9b5ffa7fa8799a6"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2021_2022_20HNH.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2021_2022_20HNH.png",
+      "size": 3486656,
+      "sha256": "e787a92014c2559f56d1abb84d4e510524db0111a368b6cda103be195b8b0758",
+      "sha256_destino": "e787a92014c2559f56d1abb84d4e510524db0111a368b6cda103be195b8b0758"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2021_2022_20HNJ.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2021_2022_20HNJ.png",
+      "size": 3228082,
+      "sha256": "fb24cf78c8b5ade97b044ed928598436b44b811c7ddbfa349719e14a34b8a064",
+      "sha256_destino": "fb24cf78c8b5ade97b044ed928598436b44b811c7ddbfa349719e14a34b8a064"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2018_2019_20HNH.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2018_2019_20HNH.png",
+      "size": 3152407,
+      "sha256": "ea0802e5d4efe3d958922a2bd0adcca1546167a76921bf6f710bbf578ccd5436",
+      "sha256_destino": "ea0802e5d4efe3d958922a2bd0adcca1546167a76921bf6f710bbf578ccd5436"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2018_2019_20HNJ.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2018_2019_20HNJ.png",
+      "size": 3233155,
+      "sha256": "b1974513f32a36b82e13c476ad753aa597957e39c89360fe04689b2dfb902134",
+      "sha256_destino": "b1974513f32a36b82e13c476ad753aa597957e39c89360fe04689b2dfb902134"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2019_2020_20HNH.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2019_2020_20HNH.png",
+      "size": 3247223,
+      "sha256": "8f86f8e931486708895d57d5f518f8402feceafe5fd54ead02ffb5bdded1d3b2",
+      "sha256_destino": "8f86f8e931486708895d57d5f518f8402feceafe5fd54ead02ffb5bdded1d3b2"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2019_2020_20HNJ.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2019_2020_20HNJ.png",
+      "size": 3206543,
+      "sha256": "f025020034bb8f1923da687de8207adeb86f9f601f59e0fd85f9641ef2b7dddb",
+      "sha256_destino": "f025020034bb8f1923da687de8207adeb86f9f601f59e0fd85f9641ef2b7dddb"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2020_2021_20HNH.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2020_2021_20HNH.png",
+      "size": 3254144,
+      "sha256": "301d3a53abfa25c4e7b2add7a5b43f8299a6843eb9d746e0834a4961d92cbff4",
+      "sha256_destino": "301d3a53abfa25c4e7b2add7a5b43f8299a6843eb9d746e0834a4961d92cbff4"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2020_2021_20HNJ.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2020_2021_20HNJ.png",
+      "size": 3062121,
+      "sha256": "fefa546296caf25191991818561eecb40c4f04393bde616b423c6006d2966fe9",
+      "sha256_destino": "fefa546296caf25191991818561eecb40c4f04393bde616b423c6006d2966fe9"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2021_2022_20HNH.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2021_2022_20HNH.png",
+      "size": 3390975,
+      "sha256": "3b47f73d6a1ced331f3937c6aa6cc94de654665146e14321cc6eca8d1d921cea",
+      "sha256_destino": "3b47f73d6a1ced331f3937c6aa6cc94de654665146e14321cc6eca8d1d921cea"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2021_2022_20HNJ.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2021_2022_20HNJ.png",
+      "size": 3212269,
+      "sha256": "7609f9faac359c8e8d2f6fac1608ee794d51dca61e42adb4e9a8f5fef75adf68",
+      "sha256_destino": "7609f9faac359c8e8d2f6fac1608ee794d51dca61e42adb4e9a8f5fef75adf68"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2018_2019_20HNH.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2018_2019_20HNH.png",
+      "size": 3175389,
+      "sha256": "832f4b8558ed0d8b98adeb80af5414da3e9169df26a745a00978d4e58f3e0060",
+      "sha256_destino": "832f4b8558ed0d8b98adeb80af5414da3e9169df26a745a00978d4e58f3e0060"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2018_2019_20HNJ.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2018_2019_20HNJ.png",
+      "size": 3272196,
+      "sha256": "f2e0fcb47e37c592b31d510fd60083613f355bf386517d6755bbee36b1ec4df9",
+      "sha256_destino": "f2e0fcb47e37c592b31d510fd60083613f355bf386517d6755bbee36b1ec4df9"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2019_2020_20HNH.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2019_2020_20HNH.png",
+      "size": 3280568,
+      "sha256": "43b6f493667880d611ed7f761fc2134912abf6d4725613a5bbe86cb0897dc716",
+      "sha256_destino": "43b6f493667880d611ed7f761fc2134912abf6d4725613a5bbe86cb0897dc716"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2019_2020_20HNJ.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2019_2020_20HNJ.png",
+      "size": 3257917,
+      "sha256": "a20e681d3fc52a2e0e12d13b4b7f92dbb5831884975601638abd441dac0ba242",
+      "sha256_destino": "a20e681d3fc52a2e0e12d13b4b7f92dbb5831884975601638abd441dac0ba242"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2020_2021_20HNH.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2020_2021_20HNH.png",
+      "size": 3329684,
+      "sha256": "ffc67e4fb134b86d21b8444fa172cf14f9d274f91cc58dc3fbea58b320b87ac1",
+      "sha256_destino": "ffc67e4fb134b86d21b8444fa172cf14f9d274f91cc58dc3fbea58b320b87ac1"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2020_2021_20HNJ.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2020_2021_20HNJ.png",
+      "size": 3166004,
+      "sha256": "e1dc7f1ff7839217a08005e553fe1a9703a882c69c3193a1b755f79099052354",
+      "sha256_destino": "e1dc7f1ff7839217a08005e553fe1a9703a882c69c3193a1b755f79099052354"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2021_2022_20HNH.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2021_2022_20HNH.png",
+      "size": 3483341,
+      "sha256": "9e940214c894f82ff179079f63170dc12d246219822abb7e83a36783317697ca",
+      "sha256_destino": "9e940214c894f82ff179079f63170dc12d246219822abb7e83a36783317697ca"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2021_2022_20HNJ.png",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2021_2022_20HNJ.png",
+      "size": 3248163,
+      "sha256": "7cd0ad8e56e9242bd7aa70ee7ee6258ef7f64a6bb2cbf4d18fde8cb25803fd56",
+      "sha256_destino": "7cd0ad8e56e9242bd7aa70ee7ee6258ef7f64a6bb2cbf4d18fde8cb25803fd56"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/protocolo.json",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/protocolo.json",
+      "size": 1894,
+      "sha256": "1001c518cefaab5694396bd12b055e6c5ceeaf8fbedecd9d8ba5595773386310",
+      "sha256_destino": "1001c518cefaab5694396bd12b055e6c5ceeaf8fbedecd9d8ba5595773386310"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/resultados.tar.gz",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/resultados.tar.gz",
+      "size": 113123108,
+      "sha256": "6aea2def8838a13f6ee26db7e52a8167065f7b0c3926c88885f628e1ea6e5e96",
+      "sha256_destino": "6aea2def8838a13f6ee26db7e52a8167065f7b0c3926c88885f628e1ea6e5e96"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/sincronizar.py",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/sincronizar.py",
+      "size": 1589,
+      "sha256": "a28cc2495a2d43d518e7406d60b1fad90c2041cb9ba97b7b824a76db08dea844",
+      "sha256_destino": "a28cc2495a2d43d518e7406d60b1fad90c2041cb9ba97b7b824a76db08dea844"
+    },
+    {
+      "origen": "resultados_test_actual_comparacion_20261010/transferencia.log",
+      "destino": "artifacts/reports/resultados_test_actual_comparacion_20261010/transferencia.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256_destino": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "origen": "test.sh",
+      "destino": "scripts/verificar_npz_historicos.sh",
+      "size": 300,
+      "sha256": "997389c6f145c33433a7fb1b87cdd46b261be227ad1d88a171202bb0f5c09100",
+      "sha256_destino": "997389c6f145c33433a7fb1b87cdd46b261be227ad1d88a171202bb0f5c09100"
+    },
+    {
+      "origen": "src/README.md",
+      "destino": "docs/PIPELINE_HISTORICO.md",
+      "size": 19922,
+      "sha256": "2cad3ee579a242fbc5aebf2d2a245eccc42fe16911410d0162214a063bc7514b",
+      "sha256_destino": "1a476463ea9dfd4f63e431c99ea1855eb3bc332bd7585fb66ab7874d3934e7dc"
+    },
+    {
+      "origen": "src/README_EXTENSION_ESTE.md",
+      "destino": "docs/README_EXTENSION_ESTE.md",
+      "size": 4339,
+      "sha256": "5ac6f7e612633d0a8dba84e84431ba50fe292e95199baa0212e1e3ecd1c58118",
+      "sha256_destino": "5ac6f7e612633d0a8dba84e84431ba50fe292e95199baa0212e1e3ecd1c58118"
+    },
+    {
+      "origen": "src/README_MNC.md",
+      "destino": "docs/README_MNC.md",
+      "size": 1681,
+      "sha256": "5cf74859f77b16ad50ef67d2ec0bd43acb478bea61679d3c40e108f025160702",
+      "sha256_destino": "5cf74859f77b16ad50ef67d2ec0bd43acb478bea61679d3c40e108f025160702"
+    },
+    {
+      "origen": "src/README_MULTICAMPANA.md",
+      "destino": "docs/README_MULTICAMPANA.md",
+      "size": 21774,
+      "sha256": "bb3e1f7d9af8d59d22cf6405500d8279e7bb0cb7e79039872b30b42785517bdc",
+      "sha256_destino": "bb3e1f7d9af8d59d22cf6405500d8279e7bb0cb7e79039872b30b42785517bdc"
+    },
+    {
+      "origen": "src/README_NUEVO_TEST_EXTENSION_ESTE.md",
+      "destino": "docs/README_NUEVO_TEST_EXTENSION_ESTE.md",
+      "size": 6776,
+      "sha256": "7ae2066b3325feda4510d58c7c14b63c558359668ca45400e983de49cc09a5e8",
+      "sha256_destino": "306666e7d2a3b66a793bfd8da3189e5f8f3e29263b753734cd9bc08c5faa1c31"
+    },
+    {
+      "origen": "src/README_TEST_ACTUAL.md",
+      "destino": "docs/README_TEST_ACTUAL.md",
+      "size": 4259,
+      "sha256": "705203d7cd77074bd1834c20a8eab65aca93a16b64a23ef7921cc8cdacd39c00",
+      "sha256_destino": "548dd42001d7f806eec14077de4d25efe14b95395bdc80890f4b72e87d5f6ada"
+    },
+    {
+      "origen": "test/inicio.md",
+      "destino": "docs/exploracion_sentinel.md",
+      "size": 817,
+      "sha256": "0272bd398896190f339f122b4d4267ea96fd00dd134f1917c03966cd9f786bd9",
+      "sha256_destino": "0272bd398896190f339f122b4d4267ea96fd00dd134f1917c03966cd9f786bd9"
+    }
+  ],
+  "nota_hashes": "sha256 registra el original; sha256_destino registra el contenido final, incluyendo actualizaciones documentales."
+}

@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 1043" role="img" aria-label="Cobertura de los 17 tiles del experimento multicampaña">
+<rect width="1100" height="1043" fill="#fafaf7"/>
+<style>text{font-family:Arial,sans-serif}.label{font-size:16px;font-weight:bold;paint-order:stroke;stroke:#fff;stroke-width:4px;stroke-linejoin:round}.city{font-size:12px;paint-order:stroke;stroke:#fff;stroke-width:3px}</style>
+<text x="40" y="35" font-size="24" font-weight="bold">Cobertura de los tiles Sentinel-2</text>
+<text x="40" y="60" font-size="15">Experimento multicampaña · grillas del anexo A · coordenadas WGS84</text>
+<rect x="40" y="80" width="20" height="16" fill="#3182bd" fill-opacity=".25" stroke="#3182bd"/>
+<text x="69" y="94" font-size="15">TRAIN · 13 tiles</text>
+<rect x="280" y="80" width="20" height="16" fill="#e68a00" fill-opacity=".25" stroke="#e68a00"/>
+<text x="309" y="94" font-size="15">VAL · 2 tiles</text>
+<rect x="520" y="80" width="20" height="16" fill="#c52839" fill-opacity=".25" stroke="#c52839"/>
+<text x="549" y="94" font-size="15">TEST · 2 tiles</text>
+<path d="M113.4,120 V958" stroke="#ddd" stroke-dasharray="4 4"/>
+<text x="113.4" y="981" text-anchor="middle" font-size="12">67° O</text>
+<path d="M248.6,120 V958" stroke="#ddd" stroke-dasharray="4 4"/>
+<text x="248.6" y="981" text-anchor="middle" font-size="12">66° O</text>
+<path d="M383.8,120 V958" stroke="#ddd" stroke-dasharray="4 4"/>
+<text x="383.8" y="981" text-anchor="middle" font-size="12">65° O</text>
+<path d="M519.0,120 V958" stroke="#ddd" stroke-dasharray="4 4"/>
+<text x="519.0" y="981" text-anchor="middle" font-size="12">64° O</text>
+<path d="M654.2,120 V958" stroke="#ddd" stroke-dasharray="4 4"/>
+<text x="654.2" y="981" text-anchor="middle" font-size="12">63° O</text>
+<path d="M789.4,120 V958" stroke="#ddd" stroke-dasharray="4 4"/>
+<text x="789.4" y="981" text-anchor="middle" font-size="12">62° O</text>
+<path d="M924.6,120 V958" stroke="#ddd" stroke-dasharray="4 4"/>
+<text x="924.6" y="981" text-anchor="middle" font-size="12">61° O</text>
+<path d="M100,849.3 H1000" stroke="#ddd" stroke-dasharray="4 4"/>
+<text x="90" y="853.3" text-anchor="end" font-size="12">35° S</text>
+<path d="M100,688.0 H1000" stroke="#ddd" stroke-dasharray="4 4"/>
+<text x="90" y="692.0" text-anchor="end" font-size="12">34° S</text>
+<path d="M100,526.8 H1000" stroke="#ddd" stroke-dasharray="4 4"/>
+<text x="90" y="530.8" text-anchor="end" font-size="12">33° S</text>
+<path d="M100,365.5 H1000" stroke="#ddd" stroke-dasharray="4 4"/>
+<text x="90" y="369.5" text-anchor="end" font-size="12">32° S</text>
+<path d="M100,204.3 H1000" stroke="#ddd" stroke-dasharray="4 4"/>
+<text x="90" y="208.3" text-anchor="end" font-size="12">31° S</text>
+<polygon points="137.2,754.1 298.5,749.8 293.3,590.4 133.8,594.6" fill="#3182bd" fill-opacity=".16" stroke="#3182bd" stroke-width="2"><title>19HGC · TRAIN · Zanjitas, Varela, Travesía, Talleres, Santa Teresa, Santa Rosa</title></polygon>
+<text x="215.7" y="672.2" text-anchor="middle" class="label" fill="#3182bd">19HGC</text>
+<polygon points="356.8,899.5 520.0,902.0 521.6,742.4 360.3,739.9" fill="#3182bd" fill-opacity=".16" stroke="#3182bd" stroke-width="2"><title>20HLG · TRAIN · Huinca Renancó, Realicó, Villa Huidobro, Rancul, Parera, Del Campillo</title></polygon>
+<text x="439.7" y="821.0" text-anchor="middle" class="label" fill="#3182bd">20HLG</text>
+<polygon points="360.0,754.1 521.5,756.6 523.0,597.0 363.4,594.6" fill="#3182bd" fill-opacity=".16" stroke="#3182bd" stroke-width="2"><title>20HLH · TRAIN · Vicuña Mackenna, Coronel Moldes, Adelia María, Del Campillo, San Basilio, Villa Valeria</title></polygon>
+<text x="442.0" y="675.6" text-anchor="middle" class="label" fill="#3182bd">20HLH</text>
+<polygon points="508.6,611.1 668.4,611.9 668.3,452.2 510.2,451.4" fill="#3182bd" fill-opacity=".16" stroke="#3182bd" stroke-width="2"><title>20HMJ · TRAIN · La Carlota, General Cabrera, Ucacha, Alejandro Roca, Las Perdices, Etruria</title></polygon>
+<text x="588.9" y="531.7" text-anchor="middle" class="label" fill="#3182bd">20HMJ</text>
+<polygon points="510.1,465.7 668.3,466.4 668.1,306.7 511.6,306.0" fill="#3182bd" fill-opacity=".16" stroke="#3182bd" stroke-width="2"><title>20HMK · TRAIN · Villa María, Villa Nueva, Río Segundo, Pilar, Oncativo, Oliva</title></polygon>
+<text x="589.5" y="386.2" text-anchor="middle" class="label" fill="#3182bd">20HMK</text>
+<polygon points="654.2,466.4 812.4,465.5 810.7,305.8 654.2,306.7" fill="#3182bd" fill-opacity=".16" stroke="#3182bd" stroke-width="2"><title>20HNK · TRAIN · Las Varillas, San Jorge, Pozo del Molle, Noetinger, Alicia, Morrison</title></polygon>
+<text x="732.9" y="386.1" text-anchor="middle" class="label" fill="#3182bd">20HNK</text>
+<polygon points="511.5,320.2 668.1,320.9 668.0,161.1 512.9,160.5" fill="#3182bd" fill-opacity=".16" stroke="#3182bd" stroke-width="2"><title>20JML · TRAIN · Río Segundo, Arroyito, Pilar, Villa del Rosario, Montecristo, Río Primero</title></polygon>
+<text x="590.1" y="240.7" text-anchor="middle" class="label" fill="#3182bd">20JML</text>
+<polygon points="213.1,750.2 374.4,754.4 377.6,594.8 218.1,590.8" fill="#3182bd" fill-opacity=".16" stroke="#3182bd" stroke-width="2"><title>20HKH · TRAIN · Villa Mercedes, Justo Daract, Villa Salles, Villa Reynolds, Travesía, Sovén</title></polygon>
+<text x="295.8" y="672.6" text-anchor="middle" class="label" fill="#3182bd">20HKH</text>
+<polygon points="505.4,901.9 668.7,902.7 668.6,743.0 507.2,742.3" fill="#3182bd" fill-opacity=".16" stroke="#3182bd" stroke-width="2"><title>20HMG · TRAIN · General Villegas, Intendente Alvear, Jovita, Serrano, Hipólito Bouchard, Bernardo Larroudé</title></polygon>
+<text x="587.5" y="822.5" text-anchor="middle" class="label" fill="#3182bd">20HMG</text>
+<polygon points="654.2,902.7 817.5,901.7 815.6,742.1 654.2,743.0" fill="#3182bd" fill-opacity=".16" stroke="#3182bd" stroke-width="2"><title>20HNG · TRAIN · Florentino Ameghino, Juan Bautista Alberdi, Tres Algarrobos, Germania, Volta, Villa Saboya</title></polygon>
+<text x="735.4" y="822.4" text-anchor="middle" class="label" fill="#3182bd">20HNG</text>
+<polygon points="803.0,901.9 966.2,899.1 962.5,739.6 801.2,742.3" fill="#3182bd" fill-opacity=".16" stroke="#3182bd" stroke-width="2"><title>20HPG · TRAIN · Junín, Lincoln, Los Toldos, Vedia, Juan Bautista Alberdi, Alfredo Demarchi</title></polygon>
+<text x="883.2" y="820.7" text-anchor="middle" class="label" fill="#3182bd">20HPG</text>
+<polygon points="801.3,756.5 962.8,753.8 959.3,594.3 799.7,596.8" fill="#3182bd" fill-opacity=".16" stroke="#3182bd" stroke-width="2"><title>20HPH · TRAIN · Colón, Rojas, Firmat, Villa Cañás, María Teresa, Wheelwright</title></polygon>
+<text x="880.8" y="675.3" text-anchor="middle" class="label" fill="#3182bd">20HPH</text>
+<polygon points="654.2,320.9 810.9,320.0 809.2,160.3 654.2,161.1" fill="#3182bd" fill-opacity=".16" stroke="#3182bd" stroke-width="2"><title>20JNL · TRAIN · San Francisco, Brinkmann, Freyre, Balnearia, Devoto, Porteña</title></polygon>
+<text x="732.1" y="240.6" text-anchor="middle" class="label" fill="#3182bd">20JNL</text>
+<polygon points="217.7,605.1 377.3,609.2 380.4,449.5 222.5,445.6" fill="#e68a00" fill-opacity=".16" stroke="#e68a00" stroke-width="2"><title>20HKJ · VAL · La Toma, Tilisarao, Concarán, San Francisco del Monte de Oro, Naschel, Virorco</title></polygon>
+<text x="299.5" y="527.4" text-anchor="middle" class="label" fill="#e68a00">20HKJ</text>
+<polygon points="507.0,756.5 668.6,757.3 668.4,597.6 508.7,596.8" fill="#e68a00" fill-opacity=".16" stroke="#e68a00" stroke-width="2"><title>20HMH · VAL · Laboulaye, Adelia María, General Levalle, Viamonte, La Cesira, Huanchillas</title></polygon>
+<text x="588.2" y="677.0" text-anchor="middle" class="label" fill="#e68a00">20HMH</text>
+<polygon points="366.1,463.5 524.2,465.8 525.6,306.1 369.2,303.9" fill="#c52839" fill-opacity=".16" stroke="#c52839" stroke-width="2"><title>20HLK · TEST · Río Tercero, Alta Gracia, Embalse, Merlo, Almafuerte, Santa Rosa de Calamuchita</title></polygon>
+<text x="446.3" y="384.8" text-anchor="middle" class="label" fill="#c52839">20HLK</text>
+<polygon points="363.1,608.9 522.9,611.3 524.4,451.6 366.4,449.3" fill="#c52839" fill-opacity=".16" stroke="#c52839" stroke-width="2"><title>20HLJ · TEST · Río Cuarto, Sampacho, Las Higueras, San Basilio, Elena, Achiras</title></polygon>
+<text x="444.2" y="530.2" text-anchor="middle" class="label" fill="#c52839">20HLJ</text>
+<circle cx="468.4" cy="823.7" r="3.3" fill="#222"/>
+<text x="474.4" y="817.7" class="city">Huinca Renancó</text>
+<circle cx="485.7" cy="855.4" r="3.3" fill="#222"/>
+<text x="491.7" y="849.4" class="city">Realicó</text>
+<circle cx="621.8" cy="431.2" r="3.3" fill="#222"/>
+<text x="627.8" y="425.2" class="city">Villa María</text>
+<circle cx="692.1" cy="344.6" r="3.3" fill="#222"/>
+<text x="698.1" y="338.6" class="city">Las Varillas</text>
+<circle cx="321.9" cy="635.7" r="3.3" fill="#222"/>
+<text x="327.9" y="629.7" class="city">Villa Mercedes</text>
+<circle cx="652.2" cy="854.5" r="3.3" fill="#222"/>
+<text x="658.2" y="848.5" class="city">General Villegas</text>
+<circle cx="931.9" cy="783.8" r="3.3" fill="#222"/>
+<text x="937.9" y="777.8" class="city">Junín</text>
+<circle cx="778.1" cy="272.8" r="3.3" fill="#222"/>
+<text x="784.1" y="266.8" class="city">San Francisco</text>
+<circle cx="299.7" cy="535.4" r="3.3" fill="#222"/>
+<text x="305.7" y="529.4" class="city">La Toma</text>
+<circle cx="601.4" cy="708.5" r="3.3" fill="#222"/>
+<text x="607.4" y="702.5" class="city">Laboulaye</text>
+<circle cx="503.8" cy="394.0" r="3.3" fill="#222"/>
+<text x="509.8" y="388.0" class="city">Río Tercero</text>
+<circle cx="460.9" cy="309.0" r="3.3" fill="#222"/>
+<text x="466.9" y="303.0" class="city">Alta Gracia</text>
+<circle cx="471.3" cy="547.8" r="3.3" fill="#222"/>
+<text x="477.3" y="541.8" class="city">Río Cuarto</text>
+<text x="40" y="1013" font-size="13">Contornos de raster completos; pueden contener NoData. Los bordes vecinos se solapan.</text>
+<text x="40" y="1033" font-size="12">Sin límites administrativos. Localidades: GeoNames. Grillas: rasters de diciembre de 2018.</text>
+</svg>

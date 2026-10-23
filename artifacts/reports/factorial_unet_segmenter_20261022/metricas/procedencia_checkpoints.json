@@ -1,0 +1,2922 @@
+{
+  "reducida_2020_2021_unet": {
+    "config": {
+      "campanas": {
+        "2018_2019": {
+          "directorio": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_1819_scl_f16",
+          "split": {
+            "train": [],
+            "val": [
+              {
+                "tile": "20HKJ",
+                "parches": 1706,
+                "conteos": [
+                  1660652,
+                  78447982,
+                  20214820,
+                  11245511,
+                  235451
+                ]
+              },
+              {
+                "tile": "20HMH",
+                "parches": 1764,
+                "conteos": [
+                  0,
+                  54756841,
+                  22796802,
+                  36837137,
+                  1214724
+                ]
+              }
+            ]
+          }
+        },
+        "2019_2020": {
+          "directorio": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_f16",
+          "split": {
+            "train": [],
+            "val": [
+              {
+                "tile": "20HKJ",
+                "parches": 1706,
+                "conteos": [
+                  2072372,
+                  79733054,
+                  15850894,
+                  14112549,
+                  35547
+                ]
+              },
+              {
+                "tile": "20HMH",
+                "parches": 1764,
+                "conteos": [
+                  2856909,
+                  54164700,
+                  19833003,
+                  36634973,
+                  2115919
+                ]
+              }
+            ]
+          }
+        },
+        "2020_2021": {
+          "directorio": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_2021_f16",
+          "split": {
+            "train": [
+              {
+                "tile": "20HLG",
+                "parches": 1146,
+                "conteos": [
+                  2346300,
+                  35596882,
+                  20856208,
+                  15368500,
+                  936366
+                ]
+              },
+              {
+                "tile": "20HLH",
+                "parches": 910,
+                "conteos": [
+                  1159503,
+                  17073327,
+                  20541554,
+                  18461315,
+                  2402061
+                ]
+              },
+              {
+                "tile": "20HMG",
+                "parches": 1016,
+                "conteos": [
+                  2340511,
+                  25332846,
+                  13048421,
+                  25548655,
+                  314143
+                ]
+              }
+            ],
+            "val": [
+              {
+                "tile": "20HKJ",
+                "parches": 1764,
+                "conteos": [
+                  414510,
+                  81355516,
+                  24671655,
+                  9161783,
+                  2040
+                ]
+              },
+              {
+                "tile": "20HMH",
+                "parches": 1764,
+                "conteos": [
+                  2959202,
+                  46377419,
+                  26138156,
+                  37733741,
+                  2396986
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "split": {
+        "train": [
+          "19HGC",
+          "20HLG",
+          "20HLH",
+          "20HMJ",
+          "20HMK",
+          "20HNK",
+          "20JML",
+          "20HKH",
+          "20HMG",
+          "20HNG",
+          "20HPG",
+          "20HPH",
+          "20JNL",
+          "20HLJ"
+        ],
+        "val": [
+          "20HKJ",
+          "20HMH"
+        ],
+        "test": [
+          "20HNJ",
+          "20HNH"
+        ]
+      },
+      "pesos": [
+        0.0,
+        0.793,
+        1.002,
+        0.861,
+        3.922
+      ],
+      "test_config": "/mnt/yacy_3/prod_bis/ferreyra/dataset/piloto_factorial_mani_20261018_v1/split_mani_comun.json",
+      "test_criterio": "mapas_independientes",
+      "conteos_train": [
+        5846314,
+        78003055,
+        54446183,
+        59378470,
+        3652570
+      ],
+      "modelo": "unet",
+      "ventana": "diciembre-mayo",
+      "bandas": [
+        "B02",
+        "B03",
+        "B04",
+        "B08"
+      ],
+      "canales": 24,
+      "seed": 42,
+      "seleccion_train": "/mnt/yacy_3/prod_bis/ferreyra/dataset/factorial_unet_segmenter_mani_20261021_v1/selecciones/reducida_2020_2021.json",
+      "seleccion_train_sha256": "fc2e91075cb3f84c16c14deb86a596ea096b8cbc11901d463067137e5dd07c27",
+      "parada_temprana": false,
+      "esquema": "original",
+      "clases": [
+        "NoData",
+        "Fondo",
+        "Maiz",
+        "Soja",
+        "Mani"
+      ],
+      "remap_desde_original": null,
+      "batch_size": 32,
+      "epochs": 100,
+      "patience": 30,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.001,
+      "anticipar_pool": false,
+      "cache_lectura": null,
+      "lectura_bloques": false,
+      "bloque_parches": 512,
+      "bloques_pool": 16,
+      "workers": 2,
+      "prefetch": 2,
+      "init_pesos": null,
+      "reanudar": null,
+      "evaluacion_test_pospuesta": true
+    },
+    "checkpoint_sha256": "abdf3637e4eba208dca3d6ffec7d1831e4524ab4b743a375fc4f043d63b2b737"
+  },
+  "reducida_2020_2021_segmenter": {
+    "config": {
+      "campanas": {
+        "2018_2019": {
+          "directorio": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_1819_scl_f16",
+          "split": {
+            "train": [],
+            "val": [
+              {
+                "tile": "20HKJ",
+                "parches": 1706,
+                "conteos": [
+                  1660652,
+                  78447982,
+                  20214820,
+                  11245511,
+                  235451
+                ]
+              },
+              {
+                "tile": "20HMH",
+                "parches": 1764,
+                "conteos": [
+                  0,
+                  54756841,
+                  22796802,
+                  36837137,
+                  1214724
+                ]
+              }
+            ]
+          }
+        },
+        "2019_2020": {
+          "directorio": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_f16",
+          "split": {
+            "train": [],
+            "val": [
+              {
+                "tile": "20HKJ",
+                "parches": 1706,
+                "conteos": [
+                  2072372,
+                  79733054,
+                  15850894,
+                  14112549,
+                  35547
+                ]
+              },
+              {
+                "tile": "20HMH",
+                "parches": 1764,
+                "conteos": [
+                  2856909,
+                  54164700,
+                  19833003,
+                  36634973,
+                  2115919
+                ]
+              }
+            ]
+          }
+        },
+        "2020_2021": {
+          "directorio": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_2021_f16",
+          "split": {
+            "train": [
+              {
+                "tile": "20HLG",
+                "parches": 1146,
+                "conteos": [
+                  2346300,
+                  35596882,
+                  20856208,
+                  15368500,
+                  936366
+                ]
+              },
+              {
+                "tile": "20HLH",
+                "parches": 910,
+                "conteos": [
+                  1159503,
+                  17073327,
+                  20541554,
+                  18461315,
+                  2402061
+                ]
+              },
+              {
+                "tile": "20HMG",
+                "parches": 1016,
+                "conteos": [
+                  2340511,
+                  25332846,
+                  13048421,
+                  25548655,
+                  314143
+                ]
+              }
+            ],
+            "val": [
+              {
+                "tile": "20HKJ",
+                "parches": 1764,
+                "conteos": [
+                  414510,
+                  81355516,
+                  24671655,
+                  9161783,
+                  2040
+                ]
+              },
+              {
+                "tile": "20HMH",
+                "parches": 1764,
+                "conteos": [
+                  2959202,
+                  46377419,
+                  26138156,
+                  37733741,
+                  2396986
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "split": {
+        "train": [
+          "19HGC",
+          "20HLG",
+          "20HLH",
+          "20HMJ",
+          "20HMK",
+          "20HNK",
+          "20JML",
+          "20HKH",
+          "20HMG",
+          "20HNG",
+          "20HPG",
+          "20HPH",
+          "20JNL",
+          "20HLJ"
+        ],
+        "val": [
+          "20HKJ",
+          "20HMH"
+        ],
+        "test": [
+          "20HNJ",
+          "20HNH"
+        ]
+      },
+      "pesos": [
+        0.0,
+        0.793,
+        1.002,
+        0.861,
+        3.922
+      ],
+      "test_config": "/mnt/yacy_3/prod_bis/ferreyra/dataset/piloto_factorial_mani_20261018_v1/split_mani_comun.json",
+      "test_criterio": "mapas_independientes",
+      "conteos_train": [
+        5846314,
+        78003055,
+        54446183,
+        59378470,
+        3652570
+      ],
+      "modelo": "segmenter",
+      "ventana": "diciembre-mayo",
+      "bandas": [
+        "B02",
+        "B03",
+        "B04",
+        "B08"
+      ],
+      "canales": 24,
+      "seed": 42,
+      "seleccion_train": "/mnt/yacy_3/prod_bis/ferreyra/dataset/factorial_unet_segmenter_mani_20261021_v1/selecciones/reducida_2020_2021.json",
+      "seleccion_train_sha256": "fc2e91075cb3f84c16c14deb86a596ea096b8cbc11901d463067137e5dd07c27",
+      "parada_temprana": false,
+      "esquema": "original",
+      "clases": [
+        "NoData",
+        "Fondo",
+        "Maiz",
+        "Soja",
+        "Mani"
+      ],
+      "remap_desde_original": null,
+      "batch_size": 32,
+      "epochs": 100,
+      "patience": 30,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.001,
+      "anticipar_pool": false,
+      "cache_lectura": null,
+      "lectura_bloques": false,
+      "bloque_parches": 512,
+      "bloques_pool": 16,
+      "workers": 2,
+      "prefetch": 2,
+      "init_pesos": null,
+      "reanudar": null,
+      "evaluacion_test_pospuesta": true
+    },
+    "checkpoint_sha256": "9c642fb3246003f370b804a81f259ca72c8f19660313c44fd5a8c3dfb5b77a17"
+  },
+  "amplia_tres_unet": {
+    "config": {
+      "campanas": {
+        "2018_2019": {
+          "directorio": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_1819_scl_f16",
+          "split": {
+            "train": [
+              {
+                "tile": "19HGC",
+                "parches": 17,
+                "conteos": [
+                  0,
+                  905138,
+                  161683,
+                  45529,
+                  1762
+                ]
+              },
+              {
+                "tile": "20HLG",
+                "parches": 77,
+                "conteos": [
+                  350102,
+                  2540428,
+                  919693,
+                  1117859,
+                  118190
+                ]
+              },
+              {
+                "tile": "20HLH",
+                "parches": 97,
+                "conteos": [
+                  300373,
+                  1761442,
+                  1619190,
+                  2486059,
+                  189928
+                ]
+              },
+              {
+                "tile": "20HMJ",
+                "parches": 98,
+                "conteos": [
+                  237729,
+                  1322886,
+                  1801390,
+                  2869231,
+                  191292
+                ]
+              },
+              {
+                "tile": "20HMK",
+                "parches": 89,
+                "conteos": [
+                  125472,
+                  1034537,
+                  2101923,
+                  2546583,
+                  24189
+                ]
+              },
+              {
+                "tile": "20HNK",
+                "parches": 82,
+                "conteos": [
+                  5512,
+                  2376032,
+                  1250461,
+                  1741947,
+                  0
+                ]
+              },
+              {
+                "tile": "20JML",
+                "parches": 88,
+                "conteos": [
+                  40866,
+                  1041432,
+                  2557444,
+                  2127426,
+                  0
+                ]
+              },
+              {
+                "tile": "20HKH",
+                "parches": 41,
+                "conteos": [
+                  0,
+                  1482126,
+                  725564,
+                  450395,
+                  28891
+                ]
+              },
+              {
+                "tile": "20HMG",
+                "parches": 89,
+                "conteos": [
+                  109363,
+                  3031242,
+                  950283,
+                  1679203,
+                  62613
+                ]
+              },
+              {
+                "tile": "20HNG",
+                "parches": 63,
+                "conteos": [
+                  0,
+                  2872807,
+                  326557,
+                  929404,
+                  0
+                ]
+              },
+              {
+                "tile": "20HPG",
+                "parches": 76,
+                "conteos": [
+                  0,
+                  3407122,
+                  425089,
+                  1148525,
+                  0
+                ]
+              },
+              {
+                "tile": "20HPH",
+                "parches": 73,
+                "conteos": [
+                  0,
+                  1758581,
+                  1308440,
+                  1717107,
+                  0
+                ]
+              },
+              {
+                "tile": "20JNL",
+                "parches": 50,
+                "conteos": [
+                  0,
+                  1318396,
+                  717939,
+                  1240465,
+                  0
+                ]
+              },
+              {
+                "tile": "20HLJ",
+                "parches": 84,
+                "conteos": [
+                  236131,
+                  1551939,
+                  1609949,
+                  1964375,
+                  142630
+                ]
+              }
+            ],
+            "val": [
+              {
+                "tile": "20HKJ",
+                "parches": 1706,
+                "conteos": [
+                  1660652,
+                  78447982,
+                  20214820,
+                  11245511,
+                  235451
+                ]
+              },
+              {
+                "tile": "20HMH",
+                "parches": 1764,
+                "conteos": [
+                  0,
+                  54756841,
+                  22796802,
+                  36837137,
+                  1214724
+                ]
+              }
+            ]
+          }
+        },
+        "2019_2020": {
+          "directorio": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_f16",
+          "split": {
+            "train": [
+              {
+                "tile": "19HGC",
+                "parches": 15,
+                "conteos": [
+                  0,
+                  612691,
+                  181409,
+                  188940,
+                  0
+                ]
+              },
+              {
+                "tile": "20HLG",
+                "parches": 107,
+                "conteos": [
+                  254796,
+                  3276993,
+                  1206860,
+                  1930921,
+                  342782
+                ]
+              },
+              {
+                "tile": "20HLH",
+                "parches": 121,
+                "conteos": [
+                  285871,
+                  2562055,
+                  1825377,
+                  2807283,
+                  449270
+                ]
+              },
+              {
+                "tile": "20HMJ",
+                "parches": 95,
+                "conteos": [
+                  251351,
+                  1746512,
+                  1601909,
+                  2417415,
+                  208733
+                ]
+              },
+              {
+                "tile": "20HMK",
+                "parches": 91,
+                "conteos": [
+                  135219,
+                  1263415,
+                  1747945,
+                  2817197,
+                  0
+                ]
+              },
+              {
+                "tile": "20HNK",
+                "parches": 49,
+                "conteos": [
+                  249514,
+                  1159763,
+                  574786,
+                  1227201,
+                  0
+                ]
+              },
+              {
+                "tile": "20JML",
+                "parches": 82,
+                "conteos": [
+                  26819,
+                  1191037,
+                  1452245,
+                  2703851,
+                  0
+                ]
+              },
+              {
+                "tile": "20HKH",
+                "parches": 33,
+                "conteos": [
+                  11173,
+                  1258098,
+                  568643,
+                  323703,
+                  1071
+                ]
+              },
+              {
+                "tile": "20HMG",
+                "parches": 87,
+                "conteos": [
+                  224644,
+                  2521385,
+                  909340,
+                  1929579,
+                  116684
+                ]
+              },
+              {
+                "tile": "20HNG",
+                "parches": 64,
+                "conteos": [
+                  152186,
+                  2050416,
+                  834645,
+                  1157015,
+                  42
+                ]
+              },
+              {
+                "tile": "20HPG",
+                "parches": 59,
+                "conteos": [
+                  153111,
+                  1934883,
+                  512224,
+                  1266406,
+                  0
+                ]
+              },
+              {
+                "tile": "20HPH",
+                "parches": 72,
+                "conteos": [
+                  94333,
+                  1059400,
+                  786584,
+                  2778275,
+                  0
+                ]
+              },
+              {
+                "tile": "20JNL",
+                "parches": 69,
+                "conteos": [
+                  421964,
+                  1537717,
+                  749819,
+                  1812484,
+                  0
+                ]
+              },
+              {
+                "tile": "20HLJ",
+                "parches": 80,
+                "conteos": [
+                  167312,
+                  1894815,
+                  1378128,
+                  1667223,
+                  135402
+                ]
+              }
+            ],
+            "val": [
+              {
+                "tile": "20HKJ",
+                "parches": 1706,
+                "conteos": [
+                  2072372,
+                  79733054,
+                  15850894,
+                  14112549,
+                  35547
+                ]
+              },
+              {
+                "tile": "20HMH",
+                "parches": 1764,
+                "conteos": [
+                  2856909,
+                  54164700,
+                  19833003,
+                  36634973,
+                  2115919
+                ]
+              }
+            ]
+          }
+        },
+        "2020_2021": {
+          "directorio": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_2021_f16",
+          "split": {
+            "train": [
+              {
+                "tile": "19HGC",
+                "parches": 17,
+                "conteos": [
+                  0,
+                  877441,
+                  232154,
+                  4517,
+                  0
+                ]
+              },
+              {
+                "tile": "20HLG",
+                "parches": 98,
+                "conteos": [
+                  283475,
+                  3016941,
+                  1650601,
+                  1271749,
+                  199762
+                ]
+              },
+              {
+                "tile": "20HLH",
+                "parches": 75,
+                "conteos": [
+                  132773,
+                  1540681,
+                  1530898,
+                  1406647,
+                  304201
+                ]
+              },
+              {
+                "tile": "20HMJ",
+                "parches": 87,
+                "conteos": [
+                  349485,
+                  1451653,
+                  1662238,
+                  2007876,
+                  230380
+                ]
+              },
+              {
+                "tile": "20HMK",
+                "parches": 107,
+                "conteos": [
+                  280872,
+                  1368210,
+                  1975745,
+                  3212808,
+                  174717
+                ]
+              },
+              {
+                "tile": "20HNK",
+                "parches": 80,
+                "conteos": [
+                  154278,
+                  1679910,
+                  1141890,
+                  2266802,
+                  0
+                ]
+              },
+              {
+                "tile": "20JML",
+                "parches": 71,
+                "conteos": [
+                  139912,
+                  1096835,
+                  1466416,
+                  1933256,
+                  16637
+                ]
+              },
+              {
+                "tile": "20HKH",
+                "parches": 30,
+                "conteos": [
+                  31534,
+                  1264988,
+                  575442,
+                  90674,
+                  3442
+                ]
+              },
+              {
+                "tile": "20HMG",
+                "parches": 77,
+                "conteos": [
+                  233503,
+                  1724078,
+                  1072207,
+                  1957891,
+                  58593
+                ]
+              },
+              {
+                "tile": "20HNG",
+                "parches": 76,
+                "conteos": [
+                  326172,
+                  2325684,
+                  855247,
+                  1473633,
+                  0
+                ]
+              },
+              {
+                "tile": "20HPG",
+                "parches": 85,
+                "conteos": [
+                  355195,
+                  2328206,
+                  731746,
+                  2155413,
+                  0
+                ]
+              },
+              {
+                "tile": "20HPH",
+                "parches": 64,
+                "conteos": [
+                  175583,
+                  755000,
+                  707740,
+                  2555981,
+                  0
+                ]
+              },
+              {
+                "tile": "20JNL",
+                "parches": 93,
+                "conteos": [
+                  407936,
+                  2364051,
+                  1123229,
+                  2199632,
+                  0
+                ]
+              },
+              {
+                "tile": "20HLJ",
+                "parches": 64,
+                "conteos": [
+                  104242,
+                  1271158,
+                  1310576,
+                  1376667,
+                  131661
+                ]
+              }
+            ],
+            "val": [
+              {
+                "tile": "20HKJ",
+                "parches": 1764,
+                "conteos": [
+                  414510,
+                  81355516,
+                  24671655,
+                  9161783,
+                  2040
+                ]
+              },
+              {
+                "tile": "20HMH",
+                "parches": 1764,
+                "conteos": [
+                  2959202,
+                  46377419,
+                  26138156,
+                  37733741,
+                  2396986
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "split": {
+        "train": [
+          "19HGC",
+          "20HLG",
+          "20HLH",
+          "20HMJ",
+          "20HMK",
+          "20HNK",
+          "20JML",
+          "20HKH",
+          "20HMG",
+          "20HNG",
+          "20HPG",
+          "20HPH",
+          "20JNL",
+          "20HLJ"
+        ],
+        "val": [
+          "20HKJ",
+          "20HMH"
+        ],
+        "test": [
+          "20HNJ",
+          "20HNH"
+        ]
+      },
+      "pesos": [
+        0.0,
+        0.793,
+        1.002,
+        0.861,
+        3.922
+      ],
+      "test_config": "/mnt/yacy_3/prod_bis/ferreyra/dataset/piloto_factorial_mani_20261018_v1/split_mani_comun.json",
+      "test_criterio": "mapas_independientes",
+      "conteos_train": [
+        6808801,
+        73538124,
+        46841648,
+        71005147,
+        3132872
+      ],
+      "modelo": "unet",
+      "ventana": "diciembre-mayo",
+      "bandas": [
+        "B02",
+        "B03",
+        "B04",
+        "B08"
+      ],
+      "canales": 24,
+      "seed": 42,
+      "seleccion_train": "/mnt/yacy_3/prod_bis/ferreyra/dataset/factorial_unet_segmenter_mani_20261021_v1/selecciones/amplia_tres.json",
+      "seleccion_train_sha256": "42efd45f5750e88cc46d4274cdc51575ea98b07eb51b6defae8ccd9357897940",
+      "parada_temprana": false,
+      "esquema": "original",
+      "clases": [
+        "NoData",
+        "Fondo",
+        "Maiz",
+        "Soja",
+        "Mani"
+      ],
+      "remap_desde_original": null,
+      "batch_size": 32,
+      "epochs": 100,
+      "patience": 30,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.001,
+      "anticipar_pool": false,
+      "cache_lectura": null,
+      "lectura_bloques": false,
+      "bloque_parches": 512,
+      "bloques_pool": 16,
+      "workers": 2,
+      "prefetch": 2,
+      "init_pesos": null,
+      "reanudar": null,
+      "evaluacion_test_pospuesta": true
+    },
+    "checkpoint_sha256": "0074320b028edbdf2af2145cd33ab16b8526ff110b4b6b72771bda072d6c0f09"
+  },
+  "amplia_tres_segmenter": {
+    "config": {
+      "campanas": {
+        "2018_2019": {
+          "directorio": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_1819_scl_f16",
+          "split": {
+            "train": [
+              {
+                "tile": "19HGC",
+                "parches": 17,
+                "conteos": [
+                  0,
+                  905138,
+                  161683,
+                  45529,
+                  1762
+                ]
+              },
+              {
+                "tile": "20HLG",
+                "parches": 77,
+                "conteos": [
+                  350102,
+                  2540428,
+                  919693,
+                  1117859,
+                  118190
+                ]
+              },
+              {
+                "tile": "20HLH",
+                "parches": 97,
+                "conteos": [
+                  300373,
+                  1761442,
+                  1619190,
+                  2486059,
+                  189928
+                ]
+              },
+              {
+                "tile": "20HMJ",
+                "parches": 98,
+                "conteos": [
+                  237729,
+                  1322886,
+                  1801390,
+                  2869231,
+                  191292
+                ]
+              },
+              {
+                "tile": "20HMK",
+                "parches": 89,
+                "conteos": [
+                  125472,
+                  1034537,
+                  2101923,
+                  2546583,
+                  24189
+                ]
+              },
+              {
+                "tile": "20HNK",
+                "parches": 82,
+                "conteos": [
+                  5512,
+                  2376032,
+                  1250461,
+                  1741947,
+                  0
+                ]
+              },
+              {
+                "tile": "20JML",
+                "parches": 88,
+                "conteos": [
+                  40866,
+                  1041432,
+                  2557444,
+                  2127426,
+                  0
+                ]
+              },
+              {
+                "tile": "20HKH",
+                "parches": 41,
+                "conteos": [
+                  0,
+                  1482126,
+                  725564,
+                  450395,
+                  28891
+                ]
+              },
+              {
+                "tile": "20HMG",
+                "parches": 89,
+                "conteos": [
+                  109363,
+                  3031242,
+                  950283,
+                  1679203,
+                  62613
+                ]
+              },
+              {
+                "tile": "20HNG",
+                "parches": 63,
+                "conteos": [
+                  0,
+                  2872807,
+                  326557,
+                  929404,
+                  0
+                ]
+              },
+              {
+                "tile": "20HPG",
+                "parches": 76,
+                "conteos": [
+                  0,
+                  3407122,
+                  425089,
+                  1148525,
+                  0
+                ]
+              },
+              {
+                "tile": "20HPH",
+                "parches": 73,
+                "conteos": [
+                  0,
+                  1758581,
+                  1308440,
+                  1717107,
+                  0
+                ]
+              },
+              {
+                "tile": "20JNL",
+                "parches": 50,
+                "conteos": [
+                  0,
+                  1318396,
+                  717939,
+                  1240465,
+                  0
+                ]
+              },
+              {
+                "tile": "20HLJ",
+                "parches": 84,
+                "conteos": [
+                  236131,
+                  1551939,
+                  1609949,
+                  1964375,
+                  142630
+                ]
+              }
+            ],
+            "val": [
+              {
+                "tile": "20HKJ",
+                "parches": 1706,
+                "conteos": [
+                  1660652,
+                  78447982,
+                  20214820,
+                  11245511,
+                  235451
+                ]
+              },
+              {
+                "tile": "20HMH",
+                "parches": 1764,
+                "conteos": [
+                  0,
+                  54756841,
+                  22796802,
+                  36837137,
+                  1214724
+                ]
+              }
+            ]
+          }
+        },
+        "2019_2020": {
+          "directorio": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_f16",
+          "split": {
+            "train": [
+              {
+                "tile": "19HGC",
+                "parches": 15,
+                "conteos": [
+                  0,
+                  612691,
+                  181409,
+                  188940,
+                  0
+                ]
+              },
+              {
+                "tile": "20HLG",
+                "parches": 107,
+                "conteos": [
+                  254796,
+                  3276993,
+                  1206860,
+                  1930921,
+                  342782
+                ]
+              },
+              {
+                "tile": "20HLH",
+                "parches": 121,
+                "conteos": [
+                  285871,
+                  2562055,
+                  1825377,
+                  2807283,
+                  449270
+                ]
+              },
+              {
+                "tile": "20HMJ",
+                "parches": 95,
+                "conteos": [
+                  251351,
+                  1746512,
+                  1601909,
+                  2417415,
+                  208733
+                ]
+              },
+              {
+                "tile": "20HMK",
+                "parches": 91,
+                "conteos": [
+                  135219,
+                  1263415,
+                  1747945,
+                  2817197,
+                  0
+                ]
+              },
+              {
+                "tile": "20HNK",
+                "parches": 49,
+                "conteos": [
+                  249514,
+                  1159763,
+                  574786,
+                  1227201,
+                  0
+                ]
+              },
+              {
+                "tile": "20JML",
+                "parches": 82,
+                "conteos": [
+                  26819,
+                  1191037,
+                  1452245,
+                  2703851,
+                  0
+                ]
+              },
+              {
+                "tile": "20HKH",
+                "parches": 33,
+                "conteos": [
+                  11173,
+                  1258098,
+                  568643,
+                  323703,
+                  1071
+                ]
+              },
+              {
+                "tile": "20HMG",
+                "parches": 87,
+                "conteos": [
+                  224644,
+                  2521385,
+                  909340,
+                  1929579,
+                  116684
+                ]
+              },
+              {
+                "tile": "20HNG",
+                "parches": 64,
+                "conteos": [
+                  152186,
+                  2050416,
+                  834645,
+                  1157015,
+                  42
+                ]
+              },
+              {
+                "tile": "20HPG",
+                "parches": 59,
+                "conteos": [
+                  153111,
+                  1934883,
+                  512224,
+                  1266406,
+                  0
+                ]
+              },
+              {
+                "tile": "20HPH",
+                "parches": 72,
+                "conteos": [
+                  94333,
+                  1059400,
+                  786584,
+                  2778275,
+                  0
+                ]
+              },
+              {
+                "tile": "20JNL",
+                "parches": 69,
+                "conteos": [
+                  421964,
+                  1537717,
+                  749819,
+                  1812484,
+                  0
+                ]
+              },
+              {
+                "tile": "20HLJ",
+                "parches": 80,
+                "conteos": [
+                  167312,
+                  1894815,
+                  1378128,
+                  1667223,
+                  135402
+                ]
+              }
+            ],
+            "val": [
+              {
+                "tile": "20HKJ",
+                "parches": 1706,
+                "conteos": [
+                  2072372,
+                  79733054,
+                  15850894,
+                  14112549,
+                  35547
+                ]
+              },
+              {
+                "tile": "20HMH",
+                "parches": 1764,
+                "conteos": [
+                  2856909,
+                  54164700,
+                  19833003,
+                  36634973,
+                  2115919
+                ]
+              }
+            ]
+          }
+        },
+        "2020_2021": {
+          "directorio": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_2021_f16",
+          "split": {
+            "train": [
+              {
+                "tile": "19HGC",
+                "parches": 17,
+                "conteos": [
+                  0,
+                  877441,
+                  232154,
+                  4517,
+                  0
+                ]
+              },
+              {
+                "tile": "20HLG",
+                "parches": 98,
+                "conteos": [
+                  283475,
+                  3016941,
+                  1650601,
+                  1271749,
+                  199762
+                ]
+              },
+              {
+                "tile": "20HLH",
+                "parches": 75,
+                "conteos": [
+                  132773,
+                  1540681,
+                  1530898,
+                  1406647,
+                  304201
+                ]
+              },
+              {
+                "tile": "20HMJ",
+                "parches": 87,
+                "conteos": [
+                  349485,
+                  1451653,
+                  1662238,
+                  2007876,
+                  230380
+                ]
+              },
+              {
+                "tile": "20HMK",
+                "parches": 107,
+                "conteos": [
+                  280872,
+                  1368210,
+                  1975745,
+                  3212808,
+                  174717
+                ]
+              },
+              {
+                "tile": "20HNK",
+                "parches": 80,
+                "conteos": [
+                  154278,
+                  1679910,
+                  1141890,
+                  2266802,
+                  0
+                ]
+              },
+              {
+                "tile": "20JML",
+                "parches": 71,
+                "conteos": [
+                  139912,
+                  1096835,
+                  1466416,
+                  1933256,
+                  16637
+                ]
+              },
+              {
+                "tile": "20HKH",
+                "parches": 30,
+                "conteos": [
+                  31534,
+                  1264988,
+                  575442,
+                  90674,
+                  3442
+                ]
+              },
+              {
+                "tile": "20HMG",
+                "parches": 77,
+                "conteos": [
+                  233503,
+                  1724078,
+                  1072207,
+                  1957891,
+                  58593
+                ]
+              },
+              {
+                "tile": "20HNG",
+                "parches": 76,
+                "conteos": [
+                  326172,
+                  2325684,
+                  855247,
+                  1473633,
+                  0
+                ]
+              },
+              {
+                "tile": "20HPG",
+                "parches": 85,
+                "conteos": [
+                  355195,
+                  2328206,
+                  731746,
+                  2155413,
+                  0
+                ]
+              },
+              {
+                "tile": "20HPH",
+                "parches": 64,
+                "conteos": [
+                  175583,
+                  755000,
+                  707740,
+                  2555981,
+                  0
+                ]
+              },
+              {
+                "tile": "20JNL",
+                "parches": 93,
+                "conteos": [
+                  407936,
+                  2364051,
+                  1123229,
+                  2199632,
+                  0
+                ]
+              },
+              {
+                "tile": "20HLJ",
+                "parches": 64,
+                "conteos": [
+                  104242,
+                  1271158,
+                  1310576,
+                  1376667,
+                  131661
+                ]
+              }
+            ],
+            "val": [
+              {
+                "tile": "20HKJ",
+                "parches": 1764,
+                "conteos": [
+                  414510,
+                  81355516,
+                  24671655,
+                  9161783,
+                  2040
+                ]
+              },
+              {
+                "tile": "20HMH",
+                "parches": 1764,
+                "conteos": [
+                  2959202,
+                  46377419,
+                  26138156,
+                  37733741,
+                  2396986
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "split": {
+        "train": [
+          "19HGC",
+          "20HLG",
+          "20HLH",
+          "20HMJ",
+          "20HMK",
+          "20HNK",
+          "20JML",
+          "20HKH",
+          "20HMG",
+          "20HNG",
+          "20HPG",
+          "20HPH",
+          "20JNL",
+          "20HLJ"
+        ],
+        "val": [
+          "20HKJ",
+          "20HMH"
+        ],
+        "test": [
+          "20HNJ",
+          "20HNH"
+        ]
+      },
+      "pesos": [
+        0.0,
+        0.793,
+        1.002,
+        0.861,
+        3.922
+      ],
+      "test_config": "/mnt/yacy_3/prod_bis/ferreyra/dataset/piloto_factorial_mani_20261018_v1/split_mani_comun.json",
+      "test_criterio": "mapas_independientes",
+      "conteos_train": [
+        6808801,
+        73538124,
+        46841648,
+        71005147,
+        3132872
+      ],
+      "modelo": "segmenter",
+      "ventana": "diciembre-mayo",
+      "bandas": [
+        "B02",
+        "B03",
+        "B04",
+        "B08"
+      ],
+      "canales": 24,
+      "seed": 42,
+      "seleccion_train": "/mnt/yacy_3/prod_bis/ferreyra/dataset/factorial_unet_segmenter_mani_20261021_v1/selecciones/amplia_tres.json",
+      "seleccion_train_sha256": "42efd45f5750e88cc46d4274cdc51575ea98b07eb51b6defae8ccd9357897940",
+      "parada_temprana": false,
+      "esquema": "original",
+      "clases": [
+        "NoData",
+        "Fondo",
+        "Maiz",
+        "Soja",
+        "Mani"
+      ],
+      "remap_desde_original": null,
+      "batch_size": 32,
+      "epochs": 100,
+      "patience": 30,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.001,
+      "anticipar_pool": false,
+      "cache_lectura": null,
+      "lectura_bloques": false,
+      "bloque_parches": 512,
+      "bloques_pool": 16,
+      "workers": 2,
+      "prefetch": 2,
+      "init_pesos": null,
+      "reanudar": null,
+      "evaluacion_test_pospuesta": true
+    },
+    "checkpoint_sha256": "1ca6024fcb21e58aa7333ece67a25735ee84dadb68346c0edd0341a5ccca1e04"
+  },
+  "amplia_2020_2021_unet": {
+    "config": {
+      "campanas": {
+        "2018_2019": {
+          "directorio": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_1819_scl_f16",
+          "split": {
+            "train": [],
+            "val": [
+              {
+                "tile": "20HKJ",
+                "parches": 1706,
+                "conteos": [
+                  1660652,
+                  78447982,
+                  20214820,
+                  11245511,
+                  235451
+                ]
+              },
+              {
+                "tile": "20HMH",
+                "parches": 1764,
+                "conteos": [
+                  0,
+                  54756841,
+                  22796802,
+                  36837137,
+                  1214724
+                ]
+              }
+            ]
+          }
+        },
+        "2019_2020": {
+          "directorio": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_f16",
+          "split": {
+            "train": [],
+            "val": [
+              {
+                "tile": "20HKJ",
+                "parches": 1706,
+                "conteos": [
+                  2072372,
+                  79733054,
+                  15850894,
+                  14112549,
+                  35547
+                ]
+              },
+              {
+                "tile": "20HMH",
+                "parches": 1764,
+                "conteos": [
+                  2856909,
+                  54164700,
+                  19833003,
+                  36634973,
+                  2115919
+                ]
+              }
+            ]
+          }
+        },
+        "2020_2021": {
+          "directorio": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_2021_f16",
+          "split": {
+            "train": [
+              {
+                "tile": "19HGC",
+                "parches": 49,
+                "conteos": [
+                  898,
+                  2525811,
+                  649888,
+                  34667,
+                  0
+                ]
+              },
+              {
+                "tile": "20HLG",
+                "parches": 282,
+                "conteos": [
+                  983551,
+                  8137384,
+                  5036609,
+                  3809253,
+                  514355
+                ]
+              },
+              {
+                "tile": "20HLH",
+                "parches": 293,
+                "conteos": [
+                  473313,
+                  5134494,
+                  6428035,
+                  6005282,
+                  1160924
+                ]
+              },
+              {
+                "tile": "20HMJ",
+                "parches": 280,
+                "conteos": [
+                  901277,
+                  4112210,
+                  5550685,
+                  7176111,
+                  609797
+                ]
+              },
+              {
+                "tile": "20HMK",
+                "parches": 287,
+                "conteos": [
+                  535977,
+                  3880375,
+                  5633210,
+                  8424508,
+                  334762
+                ]
+              },
+              {
+                "tile": "20HNK",
+                "parches": 211,
+                "conteos": [
+                  489228,
+                  4811883,
+                  2926199,
+                  5600786,
+                  0
+                ]
+              },
+              {
+                "tile": "20JML",
+                "parches": 241,
+                "conteos": [
+                  306161,
+                  3538549,
+                  5144177,
+                  6761733,
+                  43556
+                ]
+              },
+              {
+                "tile": "20HKH",
+                "parches": 104,
+                "conteos": [
+                  97174,
+                  4385569,
+                  1831951,
+                  496070,
+                  4980
+                ]
+              },
+              {
+                "tile": "20HMG",
+                "parches": 253,
+                "conteos": [
+                  742843,
+                  5862664,
+                  3363828,
+                  6411728,
+                  199545
+                ]
+              },
+              {
+                "tile": "20HNG",
+                "parches": 203,
+                "conteos": [
+                  846116,
+                  6105032,
+                  2257676,
+                  4094984,
+                  0
+                ]
+              },
+              {
+                "tile": "20HPG",
+                "parches": 220,
+                "conteos": [
+                  1117810,
+                  6045767,
+                  2138522,
+                  5115821,
+                  0
+                ]
+              },
+              {
+                "tile": "20HPH",
+                "parches": 209,
+                "conteos": [
+                  504393,
+                  2654717,
+                  2365264,
+                  8172650,
+                  0
+                ]
+              },
+              {
+                "tile": "20JNL",
+                "parches": 212,
+                "conteos": [
+                  1092630,
+                  5137081,
+                  2631568,
+                  5032271,
+                  82
+                ]
+              },
+              {
+                "tile": "20HLJ",
+                "parches": 228,
+                "conteos": [
+                  401021,
+                  4502673,
+                  4861074,
+                  4717285,
+                  460155
+                ]
+              }
+            ],
+            "val": [
+              {
+                "tile": "20HKJ",
+                "parches": 1764,
+                "conteos": [
+                  414510,
+                  81355516,
+                  24671655,
+                  9161783,
+                  2040
+                ]
+              },
+              {
+                "tile": "20HMH",
+                "parches": 1764,
+                "conteos": [
+                  2959202,
+                  46377419,
+                  26138156,
+                  37733741,
+                  2396986
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "split": {
+        "train": [
+          "19HGC",
+          "20HLG",
+          "20HLH",
+          "20HMJ",
+          "20HMK",
+          "20HNK",
+          "20JML",
+          "20HKH",
+          "20HMG",
+          "20HNG",
+          "20HPG",
+          "20HPH",
+          "20JNL",
+          "20HLJ"
+        ],
+        "val": [
+          "20HKJ",
+          "20HMH"
+        ],
+        "test": [
+          "20HNJ",
+          "20HNH"
+        ]
+      },
+      "pesos": [
+        0.0,
+        0.793,
+        1.002,
+        0.861,
+        3.922
+      ],
+      "test_config": "/mnt/yacy_3/prod_bis/ferreyra/dataset/piloto_factorial_mani_20261018_v1/split_mani_comun.json",
+      "test_criterio": "mapas_independientes",
+      "conteos_train": [
+        8492392,
+        66834209,
+        50818686,
+        71853149,
+        3328156
+      ],
+      "modelo": "unet",
+      "ventana": "diciembre-mayo",
+      "bandas": [
+        "B02",
+        "B03",
+        "B04",
+        "B08"
+      ],
+      "canales": 24,
+      "seed": 42,
+      "seleccion_train": "/mnt/yacy_3/prod_bis/ferreyra/dataset/factorial_unet_segmenter_mani_20261021_v1/selecciones/amplia_2020_2021.json",
+      "seleccion_train_sha256": "800ddc5cb9e67534f5859db0793d73a81415a75013380bce791d262272aa34b0",
+      "parada_temprana": false,
+      "esquema": "original",
+      "clases": [
+        "NoData",
+        "Fondo",
+        "Maiz",
+        "Soja",
+        "Mani"
+      ],
+      "remap_desde_original": null,
+      "batch_size": 32,
+      "epochs": 100,
+      "patience": 30,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.001,
+      "anticipar_pool": false,
+      "cache_lectura": null,
+      "lectura_bloques": false,
+      "bloque_parches": 512,
+      "bloques_pool": 16,
+      "workers": 2,
+      "prefetch": 2,
+      "init_pesos": null,
+      "reanudar": null,
+      "evaluacion_test_pospuesta": true
+    },
+    "checkpoint_sha256": "cf3971b43b352ce18a28cc113b1217fe93abb6846d458a7a5eeb01315214a3e0"
+  },
+  "amplia_2020_2021_segmenter": {
+    "config": {
+      "campanas": {
+        "2018_2019": {
+          "directorio": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_1819_scl_f16",
+          "split": {
+            "train": [],
+            "val": [
+              {
+                "tile": "20HKJ",
+                "parches": 1706,
+                "conteos": [
+                  1660652,
+                  78447982,
+                  20214820,
+                  11245511,
+                  235451
+                ]
+              },
+              {
+                "tile": "20HMH",
+                "parches": 1764,
+                "conteos": [
+                  0,
+                  54756841,
+                  22796802,
+                  36837137,
+                  1214724
+                ]
+              }
+            ]
+          }
+        },
+        "2019_2020": {
+          "directorio": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_f16",
+          "split": {
+            "train": [],
+            "val": [
+              {
+                "tile": "20HKJ",
+                "parches": 1706,
+                "conteos": [
+                  2072372,
+                  79733054,
+                  15850894,
+                  14112549,
+                  35547
+                ]
+              },
+              {
+                "tile": "20HMH",
+                "parches": 1764,
+                "conteos": [
+                  2856909,
+                  54164700,
+                  19833003,
+                  36634973,
+                  2115919
+                ]
+              }
+            ]
+          }
+        },
+        "2020_2021": {
+          "directorio": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_2021_f16",
+          "split": {
+            "train": [
+              {
+                "tile": "19HGC",
+                "parches": 49,
+                "conteos": [
+                  898,
+                  2525811,
+                  649888,
+                  34667,
+                  0
+                ]
+              },
+              {
+                "tile": "20HLG",
+                "parches": 282,
+                "conteos": [
+                  983551,
+                  8137384,
+                  5036609,
+                  3809253,
+                  514355
+                ]
+              },
+              {
+                "tile": "20HLH",
+                "parches": 293,
+                "conteos": [
+                  473313,
+                  5134494,
+                  6428035,
+                  6005282,
+                  1160924
+                ]
+              },
+              {
+                "tile": "20HMJ",
+                "parches": 280,
+                "conteos": [
+                  901277,
+                  4112210,
+                  5550685,
+                  7176111,
+                  609797
+                ]
+              },
+              {
+                "tile": "20HMK",
+                "parches": 287,
+                "conteos": [
+                  535977,
+                  3880375,
+                  5633210,
+                  8424508,
+                  334762
+                ]
+              },
+              {
+                "tile": "20HNK",
+                "parches": 211,
+                "conteos": [
+                  489228,
+                  4811883,
+                  2926199,
+                  5600786,
+                  0
+                ]
+              },
+              {
+                "tile": "20JML",
+                "parches": 241,
+                "conteos": [
+                  306161,
+                  3538549,
+                  5144177,
+                  6761733,
+                  43556
+                ]
+              },
+              {
+                "tile": "20HKH",
+                "parches": 104,
+                "conteos": [
+                  97174,
+                  4385569,
+                  1831951,
+                  496070,
+                  4980
+                ]
+              },
+              {
+                "tile": "20HMG",
+                "parches": 253,
+                "conteos": [
+                  742843,
+                  5862664,
+                  3363828,
+                  6411728,
+                  199545
+                ]
+              },
+              {
+                "tile": "20HNG",
+                "parches": 203,
+                "conteos": [
+                  846116,
+                  6105032,
+                  2257676,
+                  4094984,
+                  0
+                ]
+              },
+              {
+                "tile": "20HPG",
+                "parches": 220,
+                "conteos": [
+                  1117810,
+                  6045767,
+                  2138522,
+                  5115821,
+                  0
+                ]
+              },
+              {
+                "tile": "20HPH",
+                "parches": 209,
+                "conteos": [
+                  504393,
+                  2654717,
+                  2365264,
+                  8172650,
+                  0
+                ]
+              },
+              {
+                "tile": "20JNL",
+                "parches": 212,
+                "conteos": [
+                  1092630,
+                  5137081,
+                  2631568,
+                  5032271,
+                  82
+                ]
+              },
+              {
+                "tile": "20HLJ",
+                "parches": 228,
+                "conteos": [
+                  401021,
+                  4502673,
+                  4861074,
+                  4717285,
+                  460155
+                ]
+              }
+            ],
+            "val": [
+              {
+                "tile": "20HKJ",
+                "parches": 1764,
+                "conteos": [
+                  414510,
+                  81355516,
+                  24671655,
+                  9161783,
+                  2040
+                ]
+              },
+              {
+                "tile": "20HMH",
+                "parches": 1764,
+                "conteos": [
+                  2959202,
+                  46377419,
+                  26138156,
+                  37733741,
+                  2396986
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "split": {
+        "train": [
+          "19HGC",
+          "20HLG",
+          "20HLH",
+          "20HMJ",
+          "20HMK",
+          "20HNK",
+          "20JML",
+          "20HKH",
+          "20HMG",
+          "20HNG",
+          "20HPG",
+          "20HPH",
+          "20JNL",
+          "20HLJ"
+        ],
+        "val": [
+          "20HKJ",
+          "20HMH"
+        ],
+        "test": [
+          "20HNJ",
+          "20HNH"
+        ]
+      },
+      "pesos": [
+        0.0,
+        0.793,
+        1.002,
+        0.861,
+        3.922
+      ],
+      "test_config": "/mnt/yacy_3/prod_bis/ferreyra/dataset/piloto_factorial_mani_20261018_v1/split_mani_comun.json",
+      "test_criterio": "mapas_independientes",
+      "conteos_train": [
+        8492392,
+        66834209,
+        50818686,
+        71853149,
+        3328156
+      ],
+      "modelo": "segmenter",
+      "ventana": "diciembre-mayo",
+      "bandas": [
+        "B02",
+        "B03",
+        "B04",
+        "B08"
+      ],
+      "canales": 24,
+      "seed": 42,
+      "seleccion_train": "/mnt/yacy_3/prod_bis/ferreyra/dataset/factorial_unet_segmenter_mani_20261021_v1/selecciones/amplia_2020_2021.json",
+      "seleccion_train_sha256": "800ddc5cb9e67534f5859db0793d73a81415a75013380bce791d262272aa34b0",
+      "parada_temprana": false,
+      "esquema": "original",
+      "clases": [
+        "NoData",
+        "Fondo",
+        "Maiz",
+        "Soja",
+        "Mani"
+      ],
+      "remap_desde_original": null,
+      "batch_size": 32,
+      "epochs": 100,
+      "patience": 30,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.001,
+      "anticipar_pool": false,
+      "cache_lectura": null,
+      "lectura_bloques": false,
+      "bloque_parches": 512,
+      "bloques_pool": 16,
+      "workers": 2,
+      "prefetch": 2,
+      "init_pesos": null,
+      "reanudar": null,
+      "evaluacion_test_pospuesta": true
+    },
+    "checkpoint_sha256": "0dbb283266f0cf640d036ca48e2dcc1003bfeed4439805928dbbf915fdb8df2d"
+  },
+  "reducida_tres_unet": {
+    "config": {
+      "campanas": {
+        "2018_2019": {
+          "directorio": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_1819_scl_f16",
+          "split": {
+            "train": [
+              {
+                "tile": "20HLG",
+                "parches": 376,
+                "conteos": [
+                  1246618,
+                  12530965,
+                  4488047,
+                  6038142,
+                  337764
+                ]
+              },
+              {
+                "tile": "20HLH",
+                "parches": 330,
+                "conteos": [
+                  793920,
+                  7436041,
+                  5308191,
+                  7666125,
+                  422603
+                ]
+              },
+              {
+                "tile": "20HMG",
+                "parches": 318,
+                "conteos": [
+                  320313,
+                  11343641,
+                  3311126,
+                  5794263,
+                  71105
+                ]
+              }
+            ],
+            "val": [
+              {
+                "tile": "20HKJ",
+                "parches": 1706,
+                "conteos": [
+                  1660652,
+                  78447982,
+                  20214820,
+                  11245511,
+                  235451
+                ]
+              },
+              {
+                "tile": "20HMH",
+                "parches": 1764,
+                "conteos": [
+                  0,
+                  54756841,
+                  22796802,
+                  36837137,
+                  1214724
+                ]
+              }
+            ]
+          }
+        },
+        "2019_2020": {
+          "directorio": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_f16",
+          "split": {
+            "train": [
+              {
+                "tile": "20HLG",
+                "parches": 417,
+                "conteos": [
+                  607346,
+                  15246447,
+                  5261842,
+                  5666961,
+                  545916
+                ]
+              },
+              {
+                "tile": "20HLH",
+                "parches": 278,
+                "conteos": [
+                  519156,
+                  6265099,
+                  4320599,
+                  6527781,
+                  586373
+                ]
+              },
+              {
+                "tile": "20HMG",
+                "parches": 329,
+                "conteos": [
+                  638135,
+                  9245069,
+                  3596559,
+                  7902663,
+                  178918
+                ]
+              }
+            ],
+            "val": [
+              {
+                "tile": "20HKJ",
+                "parches": 1706,
+                "conteos": [
+                  2072372,
+                  79733054,
+                  15850894,
+                  14112549,
+                  35547
+                ]
+              },
+              {
+                "tile": "20HMH",
+                "parches": 1764,
+                "conteos": [
+                  2856909,
+                  54164700,
+                  19833003,
+                  36634973,
+                  2115919
+                ]
+              }
+            ]
+          }
+        },
+        "2020_2021": {
+          "directorio": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_2021_f16",
+          "split": {
+            "train": [
+              {
+                "tile": "20HLG",
+                "parches": 353,
+                "conteos": [
+                  717901,
+                  11218263,
+                  6412608,
+                  4479782,
+                  305654
+                ]
+              },
+              {
+                "tile": "20HLH",
+                "parches": 302,
+                "conteos": [
+                  407985,
+                  5537022,
+                  6750692,
+                  6281029,
+                  815144
+                ]
+              },
+              {
+                "tile": "20HMG",
+                "parches": 369,
+                "conteos": [
+                  927645,
+                  9111913,
+                  4823127,
+                  9201978,
+                  118121
+                ]
+              }
+            ],
+            "val": [
+              {
+                "tile": "20HKJ",
+                "parches": 1764,
+                "conteos": [
+                  414510,
+                  81355516,
+                  24671655,
+                  9161783,
+                  2040
+                ]
+              },
+              {
+                "tile": "20HMH",
+                "parches": 1764,
+                "conteos": [
+                  2959202,
+                  46377419,
+                  26138156,
+                  37733741,
+                  2396986
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "split": {
+        "train": [
+          "19HGC",
+          "20HLG",
+          "20HLH",
+          "20HMJ",
+          "20HMK",
+          "20HNK",
+          "20JML",
+          "20HKH",
+          "20HMG",
+          "20HNG",
+          "20HPG",
+          "20HPH",
+          "20JNL",
+          "20HLJ"
+        ],
+        "val": [
+          "20HKJ",
+          "20HMH"
+        ],
+        "test": [
+          "20HNJ",
+          "20HNH"
+        ]
+      },
+      "pesos": [
+        0.0,
+        0.793,
+        1.002,
+        0.861,
+        3.922
+      ],
+      "test_config": "/mnt/yacy_3/prod_bis/ferreyra/dataset/piloto_factorial_mani_20261018_v1/split_mani_comun.json",
+      "test_criterio": "mapas_independientes",
+      "conteos_train": [
+        6179019,
+        87934460,
+        44272791,
+        59558724,
+        3381598
+      ],
+      "modelo": "unet",
+      "ventana": "diciembre-mayo",
+      "bandas": [
+        "B02",
+        "B03",
+        "B04",
+        "B08"
+      ],
+      "canales": 24,
+      "seed": 42,
+      "seleccion_train": "/mnt/yacy_3/prod_bis/ferreyra/dataset/factorial_unet_segmenter_mani_20261021_v1/selecciones/reducida_tres.json",
+      "seleccion_train_sha256": "55d7f4ad87dafd4ac3da2739fdc43e4041eaca10e3e1990bd1ba06b0cc9af92e",
+      "parada_temprana": false,
+      "esquema": "original",
+      "clases": [
+        "NoData",
+        "Fondo",
+        "Maiz",
+        "Soja",
+        "Mani"
+      ],
+      "remap_desde_original": null,
+      "batch_size": 32,
+      "epochs": 100,
+      "patience": 30,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.001,
+      "anticipar_pool": false,
+      "cache_lectura": null,
+      "lectura_bloques": false,
+      "bloque_parches": 512,
+      "bloques_pool": 16,
+      "workers": 2,
+      "prefetch": 2,
+      "init_pesos": null,
+      "reanudar": null,
+      "evaluacion_test_pospuesta": true
+    },
+    "checkpoint_sha256": "8afe935a46f2addd158549de3e8d65bd7fc31a4ef540e6f09a2f7197e4cd78a2"
+  },
+  "reducida_tres_segmenter": {
+    "config": {
+      "campanas": {
+        "2018_2019": {
+          "directorio": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_1819_scl_f16",
+          "split": {
+            "train": [
+              {
+                "tile": "20HLG",
+                "parches": 376,
+                "conteos": [
+                  1246618,
+                  12530965,
+                  4488047,
+                  6038142,
+                  337764
+                ]
+              },
+              {
+                "tile": "20HLH",
+                "parches": 330,
+                "conteos": [
+                  793920,
+                  7436041,
+                  5308191,
+                  7666125,
+                  422603
+                ]
+              },
+              {
+                "tile": "20HMG",
+                "parches": 318,
+                "conteos": [
+                  320313,
+                  11343641,
+                  3311126,
+                  5794263,
+                  71105
+                ]
+              }
+            ],
+            "val": [
+              {
+                "tile": "20HKJ",
+                "parches": 1706,
+                "conteos": [
+                  1660652,
+                  78447982,
+                  20214820,
+                  11245511,
+                  235451
+                ]
+              },
+              {
+                "tile": "20HMH",
+                "parches": 1764,
+                "conteos": [
+                  0,
+                  54756841,
+                  22796802,
+                  36837137,
+                  1214724
+                ]
+              }
+            ]
+          }
+        },
+        "2019_2020": {
+          "directorio": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_f16",
+          "split": {
+            "train": [
+              {
+                "tile": "20HLG",
+                "parches": 417,
+                "conteos": [
+                  607346,
+                  15246447,
+                  5261842,
+                  5666961,
+                  545916
+                ]
+              },
+              {
+                "tile": "20HLH",
+                "parches": 278,
+                "conteos": [
+                  519156,
+                  6265099,
+                  4320599,
+                  6527781,
+                  586373
+                ]
+              },
+              {
+                "tile": "20HMG",
+                "parches": 329,
+                "conteos": [
+                  638135,
+                  9245069,
+                  3596559,
+                  7902663,
+                  178918
+                ]
+              }
+            ],
+            "val": [
+              {
+                "tile": "20HKJ",
+                "parches": 1706,
+                "conteos": [
+                  2072372,
+                  79733054,
+                  15850894,
+                  14112549,
+                  35547
+                ]
+              },
+              {
+                "tile": "20HMH",
+                "parches": 1764,
+                "conteos": [
+                  2856909,
+                  54164700,
+                  19833003,
+                  36634973,
+                  2115919
+                ]
+              }
+            ]
+          }
+        },
+        "2020_2021": {
+          "directorio": "/mnt/yacy_3/prod_bis/ferreyra/dataset/train_cordoba_dicmay_2021_f16",
+          "split": {
+            "train": [
+              {
+                "tile": "20HLG",
+                "parches": 353,
+                "conteos": [
+                  717901,
+                  11218263,
+                  6412608,
+                  4479782,
+                  305654
+                ]
+              },
+              {
+                "tile": "20HLH",
+                "parches": 302,
+                "conteos": [
+                  407985,
+                  5537022,
+                  6750692,
+                  6281029,
+                  815144
+                ]
+              },
+              {
+                "tile": "20HMG",
+                "parches": 369,
+                "conteos": [
+                  927645,
+                  9111913,
+                  4823127,
+                  9201978,
+                  118121
+                ]
+              }
+            ],
+            "val": [
+              {
+                "tile": "20HKJ",
+                "parches": 1764,
+                "conteos": [
+                  414510,
+                  81355516,
+                  24671655,
+                  9161783,
+                  2040
+                ]
+              },
+              {
+                "tile": "20HMH",
+                "parches": 1764,
+                "conteos": [
+                  2959202,
+                  46377419,
+                  26138156,
+                  37733741,
+                  2396986
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "split": {
+        "train": [
+          "19HGC",
+          "20HLG",
+          "20HLH",
+          "20HMJ",
+          "20HMK",
+          "20HNK",
+          "20JML",
+          "20HKH",
+          "20HMG",
+          "20HNG",
+          "20HPG",
+          "20HPH",
+          "20JNL",
+          "20HLJ"
+        ],
+        "val": [
+          "20HKJ",
+          "20HMH"
+        ],
+        "test": [
+          "20HNJ",
+          "20HNH"
+        ]
+      },
+      "pesos": [
+        0.0,
+        0.793,
+        1.002,
+        0.861,
+        3.922
+      ],
+      "test_config": "/mnt/yacy_3/prod_bis/ferreyra/dataset/piloto_factorial_mani_20261018_v1/split_mani_comun.json",
+      "test_criterio": "mapas_independientes",
+      "conteos_train": [
+        6179019,
+        87934460,
+        44272791,
+        59558724,
+        3381598
+      ],
+      "modelo": "segmenter",
+      "ventana": "diciembre-mayo",
+      "bandas": [
+        "B02",
+        "B03",
+        "B04",
+        "B08"
+      ],
+      "canales": 24,
+      "seed": 42,
+      "seleccion_train": "/mnt/yacy_3/prod_bis/ferreyra/dataset/factorial_unet_segmenter_mani_20261021_v1/selecciones/reducida_tres.json",
+      "seleccion_train_sha256": "55d7f4ad87dafd4ac3da2739fdc43e4041eaca10e3e1990bd1ba06b0cc9af92e",
+      "parada_temprana": false,
+      "esquema": "original",
+      "clases": [
+        "NoData",
+        "Fondo",
+        "Maiz",
+        "Soja",
+        "Mani"
+      ],
+      "remap_desde_original": null,
+      "batch_size": 32,
+      "epochs": 100,
+      "patience": 30,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.001,
+      "anticipar_pool": false,
+      "cache_lectura": null,
+      "lectura_bloques": false,
+      "bloque_parches": 512,
+      "bloques_pool": 16,
+      "workers": 2,
+      "prefetch": 2,
+      "init_pesos": null,
+      "reanudar": null,
+      "evaluacion_test_pospuesta": true
+    },
+    "checkpoint_sha256": "4aa9c22151485b0354847c1dc912e748b9477858aabc554bfb60a26de00f7f5c"
+  }
+}

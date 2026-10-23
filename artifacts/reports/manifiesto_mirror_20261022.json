@@ -1,0 +1,1667 @@
+{
+  "archivos": [
+    {
+      "origen_mirror": "artifacts/reports/chaco_sudoeste/20261014T141241Z/README.md",
+      "versionado": "artifacts/reports/chaco_sudoeste/20261014T141241Z/README.md",
+      "bytes": 314,
+      "sha256": "445e83e57490163b3d888811f4ed12515000bbbdcf405af71c25804640c7baca"
+    },
+    {
+      "origen_mirror": "artifacts/reports/chaco_sudoeste/20261014T141241Z/config_entrenamiento.json",
+      "versionado": "artifacts/reports/chaco_sudoeste/20261014T141241Z/config_entrenamiento.json",
+      "bytes": 17584,
+      "sha256": "e89e93ea0f264f9e62b3ab98dbf1d4922b8fdf4e9e6f4f65ac13e5fc24a2299d"
+    },
+    {
+      "origen_mirror": "artifacts/reports/chaco_sudoeste/20261014T141241Z/figuras/comparacion_20JPQ.png",
+      "versionado": "artifacts/reports/chaco_sudoeste/20261014T141241Z/figuras/comparacion_20JPQ.png",
+      "bytes": 3446853,
+      "sha256": "9d1d697a8f4844ea25c4e1a7b5ccc66416b8acb204f8e9c4ba14fc00b71fb52c"
+    },
+    {
+      "origen_mirror": "artifacts/reports/chaco_sudoeste/20261014T141241Z/figuras/comparacion_20JPR.png",
+      "versionado": "artifacts/reports/chaco_sudoeste/20261014T141241Z/figuras/comparacion_20JPR.png",
+      "bytes": 3832019,
+      "sha256": "3e5b4cdb53ae529dee799a35cd8f2369b9d97d69dcaf6360784820b912379f5d"
+    },
+    {
+      "origen_mirror": "artifacts/reports/chaco_sudoeste/20261014T141241Z/figuras/comparacion_20JQQ.png",
+      "versionado": "artifacts/reports/chaco_sudoeste/20261014T141241Z/figuras/comparacion_20JQQ.png",
+      "bytes": 3092693,
+      "sha256": "d75348b5bde68d3a4cacb71ecdeb4ca2860e01ca8d45f263fc6f8c68aaf62bf8"
+    },
+    {
+      "origen_mirror": "artifacts/reports/chaco_sudoeste/20261014T141241Z/figuras/confusion_20JPQ.png",
+      "versionado": "artifacts/reports/chaco_sudoeste/20261014T141241Z/figuras/confusion_20JPQ.png",
+      "bytes": 126431,
+      "sha256": "173ddc1352e9b7527c27c5310c183aa0345bb17e230d996e41f9ef3df249c427"
+    },
+    {
+      "origen_mirror": "artifacts/reports/chaco_sudoeste/20261014T141241Z/figuras/confusion_20JPR.png",
+      "versionado": "artifacts/reports/chaco_sudoeste/20261014T141241Z/figuras/confusion_20JPR.png",
+      "bytes": 127179,
+      "sha256": "2059815babb6afd38b894d1b8b3f180850ce20d3aa54bbc301f7f95c0b94efb8"
+    },
+    {
+      "origen_mirror": "artifacts/reports/chaco_sudoeste/20261014T141241Z/figuras/confusion_20JQQ.png",
+      "versionado": "artifacts/reports/chaco_sudoeste/20261014T141241Z/figuras/confusion_20JQQ.png",
+      "bytes": 127400,
+      "sha256": "ecbb102e2a0dfa7065bd9f487668ed6c8da19381a5a98c113293077348b9c619"
+    },
+    {
+      "origen_mirror": "artifacts/reports/chaco_sudoeste/20261014T141241Z/figuras/curvas_error_accuracy.png",
+      "versionado": "artifacts/reports/chaco_sudoeste/20261014T141241Z/figuras/curvas_error_accuracy.png",
+      "bytes": 211536,
+      "sha256": "1c77feef194aef6e25049536e237b37aa89f042f83fda96557163b7847e0edf0"
+    },
+    {
+      "origen_mirror": "artifacts/reports/chaco_sudoeste/20261014T141241Z/figuras/curvas_perdida.png",
+      "versionado": "artifacts/reports/chaco_sudoeste/20261014T141241Z/figuras/curvas_perdida.png",
+      "bytes": 153038,
+      "sha256": "56f7d13c535a28a718f95db70cf4887708fe6c72ffe4ca133d3b3a040735e5ea"
+    },
+    {
+      "origen_mirror": "artifacts/reports/chaco_sudoeste/20261014T141241Z/figuras/metricas_por_clase.png",
+      "versionado": "artifacts/reports/chaco_sudoeste/20261014T141241Z/figuras/metricas_por_clase.png",
+      "bytes": 101531,
+      "sha256": "39d5e52a7ce97a7564c09bcd3e2188265caa08baf1a9f6dd4038d4cf1e81102a"
+    },
+    {
+      "origen_mirror": "artifacts/reports/chaco_sudoeste/20261014T141241Z/figuras/metricas_por_tile.png",
+      "versionado": "artifacts/reports/chaco_sudoeste/20261014T141241Z/figuras/metricas_por_tile.png",
+      "bytes": 64600,
+      "sha256": "c6940731b373cc6a2131617c6bbebf07cfa91c54e702a9e4380a3f8ee8509d91"
+    },
+    {
+      "origen_mirror": "artifacts/reports/chaco_sudoeste/20261014T141241Z/index.html",
+      "versionado": "artifacts/reports/chaco_sudoeste/20261014T141241Z/index.html",
+      "bytes": 2566,
+      "sha256": "00b64dc2dff06c188834f774e323c6f5fd6de65093a6c78a332ea3353177c184"
+    },
+    {
+      "origen_mirror": "artifacts/reports/chaco_sudoeste/20261014T141241Z/metricas_tiles.json",
+      "versionado": "artifacts/reports/chaco_sudoeste/20261014T141241Z/metricas_tiles.json",
+      "bytes": 4163,
+      "sha256": "ef7d09e798d32a9790629c1e8cc0b6d74fe85fa4f2240868f3500d0e51f5c246"
+    },
+    {
+      "origen_mirror": "artifacts/reports/chaco_sudoeste/20261014T141241Z/procedencia_graficos.json",
+      "versionado": "artifacts/reports/chaco_sudoeste/20261014T141241Z/procedencia_graficos.json",
+      "bytes": 312,
+      "sha256": "44743791b014124e22c5f1ea3fff8211487b3795dcee8d66696d19a11e07be0a"
+    },
+    {
+      "origen_mirror": "artifacts/reports/chaco_sudoeste/20261014T141241Z/protocolo.json",
+      "versionado": "artifacts/reports/chaco_sudoeste/20261014T141241Z/protocolo.json",
+      "bytes": 42321,
+      "sha256": "1e37d2f8c20a065613f6865c244579c0843ce333cde6ad0c6abd23d9f578974b"
+    },
+    {
+      "origen_mirror": "artifacts/reports/comparacion_unet_segmenter_20261020/RESULTADOS.md",
+      "versionado": "artifacts/reports/comparacion_unet_segmenter_20261020/RESULTADOS.md",
+      "bytes": 1768,
+      "sha256": "1b6599bda98265f05a4c962b1681fa168ee38e33622980b6061adce7e0ea693a"
+    },
+    {
+      "origen_mirror": "artifacts/reports/comparacion_unet_segmenter_20261020/Segmenter_metricas.json",
+      "versionado": "artifacts/reports/comparacion_unet_segmenter_20261020/Segmenter_metricas.json",
+      "bytes": 42171,
+      "sha256": "db4f0fa8f37c4e83478df7064ca76a0fbf5bd530ef727a520e6396a3c3935e34"
+    },
+    {
+      "origen_mirror": "artifacts/reports/comparacion_unet_segmenter_20261020/UNet_metricas.json",
+      "versionado": "artifacts/reports/comparacion_unet_segmenter_20261020/UNet_metricas.json",
+      "bytes": 42141,
+      "sha256": "48f2be6bc1b461417a651e749e22d284a8fd43f94951921a6538d57536299be3"
+    },
+    {
+      "origen_mirror": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/curvas_val.png",
+      "versionado": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/curvas_val.png",
+      "bytes": 110975,
+      "sha256": "15d7341df9d6cb2b96f428e33d3129ffbf180803e0a4ce65de2b47abf594c219"
+    },
+    {
+      "origen_mirror": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/detalle_mani_2018_2019_20HNH.png",
+      "versionado": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/detalle_mani_2018_2019_20HNH.png",
+      "bytes": 1229840,
+      "sha256": "f206bdede89b2c7f0e2e0c678c6e0e34e6f1772bd30e5c58ae3e28dca87533de"
+    },
+    {
+      "origen_mirror": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/detalle_mani_2018_2019_20HNJ.png",
+      "versionado": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/detalle_mani_2018_2019_20HNJ.png",
+      "bytes": 1455916,
+      "sha256": "8ae7487c23e6d6214631cb1b02cd9ed6dfa78ba66d26eefbf1131aba37ee05e6"
+    },
+    {
+      "origen_mirror": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/detalle_mani_2019_2020_20HNH.png",
+      "versionado": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/detalle_mani_2019_2020_20HNH.png",
+      "bytes": 1209597,
+      "sha256": "5799400787a10bf52e45d54c7ac3b5fa26a46f622105e0425c071d0a63c8ee70"
+    },
+    {
+      "origen_mirror": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/detalle_mani_2019_2020_20HNJ.png",
+      "versionado": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/detalle_mani_2019_2020_20HNJ.png",
+      "bytes": 822431,
+      "sha256": "07a81391cf2e104c6eca57c3b36180c212ec3f073c78fc53d15c7eb09e9735f6"
+    },
+    {
+      "origen_mirror": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/detalle_mani_2020_2021_20HNH.png",
+      "versionado": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/detalle_mani_2020_2021_20HNH.png",
+      "bytes": 1126504,
+      "sha256": "45d4285dc52ca67861ae803a52a9e624248886f01d8e7457d74fcb0c919464e6"
+    },
+    {
+      "origen_mirror": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/detalle_mani_2020_2021_20HNJ.png",
+      "versionado": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/detalle_mani_2020_2021_20HNJ.png",
+      "bytes": 823140,
+      "sha256": "781d0cf05bf0f6a5e9eaa760dbb200968fff9c36ca8875182da4b13e7ed9c761"
+    },
+    {
+      "origen_mirror": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/detalle_mani_2021_2022_20HNH.png",
+      "versionado": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/detalle_mani_2021_2022_20HNH.png",
+      "bytes": 1382262,
+      "sha256": "3d6e5c49e3da1e0ddec82d7fdcbbac854a86e2dd4b5d203f9616658b94a2d316"
+    },
+    {
+      "origen_mirror": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/detalle_mani_2021_2022_20HNJ.png",
+      "versionado": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/detalle_mani_2021_2022_20HNJ.png",
+      "bytes": 836232,
+      "sha256": "95ada7c3fd4d455356c4402349e244f2e91247573c67e5ff68d03fc3ce0c7c58"
+    },
+    {
+      "origen_mirror": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/metricas_test.png",
+      "versionado": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/metricas_test.png",
+      "bytes": 51648,
+      "sha256": "7bbeaae520edecb595fb6732885a994c08a41f5100ba77077611886128f093fd"
+    },
+    {
+      "origen_mirror": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/panorama_2018_2019_20HNH.png",
+      "versionado": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/panorama_2018_2019_20HNH.png",
+      "bytes": 2954800,
+      "sha256": "dca7bcf1b33ef46a529640d0448abd8bc1f31a3db078191333e79cf4d594293c"
+    },
+    {
+      "origen_mirror": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/panorama_2018_2019_20HNJ.png",
+      "versionado": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/panorama_2018_2019_20HNJ.png",
+      "bytes": 3206978,
+      "sha256": "bb5b4739155eab324074d923f96857ee34d555f1521cd4e67d78b738b32dc541"
+    },
+    {
+      "origen_mirror": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/panorama_2019_2020_20HNH.png",
+      "versionado": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/panorama_2019_2020_20HNH.png",
+      "bytes": 3027882,
+      "sha256": "0b0bbfbeef8f91a6a28698f838b1bb48d74a1dee1180639203d2bf1d630a27b4"
+    },
+    {
+      "origen_mirror": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/panorama_2019_2020_20HNJ.png",
+      "versionado": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/panorama_2019_2020_20HNJ.png",
+      "bytes": 3192786,
+      "sha256": "82883743df3c5738d321ade1fdf0b0fe13d80057e59f53812f0af973a3851463"
+    },
+    {
+      "origen_mirror": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/panorama_2020_2021_20HNH.png",
+      "versionado": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/panorama_2020_2021_20HNH.png",
+      "bytes": 3032059,
+      "sha256": "d19ebfb18a6096a01d472d6672fd63f618d4d1cce13e92fdfd256a54cb571d40"
+    },
+    {
+      "origen_mirror": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/panorama_2020_2021_20HNJ.png",
+      "versionado": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/panorama_2020_2021_20HNJ.png",
+      "bytes": 3026287,
+      "sha256": "d5d47dd01d1359c356dc849d17e9f8a02b1924b453fdba0de3c306de86d31640"
+    },
+    {
+      "origen_mirror": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/panorama_2021_2022_20HNH.png",
+      "versionado": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/panorama_2021_2022_20HNH.png",
+      "bytes": 3172844,
+      "sha256": "9ef5629d06a8d9a181bf3ed10a29516524f4b3834f440300d081240bff709124"
+    },
+    {
+      "origen_mirror": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/panorama_2021_2022_20HNJ.png",
+      "versionado": "artifacts/reports/comparacion_unet_segmenter_20261020/figuras/panorama_2021_2022_20HNJ.png",
+      "bytes": 3127997,
+      "sha256": "b2b8bae0e5be76fbf1b79b89986f5acf2c8b83417782fa940840f3819a9d2952"
+    },
+    {
+      "origen_mirror": "artifacts/reports/comparacion_unet_segmenter_20261020/index.html",
+      "versionado": "artifacts/reports/comparacion_unet_segmenter_20261020/index.html",
+      "bytes": 4223,
+      "sha256": "b42b5ac4a11215a0ae246067b813ab5408417c09513adcae7217e5413e0e2a7f"
+    },
+    {
+      "origen_mirror": "artifacts/reports/comparacion_unet_segmenter_20261020/metricas_independientes.csv",
+      "versionado": "artifacts/reports/comparacion_unet_segmenter_20261020/metricas_independientes.csv",
+      "bytes": 1625,
+      "sha256": "fb4c44d00726b1c6860d8ef78ace31eecacf4f95d3e8a0db5e5a62edc2d3770d"
+    },
+    {
+      "origen_mirror": "artifacts/reports/comparacion_unet_segmenter_20261020/resumen.json",
+      "versionado": "artifacts/reports/comparacion_unet_segmenter_20261020/resumen.json",
+      "bytes": 3224,
+      "sha256": "06c26704cc7fefaea0087c282d08062b8a004f1dcf3fea0929225f78811aebff"
+    },
+    {
+      "origen_mirror": "artifacts/reports/comparacion_unet_segmenter_20261020/sha256.json",
+      "versionado": "artifacts/reports/comparacion_unet_segmenter_20261020/sha256.json",
+      "bytes": 2631,
+      "sha256": "8425918f8a9c146705002184b02e1e7989ce9c891b61bc118dd5fbd7b7870a3b"
+    },
+    {
+      "origen_mirror": "artifacts/reports/comparacion_unet_segmenter_20261020/ventanas_detalle.json",
+      "versionado": "artifacts/reports/comparacion_unet_segmenter_20261020/ventanas_detalle.json",
+      "bytes": 2488,
+      "sha256": "404697dec92b3618c5c106224166289a6933a168932e1f8430d6ec4f8c2d6716"
+    },
+    {
+      "origen_mirror": "artifacts/reports/ensayo_factorial_20261018/protocolo.json",
+      "versionado": "artifacts/reports/ensayo_factorial_20261018/protocolo.json",
+      "bytes": 22018,
+      "sha256": "ef5351a7babce6c63dd42219d44e3b870af03a449fd4d299ade5a9d2c713ab72"
+    },
+    {
+      "origen_mirror": "artifacts/reports/extension_este_evaluacion_20261009T192204/README.md",
+      "versionado": "artifacts/reports/extension_este_evaluacion_20261009T192204/README.md",
+      "bytes": 682,
+      "sha256": "509616f0ff742c913ee7f00a39e9cb587a96365eb235a0cbc601fe11d5df405f"
+    },
+    {
+      "origen_mirror": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/comparacion_2018_2019_20HNH.png",
+      "versionado": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/comparacion_2018_2019_20HNH.png",
+      "bytes": 3634759,
+      "sha256": "11ff3988a5e4cc7766f1ed9d3f043c6b29204bac1061ecca4bc13d384a9bbbfa"
+    },
+    {
+      "origen_mirror": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/comparacion_2018_2019_20HNJ.png",
+      "versionado": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/comparacion_2018_2019_20HNJ.png",
+      "bytes": 3718473,
+      "sha256": "494db20e65108bb48b6b5358d2c5718adefc37c121abb687a4635bc55051870d"
+    },
+    {
+      "origen_mirror": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/comparacion_2019_2020_20HNH.png",
+      "versionado": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/comparacion_2019_2020_20HNH.png",
+      "bytes": 3736071,
+      "sha256": "5146384aa2004dd0cfcb0053f3887d888aad44671cdadd11c2761da1663fa276"
+    },
+    {
+      "origen_mirror": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/comparacion_2019_2020_20HNJ.png",
+      "versionado": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/comparacion_2019_2020_20HNJ.png",
+      "bytes": 3675994,
+      "sha256": "dbe0b1b690144bb41196e523f586899f1fb24a11e67457ba5a6bbfcf24ee9c06"
+    },
+    {
+      "origen_mirror": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/comparacion_2020_2021_20HNH.png",
+      "versionado": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/comparacion_2020_2021_20HNH.png",
+      "bytes": 3738308,
+      "sha256": "cf945e1cc68bfc9f70bcc3640da55e326a50daecbe40cf689ff7e8000c5f4cac"
+    },
+    {
+      "origen_mirror": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/comparacion_2020_2021_20HNJ.png",
+      "versionado": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/comparacion_2020_2021_20HNJ.png",
+      "bytes": 3497295,
+      "sha256": "34f5a32f1730e7539d79ea7af801d2ad6c3f6ed3b23f9fdef49efb63d98e9450"
+    },
+    {
+      "origen_mirror": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/comparacion_2021_2022_20HNH.png",
+      "versionado": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/comparacion_2021_2022_20HNH.png",
+      "bytes": 3901854,
+      "sha256": "3e580c25770be20cd2fb586cea645b4e5935378355f0689213e55d30baebb5cb"
+    },
+    {
+      "origen_mirror": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/comparacion_2021_2022_20HNJ.png",
+      "versionado": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/comparacion_2021_2022_20HNJ.png",
+      "bytes": 3677577,
+      "sha256": "35a041c3257c3cfa3a7d52718ec69c295e07b16aee5fb85f111c164605252360"
+    },
+    {
+      "origen_mirror": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/confusion_2018_2019_completa.png",
+      "versionado": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/confusion_2018_2019_completa.png",
+      "bytes": 56314,
+      "sha256": "c2a4d1c91886d15e32db6c4668e38f42f7c4ac0e201d93478d704f70dea5befd"
+    },
+    {
+      "origen_mirror": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/confusion_2018_2019_independiente.png",
+      "versionado": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/confusion_2018_2019_independiente.png",
+      "bytes": 56684,
+      "sha256": "bfe0e33e5c9c4dee3b6aaaf530ca2160a85d5bc066dac9384c42e374d41740c7"
+    },
+    {
+      "origen_mirror": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/confusion_2019_2020_completa.png",
+      "versionado": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/confusion_2019_2020_completa.png",
+      "bytes": 56994,
+      "sha256": "a4c9ea8c99be4c79dfd3e4055f89a568ed283d06a2d4551ce5530e120147d1a5"
+    },
+    {
+      "origen_mirror": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/confusion_2019_2020_independiente.png",
+      "versionado": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/confusion_2019_2020_independiente.png",
+      "bytes": 57562,
+      "sha256": "4d9c476e52ef8d6467df75a00104ef8ea23f3b5fb5a82923759fbc9bcc8b937c"
+    },
+    {
+      "origen_mirror": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/confusion_2020_2021_completa.png",
+      "versionado": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/confusion_2020_2021_completa.png",
+      "bytes": 57023,
+      "sha256": "ed01c80f924666d0fee35d8975d9e8ba4f418fca02f6088994d7bca04249ee0f"
+    },
+    {
+      "origen_mirror": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/confusion_2020_2021_independiente.png",
+      "versionado": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/confusion_2020_2021_independiente.png",
+      "bytes": 59243,
+      "sha256": "8ea65ff9bc46e00880fbe7e5dd1ae19b8a11783a0e72e98a1f3eb986d1f3d17d"
+    },
+    {
+      "origen_mirror": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/confusion_2021_2022_completa.png",
+      "versionado": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/confusion_2021_2022_completa.png",
+      "bytes": 55888,
+      "sha256": "45b18955456368293483c651124050a0dcd1d92d2e90ae5fa056517e6ae35703"
+    },
+    {
+      "origen_mirror": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/confusion_2021_2022_independiente.png",
+      "versionado": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/confusion_2021_2022_independiente.png",
+      "bytes": 55870,
+      "sha256": "be2b8e179d2edf8a07a7784b8efe624c2f0659d716c1ee773e9aee9411d5cd98"
+    },
+    {
+      "origen_mirror": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/resumen_nuevo_test.png",
+      "versionado": "artifacts/reports/extension_este_evaluacion_20261009T192204/figuras/resumen_nuevo_test.png",
+      "bytes": 48668,
+      "sha256": "2da6edc9044ce0a03b9554d477baabb7bf872e54baedbbe6b0e7c1a0b57b8c84"
+    },
+    {
+      "origen_mirror": "artifacts/reports/extension_este_evaluacion_20261009T192204/fin.txt",
+      "versionado": "artifacts/reports/extension_este_evaluacion_20261009T192204/fin.txt",
+      "bytes": 26,
+      "sha256": "26b61ecc5bb138b35eed62c90b1b0953d21050aee9528ca08a744f960a883655"
+    },
+    {
+      "origen_mirror": "artifacts/reports/extension_este_evaluacion_20261009T192204/metricas_tiles.json",
+      "versionado": "artifacts/reports/extension_este_evaluacion_20261009T192204/metricas_tiles.json",
+      "bytes": 23317,
+      "sha256": "7237fd1a0f4f8265855a1ba2622f25bf65beaee4d4ad3d89a764cf66be5786e4"
+    },
+    {
+      "origen_mirror": "artifacts/reports/extension_este_evaluacion_20261009T192204/protocolo.json",
+      "versionado": "artifacts/reports/extension_este_evaluacion_20261009T192204/protocolo.json",
+      "bytes": 1590,
+      "sha256": "33521b6356ea16871be8909490981c7989001bf17da89d0dc9f2d86a53bcefa7"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/PROTOCOLO_Y_RESULTADOS.md",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/PROTOCOLO_Y_RESULTADOS.md",
+      "bytes": 11997,
+      "sha256": "4a03be74ca39f6ec8364556491df4fa540f1b68fff6d7de0ad1ec8127d32a0d9"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/RESULTADOS.md",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/RESULTADOS.md",
+      "bytes": 8566,
+      "sha256": "41824766bece185b29cadde5f25e1e83e3396b2b541dbe117f0d40d5bd7aaa67"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/auditoria_mani.json",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/auditoria_mani.json",
+      "bytes": 18349,
+      "sha256": "fbbc028ca10cd6c1be8cb643fc01a5fc317bba3eb220c43bd670e89785c8c1b9"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/campanas_test.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/campanas_test.png",
+      "bytes": 264208,
+      "sha256": "0778bb3b0eb7f098ccd422ac3b64b802b9b88f0dcf1e3568e60780979887a944"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_2020_2021_segmenter_2018_2019.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_2020_2021_segmenter_2018_2019.png",
+      "bytes": 93479,
+      "sha256": "667e287cc06e019ba6a4684584e4e73d8af8a8c109c3aac418a6e932502b5ee5"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_2020_2021_segmenter_2019_2020.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_2020_2021_segmenter_2019_2020.png",
+      "bytes": 92676,
+      "sha256": "f211fdc6846e6e85c4df397a990afb16c93fb45dbc985721d3f258731ebbb2d0"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_2020_2021_segmenter_2020_2021.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_2020_2021_segmenter_2020_2021.png",
+      "bytes": 94466,
+      "sha256": "25e4f25d64969614192a91af4571579d8c725f0ca16f6408f169611e00c627a6"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_2020_2021_segmenter_2021_2022.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_2020_2021_segmenter_2021_2022.png",
+      "bytes": 93913,
+      "sha256": "a29aa7f90d1ff58fde6a291c78fa87b0475600419ee81ddab86822033308b2ff"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_2020_2021_unet_2018_2019.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_2020_2021_unet_2018_2019.png",
+      "bytes": 94197,
+      "sha256": "5aa3570b03972331bfc662d13bc75af8f089c53116f213a354bbba6977f8dc62"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_2020_2021_unet_2019_2020.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_2020_2021_unet_2019_2020.png",
+      "bytes": 91402,
+      "sha256": "019c5eae96a036a1b6294bca5b2f8d85efd114436351d11441872098990de473"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_2020_2021_unet_2020_2021.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_2020_2021_unet_2020_2021.png",
+      "bytes": 94020,
+      "sha256": "77235d66fae0288b7c7798b149968278ffddd50b7bb087a2988d061ddfbd5bd5"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_2020_2021_unet_2021_2022.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_2020_2021_unet_2021_2022.png",
+      "bytes": 94089,
+      "sha256": "50d7c2f184afbee901155847e9c91f3f3925cbf1615aeaf2b0f814d1b92ad247"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_tres_segmenter_2018_2019.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_tres_segmenter_2018_2019.png",
+      "bytes": 94617,
+      "sha256": "adba742740d8398548b4a846697ad53bd574be3ec3d623101ba7af3b8bf8f8d8"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_tres_segmenter_2019_2020.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_tres_segmenter_2019_2020.png",
+      "bytes": 93113,
+      "sha256": "2edd8de62c7a32a82b5c1ff8f88f915eeef74136055671c598ceb7cda7f45dc4"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_tres_segmenter_2020_2021.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_tres_segmenter_2020_2021.png",
+      "bytes": 92333,
+      "sha256": "904765a8fc688fffa64e81a5141f316097002c19b850db99f6b691db5bea2236"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_tres_segmenter_2021_2022.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_tres_segmenter_2021_2022.png",
+      "bytes": 91418,
+      "sha256": "3275c4a5bab7d2ccb97057186650796de70b2e3e23a8c5e11a9acabd8cec85ae"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_tres_unet_2018_2019.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_tres_unet_2018_2019.png",
+      "bytes": 92868,
+      "sha256": "f5ebcb6d2a233e757c125aa24e625df0119a775a24469a1d9c7409f5530865f3"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_tres_unet_2019_2020.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_tres_unet_2019_2020.png",
+      "bytes": 89775,
+      "sha256": "cc98083d7f749843eb8d5caab9eb8f6c4cc9c38932bf22671595b7c7883d9033"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_tres_unet_2020_2021.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_tres_unet_2020_2021.png",
+      "bytes": 90483,
+      "sha256": "1c1a386c1cca8bb5375d36c503b02bc824740eaeb5cf4b5f53d0341ea8f36ae1"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_tres_unet_2021_2022.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_amplia_tres_unet_2021_2022.png",
+      "bytes": 89089,
+      "sha256": "90e6daac429bf9136f8bbf87118f1f8bc4650fe4455c1819a46108751b6a317a"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_2020_2021_segmenter_2018_2019.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_2020_2021_segmenter_2018_2019.png",
+      "bytes": 94116,
+      "sha256": "2639998bbbfd68afe73bf2771c04f6f19d7fae0ce0f060cf08032cbf606eb840"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_2020_2021_segmenter_2019_2020.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_2020_2021_segmenter_2019_2020.png",
+      "bytes": 93700,
+      "sha256": "f230d7051e98002e83f0d79d28575301d429589ebb13db4cbff5164e26152904"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_2020_2021_segmenter_2020_2021.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_2020_2021_segmenter_2020_2021.png",
+      "bytes": 92707,
+      "sha256": "d56a1f855a1d491ba6e889c91bb341b4029ff2c6ff3756fa8cd7d0f12c4bcc75"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_2020_2021_segmenter_2021_2022.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_2020_2021_segmenter_2021_2022.png",
+      "bytes": 91578,
+      "sha256": "d87f1041db844fe6250dcc324569794a691433ab87ae8bee23470962d22d2d2a"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_2020_2021_unet_2018_2019.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_2020_2021_unet_2018_2019.png",
+      "bytes": 95786,
+      "sha256": "0ad16215321aeeaebd1a8c624f6a895488549c3324d07246f541ad87fe3ae5a8"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_2020_2021_unet_2019_2020.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_2020_2021_unet_2019_2020.png",
+      "bytes": 93339,
+      "sha256": "c20cd09207d091fdff501a8e29c7ba935faeb21a5a7431864e36a6412ea2709d"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_2020_2021_unet_2020_2021.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_2020_2021_unet_2020_2021.png",
+      "bytes": 93604,
+      "sha256": "22932987118b234a5f5d84a8ff35d9a7205418b82a76e9217a01ec43e97e35b8"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_2020_2021_unet_2021_2022.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_2020_2021_unet_2021_2022.png",
+      "bytes": 95967,
+      "sha256": "c6cfc67a0ab42085af98d034e9a4f9bfef9fa58d1bf9b533f7dc9d145122ae79"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_tres_segmenter_2018_2019.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_tres_segmenter_2018_2019.png",
+      "bytes": 95499,
+      "sha256": "859777ba9db0f1c9ebc10d65a5904ddf2158c9755708095e389c6cd893412f80"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_tres_segmenter_2019_2020.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_tres_segmenter_2019_2020.png",
+      "bytes": 90637,
+      "sha256": "4c7ded9c1c58a5fbac10bacb7efbdf199339760428a143474bf3ab874a748c84"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_tres_segmenter_2020_2021.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_tres_segmenter_2020_2021.png",
+      "bytes": 92463,
+      "sha256": "6ed531426849472ceb6666642cabd344b9cdf198f11ffcd0eaf92b533478d558"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_tres_segmenter_2021_2022.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_tres_segmenter_2021_2022.png",
+      "bytes": 90530,
+      "sha256": "99aea71e60ce7ae8a4e62cf6951185cac0f2dbde67f422a30ecc3fbd204e1ed1"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_tres_unet_2018_2019.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_tres_unet_2018_2019.png",
+      "bytes": 92212,
+      "sha256": "f4bfbf527384a906effc3eab6e7d607067316eaed21307302fd4219beaba615b"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_tres_unet_2019_2020.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_tres_unet_2019_2020.png",
+      "bytes": 90885,
+      "sha256": "ea648ded8797d4d61dfe80e306d2544d559f6b3c0108a0ae9515f79eaa24cf64"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_tres_unet_2020_2021.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_tres_unet_2020_2021.png",
+      "bytes": 93921,
+      "sha256": "b170d5c92fa5062aa1cc21dc229c8f9599c57fa009da80ba443b3a7f86073a90"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_tres_unet_2021_2022.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/confusion_reducida_tres_unet_2021_2022.png",
+      "bytes": 92550,
+      "sha256": "9cc62fb023f1ce096ab1dac4efa342456596173fea324657d90178566e6b9fff"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/curvas_amplia_2020_2021.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/curvas_amplia_2020_2021.png",
+      "bytes": 101081,
+      "sha256": "0c8fa329a2daf1a6a4af847e54b33dd76fe97e9908e3913035469d904c1630d5"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/curvas_amplia_tres.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/curvas_amplia_tres.png",
+      "bytes": 103850,
+      "sha256": "0911ad224d5ad3e69d0803ce3efc79e51fa810a652485d18b98072bc134d3e65"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/curvas_reducida_2020_2021.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/curvas_reducida_2020_2021.png",
+      "bytes": 98926,
+      "sha256": "ebdcbfcf9eb3c886a77c2045dad919f04b318ed42caa242d774f957574f813e0"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/curvas_reducida_tres.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/curvas_reducida_tres.png",
+      "bytes": 108774,
+      "sha256": "0500fcaf9e1ce87f6c72b6e96e1a744751bb34957d9566dbd89283c7b484b920"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/detalle_mani_amplia_2020_2021_2021_2022_20HNH.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/detalle_mani_amplia_2020_2021_2021_2022_20HNH.png",
+      "bytes": 1238675,
+      "sha256": "37a81ee6335953bd4d842a2e7b3a8b7ba5378b2baf48d597201a935a0d4ceeb0"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/detalle_mani_amplia_2020_2021_2021_2022_20HNJ.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/detalle_mani_amplia_2020_2021_2021_2022_20HNJ.png",
+      "bytes": 680334,
+      "sha256": "833a831dc0440671d11f387d39471b4a346fbca54bf61e1e9633f87e7a35cb8b"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/detalle_mani_amplia_tres_2021_2022_20HNH.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/detalle_mani_amplia_tres_2021_2022_20HNH.png",
+      "bytes": 1158666,
+      "sha256": "a60987cf8c58c5d3586943b82fb758f2b943d0060b8ae9a577b9ffdbe90782c6"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/detalle_mani_amplia_tres_2021_2022_20HNJ.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/detalle_mani_amplia_tres_2021_2022_20HNJ.png",
+      "bytes": 680252,
+      "sha256": "f1f8f07bb2f75702d80ad0fdf727d40ff18a45120a5fb877abdfc298b6b4c485"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/detalle_mani_reducida_2020_2021_2021_2022_20HNH.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/detalle_mani_reducida_2020_2021_2021_2022_20HNH.png",
+      "bytes": 1271388,
+      "sha256": "df7935504a220491d8871fa2fed7f634c2bf245fad6679201fb884ce612d72fa"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/detalle_mani_reducida_2020_2021_2021_2022_20HNJ.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/detalle_mani_reducida_2020_2021_2021_2022_20HNJ.png",
+      "bytes": 680567,
+      "sha256": "8273c3e71d389a809489eb64c23aad39348e22f181ca25eb8236effe14242c2e"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/detalle_mani_reducida_tres_2021_2022_20HNH.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/detalle_mani_reducida_tres_2021_2022_20HNH.png",
+      "bytes": 1174958,
+      "sha256": "6f8dbadd4dedfe2d20d79f2dc266eb3567e64775a658e198de85a2420cb61821"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/detalle_mani_reducida_tres_2021_2022_20HNJ.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/detalle_mani_reducida_tres_2021_2022_20HNJ.png",
+      "bytes": 680868,
+      "sha256": "15e0f15d3f6b394cb320e60b21895cb27cd2855f834a3dece6a85631bd5986d5"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/interacciones.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/interacciones.png",
+      "bytes": 131415,
+      "sha256": "213bb4560d9cc3ff6233b80f5b5bbf26b453313aa9cbe1720dfbebac1666b419"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_2020_2021_2018_2019_20HNH.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_2020_2021_2018_2019_20HNH.png",
+      "bytes": 2550323,
+      "sha256": "6e2b814479436db3351d927541971c9c41b940371a81cbeecb1d406deb14518b"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_2020_2021_2018_2019_20HNJ.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_2020_2021_2018_2019_20HNJ.png",
+      "bytes": 2734878,
+      "sha256": "ebe31aef092cbd2841ee76ea5f1f83638bcb0f1ba1ef23281b0ad156e8577a4b"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_2020_2021_2019_2020_20HNH.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_2020_2021_2019_2020_20HNH.png",
+      "bytes": 2653866,
+      "sha256": "a65c09b7c9759fd9c80760255f3b813b929c828885bc5ab4af38482921efce73"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_2020_2021_2019_2020_20HNJ.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_2020_2021_2019_2020_20HNJ.png",
+      "bytes": 2811493,
+      "sha256": "77b719aed38b4a56a96a6b8bc326f0ebde365b44fa864e8d07b62cab6452b1d5"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_2020_2021_2020_2021_20HNH.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_2020_2021_2020_2021_20HNH.png",
+      "bytes": 2551296,
+      "sha256": "f1a73ad6b83c457e1a12b8e7064fc8cadc6fd92f88a88644f0e545cd56b4c81c"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_2020_2021_2020_2021_20HNJ.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_2020_2021_2020_2021_20HNJ.png",
+      "bytes": 2536646,
+      "sha256": "fe7c0db25d18bfa3d4ce82ec1cc5096a283474b6fccbac70b04d6e870b8a310d"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_2020_2021_2021_2022_20HNH.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_2020_2021_2021_2022_20HNH.png",
+      "bytes": 2754785,
+      "sha256": "dafd4b09a09068d4dee7f104a73133d9d7b85ff9fe0b5f3c2ca413970ad0b0e0"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_2020_2021_2021_2022_20HNJ.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_2020_2021_2021_2022_20HNJ.png",
+      "bytes": 2720963,
+      "sha256": "caf5aadc63af3571063150d83b6573db7e8ce64880eaff83508d07a0fe7f689e"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_tres_2018_2019_20HNH.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_tres_2018_2019_20HNH.png",
+      "bytes": 2522822,
+      "sha256": "100aaf2cbb98eda532809ac07469b7ae6ae547682e97e506d4b2929ed8738542"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_tres_2018_2019_20HNJ.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_tres_2018_2019_20HNJ.png",
+      "bytes": 2763990,
+      "sha256": "4f977f5b1aacb3c34f377cfffe2644e633fe84cef26a58b2e69e2b5692de06f8"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_tres_2019_2020_20HNH.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_tres_2019_2020_20HNH.png",
+      "bytes": 2560563,
+      "sha256": "4f69efce82cdbf2fe6d86283adc3a237295bb6bf3330f292ce19b9709df42edd"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_tres_2019_2020_20HNJ.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_tres_2019_2020_20HNJ.png",
+      "bytes": 2727491,
+      "sha256": "36bb71ba8c641a0a99a45cba29fafd289e03a384e18ec23c94bd88463c85bf62"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_tres_2020_2021_20HNH.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_tres_2020_2021_20HNH.png",
+      "bytes": 2566147,
+      "sha256": "b582e9b4a7927060d09465355760c39a320abc0c95287346a91df2129f1fec8c"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_tres_2020_2021_20HNJ.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_tres_2020_2021_20HNJ.png",
+      "bytes": 2584529,
+      "sha256": "f2e7e972606ceff4930ba50a6de88937025495b095ee0949ffd869c7b5a8d971"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_tres_2021_2022_20HNH.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_tres_2021_2022_20HNH.png",
+      "bytes": 2671535,
+      "sha256": "eb24d2cb9ea8bb6aab081a80afdd9f87ef46097dc8d8c3641f82fdae7c604440"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_tres_2021_2022_20HNJ.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_amplia_tres_2021_2022_20HNJ.png",
+      "bytes": 2692294,
+      "sha256": "76d66d1bacf14ceb2b20959f22985a935d9b11adc286d6cc848c2ff87845b3f3"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_2020_2021_2018_2019_20HNH.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_2020_2021_2018_2019_20HNH.png",
+      "bytes": 2575587,
+      "sha256": "9a5b1b02d70731e931ca6a3507e0adc169879ca7657bd9f9f6d5ff06e8151443"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_2020_2021_2018_2019_20HNJ.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_2020_2021_2018_2019_20HNJ.png",
+      "bytes": 2736233,
+      "sha256": "26bdc09734763f3d23049ce1f38f5c5c4b3703cbd9b822db00f7bf3e7c8d39eb"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_2020_2021_2019_2020_20HNH.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_2020_2021_2019_2020_20HNH.png",
+      "bytes": 2665844,
+      "sha256": "d5ecbc1afcbbac89507538d0275e0e3a32e176a82e96110f29a5517d8c778b59"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_2020_2021_2019_2020_20HNJ.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_2020_2021_2019_2020_20HNJ.png",
+      "bytes": 2841530,
+      "sha256": "d2e5eb396f756282235102904daa2667f205b489a50b49c96969996b314048d7"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_2020_2021_2020_2021_20HNH.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_2020_2021_2020_2021_20HNH.png",
+      "bytes": 2608257,
+      "sha256": "ba73e53be0aeb8325b41713ea95f849d1ee2053e06900e5e11072a54be9148e2"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_2020_2021_2020_2021_20HNJ.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_2020_2021_2020_2021_20HNJ.png",
+      "bytes": 2610917,
+      "sha256": "a7ae1ee74c32e854547417451a9708895963d868efcfb6290a9fdb5fa0860da8"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_2020_2021_2021_2022_20HNH.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_2020_2021_2021_2022_20HNH.png",
+      "bytes": 2776163,
+      "sha256": "78d4fab50a59419d9d5d5eef8e955e72871252c3bba4ffd746b866e502ed7e18"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_2020_2021_2021_2022_20HNJ.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_2020_2021_2021_2022_20HNJ.png",
+      "bytes": 2715363,
+      "sha256": "006175dc5b1d3c2a4d0b249a86e95f26c5dcf7f5b6b79f2cb0f1b2bfd6c5e03f"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_tres_2018_2019_20HNH.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_tres_2018_2019_20HNH.png",
+      "bytes": 2490361,
+      "sha256": "f6984009cbe2f49557fe87207ed6f7e9d546dde8733761d81be80af15a6c2b1b"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_tres_2018_2019_20HNJ.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_tres_2018_2019_20HNJ.png",
+      "bytes": 2730572,
+      "sha256": "3468596fd2f84d39270794a8dda2d560075aa03c8327b8d7a57ecbe11539046c"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_tres_2019_2020_20HNH.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_tres_2019_2020_20HNH.png",
+      "bytes": 2552137,
+      "sha256": "57e713ead23cac46c2a609fe874a8b565ee923300e31a4d7ab857879093dfc9b"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_tres_2019_2020_20HNJ.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_tres_2019_2020_20HNJ.png",
+      "bytes": 2773735,
+      "sha256": "1032b6a5abda335afb1151bcaa683228ccbfd2411167c6b38add8745e5b910eb"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_tres_2020_2021_20HNH.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_tres_2020_2021_20HNH.png",
+      "bytes": 2586991,
+      "sha256": "539da6b235586d16b8cd38d3466e0e8f6904b01169ce8195e7ea814150928041"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_tres_2020_2021_20HNJ.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_tres_2020_2021_20HNJ.png",
+      "bytes": 2586128,
+      "sha256": "0ea5064ab87948a506fc520b0c832eaa968de8e4b9253d97f186f9f9c1bec819"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_tres_2021_2022_20HNH.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_tres_2021_2022_20HNH.png",
+      "bytes": 2694187,
+      "sha256": "147357a6b34f9abf1c3b814410df0210d6c8ad02367fea94a471b344276be45e"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_tres_2021_2022_20HNJ.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/panorama_reducida_tres_2021_2022_20HNJ.png",
+      "bytes": 2696247,
+      "sha256": "733032da2df5ee1a72fbb667ade23041a94251dafaf7c0f8c9974faf36fc2f85"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/resumen_2021_2022.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/figuras/resumen_2021_2022.png",
+      "bytes": 86526,
+      "sha256": "ed464c10ad9fd0e97e8ac4c8bc9b1c94bf873f7ca3f7d141244d9b433ea5e77a"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/finalizar_reporte.py",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/finalizar_reporte.py",
+      "bytes": 3510,
+      "sha256": "a65d75601fde5bb1ab11b233f4fe8f8232c16d0fc392b7f8ea95c491621acf08"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/generador_reporte.py",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/generador_reporte.py",
+      "bytes": 22404,
+      "sha256": "70192461edf9ffbc331ffabad36b422e9f5796e1a57fe010b68fb90145743159"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/index.html",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/index.html",
+      "bytes": 44747,
+      "sha256": "00b3b492a822c6f3da178b03c997b7f6af5331832875f1a4871ce7722b848012"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/mapa_nucleo_mani.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/mapa_nucleo_mani.png",
+      "bytes": 833058,
+      "sha256": "cb196d0ab45ab16da94d94134a327e004fbc976ac57591186d871946b1fd3269"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/metricas/contrastes_2021_2022_pp.csv",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/metricas/contrastes_2021_2022_pp.csv",
+      "bytes": 1940,
+      "sha256": "6040c2a781390fb2001d62b863c4cd3a37c8e5795c31a7296595ca037b48e88a"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/metricas/procedencia_checkpoints.json",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/metricas/procedencia_checkpoints.json",
+      "bytes": 72543,
+      "sha256": "49620c5ab5f8a4ff53e15d911785a398483b4f5a3bbbd13d76da5a4c2aa84a1b"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/metricas/resultados_completos.json",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/metricas/resultados_completos.json",
+      "bytes": 104259,
+      "sha256": "ee1ab7514ced4be7570bccc097f0c99e97e4ff654ca5d2b1a6163528135ae017"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/metricas/resumen_2021_2022.csv",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/metricas/resumen_2021_2022.csv",
+      "bytes": 2402,
+      "sha256": "e3ae08be283199562c0c92979d97ebd737f5e2ad618d611ca70bbbe06008b68f"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/metricas/resumen_2021_2022.json",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/metricas/resumen_2021_2022.json",
+      "bytes": 4700,
+      "sha256": "4e592986dee196fca9efb398ec91a05084d8c5ee38f874982400370acb280acb"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/metricas/todas_las_metricas.csv",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/metricas/todas_las_metricas.csv",
+      "bytes": 17942,
+      "sha256": "66ac27804ebcd4dc64a3ec7bec887be07e8319c7abed10930f3791060e2e69ea"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/metricas/validacion_y_epocas.csv",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/metricas/validacion_y_epocas.csv",
+      "bytes": 931,
+      "sha256": "0ad7d67fd95e187c0c76687be1d6d7b8ecad0f98885349e29695569a7d77160d"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/metricas/ventanas_detalle.json",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/metricas/ventanas_detalle.json",
+      "bytes": 463,
+      "sha256": "985ebed212c17a719ca96c9d4eed05620586f703ea30bdb4c29bed6822636934"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/organizar_archivo.py",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/organizar_archivo.py",
+      "bytes": 10128,
+      "sha256": "e0ce0e7ad432f539a25862d388d67e49b03f5ccafea444cbc06bab15f1e08e2a"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/protocolo.json",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/protocolo.json",
+      "bytes": 21840,
+      "sha256": "3883223f29f6125e79fe943a7e008b9a0e4f14a68ba4d3cc2dc0ef75d41145c3"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/sha256.json",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/sha256.json",
+      "bytes": 11917,
+      "sha256": "34ed1abb61ea8fbc8d99cdd8b44a6b137a7dd7ccb65a512d06fbc605cb17d0e5"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/versiones/20261022T122651803187Z/RESULTADOS.md",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/versiones/20261022T122651803187Z/RESULTADOS.md",
+      "bytes": 6217,
+      "sha256": "86e0491c87844aa77537d6f32565086002527f47a01d8dcd5206c5cb0964a2fa"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/versiones/20261022T122651803187Z/index.html",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/versiones/20261022T122651803187Z/index.html",
+      "bytes": 25295,
+      "sha256": "7cbd599758a9a30c651b12040f722b05cdb6eb4a459e6a680e6336517dbe6d44"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_20261022/versiones/20261022T122651803187Z/sha256.json",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_20261022/versiones/20261022T122651803187Z/sha256.json",
+      "bytes": 11468,
+      "sha256": "8f4f31d0f9d7d6d201b55b83b1cc6a3b48c5fb3938c4b5e10ee8727854522234"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_mani_20261021/auditoria_mani.json",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_mani_20261021/auditoria_mani.json",
+      "bytes": 18349,
+      "sha256": "fbbc028ca10cd6c1be8cb643fc01a5fc317bba3eb220c43bd670e89785c8c1b9"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_mani_20261021/mapa_nucleo_mani.png",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_mani_20261021/mapa_nucleo_mani.png",
+      "bytes": 833058,
+      "sha256": "cb196d0ab45ab16da94d94134a327e004fbc976ac57591186d871946b1fd3269"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_mani_20261021/mapa_selecciones.geojson",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_mani_20261021/mapa_selecciones.geojson",
+      "bytes": 4852745,
+      "sha256": "9842bfc7ccf30fdbac2561f0f54636a35dcad09066f9b549bf620483709d6238"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_mani_20261021/protocolo.json",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_mani_20261021/protocolo.json",
+      "bytes": 21840,
+      "sha256": "3883223f29f6125e79fe943a7e008b9a0e4f14a68ba4d3cc2dc0ef75d41145c3"
+    },
+    {
+      "origen_mirror": "artifacts/reports/factorial_unet_segmenter_mani_20261021/sha256_local.json",
+      "versionado": "artifacts/reports/factorial_unet_segmenter_mani_20261021/sha256_local.json",
+      "bytes": 375,
+      "sha256": "c67cd426b688035967222edf62eeda135636a4c457aac21cc087cf8a2104882d"
+    },
+    {
+      "origen_mirror": "artifacts/reports/incorporacion_mani_20261018/inventario_mani.csv",
+      "versionado": "artifacts/reports/incorporacion_mani_20261018/inventario_mani.csv",
+      "bytes": 2294,
+      "sha256": "ca84559854e9b7456640f57fa92ec017bdf5fc75800c21ec8a51f8e62aae2f3a"
+    },
+    {
+      "origen_mirror": "artifacts/reports/incorporacion_mani_20261018/inventario_mani.json",
+      "versionado": "artifacts/reports/incorporacion_mani_20261018/inventario_mani.json",
+      "bytes": 12070,
+      "sha256": "6ba65ff009954471660651131eccef28f895432b46b69cfe92a26b9b4e129975"
+    },
+    {
+      "origen_mirror": "artifacts/reports/incorporacion_mani_20261018/manifiesto.json",
+      "versionado": "artifacts/reports/incorporacion_mani_20261018/manifiesto.json",
+      "bytes": 2920,
+      "sha256": "89706c046c99150c35a7c48758a17b354be5e67fe1a6c117a2fad10193160626"
+    },
+    {
+      "origen_mirror": "artifacts/reports/incorporacion_mani_20261018/plan_cobertura/resumen.json",
+      "versionado": "artifacts/reports/incorporacion_mani_20261018/plan_cobertura/resumen.json",
+      "bytes": 1270,
+      "sha256": "a37e4bec0bd2c0c3fdb8b52d7e1a61d6db1576290c6ab21e3473b9ea69d5e57d"
+    },
+    {
+      "origen_mirror": "artifacts/reports/incorporacion_mani_20261018/protocolo.json",
+      "versionado": "artifacts/reports/incorporacion_mani_20261018/protocolo.json",
+      "bytes": 18300,
+      "sha256": "18c1f62b151216b3cb5c3a20322167870e7a4fb89acd81fa09e83c8f0fa5a01a"
+    },
+    {
+      "origen_mirror": "artifacts/reports/incorporacion_mani_20261018/split_mani_HLJ.json",
+      "versionado": "artifacts/reports/incorporacion_mani_20261018/split_mani_HLJ.json",
+      "bytes": 786,
+      "sha256": "4a5cfbcce04807400420925ed62ec53b7e1b5fb31b703ff6dc2f7a3775e2d471"
+    },
+    {
+      "origen_mirror": "artifacts/reports/indice_test_actual.html",
+      "versionado": "artifacts/reports/indice_test_actual.html",
+      "bytes": 32495,
+      "sha256": "212df8582d4b797190157cc9adc2ea43745b73dc3253dd9009fec6f36cd1a3d6"
+    },
+    {
+      "origen_mirror": "artifacts/reports/manifiesto_figuras_test_20261012.json",
+      "versionado": "artifacts/reports/manifiesto_figuras_test_20261012.json",
+      "bytes": 34895,
+      "sha256": "4837f75ccfdf9fbbd0dcea76cc4c5546de0a5d61eacd729f091a5aa70373e3cc"
+    },
+    {
+      "origen_mirror": "artifacts/reports/piloto_factorial_mani_20261018/LIMITACIONES.md",
+      "versionado": "artifacts/reports/piloto_factorial_mani_20261018/LIMITACIONES.md",
+      "bytes": 8702,
+      "sha256": "cd93b41b74bd04adcbd8c540c784717583153d64376000f63bdbb78bfc2ad939"
+    },
+    {
+      "origen_mirror": "artifacts/reports/piloto_factorial_mani_20261018/documentacion.json",
+      "versionado": "artifacts/reports/piloto_factorial_mani_20261018/documentacion.json",
+      "bytes": 212,
+      "sha256": "be8936087d4696c02027f0f29d07d99e07b48b579d6f2ad7abbb7c0710b15b65"
+    },
+    {
+      "origen_mirror": "artifacts/reports/piloto_factorial_mani_20261018/ensayo_factorial_20261018_v1/cancelacion.json",
+      "versionado": "artifacts/reports/piloto_factorial_mani_20261018/ensayo_factorial_20261018_v1/cancelacion.json",
+      "bytes": 271,
+      "sha256": "3fa8876c7ce0d0922c2ae510992b02f30d80643e198b0154c18949afe5ab0719"
+    },
+    {
+      "origen_mirror": "artifacts/reports/piloto_factorial_mani_20261018/ensayo_mani_20261018_v1/cancelacion.json",
+      "versionado": "artifacts/reports/piloto_factorial_mani_20261018/ensayo_mani_20261018_v1/cancelacion.json",
+      "bytes": 271,
+      "sha256": "3fa8876c7ce0d0922c2ae510992b02f30d80643e198b0154c18949afe5ab0719"
+    },
+    {
+      "origen_mirror": "artifacts/reports/piloto_factorial_mani_20261018/protocolo.json",
+      "versionado": "artifacts/reports/piloto_factorial_mani_20261018/protocolo.json",
+      "bytes": 17540,
+      "sha256": "284966a5b6ba7220c6315aaf4d9d0964bc7aff02ae2c4bb6439f826e3647738e"
+    },
+    {
+      "origen_mirror": "artifacts/reports/piloto_factorial_mani_20261018/resultados_20261019.json",
+      "versionado": "artifacts/reports/piloto_factorial_mani_20261018/resultados_20261019.json",
+      "bytes": 59205,
+      "sha256": "e4b78caf497ba2e053781121680279e3c06fe4b7a3e40b42587291e151c809a8"
+    },
+    {
+      "origen_mirror": "artifacts/reports/piloto_factorial_mani_20261018/split_mani_comun.json",
+      "versionado": "artifacts/reports/piloto_factorial_mani_20261018/split_mani_comun.json",
+      "bytes": 786,
+      "sha256": "4a5cfbcce04807400420925ed62ec53b7e1b5fb31b703ff6dc2f7a3775e2d471"
+    },
+    {
+      "origen_mirror": "artifacts/reports/presentacion_factorial_20261022/GUION.md",
+      "versionado": "artifacts/reports/presentacion_factorial_20261022/GUION.md",
+      "bytes": 7664,
+      "sha256": "247d46183a9fbd1aebda7e77b04ba5fec62e2074d1d2980bbd657630ebea0ef0"
+    },
+    {
+      "origen_mirror": "artifacts/reports/presentacion_factorial_20261022/LEEME.md",
+      "versionado": "artifacts/reports/presentacion_factorial_20261022/LEEME.md",
+      "bytes": 649,
+      "sha256": "06c591928b1025f8bbd7354d7d8f5a1a4c5bf788dd0f2e99bd21ee4ae899ce1b"
+    },
+    {
+      "origen_mirror": "artifacts/reports/presentacion_factorial_20261022/PRESENTACION.html",
+      "versionado": "artifacts/reports/presentacion_factorial_20261022/PRESENTACION.html",
+      "bytes": 1568238,
+      "sha256": "ff7e2a308984ebeb776e215a5fdc6536764b0e010115044cb7d6d755a2a782da"
+    },
+    {
+      "origen_mirror": "artifacts/reports/presentacion_factorial_20261022/procedencia.json",
+      "versionado": "artifacts/reports/presentacion_factorial_20261022/procedencia.json",
+      "bytes": 549,
+      "sha256": "bc77254fda806d4c6714804e14e2a91e7be1ff395975e4526abfb1f9cf998f1d"
+    },
+    {
+      "origen_mirror": "artifacts/reports/presentacion_factorial_20261022/versiones/20261022T123327Z/GUION.md",
+      "versionado": "artifacts/reports/presentacion_factorial_20261022/versiones/20261022T123327Z/GUION.md",
+      "bytes": 6219,
+      "sha256": "da15af09f3e6fdb3fbff559ced5352291880a9c6098c18a9316fc209c9c73e96"
+    },
+    {
+      "origen_mirror": "artifacts/reports/presentacion_factorial_20261022/versiones/20261022T123327Z/LEEME.md",
+      "versionado": "artifacts/reports/presentacion_factorial_20261022/versiones/20261022T123327Z/LEEME.md",
+      "bytes": 649,
+      "sha256": "06c591928b1025f8bbd7354d7d8f5a1a4c5bf788dd0f2e99bd21ee4ae899ce1b"
+    },
+    {
+      "origen_mirror": "artifacts/reports/presentacion_factorial_20261022/versiones/20261022T123327Z/PRESENTACION.html",
+      "versionado": "artifacts/reports/presentacion_factorial_20261022/versiones/20261022T123327Z/PRESENTACION.html",
+      "bytes": 1565372,
+      "sha256": "58bc0a6b49a89e0e4cbb02d626cf3f364ebf39da89aabea18a961a8b38793bf3"
+    },
+    {
+      "origen_mirror": "artifacts/reports/presentacion_factorial_20261022/versiones/20261022T123327Z/procedencia.json",
+      "versionado": "artifacts/reports/presentacion_factorial_20261022/versiones/20261022T123327Z/procedencia.json",
+      "bytes": 549,
+      "sha256": "459de3baa41f73cf56f99acbffaabc4ffa436bb984b30d10fdb711b4a91cc776"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/README.md",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/README.md",
+      "bytes": 459,
+      "sha256": "8b72dce5b2bfcc4c84c4662178915e95685051cc3bb7fff33d5adc66b6c20256"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/comparacion_metricas.csv",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/comparacion_metricas.csv",
+      "bytes": 2503,
+      "sha256": "9305fbba24e2dc0a33571af863618a357a1ef4d07bcc14c1198ea17af846eaab"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/estado_transferencia.json",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/estado_transferencia.json",
+      "bytes": 177,
+      "sha256": "719e04603b148d066ea0311fcfc9c61123194b2a9e70d26ad3c83191169ba665"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/evaluacion_test_actual.json",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/evaluacion_test_actual.json",
+      "bytes": 121014,
+      "sha256": "4abc865e2e659e9cf49c9a440b3e7680833a36cabfc59387189249a93b7a658e"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2018_2019_20HNH.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2018_2019_20HNH.png",
+      "bytes": 4161119,
+      "sha256": "28052ceebdf721830d44c3caec2681eaa333f7c7f5842c6284eddab771735861"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2018_2019_20HNJ.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2018_2019_20HNJ.png",
+      "bytes": 4394063,
+      "sha256": "42e467889e7166a74d8763b39f46ec7c22f8b902f8f59feff9e813afdd500902"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2019_2020_20HNH.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2019_2020_20HNH.png",
+      "bytes": 4128119,
+      "sha256": "532539a8b82ed31cfa488f7ec4096bf098a37e2d11df97719c188a11bc3ac4b5"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2019_2020_20HNJ.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2019_2020_20HNJ.png",
+      "bytes": 4276047,
+      "sha256": "a890126879253183222084f43994ace18cda0cfedef8b4164a61e34bf3ea46c1"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2020_2021_20HNH.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2020_2021_20HNH.png",
+      "bytes": 4130220,
+      "sha256": "4158d0e67d053b96c751067dc965adfbfaf785a751a73838112759c320561cde"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2020_2021_20HNJ.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2020_2021_20HNJ.png",
+      "bytes": 4077843,
+      "sha256": "815a258e0a2cda97ffa2d5125b07668c49a91695b1f57242f87bd0b7803e2b16"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2021_2022_20HNH.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2021_2022_20HNH.png",
+      "bytes": 4503013,
+      "sha256": "f3883bb3ac6d9ceabd809b3ebadf1285c8a31b4cb2ea55959cf3105355fb5f23"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2021_2022_20HNJ.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/comparacion_modelos_2021_2022_20HNJ.png",
+      "bytes": 4137901,
+      "sha256": "34c6dcf629acc97ad52af2496049b32099b67ce69c319649a21a58ced5c67137"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/comparacion_test_actual.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/comparacion_test_actual.png",
+      "bytes": 53672,
+      "sha256": "72c92001dfdb0a61d17ac4743a149620aaf79b191ee444e9ca30730001a4cf9c"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2018_2019_completa.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2018_2019_completa.png",
+      "bytes": 57952,
+      "sha256": "5f1851d9e24c006cc4c0ce4cd9901d4c99f2c63174cb50be4bdcd6ea47ca5992"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2018_2019_independiente.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2018_2019_independiente.png",
+      "bytes": 57632,
+      "sha256": "5c96c68387c70159dd5cdedc6542f86ab50ed88bdcde887e90bf57ad50e1e702"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2019_2020_completa.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2019_2020_completa.png",
+      "bytes": 58103,
+      "sha256": "bac3a13ab81943b18279f5fc562a622b1a62f0b06ba79924f8c6e8554fe1bde3"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2019_2020_independiente.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2019_2020_independiente.png",
+      "bytes": 59312,
+      "sha256": "2ac9f88a02455720160c344a23d5a72b65a51033638454145a197f75e704fda0"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2020_2021_completa.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2020_2021_completa.png",
+      "bytes": 60710,
+      "sha256": "5502ec114ba5a050b6129104880b85ee8b3fd0539fb81b7571859f5b3dcb9c4c"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2020_2021_independiente.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2020_2021_independiente.png",
+      "bytes": 59696,
+      "sha256": "fa5b8422a45c3bc4c48b7fda0037b912d5cf148706312e19310f72f628f6a442"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2021_2022_completa.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2021_2022_completa.png",
+      "bytes": 56381,
+      "sha256": "f0b9ef0658f71f305dfe614e40c35e2709b32fcf782020cffd421d8673ff3145"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2021_2022_independiente.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_fcr_2019_2020_2021_2022_independiente.png",
+      "bytes": 56966,
+      "sha256": "dd3312e1e02717686462f7390dc7eb3134e56737b3d2a9be71ea2c595066c9f8"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2018_2019_completa.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2018_2019_completa.png",
+      "bytes": 57900,
+      "sha256": "7d7f113efa4b868bb11dafeaa206dc504039d6ab476a478dc194af569019f832"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2018_2019_independiente.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2018_2019_independiente.png",
+      "bytes": 58386,
+      "sha256": "fa913f067f2f818f0b608dae2485ada56cb576591ef7de2e872e4dfd69063a15"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2019_2020_completa.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2019_2020_completa.png",
+      "bytes": 58668,
+      "sha256": "2258684e77812e697ecf693d3efc158f425d0715769ff7ad42b90fef817acb01"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2019_2020_independiente.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2019_2020_independiente.png",
+      "bytes": 59032,
+      "sha256": "92d6669781d16d4633810a96320b4cb36f824ed779ad05278ba4dc06e5c31372"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2020_2021_completa.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2020_2021_completa.png",
+      "bytes": 58605,
+      "sha256": "4bf476adecbc53a91ec9b96deb6f1b21689986de52cc727f2bbb96a316500faf"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2020_2021_independiente.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2020_2021_independiente.png",
+      "bytes": 60645,
+      "sha256": "ae00d636a47d531d5c62c1648ee85fa778b2580c1ba0d43d5bc98c4d1b0be9aa"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2021_2022_completa.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2021_2022_completa.png",
+      "bytes": 57464,
+      "sha256": "7b03ec7af52debb4374d8501b43a772131505d8ec75eeb936597e9eda17cef24"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2021_2022_independiente.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_principal_2021_2022_independiente.png",
+      "bytes": 57661,
+      "sha256": "c0600a156822a9d063e47cd578c5b42e14bae3f5478e0f457d0429fdb131030e"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2018_2019_completa.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2018_2019_completa.png",
+      "bytes": 57004,
+      "sha256": "66c18edce8a56c1536c2ce0318f65bd8964b5c8e11f182b92ebac26ba999bf7e"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2018_2019_independiente.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2018_2019_independiente.png",
+      "bytes": 56895,
+      "sha256": "d6613e3272cc0b924f37755b14bf0afb176ae9685877e9d8ee2b0050ce92a3e3"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2019_2020_completa.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2019_2020_completa.png",
+      "bytes": 57673,
+      "sha256": "f0bd72ea5646c5a2f7209977cd35041840150441804a5cc146fca827dffb4550"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2019_2020_independiente.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2019_2020_independiente.png",
+      "bytes": 58352,
+      "sha256": "c2ad79ed60d5b0f2249d7cd24ce869e044b93afe30470301c4a87baa37843b2f"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2020_2021_completa.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2020_2021_completa.png",
+      "bytes": 57079,
+      "sha256": "7babc967a9eeb74f98839b9fb8f17c992b4981afe4bf846480c631d5a052a737"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2020_2021_independiente.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2020_2021_independiente.png",
+      "bytes": 57583,
+      "sha256": "e2d2402781e586a672ae260f34c6fe73c71f6a14eb0288ec4ef834b5650db80f"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2021_2022_completa.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2021_2022_completa.png",
+      "bytes": 55755,
+      "sha256": "ffd71543875881b1eeb611fb31d6e9b3d5579c42a6638ac5ddc0598bb35f2318"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2021_2022_independiente.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/confusion_unet_2019_2020_2021_2022_independiente.png",
+      "bytes": 56123,
+      "sha256": "8769fa6c6c534633345529964e9b7a6388db57ebd9070d57cd6e88e0a24d7d54"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/curvas_comparadas.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/figuras/curvas_comparadas.png",
+      "bytes": 397106,
+      "sha256": "e51f0532b9b93ba69bd304fa83b9d5625336294c21b7587cd4d0472a9ea6cead"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/fin.txt",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/fin.txt",
+      "bytes": 26,
+      "sha256": "f6d76ad412ac2ca17f6b9a3cb4933e35a3a5319539e6ba72b659875b1aa84250"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/metricas_tiles.json",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/metricas_tiles.json",
+      "bytes": 71115,
+      "sha256": "222ce7ab4c1adcc8ebaf2fe5c78671d2a40569e710f363f96fd76cafbc6205b4"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2018_2019_20HNH.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2018_2019_20HNH.png",
+      "bytes": 3173243,
+      "sha256": "21162d23479b927a31cf760998b3e6fa17c1b9af212d388293428a42c0734f83"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2018_2019_20HNJ.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2018_2019_20HNJ.png",
+      "bytes": 3260274,
+      "sha256": "1244ed3a37d47a69f021daf350e8adb6c46ce3aa0544f7a7e3eea0add8ee2406"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2019_2020_20HNH.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2019_2020_20HNH.png",
+      "bytes": 3282333,
+      "sha256": "844cbe31f5d9626504b83c22ee4acb14c2baf0ed52656f78da2cbabe239ad7d8"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2019_2020_20HNJ.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2019_2020_20HNJ.png",
+      "bytes": 3282302,
+      "sha256": "ef0de0062de1b471946b717ec89bedc0bf2caf2e6851a70ce5767dda90050a06"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2020_2021_20HNH.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2020_2021_20HNH.png",
+      "bytes": 3308711,
+      "sha256": "bbebd6a5c9a4a25dadab07ebc934f3a81282d026f31fed65987d0dc29d6d51d8"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2020_2021_20HNJ.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2020_2021_20HNJ.png",
+      "bytes": 3158215,
+      "sha256": "68799e8bc1f035765d698c323e13a81994858ec5153a89f4a9b5ffa7fa8799a6"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2021_2022_20HNH.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2021_2022_20HNH.png",
+      "bytes": 3486656,
+      "sha256": "e787a92014c2559f56d1abb84d4e510524db0111a368b6cda103be195b8b0758"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2021_2022_20HNJ.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/fcr_2019_2020/figuras/comparacion_2021_2022_20HNJ.png",
+      "bytes": 3228082,
+      "sha256": "fb24cf78c8b5ade97b044ed928598436b44b811c7ddbfa349719e14a34b8a064"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2018_2019_20HNH.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2018_2019_20HNH.png",
+      "bytes": 3152407,
+      "sha256": "ea0802e5d4efe3d958922a2bd0adcca1546167a76921bf6f710bbf578ccd5436"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2018_2019_20HNJ.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2018_2019_20HNJ.png",
+      "bytes": 3233155,
+      "sha256": "b1974513f32a36b82e13c476ad753aa597957e39c89360fe04689b2dfb902134"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2019_2020_20HNH.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2019_2020_20HNH.png",
+      "bytes": 3247223,
+      "sha256": "8f86f8e931486708895d57d5f518f8402feceafe5fd54ead02ffb5bdded1d3b2"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2019_2020_20HNJ.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2019_2020_20HNJ.png",
+      "bytes": 3206543,
+      "sha256": "f025020034bb8f1923da687de8207adeb86f9f601f59e0fd85f9641ef2b7dddb"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2020_2021_20HNH.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2020_2021_20HNH.png",
+      "bytes": 3254144,
+      "sha256": "301d3a53abfa25c4e7b2add7a5b43f8299a6843eb9d746e0834a4961d92cbff4"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2020_2021_20HNJ.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2020_2021_20HNJ.png",
+      "bytes": 3062121,
+      "sha256": "fefa546296caf25191991818561eecb40c4f04393bde616b423c6006d2966fe9"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2021_2022_20HNH.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2021_2022_20HNH.png",
+      "bytes": 3390975,
+      "sha256": "3b47f73d6a1ced331f3937c6aa6cc94de654665146e14321cc6eca8d1d921cea"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2021_2022_20HNJ.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/principal/figuras/comparacion_2021_2022_20HNJ.png",
+      "bytes": 3212269,
+      "sha256": "7609f9faac359c8e8d2f6fac1608ee794d51dca61e42adb4e9a8f5fef75adf68"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2018_2019_20HNH.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2018_2019_20HNH.png",
+      "bytes": 3175389,
+      "sha256": "832f4b8558ed0d8b98adeb80af5414da3e9169df26a745a00978d4e58f3e0060"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2018_2019_20HNJ.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2018_2019_20HNJ.png",
+      "bytes": 3272196,
+      "sha256": "f2e0fcb47e37c592b31d510fd60083613f355bf386517d6755bbee36b1ec4df9"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2019_2020_20HNH.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2019_2020_20HNH.png",
+      "bytes": 3280568,
+      "sha256": "43b6f493667880d611ed7f761fc2134912abf6d4725613a5bbe86cb0897dc716"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2019_2020_20HNJ.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2019_2020_20HNJ.png",
+      "bytes": 3257917,
+      "sha256": "a20e681d3fc52a2e0e12d13b4b7f92dbb5831884975601638abd441dac0ba242"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2020_2021_20HNH.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2020_2021_20HNH.png",
+      "bytes": 3329684,
+      "sha256": "ffc67e4fb134b86d21b8444fa172cf14f9d274f91cc58dc3fbea58b320b87ac1"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2020_2021_20HNJ.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2020_2021_20HNJ.png",
+      "bytes": 3166004,
+      "sha256": "e1dc7f1ff7839217a08005e553fe1a9703a882c69c3193a1b755f79099052354"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2021_2022_20HNH.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2021_2022_20HNH.png",
+      "bytes": 3483341,
+      "sha256": "9e940214c894f82ff179079f63170dc12d246219822abb7e83a36783317697ca"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2021_2022_20HNJ.png",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/modelos/unet_2019_2020/figuras/comparacion_2021_2022_20HNJ.png",
+      "bytes": 3248163,
+      "sha256": "7cd0ad8e56e9242bd7aa70ee7ee6258ef7f64a6bb2cbf4d18fde8cb25803fd56"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/protocolo.json",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/protocolo.json",
+      "bytes": 1894,
+      "sha256": "1001c518cefaab5694396bd12b055e6c5ceeaf8fbedecd9d8ba5595773386310"
+    },
+    {
+      "origen_mirror": "artifacts/reports/resultados_test_actual_comparacion_20261010/sincronizar.py",
+      "versionado": "artifacts/reports/resultados_test_actual_comparacion_20261010/sincronizar.py",
+      "bytes": 1589,
+      "sha256": "a28cc2495a2d43d518e7406d60b1fad90c2041cb9ba97b7b824a76db08dea844"
+    },
+    {
+      "origen_mirror": "artifacts/archive/legacy_root/figuras/comparacion_curvas.png",
+      "versionado": "artifacts/reports/archivo_mirror/legacy_root/figuras/comparacion_curvas.png",
+      "bytes": 265527,
+      "sha256": "baa30846efc99e15690bae036df3550d72705439ef54b76a35aa7ada834c1c60"
+    },
+    {
+      "origen_mirror": "artifacts/archive/legacy_root/figuras/comparacion_inferencia_20HLJ_fcrtransunet.png",
+      "versionado": "artifacts/reports/archivo_mirror/legacy_root/figuras/comparacion_inferencia_20HLJ_fcrtransunet.png",
+      "bytes": 3007667,
+      "sha256": "d532e1ea5046998ac462171db9448758c7943e1a1000e899f7c60108d4b80f93"
+    },
+    {
+      "origen_mirror": "artifacts/archive/legacy_root/figuras/comparacion_inferencia_20JML_fcrtransunet.png",
+      "versionado": "artifacts/reports/archivo_mirror/legacy_root/figuras/comparacion_inferencia_20JML_fcrtransunet.png",
+      "bytes": 3462834,
+      "sha256": "9a778f07b5182483dc18e2e7800798762e9b8a59597a62532b5a39dc82c62f97"
+    },
+    {
+      "origen_mirror": "artifacts/archive/legacy_root/figuras/comparacion_mapa_20HLJ.png",
+      "versionado": "artifacts/reports/archivo_mirror/legacy_root/figuras/comparacion_mapa_20HLJ.png",
+      "bytes": 4136822,
+      "sha256": "3f3ff26042c6ac97c8fd13f14359d8a4475baf27aef3117e06274d8b64d5fe57"
+    },
+    {
+      "origen_mirror": "artifacts/archive/legacy_root/figuras/comparacion_vdr3_mapa.png",
+      "versionado": "artifacts/reports/archivo_mirror/legacy_root/figuras/comparacion_vdr3_mapa.png",
+      "bytes": 2912970,
+      "sha256": "807073c80cb8b7f6840688a5b9d33b0cc65b9a2112aeb3610fe78bc074aeeebc"
+    },
+    {
+      "origen_mirror": "artifacts/archive/legacy_root/figuras/comparacion_verano.png",
+      "versionado": "artifacts/reports/archivo_mirror/legacy_root/figuras/comparacion_verano.png",
+      "bytes": 2543959,
+      "sha256": "44a14b2aabb4ab6394462212a744630113960319fe8ae3fee989167b33f2f770"
+    },
+    {
+      "origen_mirror": "artifacts/archive/legacy_root/figuras/mapa_tiles_multicampana.html",
+      "versionado": "artifacts/reports/archivo_mirror/legacy_root/figuras/mapa_tiles_multicampana.html",
+      "bytes": 474600,
+      "sha256": "dd408666a14b3b77dc492e4b0233c1ce41557ceb87aeec0dd9e04e39f7045fce"
+    },
+    {
+      "origen_mirror": "artifacts/archive/legacy_root/figuras/mapa_tiles_multicampana.svg",
+      "versionado": "artifacts/reports/archivo_mirror/legacy_root/figuras/mapa_tiles_multicampana.svg",
+      "bytes": 10248,
+      "sha256": "48d319fd2f9843ccbf2e877ff63c890a698a2427facd6126f05ce82d60f84aac"
+    },
+    {
+      "origen_mirror": "artifacts/archive/legacy_root/figuras/metricas_fcrtransunet.png",
+      "versionado": "artifacts/reports/archivo_mirror/legacy_root/figuras/metricas_fcrtransunet.png",
+      "bytes": 111295,
+      "sha256": "4fcf505740976d6bd3e419c072cf9220fe53e76c2940b0b73822547a9cd659db"
+    },
+    {
+      "origen_mirror": "artifacts/archive/legacy_root/figuras/metricas_v2.png",
+      "versionado": "artifacts/reports/archivo_mirror/legacy_root/figuras/metricas_v2.png",
+      "bytes": 137530,
+      "sha256": "0d48e326feff7e87d86354cd013b2d3da3090b497c78ff0d7f906debe3cfe627"
+    },
+    {
+      "origen_mirror": "artifacts/archive/legacy_root/figuras/prediccion_20JML_utae.png",
+      "versionado": "artifacts/reports/archivo_mirror/legacy_root/figuras/prediccion_20JML_utae.png",
+      "bytes": 1900132,
+      "sha256": "72ea1badeed4f08ecac17b6d234ee3547b0de489759ce829e1d5e092a475199f"
+    },
+    {
+      "origen_mirror": "artifacts/archive/legacy_root/inventarios/auditoria_geografia_tiles.json",
+      "versionado": "artifacts/reports/archivo_mirror/legacy_root/inventarios/auditoria_geografia_tiles.json",
+      "bytes": 1342888,
+      "sha256": "15bf1ddaa3f5452692b5586e3070b17facb8527b443a522ba713decadcd0da88"
+    },
+    {
+      "origen_mirror": "artifacts/archive/legacy_root/inventarios/estructura_sentinel2.json",
+      "versionado": "artifacts/reports/archivo_mirror/legacy_root/inventarios/estructura_sentinel2.json",
+      "bytes": 326069,
+      "sha256": "86eb90df14bfabcaf1cb6db1eb3c1262d2756d8f7b0e2df07443059dccb0e197"
+    },
+    {
+      "origen_mirror": "artifacts/archive/legacy_root/inventarios/huellas_parches_multicampana.geojson",
+      "versionado": "artifacts/reports/archivo_mirror/legacy_root/inventarios/huellas_parches_multicampana.geojson",
+      "bytes": 487758,
+      "sha256": "46edf6d3ddf3b2d679607bd7fa95e016dc77c9e49e7e2b8216b39e26b158c68e"
+    },
+    {
+      "origen_mirror": "artifacts/archive/reorganizacion_mirror_20261010.json",
+      "versionado": "artifacts/reports/archivo_mirror/reorganizacion_mirror_20261010.json",
+      "bytes": 48695,
+      "sha256": "51cc18bcefc57cee017adadb466f74107a03e5ee130687399016ab5d7fad3f3b"
+    }
+  ],
+  "fuera_de_git": [
+    "artifacts/reports/chaco_sudoeste/20261014T141241Z/historial_entrenamiento.npy",
+    "artifacts/reports/chaco_sudoeste/20261014T141241Z/mascaras/20JPQ_agrupada.tif",
+    "artifacts/reports/chaco_sudoeste/20261014T141241Z/mascaras/20JPQ_cruda.tif",
+    "artifacts/reports/chaco_sudoeste/20261014T141241Z/mascaras/20JPR_agrupada.tif",
+    "artifacts/reports/chaco_sudoeste/20261014T141241Z/mascaras/20JPR_cruda.tif",
+    "artifacts/reports/chaco_sudoeste/20261014T141241Z/mascaras/20JQQ_agrupada.tif",
+    "artifacts/reports/chaco_sudoeste/20261014T141241Z/mascaras/20JQQ_cruda.tif",
+    "artifacts/reports/chaco_sudoeste/20261014T141241Z/modelo_congelado.pth",
+    "artifacts/reports/chaco_sudoeste/20261014T141241Z/predicciones/prediccion_20JPQ.tif",
+    "artifacts/reports/chaco_sudoeste/20261014T141241Z/predicciones/prediccion_20JPR.tif",
+    "artifacts/reports/chaco_sudoeste/20261014T141241Z/predicciones/prediccion_20JQQ.tif",
+    "artifacts/reports/resultados_test_actual_comparacion_20261010/resultados.tar.gz",
+    "artifacts/reports/resultados_test_actual_comparacion_20261010/transferencia.log",
+    "artifacts/archive/legacy_root/logs/composites_filtrado.log",
+    "artifacts/archive/legacy_root/logs/composites_filtrado2.log",
+    "artifacts/archive/legacy_root/logs/composites_filtrado3.log",
+    "artifacts/archive/legacy_root/logs/composites_filtrado4.log",
+    "artifacts/archive/legacy_root/logs/composites_filtrado5.log",
+    "artifacts/archive/legacy_root/logs/composites_filtrado6.log",
+    "artifacts/archive/legacy_root/logs/generar_datasets.log",
+    "artifacts/archive/legacy_root/logs/logs.txt",
+    "artifacts/archive/legacy_root/logs/nohup.out"
+  ],
+  "nota": "Los originales del mirror se conservan. archivo_mirror contiene copias de revisión de archive; el enlace operativo de floryacy no cambia."
+}

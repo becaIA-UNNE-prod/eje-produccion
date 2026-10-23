@@ -1,0 +1,43 @@
+{
+  "umbral_fragmento_ha": 1,
+  "umbral_concordancia_MNC": 0.5,
+  "resultados": {
+    "reasignacion_HLK": {
+      "2018_2019": {
+        "fragmentos": 58,
+        "concordantes": 7,
+        "ha_suma_fragmentos": 5715.346954160793
+      },
+      "2019_2020": {
+        "fragmentos": 59,
+        "concordantes": 4,
+        "ha_suma_fragmentos": 4417.700345933457
+      },
+      "2020_2021": {
+        "fragmentos": 81,
+        "concordantes": 9,
+        "ha_suma_fragmentos": 8720.681756940578
+      }
+    },
+    "sentinel_nuevo": {
+      "2018_2019": {
+        "fragmentos": 7,
+        "concordantes": 0,
+        "ha_suma_fragmentos": 494.546378236714
+      },
+      "2019_2020": {
+        "fragmentos": 21,
+        "concordantes": 0,
+        "ha_suma_fragmentos": 3346.5819621642713
+      },
+      "2020_2021": {
+        "fragmentos": 26,
+        "concordantes": 1,
+        "ha_suma_fragmentos": 2766.9399080522967
+      }
+    }
+  },
+  "sentinel_descargado": false,
+  "politica": "Solo priorizar ROI concordantes; resolver tiles/escenas, auditar fuentes y capacidad antes de descargar. HLK ya tiene arrays: no descargar de nuevo.",
+  "limitacion": "Concordancia entre dos cartografias modeladas, no validacion independiente. Areas sumadas, sin disolver solapamientos."
+}

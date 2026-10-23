@@ -38,3 +38,19 @@ wheels/
 !/artifacts/maps/**/*.html
 !/artifacts/maps/**/*.json
 !/artifacts/maps/**/*.geojson
+
+# Copias de revisión: reportes, figuras y métricas del mirror
+!/artifacts/reports/
+/artifacts/reports/**
+!/artifacts/reports/**/
+!/artifacts/reports/**/*.csv
+!/artifacts/reports/**/*.geojson
+!/artifacts/reports/**/*.html
+!/artifacts/reports/**/*.json
+!/artifacts/reports/**/*.md
+!/artifacts/reports/**/*.png
+!/artifacts/reports/**/*.py
+!/artifacts/reports/**/*.svg
+!/artifacts/reports/**/*.txt
+/artifacts/reports/test_actual
+/artifacts/reports/**/logs/

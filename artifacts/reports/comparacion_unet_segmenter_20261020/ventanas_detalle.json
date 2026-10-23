@@ -1,0 +1,98 @@
+[
+  {
+    "campana": "2018_2019",
+    "tile": "20HNJ",
+    "window": [
+      9956,
+      9088,
+      1024,
+      1024
+    ],
+    "criterio": "Ventana centrada en bloque de 256 con mayor conteo de man\u00ed de referencia independiente; selecci\u00f3n sin consultar predicciones",
+    "pixeles_mani_bloque": 173
+  },
+  {
+    "campana": "2018_2019",
+    "tile": "20HNH",
+    "window": [
+      2688,
+      4992,
+      1024,
+      1024
+    ],
+    "criterio": "Ventana centrada en bloque de 256 con mayor conteo de man\u00ed de referencia independiente; selecci\u00f3n sin consultar predicciones",
+    "pixeles_mani_bloque": 11493
+  },
+  {
+    "campana": "2019_2020",
+    "tile": "20HNJ",
+    "window": [
+      0,
+      0,
+      1024,
+      1024
+    ],
+    "criterio": "Ventana centrada en bloque de 256 con mayor conteo de man\u00ed de referencia independiente; selecci\u00f3n sin consultar predicciones",
+    "pixeles_mani_bloque": 0
+  },
+  {
+    "campana": "2019_2020",
+    "tile": "20HNH",
+    "window": [
+      2432,
+      5248,
+      1024,
+      1024
+    ],
+    "criterio": "Ventana centrada en bloque de 256 con mayor conteo de man\u00ed de referencia independiente; selecci\u00f3n sin consultar predicciones",
+    "pixeles_mani_bloque": 7410
+  },
+  {
+    "campana": "2020_2021",
+    "tile": "20HNJ",
+    "window": [
+      0,
+      0,
+      1024,
+      1024
+    ],
+    "criterio": "Ventana centrada en bloque de 256 con mayor conteo de man\u00ed de referencia independiente; selecci\u00f3n sin consultar predicciones",
+    "pixeles_mani_bloque": 0
+  },
+  {
+    "campana": "2020_2021",
+    "tile": "20HNH",
+    "window": [
+      640,
+      5504,
+      1024,
+      1024
+    ],
+    "criterio": "Ventana centrada en bloque de 256 con mayor conteo de man\u00ed de referencia independiente; selecci\u00f3n sin consultar predicciones",
+    "pixeles_mani_bloque": 15750
+  },
+  {
+    "campana": "2021_2022",
+    "tile": "20HNJ",
+    "window": [
+      0,
+      0,
+      1024,
+      1024
+    ],
+    "criterio": "Ventana centrada en bloque de 256 con mayor conteo de man\u00ed de referencia independiente; selecci\u00f3n sin consultar predicciones",
+    "pixeles_mani_bloque": 0
+  },
+  {
+    "campana": "2021_2022",
+    "tile": "20HNH",
+    "window": [
+      2176,
+      7040,
+      1024,
+      1024
+    ],
+    "criterio": "Ventana centrada en bloque de 256 con mayor conteo de man\u00ed de referencia independiente; selecci\u00f3n sin consultar predicciones",
+    "pixeles_mani_bloque": 20930
+  }
+]
