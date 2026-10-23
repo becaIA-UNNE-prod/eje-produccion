@@ -1,0 +1,13 @@
+{
+  "titulo": "Split configurado · evaluacion / reducida_2020_2021_segmenter_evaluacion · 20261021T153639Z",
+  "split_sha256": "80aaf8acb58d0d31a745e46e893c59c25224ea037fc155b52d44a66fdd142441",
+  "catalogo_sha256": "587f60373f59f1784ac687fc711a07605cb9f058560b26b953e37bb49ebccca2",
+  "conteos": {
+    "train": 13,
+    "val": 2,
+    "test": 2,
+    "inferencia": 3
+  },
+  "alcance": "Contornos completos de composites, no cobertura de parches ni máscara de exclusión.",
+  "inferencia_sha256": "30fad3a3e843c845ee750ffb1ff9da381267ba3fa3aec3e1cdb3dd567293c872"
+}

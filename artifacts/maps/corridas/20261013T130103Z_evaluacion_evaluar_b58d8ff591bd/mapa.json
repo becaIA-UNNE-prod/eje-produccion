@@ -1,0 +1,11 @@
+{
+  "titulo": "Split configurado · evaluacion / evaluar · 20261013T130103Z",
+  "split_sha256": "80aaf8acb58d0d31a745e46e893c59c25224ea037fc155b52d44a66fdd142441",
+  "catalogo_sha256": "d19c6a0545d8635df007f5f66870624cdd96501c535e87af1dc6a7ed6fb1728e",
+  "conteos": {
+    "train": 13,
+    "val": 2,
+    "test": 2
+  },
+  "alcance": "Contornos completos de composites, no cobertura de parches ni máscara de exclusión."
+}
